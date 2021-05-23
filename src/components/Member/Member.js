@@ -10,7 +10,7 @@ export default class Member extends Component {
                             <a href="Dangky">Đăng ký</a>
                         </li>
                         <li className="btn-login">
-                            <a href="Dangnhap">Đăng nhập</a>
+                            <a href="/login">Đăng nhập</a>
                         </li>
                         <a className="hotline" href="tel.08081508">0808 1508</a>
                     </ul>

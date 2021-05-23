@@ -4,7 +4,7 @@
   color: white;
   background-image: url('./images/BackGround.jpg');
   background-size: cover;
-  height: 260vmin;
+  height: fit-content;
 }
 .App-header {
   display: flex;
@@ -287,7 +287,6 @@ a.hotline:hover {
   position: relative;
   width: 100%;
   height: auto;
-  
 }
 .nav-icon-content {
   position: relative;
@@ -320,12 +319,23 @@ a.hotline:hover {
 .List_movies{
   display: inline-block;
 }
+.List_movies .card{
+  width: 18rem;
+  display: inline-block;
+  border-radius: 30px 30px;
+  margin: 10px;
+  box-shadow: 5px 10px 10px 5px rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.7);
+}
 #Card_Text{
   overflow: hidden;
   width: fit-content;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+#Card_body{
+  background-color: #21094e;
 }
 .btn-primary {
   color: #fbfbfb;
@@ -475,4 +485,8 @@ a.hotline:hover {
 }
 .bottom-nav-icon ul li img {
   pointer-events: none;
+}
+
+.wrapper {
+  padding: 20px;
 }

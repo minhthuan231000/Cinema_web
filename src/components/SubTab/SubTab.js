@@ -13,7 +13,6 @@ class SubTab extends Component {
                         {/* Your component here */}
                     </Tab>
                 </Tabs>
-            );
             </div>
         );
     }
