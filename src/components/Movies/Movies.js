@@ -3,6 +3,7 @@ import {Card, Button} from 'react-bootstrap'
 import images from '../../image'
 import content from '../content.json'
 class Movies extends Component {
+    /* Xử lý nodejs tại component này */
     constructor(props) {
         super(props);
         this.state = {

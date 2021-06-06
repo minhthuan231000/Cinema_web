@@ -1,0 +1,96 @@
+.about-box {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    padding-top: 50px;
+    display: block;
+    opacity: 1;
+}
+.intro-wrap {
+    position: relative;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+    margin-bottom: 60px;
+}
+.intro-item {
+    position: relative;
+    width: 100%;
+}
+.intro-item:nth-child(odd) .intro-pic {
+    float: left;
+    margin-right: 30px;
+}
+.intro-item:nth-child(even) .intro-pic {
+    float: right;
+    margin-left: 20px;
+}
+.intro-pic {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid #fff;
+    line-height: 0;
+    z-index: 2;
+    box-shadow: 10px 10px 0 rgb(0 0 0 / 20%);
+}
+.intro-pic img{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: block;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+.intro-item::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    clear: both;
+}
+.intro-item h3 {
+    font-family: 'avantgarde-demi';
+    font-size: 26px;
+    font-weight: normal;
+    color: #fff;
+    line-height: 30px;
+    text-transform: uppercase;
+    z-index: 1;
+    display: inline-block;
+    width: auto;
+    margin-bottom: 10px;
+    max-width:  1000px;
+}
+.intro-item:nth-child(odd) h3 {
+    background-color: #e00d7a;
+    padding: 17px 30px 17px 120px;
+    border-radius: 0px 30px 0px 0px;
+    -webkit-border-radius: 0px 50px 0px 0px;
+    margin-left: -125px;
+}
+.intro-item:nth-child(even) h3 {
+    background-color: #ba3469;
+    padding: 17px 130px 17px 30px;
+    text-align: right;
+    border-radius: 30px 0px 0px 0px;
+    -webkit-border-radius: 50px 0px 0px 0px;
+    margin-right: -125px;
+}
+.intro-txt {
+    display: block;
+}
+.intro-item:nth-child(odd) .intro-txt {
+    padding: 95px 0 0 100px;
+    text-align: left;
+}
+.intro-item:nth-child(even) .intro-txt {
+    padding: 95px 0 0 100px;
+    text-align: right;
+}

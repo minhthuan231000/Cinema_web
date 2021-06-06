@@ -1,0 +1,39 @@
+.Register {
+    width: 500px;
+    display: inline-block;
+}
+
+.Register .form-check {
+    display: inline-block;
+}
+
+.Register .form-check .form-check-label {
+    margin-right: 10px !important;
+}
+
+.Register .form-control {
+    border-radius: 30px;
+}
+
+.Register .Name, .Tel {
+    display: inline-block;
+    padding-left: 0px !important;
+}
+
+.Register .Tel {
+    padding-right: 0px !important;
+}
+
+.Register button.btnReg {
+    margin-left: 30%;
+    border-radius: 20px;
+}
+
+.Register button.btnReg:hover {
+    box-shadow: 2px 2px #1467e46e, 2px 2px #1467e46e, 3px 3px #1467e46e;
+    border: 1px solid #1467e46e;
+}
+.customOverlay {
+    background: #00000093;
+}
+
