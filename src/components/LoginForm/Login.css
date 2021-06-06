@@ -1,6 +1,31 @@
-.Login{
-    text-align: start;
-    padding: 3px;
-    margin-top: 65px;
-    align-items: center;
+.Login {
+    width: 100%;
+    display: inline-block;
+}
+.Login .form-control {
+    border-radius: 30px;
+}
+.Login button.btnLog {
+    margin-left: 30%;
+    border-radius: 20px;
+}
+
+.Login button.btnLog:hover {
+    box-shadow: 2px 2px #1467e46e, 2px 2px #1467e46e, 3px 3px #1467e46e;
+    border: 1px solid #1467e46e;
+}
+.Login .social-login{
+    text-align: center;
+}
+.Login .social-login span a{
+    color: bisque;
+    text-decoration: none;
+    margin: 10px;
+    padding-bottom: 30px;
+}
+.Login .social-login span a.fb:hover{
+    color: #2e88f0;
+}
+.Login .social-login span a.gg:hover{
+    color: #f03b2e;
 }
