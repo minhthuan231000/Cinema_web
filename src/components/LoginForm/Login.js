@@ -9,12 +9,12 @@ class Login extends Component {
                     <center><h3>Đăng Nhập</h3></center>
                     <h6>Vui lòng nhập tên người dùng(email) và mật khẩu</h6>
                     <div className="form-group">
-                        <input type="email" className="form-control" placeholder="EMAIL (*)" />
+                        <input name="email" type="email" className="form-control" placeholder="EMAIL (*)" />
                     </div>
                     <div className="form-group">
-                        <input type="password" className="form-control" placeholder="MẬT KHẨU (*)" />
+                        <input name="password" type="password" className="form-control" placeholder="MẬT KHẨU (*)" />
                     </div>
-                    <button type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
+                    <button  type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
                     <div className="social-login">
                         <span><a className="fb" href="/login-facebook">Login with Facebook</a></span>
                         <span><a className="gg" href="/login-google">Login with Google</a></span>
