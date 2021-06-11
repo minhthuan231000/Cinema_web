@@ -52,7 +52,7 @@ export const isEmpty = (thing) => {
 export const isLength = (str, options) => {
 
     if (isEmpty(options)) {
-        throw new Error("Who will provide the options you?")
+        throw new Error(" ")
     }
 
     let isValid = true;
