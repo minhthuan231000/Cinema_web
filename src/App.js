@@ -66,10 +66,8 @@ export default class App extends Component {
                             <Route path="/Lichchieu">
                             </Route>
                             <Route path="/RapvaGia">
-    
                             </Route>
                             <Route path="/Tintuc">
-    
                             </Route>
                             <Route path="/Gioithieu">
                                 <div className="container">
