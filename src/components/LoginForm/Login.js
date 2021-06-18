@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import './Login.css'
+import { browserHistory } from 'react-router';
 import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '../../models/validator';
 class Login extends Component {
     /* Xử lý nodejs tại component này */
     constructor(props){
         super(props);
         this.state = {
+            formData: {},
             errors: {}, // Contains login field errors
         }
     }
 
     handleInputChange = (event) => {
         const target = event.target;
-        const value = target.value;
+        const value = target.type === 'checkbox' ? target.checked : target.value;;
         const name = target.name;
 
         let { formData } = this.state;
@@ -23,7 +25,6 @@ class Login extends Component {
         });
     }
     validateLoginForm = (e) => {
-
         let errors = {};
         const { formData } = this.state;
         if (isEmpty(formData.email)) {
@@ -49,32 +50,55 @@ class Login extends Component {
     submitForm = (e) => {
         //Chặn các event mặc định của form
         e.preventDefault();
-     
        //Gọi hàm validateLoginForm() dùng để kiểm tra form
         const validation = this.validateLoginForm();
-     
         //Kiểm tra lỗi của input trong form và hiển thị
         if (validation !== true) {
           alert(Object.values(validation))
         }else{
-        
-            
-          alert('Submit form success')
+          //Login code
+            const { formData } = this.state;
+            const data = {
+                email: formData.email,
+                password: formData.password,
+            }
+            if(formData){
+            localStorage.setItem('user', JSON.stringify({data}));
+            var request = new Request('http://localhost:9080/api/login',{
+                method: 'POST',
+                header: new Headers({'Content-Type': 'application/json'}),
+                body: JSON.stringify(data),
+            });
+
+            fetch(request)
+                    .then(function(response){
+                        response.json()
+                            .then(function(data){
+                                console.log(data);
+                            })
+                    })
+            }
         }
       }
     render() {
+        const { formData } = this.state;
+        var loggedInUser = localStorage.getItem('user');
         
-        //const { errors, formSubmitted } = this.state;
+
+       if (loggedInUser) { // neu da login thi Redirect
+        const {history} = this.props;
+        history.push('/');
+        }
         return (
             <div className="Login container">
-                <form onSubmit={this.submitForm} method="POST">
+                <form  onSubmit={this.submitForm} method="post">
                     <center><h3>Đăng Nhập</h3></center>
                     <h6>Vui lòng nhập tên người dùng(email) và mật khẩu</h6>
                     <div className="form-group">
-                        <input name="email" type="email" className="form-control" placeholder="EMAIL (*)" onChange={e => this.handleInputChange(e)} />
+                        <input name="email" type="email" className="form-control" placeholder="EMAIL (*)" value={formData.email} onChange={e => this.handleInputChange(e)} />
                     </div>
                     <div className="form-group">
-                        <input name="password" type="password" className="form-control" placeholder="MẬT KHẨU (*)" onChange={e => this.handleInputChange(e)}/>
+                        <input name="password" type="password" className="form-control" placeholder="MẬT KHẨU (*)" value={formData.password} onChange={e => this.handleInputChange(e)} />
                     </div>
                     <button  type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
                     <div className="social-login">

@@ -20,31 +20,22 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
-          name: "React",
-          isUserAuthenticated: true
-        };
+            name: "React",
+            isUserAuthenticated: true,
+            currentUser: null,
+          };
       }
     render() {
         return (
             <div className="App">
-                <div className="container-fluid">
-                    <HeaderTop />
-                </div>
-                <div className="content">
-                    <Member />
-                    <SliderAuto />
-                </div>
-                <div className="cart-content">
-                    <CartContent />
-                </div>
+                <div className="container-fluid"><HeaderTop /></div>
+                <div className="content"><Member /><SliderAuto /></div>
+                <div className="cart-content"><CartContent /></div>
                 <div className="content-page">
                     <ContentPage />
                     <BrowserRouter>
                         <Switch>
-                            <Route
-                                exact
-                                path="/"
-                                render={() => {
+                            <Route exact path="/"render={() => {
                                     return (
                                         this.state.isUserAuthenticated ?
                                             <Redirect to="/Home" /> :
@@ -63,24 +54,13 @@ export default class App extends Component {
                                 </div>
                                 <Movies />
                             </Route>
-                            <Route path="/Lichchieu">
-                            </Route>
-                            <Route path="/RapvaGia">
-                            </Route>
-                            <Route path="/Tintuc">
-                            </Route>
-                            <Route path="/Gioithieu">
-                                <div className="container">
-                                <Introduce />
-                                </div>
-                            </Route>
-                            <Route path="/dashboard">
-                                <Dashboard />
-                            </Route>
-                            <Route path="/login">
-                            </Route>
-                            <Route path="/register">
-                            </Route>
+                            <Route path="/Lichchieu"></Route>
+                            <Route path="/RapvaGia"></Route>
+                            <Route path="/Tintuc"></Route>
+                            <Route path="/Gioithieu"><div className="container"><Introduce /></div></Route>
+                            <Route path="/dashboard"><Dashboard /></Route>
+                            <Route path="/login" ></Route>
+                            <Route path="/register"></Route>
                         </Switch>
                     </BrowserRouter>
                 </div>

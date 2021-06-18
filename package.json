@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "formik": "^2.2.7",
     "pg": "^8.6.0",
@@ -19,6 +20,7 @@
     "react-scripts": "^4.0.3",
     "react-slick": "^0.28.1",
     "reactstrap": "^8.9.0",
+    "request": "^2.88.2",
     "sequelize": "^6.6.2",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^1.1.2"

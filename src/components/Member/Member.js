@@ -5,6 +5,7 @@ import './member.css'
 import Register from '../RegisterForm/Register';
 import Login from '../LoginForm/Login';
 export default function Member() {
+    
     const [openReg, setOpen] = useState(false);
     const onOpenModalReg = () => setOpen(true);
     const onCloseModalReg = () => setOpen(false);
