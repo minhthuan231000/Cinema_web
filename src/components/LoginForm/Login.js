@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './Login.css'
-import { browserHistory } from 'react-router';
+import './Login.css';
 import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '../../models/validator';
+const post_server = "9080";
 class Login extends Component {
     /* Xử lý nodejs tại component này */
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
             formData: {},
             errors: {}, // Contains login field errors
@@ -54,53 +54,56 @@ class Login extends Component {
         const validation = this.validateLoginForm();
         //Kiểm tra lỗi của input trong form và hiển thị
         if (validation !== true) {
-          alert(Object.values(validation))
+          alert(Object.values(validation)) 
         }else{
           //Login code
             const { formData } = this.state;
-            const data = {
+            let data = {
                 email: formData.email,
-                password: formData.password,
-            }
+                password: formData.password
+            };
             if(formData){
-            localStorage.setItem('user', JSON.stringify({data}));
-            var request = new Request('http://localhost:9080/api/login',{
+            //localStorage.setItem('user', JSON.stringify({data}));
+            var request = new Request(`http://localhost:${post_server}/api/login`,{
                 method: 'POST',
                 header: new Headers({'Content-Type': 'application/json'}),
-                body: JSON.stringify(data),
+                body: JSON.stringify(data)
             });
 
             fetch(request)
-                    .then(function(response){
-                        response.json()
-                            .then(function(data){
-                                console.log(data);
-                            })
-                    })
+            .then(
+              function(response) {
+                if (response.status !== 200) {
+                  console.log('Lỗi, mã lỗi ' + response.status);
+                  return;
+                }
+                // parse response data
+                response.json().then(data => {console.log(data);})})
+                .catch(err => { console.log('Error :-S', err)});
             }
         }
       }
     render() {
         const { formData } = this.state;
-        var loggedInUser = localStorage.getItem('user');
+       // var loggedInUser = localStorage.getItem('user');
         
 
-       if (loggedInUser) { // neu da login thi Redirect
-        const {history} = this.props;
-        history.push('/');
-        }
+        //    if (loggedInUser) { // neu da login thi Redirect
+        //     const {history} = this.props;
+        //     history.push('/');
+        //     }
         return (
             <div className="Login container">
-                <form  onSubmit={this.submitForm} method="post">
+                <form   method="post">
                     <center><h3>Đăng Nhập</h3></center>
                     <h6>Vui lòng nhập tên người dùng(email) và mật khẩu</h6>
                     <div className="form-group">
-                        <input name="email" type="email" className="form-control" placeholder="EMAIL (*)" value={formData.email} onChange={e => this.handleInputChange(e)} />
+                        <input name="email" type="email" className="form-control" placeholder="EMAIL (*)" value={formData.email || ''} onChange={e => this.handleInputChange(e)} />
                     </div>
                     <div className="form-group">
-                        <input name="password" type="password" className="form-control" placeholder="MẬT KHẨU (*)" value={formData.password} onChange={e => this.handleInputChange(e)} />
+                        <input name="password" type="password" className="form-control" placeholder="MẬT KHẨU (*)" value={formData.password || ''} onChange={e => this.handleInputChange(e)} />
                     </div>
-                    <button  type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
+                    <button onClick={this.submitForm} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
                     <div className="social-login">
                         <span><a className="fb" href="/login-facebook">Login with Facebook</a></span>
                         <span><a className="gg" href="/login-google">Login with Google</a></span>
