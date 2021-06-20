@@ -1,0 +1,58 @@
+.admin_main {
+    background: white;
+    display: block;
+    text-align: left;
+}
+
+header.admin_header {
+    display: inline-block;
+    width: 100%;
+    background-image: url('../images/18250.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: right;
+}
+header.admin_header > .admin_nav{
+    display: inline;
+}
+header.admin_header .navbar-brand{
+    display: inline;
+    float: left;
+    padding: 1em;
+    text-transform: uppercase;
+}
+.navbar-auth{
+    display: inline;
+    float: right;
+    padding: 1em;
+    list-style: none;
+    list-style-type: none;
+}
+.navbar-auth li{
+    display: inline;
+    padding: 0.5em;
+}
+.admin_content{
+    display: inline-flex;
+}
+.admin_content .admin_sliderbar{
+    display: flex;
+    flex-grow: 1;
+    height: 224;
+}
+.admin_sliderbar .divider{
+    height: 0.3vmax;
+}
+.admin_content .admin_sliderbar .tabs{
+    border-right: 1px solid #1976d2;
+    background-image: url('../images/18250.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+}
+.admin_content .admin_sliderbar .tabs .tab:hover{
+    background-color: #1976d2;
+}
+.admin_content .admin_layout{
+    display: flex;
+}
