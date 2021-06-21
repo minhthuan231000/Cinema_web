@@ -15,15 +15,15 @@ export default function Member() {
     const onCloseModalLog = () => setOpen2(false);
 
     var loggedInUser = localStorage.getItem('user');
-    if (loggedInUser) { // neu da login thi Redirect
-        console.log(loggedInUser);
+    if(loggedInUser) { // neu da login thi Redirect
+        let username = JSON.parse(loggedInUser).fullname;
         return(
         <div className="register-content">
                 <div className="container">
                     <div className="register-wrap">
                         <ul>
                             <li className="btn-login">
-                                <span >{loggedInUser}</span>
+                                <button >{username}</button>
                             </li>
                             <li className="hotline">0808 1508</li>
                         </ul>

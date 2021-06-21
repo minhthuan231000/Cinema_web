@@ -76,16 +76,22 @@ class Login extends Component {
                     this.setState({
                         user: result
                     });
+                    data = {
+                        ...data,
+                        fullname: result.fullname
+                    }
+                        localStorage.setItem('user', JSON.stringify(data));
                     },
                     (error) => {
                     this.setState({
                         error: error
                     });
+                    console.log(error)
                     }
                 )
-            localStorage.setItem('user', JSON.stringify(data));
             }
         }
+        
     }
     render() {
         let formData = this.state.formData;
@@ -98,7 +104,7 @@ class Login extends Component {
             }
         return (
             <div className="Login container">
-                <form   method="post">
+                <form method="post">
                     <center><h3>Đăng Nhập</h3></center>
                     <h6>Vui lòng nhập tên người dùng(email) và mật khẩu</h6>
                     <div className="form-group">

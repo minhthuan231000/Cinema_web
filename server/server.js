@@ -33,7 +33,8 @@ app.post('/api/login',asyncHandler(async function(request, response){
       return response.status(201).send(found.dataValues);
     }
     else{
-      return response.status(400).send('fail');
+      console.log('Not found');
+      return response.status(400).send({error: 'error'});
     }
 }))
 db.sync().then(function() {
