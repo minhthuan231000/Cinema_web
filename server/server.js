@@ -34,7 +34,7 @@ app.post('/api/login',asyncHandler(async function(request, response){
     }
     else{
       console.log('Not found');
-      return response.status(400).send({error: 'error'});
+      return response.status(400).send('');
     }
 }))
 db.sync().then(function() {

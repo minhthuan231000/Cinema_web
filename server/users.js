@@ -22,6 +22,10 @@ const User = db.define('User', {
       type: DataTypes.STRING(7),
       allowNull: false,
     },
+    role: {
+      type: DataTypes.STRING(7),
+      allowNull: false,
+    }
   });
 User.findByEmail = async function(email){
     return User.findOne({

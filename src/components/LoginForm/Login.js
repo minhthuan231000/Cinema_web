@@ -76,27 +76,30 @@ class Login extends Component {
                     this.setState({
                         user: result
                     });
-                    data = {
-                        ...data,
-                        fullname: result.fullname
-                    }
+                    if(result){
+                        data = {
+                            ...data,
+                            fullname: result.fullname,
+                            role: result.role,
+                        }
                         localStorage.setItem('user', JSON.stringify(data));
-                    },
+                    }},
                     (error) => {
                     this.setState({
                         error: error
                     });
-                    console.log(error)
+                    if(error){
+                        console.log(error);
+                    }
                     }
                 )
             }
         }
-        
+
     }
     render() {
         let formData = this.state.formData;
         var loggedInUser = localStorage.getItem('user');
-        
 
         if (loggedInUser) { // neu da login thi Redirect
             console.log('User exist');
