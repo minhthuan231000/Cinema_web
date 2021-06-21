@@ -22,10 +22,6 @@ const User = db.define('User', {
       type: DataTypes.STRING(7),
       allowNull: false,
     },
-    // image: {
-    //   type: DataTypes.BLOB,
-    //   allowNull: true,
-    // }
   });
 User.findByEmail = async function(email){
     return User.findOne({
@@ -34,6 +30,7 @@ User.findByEmail = async function(email){
         },
     }); 
 };
+
 User.findById = async function(id){
     return User.findByPk(id);
 };

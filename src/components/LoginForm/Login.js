@@ -7,8 +7,9 @@ class Login extends Component {
     constructor(){
         super();
         this.state = {
+            user: [],
             formData: {},
-            errors: {}, // Contains login field errors
+            errors: null, // Contains login field errors
         }
     }
 
@@ -63,35 +64,38 @@ class Login extends Component {
                 password: formData.password
             };
             if(formData){
-            //localStorage.setItem('user', JSON.stringify({data}));
             var request = new Request(`http://localhost:${post_server}/api/login`,{
                 method: 'POST',
-                header: new Headers({'Content-Type': 'application/json'}),
+                headers: new Headers({'Content-Type': 'application/json'}),
                 body: JSON.stringify(data)
             });
 
             fetch(request)
-            .then(
-              function(response) {
-                if (response.status !== 200) {
-                  console.log('Lỗi, mã lỗi ' + response.status);
-                  return;
-                }
-                // parse response data
-                response.json().then(data => {console.log(data);})})
-                .catch(err => { console.log('Error :-S', err)});
+                .then(res => res.json())
+                .then((result) => {
+                    this.setState({
+                        user: result
+                    });
+                    },
+                    (error) => {
+                    this.setState({
+                        error: error
+                    });
+                    }
+                )
+            localStorage.setItem('user', JSON.stringify(data));
             }
         }
-      }
+    }
     render() {
-        const { formData } = this.state;
-       // var loggedInUser = localStorage.getItem('user');
+        let formData = this.state.formData;
+        var loggedInUser = localStorage.getItem('user');
         
 
-        //    if (loggedInUser) { // neu da login thi Redirect
-        //     const {history} = this.props;
-        //     history.push('/');
-        //     }
+        if (loggedInUser) { // neu da login thi Redirect
+            console.log('User exist');
+            return;
+            }
         return (
             <div className="Login container">
                 <form   method="post">

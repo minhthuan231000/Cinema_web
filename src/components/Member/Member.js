@@ -13,27 +13,48 @@ export default function Member() {
     const [openLog, setOpen2] = useState(false);
     const onOpenModalLog = () => setOpen2(true);
     const onCloseModalLog = () => setOpen2(false);
-    return (
+
+    var loggedInUser = localStorage.getItem('user');
+    if (loggedInUser) { // neu da login thi Redirect
+        console.log(loggedInUser);
+        return(
         <div className="register-content">
-            <div className="container">
-                <div className="register-wrap">
-                    <ul>
-                        <li className="btn-register">
-                            <button onClick={onOpenModalReg}>Đăng ký thành viên</button>
-                            <Modal open={openReg} onClose={onCloseModalReg} center classNames={{ overlay: 'customOverlay', modal: 'ModalReg' }}>
-                                <Register />
-                            </Modal>
-                        </li>
-                        <li className="btn-login">
-                            <button onClick={onOpenModalLog}>Đăng nhập</button>
-                            <Modal open={openLog} onClose={onCloseModalLog} center classNames={{ overlay: 'customOverlay', modal: 'ModalLog' }}>
-                                <Login />
-                            </Modal>
-                        </li>
-                        <li className="hotline">0808 1508</li>
-                    </ul>
+                <div className="container">
+                    <div className="register-wrap">
+                        <ul>
+                            <li className="btn-login">
+                                <span >{loggedInUser}</span>
+                            </li>
+                            <li className="hotline">0808 1508</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }else{
+        return (
+            <div className="register-content">
+                <div className="container">
+                    <div className="register-wrap">
+                        <ul>
+                            <li className="btn-register">
+                                <button onClick={onOpenModalReg}>Đăng ký thành viên</button>
+                                <Modal open={openReg} onClose={onCloseModalReg} center classNames={{ overlay: 'customOverlay', modal: 'ModalReg' }}>
+                                    <Register />
+                                </Modal>
+                            </li>
+                            <li className="btn-login">
+                                <button onClick={onOpenModalLog}>Đăng nhập</button>
+                                <Modal open={openLog} onClose={onCloseModalLog} center classNames={{ overlay: 'customOverlay', modal: 'ModalLog' }}>
+                                    <Login />
+                                </Modal>
+                            </li>
+                            <li className="hotline">0808 1508</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    
 }
