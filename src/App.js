@@ -14,7 +14,7 @@ import Bottom from './components/Bottom/Bottom';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import Dashboard from '../src/components/Dashboard/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 import Introduce from './components/Introduce/introduce';
 export default class App extends Component {
     constructor() {
