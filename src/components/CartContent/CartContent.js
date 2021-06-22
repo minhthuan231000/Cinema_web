@@ -2,6 +2,55 @@ import React, { Component } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 class CartContent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            listPhim: [
+                { name: "Phim 1" },
+                { name: "Phim 2" },
+                { name: "Phim 3" }
+            ],
+            listRap: [
+                { name: "Rap 1" },
+                { name: "Rap 2" },
+                { name: "Rap 3" },
+            ],
+            listNgay: [
+                { name: "Ngay 1" },
+                { name: "Ngay 2" },
+                { name: "Ngay 3" },
+            ],
+            listGio: [
+                { name: "Gio 1" },
+                { name: "Gio 2" },
+                { name: "Gio 3" },
+            ]
+        }
+    }
+    ShowItemPhim = () => {
+        const ListPhim = this.state.listPhim.map((item, index) =>
+            <Dropdown.Item eventKey={index}>{item.name}</Dropdown.Item>
+        )
+        return ListPhim;
+    }
+    ShowItemRap = () => {
+        const ListPhim = this.state.listRap.map((item, index) =>
+            <Dropdown.Item eventKey={index}>{item.name}</Dropdown.Item>
+        )
+        return ListPhim;
+    }
+    ShowItemNgay = () => {
+        const ListPhim = this.state.listNgay.map((item, index) =>
+            <Dropdown.Item eventKey={index}>{item.name}</Dropdown.Item>
+        )
+        return ListPhim;
+    }
+    ShowItemGio = () => {
+        const ListPhim = this.state.listGio.map((item, index) =>
+            <Dropdown.Item eventKey={index}>{item.name}</Dropdown.Item>
+        )
+        return ListPhim;
+    }
     render() {
         const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
             <li
@@ -29,9 +78,7 @@ class CartContent extends Component {
                                     <h3>Chọn Phim</h3>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item eventKey="1">Phim 1</Dropdown.Item>
-                                    <Dropdown.Item eventKey="2">Phim 2</Dropdown.Item>
-                                    <Dropdown.Item eventKey="3">Phim 3</Dropdown.Item>
+                                    {this.ShowItemPhim()}
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
@@ -43,9 +90,7 @@ class CartContent extends Component {
                                     <h3>Chọn Rạp</h3>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item eventKey="1">Rạp 1</Dropdown.Item>
-                                    <Dropdown.Item eventKey="2">Rạp 2</Dropdown.Item>
-                                    <Dropdown.Item eventKey="3">Rạp 3</Dropdown.Item>
+                                    {this.ShowItemRap()}
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
@@ -57,9 +102,7 @@ class CartContent extends Component {
                                     <h3>Chọn Ngày</h3>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item eventKey="1">Ngày 1</Dropdown.Item>
-                                    <Dropdown.Item eventKey="2">Ngày 2</Dropdown.Item>
-                                    <Dropdown.Item eventKey="3">Ngày 3</Dropdown.Item>
+                                    {this.ShowItemNgay()}
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
@@ -71,9 +114,7 @@ class CartContent extends Component {
                                     <h3>Chọn Suất Chiếu</h3>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu style={{ width: '290px', alignSelf: 'left' }}>
-                                    <Dropdown.Item eventKey="1">Giờ 1</Dropdown.Item>
-                                    <Dropdown.Item eventKey="2">Giờ 2</Dropdown.Item>
-                                    <Dropdown.Item eventKey="3">Giờ 3</Dropdown.Item>
+                                    {this.ShowItemGio()}
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
