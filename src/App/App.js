@@ -21,7 +21,7 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAdmin: true, /* true là đi đến Admin, false là đi đến home */
+            isAdmin: false, /* true là đi đến Admin, false là đi đến home */
         };
     }
     isAdmin = () => {
