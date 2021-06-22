@@ -9,7 +9,7 @@ class introduce extends Component {
     render() {
         return (
             <div>
-                <Tabs defaultActiveKey="hethong" id="uncontrolled-tab-example">
+                <Tabs defaultActiveKey="dichvu" id="uncontrolled-tab-example">
                     <Tab eventKey="hethong" title="HỆ THỐNG">
                         {/* Your component here  */}
                         <IntroSystem />

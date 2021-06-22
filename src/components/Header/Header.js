@@ -8,21 +8,21 @@ class HeaderTop extends Component {
                 </div>
                 <div className="navbox">
                     <ul>
-                        <li id="phim">
-                            <a className="item" href="/Phim">PHIM</a>
-                        </li>
-                        <li id="lichchieu">
-                            <a className="item" href="/Lichchieu">LỊCH CHIẾU</a>
-                        </li>
-                        <li id="rapvagia">
-                            <a className="item" href="/RapvaGia">RẠP VÀ GIÁ</a>
-                        </li>
-                        <li id="tintuc">
-                            <a className="item" href="/Tintuc">TIN TỨC</a>
-                        </li>
-                        <li id="gioithieu">
-                            <a className="item" href="/Gioithieu">GIỚI THIỆU</a>
-                        </li>
+                        <a className="item" href="/Phim">
+                            <li id="phim">PHIM</li>
+                        </a>
+                        <a className="item" href="/Lichchieu">
+                            <li id="lichchieu">LỊCH CHIẾU</li>
+                        </a>
+                        <a className="item" href="/RapvaGia">
+                            <li id="rapvagia">RẠP VÀ GIÁ</li>
+                        </a>
+                        <a className="item" href="/Tintuc">
+                            <li id="tintuc">TIN TỨC</li>
+                        </a>
+                        <a className="item" href="/Gioithieu">
+                            <li id="gioithieu">GIỚI THIỆU</li>
+                        </a>
                     </ul>
                 </div>
             </div>
