@@ -73,17 +73,11 @@ body{
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   background: none;
-}
-
-.navbox li:last-child {
-  -webkit-border-radius: 0px 30px 30px 0px;
-}
-
-.navbox li:first-child {
-  -webkit-border-radius: 30px 0px 0px 30px;
+  padding-top: 7px;
 }
 
 .navbox li:hover {
+  cursor: pointer;
   background-color: #e00d7a;
   border-color: #e00d7a;
 }
@@ -93,7 +87,14 @@ a.item {
   color: #fff !important;
   margin-top: 4em;
 }
-
+a.item:first-child > li{
+  border-radius: 30 0 0 30;
+  -webkit-border-radius: 30px 0 0 30px;
+}
+a.item:last-child > li{
+  border-radius: 0 30 30 0;
+  -webkit-border-radius: 0 30px 30px 0;
+}
 .navitem a:hover {
   text-decoration: none;
 }
@@ -330,14 +331,11 @@ li.hotline:hover {
 }
 
 .select-header {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding-top: 5px;
+  background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
-  height: auto;
+  height: 100%;
   cursor: pointer;
   position: absolute;
-  left: 0;
-  top: 0;
   border: 2px solid rgba(255, 255, 255, 0);
 }
 
@@ -349,12 +347,12 @@ li.hotline:hover {
   border-radius: 30px 0 30px 30px;
 }
 
-.select-list[data-cate='day'] .select-header {
-  border-radius: 30px 30px 30px 0;
-}
-
 .select-list[data-cate='hour'] .select-header {
   border-radius: 30px 30px 0 30px;
+}
+
+.select-list[data-cate='day'] .select-header {
+  border-radius: 30px 30px 30px 0;
 }
 
 .select-header span {
@@ -383,7 +381,17 @@ li.hotline:hover {
   overflow: hidden;
   text-transform: uppercase;
 }
-
+.select-header .dropdown-menu.show {
+  background-color: rgba(0, 0, 0, 0.884);
+  display: block;
+  width: 100%;
+}
+.dropdown-item{
+  color: #fbfbfb;
+}
+.dropdown-item::focus{
+  color: #1d9feb;
+}
 .App .content-page {
   margin-bottom: 145px;
 }
