@@ -38,4 +38,11 @@ User.findByEmail = async function(email){
 User.findById = async function(id){
     return User.findByPk(id);
 };
+User.associate = function (models) {
+  User.hasMany(models.Booking, {
+    foreignKey: 'user_id',
+    sourceKey: 'id',
+    as: 'booking'
+  });
+};
 module.exports = User;
