@@ -17,6 +17,7 @@ import SubTab from '../components/SubTab/SubTab';
 import Bottom from '../components/Bottom/Bottom';
 import Introduce from '../components/Introduce/introduce';
 import AdminPage from '../AdminPage/AdminPage'
+import BookingTicket from '../components/BookingTicket/BookingTicket'
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -36,65 +37,68 @@ export default class App extends Component {
     UserPage = () => {
         return <div className="App">
             <BrowserRouter>
-                    <div className="container-fluid">
-                        <HeaderTop />
-                    </div>
-                    <div className="content">
-                        <Member />
-                        <SliderAuto />
-                    </div>
-                    <div className="cart-content">
-                        <CartContent />
-                    </div>
-                    <div className="content-page">
-                        <ContentPage /> 
-                            <Switch>
-                                <Route
-                                    exact
-                                    path="/"
-                                    render={() => {
-                                        return (
-                                            this.state.isUserAuthenticated ?
-                                                <Redirect to="/Home" /> :
-                                                <Redirect to="/Home" />
-                                        )
-                                    }} />
-                                <Route path="/Home">
-                                    <div className="sub-tab">
-                                        <SubTab />
-                                    </div>
-                                    <Movies />
-                                </Route>
-                                <Route path="/Phim">
-                                    <div className="sub-tab">
-                                        <SubTab />
-                                    </div>
-                                    <Movies />
-                                </Route>
-                                <Route path="/Lichchieu">
-                                </Route>
-                                <Route path="/RapvaGia">
+                <div className="container-fluid">
+                    <HeaderTop />
+                </div>
+                <div className="content">
+                    <Member />
+                    <SliderAuto />
+                </div>
+                <div className="cart-content">
+                    <CartContent />
+                </div>
+                <div className="content-page">
+                    <ContentPage />
+                    <Switch>
+                        <Route
+                            exact
+                            path="/"
+                            render={() => {
+                                return (
+                                    this.state.isUserAuthenticated ?
+                                        <Redirect to="/Home" /> :
+                                        <Redirect to="/Home" />
+                                )
+                            }} />
+                        <Route path="/shopping">
+                            <BookingTicket />
+                        </Route>
+                        <Route path="/Home">
+                            <div className="sub-tab">
+                                <SubTab />
+                            </div>
+                            <Movies />
+                        </Route>
+                        <Route path="/Phim">
+                            <div className="sub-tab">
+                                <SubTab />
+                            </div>
+                            <Movies />
+                        </Route>
+                        <Route path="/Lichchieu">
+                        </Route>
+                        <Route path="/RapvaGia">
 
-                                </Route>
-                                <Route path="/Tintuc">
+                        </Route>
+                        <Route path="/Tintuc">
 
-                                </Route>
-                                <Route path="/Gioithieu">
-                                    <div className="container">
-                                        <Introduce />
-                                    </div>
-                                </Route>
-                                <Route path="/dashboard">
-                                </Route>
-                                <Route path="/login">
-                                </Route>
-                                <Route path="/register">
-                                </Route>
-                            </Switch>
-                    </div>
-                    <div className="bottom-page">
-                        <Bottom />
-                    </div>
+                        </Route>
+                        <Route path="/Gioithieu">
+                            <div className="container">
+                                <Introduce />
+                            </div>
+                        </Route>
+                        <Route path="/dashboard">
+                        </Route>
+                        <Route path="/login">
+                        </Route>
+                        <Route path="/register">
+                        </Route>
+                    </Switch>
+                </div>
+                <div className="bottom-page">
+                    <Bottom />
+                </div>
             </BrowserRouter>
         </div>
     }

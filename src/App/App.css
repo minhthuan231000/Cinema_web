@@ -220,8 +220,8 @@ li {
   font-size: 30px;
   color: #e00d7a;
   background: url(../images/icons/icon-call.jpg) no-repeat left 7px;
-  padding: 8px 0 18px 58px;
-  margin-inline-start: 13em;
+  padding: 15px 0 18px 58px;
+  margin-inline-start: 11em;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
 }
