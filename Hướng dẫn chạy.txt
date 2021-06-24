@@ -1,3 +1,3 @@
 Cài đặt các module cần thiết : 
-npm install react-scripts --save,
-react-responsive-modal --save
+npm install express 
+npm install react-scripts --save
