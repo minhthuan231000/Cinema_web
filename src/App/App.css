@@ -181,19 +181,33 @@ li {
   color: #e00d7a !important;
 }
 
+.register-wrap ul li {
+  float: left;
+  margin-right: 30px;
+}
+
 .register-wrap ul li.btn-login {
   height: 50px;
   background-size: 40px !important;
   background: url(../images/icons/icon-login.jpg) no-repeat left top;
 }
 
-.register-wrap ul li {
-  float: left;
-  margin-right: 30px;
-}
-
 .register-wrap ul li.btn-login button {
   padding: 18px 0 23px 42px;
+  display: block;
+  border: none;
+  background-color: transparent;
+}
+
+.register-wrap ul li.btn-logout {
+  height: 50px;
+  background-size: 40px !important;
+  background: url(../images/icons/icon-logout.jpg) no-repeat left top;
+  margin-top: 8px;
+}
+
+.register-wrap ul li.btn-logout button {
+  padding: 11px 0 23px 50px;
   display: block;
   border: none;
   background-color: transparent;
