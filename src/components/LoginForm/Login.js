@@ -109,11 +109,17 @@ class Login extends Component {
                     <div className="form-group">
                         <input type="password" className="form-control" name='password' onChange={e => this.handleInputChange(e)} placeholder="MẬT KHẨU (*)" />
                     </div>
+                    <div className="forget-password">
+                        <span><a className="pw" href="/login-facebook">Quên mật khẩu?</a></span>
+                    </div>
+                    <span>&nbsp;</span>
                     <button onClick={this.submitForm} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
+                    <span>&nbsp;</span>
                     <div className="social-login">
                         <span><a className="fb" href="/login-facebook">Login with Facebook</a></span>
                         <span><a className="gg" href="/login-google">Login with Google</a></span>
                     </div>
+                    <span>&nbsp;</span>
                 </form>
             </div>
         );
