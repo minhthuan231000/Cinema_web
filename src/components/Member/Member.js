@@ -4,6 +4,10 @@ import { Modal } from 'react-responsive-modal';
 import './member.css'
 import Register from '../RegisterForm/Register';
 import Login from '../LoginForm/Login';
+
+import { Badge } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 export default function Member() {
 
     const [openReg, setOpen] = useState(false);
@@ -14,10 +18,15 @@ export default function Member() {
     const onOpenModalLog = () => setOpen2(true);
     const onCloseModalLog = () => setOpen2(false);
 
-    let logout = () => localStorage.removeItem('user');
+    let logout = () => {
+        localStorage.removeItem('user')
+        refreshPage();
+    };
 
     const loggedInUser = localStorage.getItem('user');
-
+    const refreshPage = () => {
+        window.location.reload();
+    }
     if (loggedInUser) { // neu da login thi Redirect
         let username = JSON.parse(loggedInUser).fullname;
         return (
@@ -30,6 +39,13 @@ export default function Member() {
                             </li>
                             <li className="btn-login">
                                 <button>{username}</button>
+                            </li>
+                            <li className="btn-cart">
+                                <IconButton aria-label="show 4 new item" color="inherit" href="/shopping"> {/* xem lịch sử đặt vé */}
+                                    <Badge badgeContent={0} color="secondary" showZero>
+                                        <ShoppingCartIcon style={{color: '#e00d7a', fontSize: '35px'}} />
+                                    </Badge>
+                                </IconButton>
                             </li>
                             <li className="hotline">0808 1508</li>
                         </ul>

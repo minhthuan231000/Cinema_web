@@ -47,7 +47,6 @@ class Login extends Component {
             return errors;
         }
     }
-
     submitForm = (e) => {
         //Chặn các event mặc định của form
         e.preventDefault();
@@ -95,7 +94,10 @@ class Login extends Component {
                 )
             }
         }
-
+        this.refreshPage();
+    }
+    refreshPage = () => {
+        window.location.reload();
     }
     render() {
         return (
@@ -113,7 +115,7 @@ class Login extends Component {
                         <span><a className="pw" href="/login-facebook">Quên mật khẩu?</a></span>
                     </div>
                     <span>&nbsp;</span>
-                    <button onClick={this.submitForm} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
+                    <button onClick={(e) => {this.submitForm(e)}} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
                     <span>&nbsp;</span>
                     <div className="social-login">
                         <span><a className="fb" href="/login-facebook">Login with Facebook</a></span>
