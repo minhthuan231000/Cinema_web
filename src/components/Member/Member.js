@@ -17,16 +17,16 @@ export default function Member() {
     const [openLog, setOpen2] = useState(false);
     const onOpenModalLog = () => setOpen2(true);
     const onCloseModalLog = () => setOpen2(false);
-
+    const refreshPage = () => {
+        window.location.reload();
+    }
     let logout = () => {
         localStorage.removeItem('user')
         refreshPage();
     };
 
     const loggedInUser = localStorage.getItem('user');
-    const refreshPage = () => {
-        window.location.reload();
-    }
+    
     if (loggedInUser) { // neu da login thi Redirect
         let username = JSON.parse(loggedInUser).fullname;
         return (

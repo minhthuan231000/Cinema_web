@@ -95,6 +95,7 @@ class Register extends Component {
           .then(res => res.json())
           .then((result) => {
             console.log(result)
+            this.refreshPage();
           },
             (error) => {
               this.setState({
@@ -107,7 +108,6 @@ class Register extends Component {
           )
       }
     }
-    this.refreshPage();
   }
   refreshPage = () => {
     window.location.reload();

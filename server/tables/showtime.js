@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('./db')
+const db = require('../db')
 const Utils = require("./utils");
 
 const Showtime = db.define("Showtime", {
@@ -57,6 +57,7 @@ const Showtime = db.define("Showtime", {
         }
     },
 });
+
 Showtime.associate = function (models) {
     Showtime.hasMany(models.Booking, {
         foreignKey: 'showtime_id',

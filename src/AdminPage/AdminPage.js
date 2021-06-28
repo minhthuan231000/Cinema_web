@@ -57,6 +57,11 @@ export default function AdminPage() {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+    
+    let logout = () => {
+        localStorage.removeItem('user')
+        window.location.reload();
+    };
     const menuId = 'primary-search-account-menu';
     const renderProfile = (
         <Menu
@@ -69,7 +74,7 @@ export default function AdminPage() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
     );
     const [value, setValue] = React.useState(0);

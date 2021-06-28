@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('./db')
 
+//Vé
 const Ticket = db.define("Ticket", {
   booking_id: {
     type: Sequelize.UUID,

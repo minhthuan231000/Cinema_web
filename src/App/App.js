@@ -25,12 +25,6 @@ export default class App extends Component {
             isAdmin: false, /* true là đi đến Admin, false là đi đến home */
         };
     }
-    isAdmin = () => {
-        this.setState({ isAdmin: true })
-    }
-    isUser = () => {
-        this.setState({ isAdmin: false })
-    }
     AdminPage = () => {
         return <AdminPage />
     }
@@ -103,10 +97,19 @@ export default class App extends Component {
         </div>
     }
     showButton = () => {
-        if (this.state.isAdmin === true) {
-            return this.AdminPage()
-        } else {
-            return this.UserPage()
+        const loggedInUser = localStorage.getItem('user');
+        if(!loggedInUser){
+            return this.UserPage();
+        }
+        if(loggedInUser){
+        let role = JSON.parse(loggedInUser).role;
+        
+            if(role === 'user' ){
+                console.log(role)
+                return this.UserPage();
+            }else if(role === 'staff'){
+                return this.AdminPage()
+            }
         }
     }
     render() {
