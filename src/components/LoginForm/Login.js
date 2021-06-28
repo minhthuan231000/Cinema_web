@@ -163,7 +163,7 @@ class Login extends Component {
             }
             return (
                 <form method="POST">
-                    <h6>Nhập Mã Xác Nhận</h6>
+                    <h6>Nhập Mã Xác Nhận (Vui lòng kiểm tra email của bạn)</h6>
                     <div className="form-group">
                         <input type="text" name='text' className="form-control" onChange={e => this.handleInputChange(e)} placeholder="CODE (*)" />
                     </div>
