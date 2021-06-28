@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './Login.css';
 import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../models/validator';   
+
+import icon_fb from '../../images/icons/icon-facebook.jpg'
+import icon_gg from '../../images/icons/icon-google.jpg'
 const post_server = "9080";
 class Login extends Component {
     /* Xử lý nodejs tại component này */
@@ -118,8 +121,12 @@ class Login extends Component {
                     <button onClick={(e) => {this.submitForm(e)}} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
                     <span>&nbsp;</span>
                     <div className="social-login">
-                        <span><a className="fb" href="/login-facebook">Login with Facebook</a></span>
-                        <span><a className="gg" href="/login-google">Login with Google</a></span>
+                        <span>
+                        <img alt="" src={icon_fb}></img>
+                        <a className="fb" href="/login-facebook">Login with Facebook</a></span>
+                        <span>
+                        <img alt="" src={icon_gg}></img>
+                        <a className="gg" href="/login-google">Login with Google</a></span>
                     </div>
                     <span>&nbsp;</span>
                 </form>
