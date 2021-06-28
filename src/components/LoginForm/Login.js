@@ -145,18 +145,36 @@ class Login extends Component {
             }
             return (
                 <form method="POST">
-                    <h6>Vui lòng nhập tên người dùng(email)</h6>
+                    <h6>Vui lòng nhập email để tìm lại mật khẩu</h6>
                     <div className="form-group">
                         <input type="email" name='email' className="form-control" onChange={e => this.handleInputChange(e)} placeholder="EMAIL (*)" />
                     </div>
                     <div className="forget-password">
-                        <span onClick={onClick}>Đi đến đăng nhập</span>
+                        <button id="btnLogin" onClick={onClick} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đến Đăng Nhập</button>
+                    </div>
+                </form>
+            )
+        }
+        const ConfirmEmail = () => {
+            const onClick = () => {
+                this.setState({
+                    LogForm: true
+                })
+            }
+            return (
+                <form method="POST">
+                    <h6>Nhập Mã Xác Nhận</h6>
+                    <div className="form-group">
+                        <input type="text" name='text' className="form-control" onChange={e => this.handleInputChange(e)} placeholder="CODE (*)" />
+                    </div>
+                    <div className="forget-password">
+                        <button id="btnLogin" onClick={onClick} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đến Đăng Nhập</button>
                     </div>
                 </form>
             )
         }
         const HandleShow = () => {
-            return this.state.LogForm ? <ShowLog /> : <ShowForget />
+            return this.state.LogForm ? <ShowLog /> || <ConfirmEmail /> : <ShowForget />
         }
         return (
             <div className="Login container">
