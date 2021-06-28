@@ -26,7 +26,7 @@ export default function Member() {
     };
 
     const loggedInUser = localStorage.getItem('user');
-    
+
     if (loggedInUser) { // neu da login thi Redirect
         let username = JSON.parse(loggedInUser).fullname;
         return (
@@ -43,7 +43,7 @@ export default function Member() {
                             <li className="btn-cart">
                                 <IconButton aria-label="show 4 new item" color="inherit" href="/shopping"> {/* xem lịch sử đặt vé */}
                                     <Badge badgeContent={0} color="secondary" showZero>
-                                        <ShoppingCartIcon style={{color: '#e00d7a', fontSize: '35px'}} />
+                                        <ShoppingCartIcon style={{ color: '#e00d7a', fontSize: '35px' }} />
                                     </Badge>
                                 </IconButton>
                             </li>
@@ -67,7 +67,7 @@ export default function Member() {
                             </li>
                             <li className="btn-login">
                                 <button onClick={onOpenModalLog}>Đăng nhập</button>
-                                <Modal open={openLog} onClose={onCloseModalLog} center classNames={{ overlay: 'customOverlay', modal: 'ModalLog' }}>
+                                <Modal open={openLog} center classNames={{ overlay: 'customOverlay', modal: 'ModalLog' }}>
                                     <Login />
                                 </Modal>
                             </li>

@@ -36,6 +36,7 @@
 .Login .social-login span a.gg:hover{
     color: #f03b2e;
 }
-.Login .forget-password span a.pw:hover{
+.Login .forget-password > span:hover{
     color: #ff0000;
+    cursor: pointer;
 }
