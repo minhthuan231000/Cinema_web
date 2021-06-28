@@ -89,11 +89,11 @@ export default function FeatureAdd() {
           <AddIcon fontSize="small" />
         </Fab>
         <InputLabel id="demo-simple-select-label">Chiều dọc</InputLabel>
-        <Fab size="small" color="primary" aria-label="chieudoc" onClick={() => {
-          setCountY(Math.max(countY - 1, 10));
-        }} className={classes.addButton}>
-          <RemoveIcon fontSize="small" />
-        </Fab>
+          <Fab size="small" color="primary" aria-label="chieudoc" onClick={() => {
+            setCountY(Math.max(countY - 1, 10));
+          }} className={classes.addButton}>
+            <RemoveIcon fontSize="small" />
+          </Fab>
         <TextField className={classes.size} value={countY} />
         <Fab size="small" color="primary" aria-label="chieudoc" onClick={() => {
           setCountY(Math.min(countY + 1, 20));
