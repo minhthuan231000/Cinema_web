@@ -67,7 +67,7 @@ export default function Member() {
                             </li>
                             <li className="btn-login">
                                 <button onClick={onOpenModalLog}>Đăng nhập</button>
-                                <Modal open={openLog} center classNames={{ overlay: 'customOverlay', modal: 'ModalLog' }}>
+                                <Modal open={openLog} onClose={onCloseModalLog} center classNames={{ overlay: 'customOverlay', modal: 'ModalLog' }}>
                                     <Login />
                                 </Modal>
                             </li>

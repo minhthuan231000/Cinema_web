@@ -44,19 +44,6 @@ export default class SystemCinema extends Component {
         return ListPhim;
     }
     render() {
-        const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-            <li
-                ref={ref}
-                onClick={(e) => {
-                    e.preventDefault();
-                    onClick(e);
-                }}
-                style={{ listStyle: 'none', display: 'inline', width: '100%' }}
-            >
-                {children}
-                <span></span>
-            </li>
-        ));
         return (
             <div className="cart-wrap">
                 
