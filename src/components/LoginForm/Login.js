@@ -12,7 +12,6 @@ class Login extends Component { // class parent login
         super();
         this.state = {
             LogForm: true
-            
         }
     }
     render() {
@@ -25,8 +24,6 @@ class Login extends Component { // class parent login
                 const target = event.target;
                 const value = target.value;;
                 const name = target.name;
-        
-                console.log(value)
                 formData[name] = value;
             }
             const validateLoginForm = (e) => {
@@ -113,7 +110,7 @@ class Login extends Component { // class parent login
                         <span onClick={onClick}>Quên mật khẩu?</span>
                     </div>
                     <span>&nbsp;</span>
-                    <button id="btnLogin" onClick={(e) => { submitForm(e) }} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
+                    <button onClick={(e) => { submitForm(e) }} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
                     <span>&nbsp;</span>
                     <div className="social-login">
                         <span>
@@ -149,12 +146,11 @@ class Login extends Component { // class parent login
                         <input type="email" name='email' className="form-control" onChange={handleInputChange} placeholder="EMAIL (*)" />
                     </div>
                     <div className="forget-password">
-                        <button id="btnLogin" onClick={onClick} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đến Đăng Nhập</button>
+                        <button onClick={onClick} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Đến Đăng Nhập</button>
                     </div>
                 </form>
             )
         }
-        
         const HandleShow = () => {
             return this.state.LogForm ? <ShowLog /> : <ShowForget />
         }
