@@ -1,0 +1,130 @@
+.cinema-list-content {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.cinema-list-wrap {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+.cinema-list {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+    /* margin-left: -45px; */
+}
+.cinema-list .select-list {
+    width: 224px;
+    margin: 0;
+    margin-bottom: 4px;
+}
+.select-list {
+    position: relative;
+    height: 48px;
+    width: 290px;
+    margin: 0 5px 12px 5px;
+    display: inline-block;
+}
+.cinema-list .select-header {
+    border-radius: 0 30px 30px 30px;
+    -webkit-border-radius: 0 30px 30px 30px;
+    background-color: rgba(0,0,0,1);
+    border: 2px solid rgba(104,54,97,1);
+}
+.select-header {
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 2px solid rgba(255,255,255,0);
+}
+.select-header span {
+    width: 40px;
+    height: 48px;
+    position: absolute;
+    right: 0px;
+    top: -2px;
+    background: url(../images/select.png) no-repeat center center;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+}
+.select-box {
+    position: absolute;
+    top: 48px;
+    left: 5%;
+    display: none;
+    width: 90%;
+    height: auto;
+    z-index: 999;
+    box-shadow: 10px 10px rgb(0 0 0 / 10%);
+    background-color: rgba(255,255,255,1);
+}
+.select-box ul {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    display: block;
+    position: relative;
+}
+.select-box li.selected {
+    background-color: #e00d7a;
+    pointer-events: none;
+}
+.cinema-address {
+    width: 68%;
+    display: inline-block;
+    vertical-align: top;
+}
+.cinema-address h2 {
+    display: block;
+}
+.cinema-address h2 .c_logo {
+    display: inline-block;
+    width: 190px;
+    height: 95px;
+    background: url(../images/logo.png) no-repeat left top;
+    background-size: contain;
+    -webkit-background-size: contain;
+}
+.cinema-address h2 .c_name {
+    position: relative;
+    font-family: 'Futurab';
+    font-weight: normal;
+    font-size: 28px;
+    text-transform: uppercase;
+    line-height: 28px;
+    color: #fff;
+    bottom: 23px;
+    left: 5px;
+}
+.c_address {
+    position: relative;
+    margin-bottom: 8px;
+    padding-left: 80px;
+    width: 100%;
+    color: #fff;
+    font-family: 'MyriadLight';
+    font-weight: normal;
+    font-size: 18px;
+    bottom: 16px;
+}
+.c_tel {
+    position: relative;
+    margin-bottom: 8px;
+    padding-left: 80px;
+    width: 100%;
+    color: #fff;
+    font-family: 'MyriadLight';
+    font-weight: normal;
+    font-size: 18px;
+    color: #fff;
+    bottom: 16px;
+}

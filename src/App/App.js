@@ -18,6 +18,8 @@ import Bottom from '../components/Bottom/Bottom';
 import Introduce from '../components/Introduce/introduce';
 import AdminPage from '../AdminPage/AdminPage'
 import BookingTicket from '../components/BookingTicket/BookingTicket'
+import PriceTicket from '../components/PriceTicket/PriceTicket';
+import SystemCinema from '../components/SystemCinema/SystemCinema';
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -72,7 +74,8 @@ export default class App extends Component {
                         <Route path="/Lichchieu">
                         </Route>
                         <Route path="/RapvaGia">
-
+                            <SystemCinema />
+                            <PriceTicket />
                         </Route>
                         <Route path="/Tintuc">
 
@@ -81,12 +84,6 @@ export default class App extends Component {
                             <div className="container">
                                 <Introduce />
                             </div>
-                        </Route>
-                        <Route path="/dashboard">
-                        </Route>
-                        <Route path="/login">
-                        </Route>
-                        <Route path="/register">
                         </Route>
                     </Switch>
                 </div>
