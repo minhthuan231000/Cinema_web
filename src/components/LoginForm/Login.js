@@ -11,14 +11,15 @@ class Login extends Component { // class parent login
     constructor() {
         super();
         this.state = {
+            user: [],
+            formData: {},
+            errors: null, // Contains login field errors
             LogForm: true
         }
     }
     render() {
         const ShowLog = () => { // class child Show Login
-            const user = [];
             const formData = {};
-            const errors = null;
 
             const handleInputChange = (event) => {
                 const target = event.target;
@@ -27,12 +28,13 @@ class Login extends Component { // class parent login
                 formData[name] = value;
             }
             const validateLoginForm = (e) => {
+                let errors = {};
                 if (isEmpty(formData.email)) {
                     errors.email = "Email can't be blank";
                 } else if (!isEmail(formData.email)) {
                     errors.email = "Please enter a valid email";
                 }
-        
+
                 if (isEmpty(formData.password)) {
                     errors.password = "Password can't be blank";
                 } else if (isContainWhiteSpace(formData.password)) {
@@ -66,11 +68,11 @@ class Login extends Component { // class parent login
                             headers: new Headers({ 'Content-Type': 'application/json' }),
                             body: JSON.stringify(data)
                         });
-        
+
                         fetch(request)
                             .then(res => res.json())
                             .then((result) => {
-                                this.user =  result;
+                                this.user = result;
                                 if (result) {
                                     data = {
                                         ...data,
