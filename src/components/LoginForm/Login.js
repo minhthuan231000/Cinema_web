@@ -80,6 +80,7 @@ class Login extends Component { // class parent login
                                         role: result.role,
                                     }
                                     localStorage.setItem('user', JSON.stringify(data));
+                                    window.location.reload();
                                 }
                             },
                                 (error) => {
@@ -91,7 +92,6 @@ class Login extends Component { // class parent login
                             )
                     }
                 }
-                window.location.reload();
             }
             const onClick = () => {
                 this.setState({
