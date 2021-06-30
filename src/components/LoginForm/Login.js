@@ -8,8 +8,8 @@ import icon_gg from '../../images/icons/icon-google.jpg'
 const post_server = "9080";
 class Login extends Component { // class parent login
     /* Xử lý nodejs tại component này */
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             user: [],
             formData: {},

@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('./db')
+const db = require('../db')
 const Utils = require("./utils");
 //Rạp chiếu phim
 const Theater = db.define("Theater", {

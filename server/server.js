@@ -5,6 +5,11 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const User = require('./tables/users');
+const Booking = require('./tables/booking');
+const Cinema = require('./tables/cinema');
+const Showtime = require('./tables/showtime');
+const Theater = require('./tables/theater');
+const Ticket = require('./tables/ticket');
 const asyncHandler = require('express-async-handler');
 
 const db = require('./db')
