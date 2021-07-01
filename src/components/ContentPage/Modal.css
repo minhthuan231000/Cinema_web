@@ -53,3 +53,9 @@
     padding-top: 1em;
     padding-left: 2em;
 }
+span.icon-modal{
+    cursor: pointer;
+}
+span.icon-modal > img:hover{
+    opacity: 70%;
+}

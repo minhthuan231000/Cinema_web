@@ -13,7 +13,7 @@ export default function ContentPage() {
             <div className="nav-icon-wrap">
                 <ul>
                     <li>
-                        <span data-name={1} onClick={() => setOpen1(true)}>
+                        <span className="icon-modal" onClick={() => setOpen1(true)}>
                             <img src="https://cinestar.com.vn/pictures/moi/8DinhDang/dolby.png" alt="DOBLY ATMOS - CÔNG NGHỆ ÂM THANH MỚI MANG TÍNH ĐỘT PHÁ" />
                         </span>
                         <Modal open={openMd1} onClose={() => setOpen1(false)} center classNames={{
@@ -41,7 +41,7 @@ export default function ContentPage() {
                         </Modal>
                     </li>
                     <li>
-                        <span data-name={2} onClick={() => setOpen2(true)}>
+                        <span className="icon-modal" onClick={() => setOpen2(true)}>
                             <img src="https://cinestar.com.vn/pictures/moi/8DinhDang/christie.png" alt="Máy chiếu CHRISTIE" />
                         </span>
                         <Modal open={openMd2} onClose={() => setOpen2(false)} center classNames={{
@@ -62,7 +62,7 @@ export default function ContentPage() {
                         </Modal>
                     </li>
                     <li>
-                        <span data-name={3} onClick={() => setOpen3(true)}>
+                        <span className="icon-modal" onClick={() => setOpen3(true)}>
                             <img src="https://cinestar.com.vn/pictures/moi/8DinhDang/2d.png" alt="Công nghệ chiếu phim 2D Digital" />
                         </span>
                         <Modal open={openMd3} onClose={() => setOpen3(false)} center classNames={{
@@ -84,7 +84,7 @@ export default function ContentPage() {
                         </Modal>
                     </li>
                     <li>
-                        <span data-name={4} onClick={() => setOpen4(true)}>
+                        <span className="icon-modal" onClick={() => setOpen4(true)}>
                             <img src="https://cinestar.com.vn/pictures/moi/8DinhDang/3d3.png" alt="Công nghệ chiếu phim 3D Digital" />
                         </span>
                         <Modal open={openMd4} onClose={() => setOpen4(false)} center classNames={{
