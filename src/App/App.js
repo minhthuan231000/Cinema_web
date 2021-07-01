@@ -19,7 +19,6 @@ import Introduce from '../components/Introduce/introduce';
 import AdminPage from '../AdminPage/AdminPage'
 import BookingTicket from '../components/BookingTicket/BookingTicket'
 import PriceTicket from '../components/PriceTicket/PriceTicket';
-import SystemCinema from '../components/SystemCinema/SystemCinema';
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -74,7 +73,6 @@ export default class App extends Component {
                         <Route path="/Lichchieu">
                         </Route>
                         <Route path="/RapvaGia">
-                            <SystemCinema />
                             <PriceTicket />
                         </Route>
                         <Route path="/Tintuc">

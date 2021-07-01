@@ -29,25 +29,25 @@ class CartContent extends Component {
     }
     ShowItemPhim = () => {
         const ListPhim = this.state.listPhim.map((item, index) =>
-            <Dropdown.Item eventKey={index}>{item.name}</Dropdown.Item>
+            <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
         )
         return ListPhim;
     }
     ShowItemRap = () => {
         const ListPhim = this.state.listRap.map((item, index) =>
-            <Dropdown.Item eventKey={index}>{item.name}</Dropdown.Item>
+            <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
         )
         return ListPhim;
     }
     ShowItemNgay = () => {
         const ListPhim = this.state.listNgay.map((item, index) =>
-            <Dropdown.Item eventKey={index}>{item.name}</Dropdown.Item>
+            <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
         )
         return ListPhim;
     }
     ShowItemGio = () => {
         const ListPhim = this.state.listGio.map((item, index) =>
-            <Dropdown.Item eventKey={index}>{item.name}</Dropdown.Item>
+            <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
         )
         return ListPhim;
     }

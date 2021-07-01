@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 require('dotenv').config({ path: '../.env' });
-module.exports = new Sequelize(process.env.DATABASE_URL ||'postgres://postgres:2039@localhost:5432/ltw2',{
+module.exports = new Sequelize(process.env.DATABASE_URL ||'postgres://postgres:thuan123@localhost:5432/doancuoiky',{
     dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions:{
