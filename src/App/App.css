@@ -403,7 +403,7 @@ li.hotline:hover {
 .dropdown-item{
   color: #fbfbfb;
 }
-.dropdown-item::focus{
+.dropdown-item:focus{
   color: #1d9feb;
 }
 .App .content-page {

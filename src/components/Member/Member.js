@@ -61,13 +61,25 @@ export default function Member() {
                         <ul>
                             <li className="btn-register">
                                 <button onClick={onOpenModalReg}>Đăng ký thành viên</button>
-                                <Modal open={openReg} onClose={onCloseModalReg} center classNames={{ overlay: 'customOverlay', modal: 'ModalReg' }}>
+                                <Modal open={openReg} onClose={onCloseModalReg} center classNames={{
+                                    overlay: 'customOverlay', modal: 'ModalReg',
+                                    overlayAnimationIn: 'customEnterOverlayAnimation',
+                                    overlayAnimationOut: 'customLeaveOverlayAnimation',
+                                    modalAnimationIn: 'customEnterModalAnimation',
+                                    modalAnimationOut: 'customLeaveModalAnimation',
+                                }} animationDuration={1000}>
                                     <Register />
                                 </Modal>
                             </li>
                             <li className="btn-login">
                                 <button onClick={onOpenModalLog}>Đăng nhập</button>
-                                <Modal open={openLog} onClose={onCloseModalLog} center classNames={{ overlay: 'customOverlay', modal: 'ModalLog' }}>
+                                <Modal open={openLog} onClose={onCloseModalLog} center classNames={{ 
+                                    overlay: 'customOverlay', modal: 'ModalLog',
+                                    overlayAnimationIn: 'customEnterOverlayAnimation',
+                                    overlayAnimationOut: 'customLeaveOverlayAnimation',
+                                    modalAnimationIn: 'customEnterModalAnimation',
+                                    modalAnimationOut: 'customLeaveModalAnimation',
+                                }} animationDuration={1000}>
                                     <Login />
                                 </Modal>
                             </li>
