@@ -5,12 +5,12 @@
 }
 
 header.admin_header {
-    display: inline-block;
+    display: inline;
+    float: right;
     width: 100%;
     background-image: url('../images/18250.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    float: right;
 }
 header.admin_header > .admin_nav{
     display: inline;
