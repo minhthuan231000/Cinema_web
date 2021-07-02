@@ -3,16 +3,18 @@ require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const morgan = require('morgan')
 const bodyParser = require('body-parser');
+const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
+
 const User = require('./tables/users');
 const Booking = require('./tables/booking');
 const Cinema = require('./tables/cinema');
 const Showtime = require('./tables/showtime');
 const Theater = require('./tables/theater');
 const Ticket = require('./tables/ticket');
-const asyncHandler = require('express-async-handler');
 
-const db = require('./db')
+
+const sequelize = require('./db');
 var app = express();
 var port = process.env.PORT_SERVER || 9080;
 
@@ -62,7 +64,7 @@ app.post('/api/register',asyncHandler(async function(request, response){
 }))
 
 
-db.sync().then(function() {
+sequelize.sync().then(function() {
   console.log(`Server is listening on http://localhost:${port}`);
   app.listen(port);
 }).catch(console.error);

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db')
 
-const Booking = db.define("Booking", {
+var Booking = db.define("Booking", {
   id: {
     primaryKey: true,
     type: Sequelize.UUID,
