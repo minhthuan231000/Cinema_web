@@ -19,6 +19,8 @@ import Introduce from '../components/Introduce/introduce';
 import AdminPage from '../AdminPage/AdminPage'
 import BookingTicket from '../components/BookingTicket/BookingTicket'
 import PriceTicket from '../components/PriceTicket/PriceTicket';
+import PageNotFound404 from '../components/Page404/404';
+import News from '../components/News/News';
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -76,12 +78,15 @@ export default class App extends Component {
                             <PriceTicket />
                         </Route>
                         <Route path="/Tintuc">
-
+                            <News />
                         </Route>
                         <Route path="/Gioithieu">
                             <div className="container">
                                 <Introduce />
                             </div>
+                        </Route>
+                        <Route path="/PageNotFound">
+                            <PageNotFound404 />
                         </Route>
                     </Switch>
                 </div>

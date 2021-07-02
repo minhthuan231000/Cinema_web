@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './News.css'
 export default function News() {
     return (
         <div>
-            <h5>TIN TỨC</h5>
+            <h1>TIN TỨC</h1>
             <div className="news-tab-content" style={{ minHeight: '484.5px', opacity: 1 }}>
                 <div className="news-tab-wrap" style={{ opacity: 1 }}>
                     {/*news-col*/}
@@ -11,7 +11,7 @@ export default function News() {
                     <div id="news" style={{ position: 'relative', width: 1170, height: '1534.92px' }}>
                         <div className="news-item new" style={{ display: 'block', position: 'absolute', left: 0, top: 0 }}>
                             <div className="news-bg">
-                                <a classname="view-detail" href="https://cinestar.com.vn/tintuc/theconjuringmaxuiquykhienhelotrailerchinhthucchophantieptheotheconjuring">
+                                <a className="view-detail" href="/Tintuc">
                                 </a>
                                 <div className="news-pic">
                                     <img data-src="https://cinestar.com.vn/pictures/176127737_895216464398053_4305814264711249791_n.jpg" alt="pic" src="https://cinestar.com.vn/pictures/176127737_895216464398053_4305814264711249791_n.jpg" />
@@ -23,7 +23,7 @@ export default function News() {
                         </div>
                         <div className="news-item new" style={{ display: 'block', position: 'absolute', left: 390, top: 0 }}>
                             <div className="news-bg">
-                                <a classname="view-detail" href="https://cinestar.com.vn/tintuc/thamtulungdanhconanviendandogiaimathuonghieuconanlydonaokhienchangthamtumaikhonglonluonkhiencacfanngongcho">
+                                <a className="view-detail" href="/Tintuc">
                                 </a>
 
                                 <div className="news-pic">
@@ -36,7 +36,7 @@ export default function News() {
                         </div>
                         <div className="news-item new" style={{ display: 'block', position: 'absolute', left: 780, top: 0 }}>
                             <div className="news-bg">
-                                <a classname="view-detail" href="https://cinestar.com.vn/tintuc/spacejamkynguyenmoisaumichealjordan20namspacejamchinhthucquaytrolaivoihuyenthoailebronjames">
+                                <a className="view-detail" href="/Tintuc">
                                 </a>
 
                                 <div className="news-pic">
@@ -49,7 +49,7 @@ export default function News() {
                         </div>
                         <div className="news-item new" style={{ display: 'block', position: 'absolute', left: 390, top: 557 }}>
                             <div className="news-bg">
-                                <a classname="view-detail" href="https://cinestar.com.vn/tintuc/demnhactuongniemnhacsinguyenanh9xavangtiengduongcam">
+                                <a className="view-detail" href="/Tintuc">
                                 </a>
 
                                 <div className="news-pic">
@@ -62,9 +62,9 @@ export default function News() {
                                     Đặc biệt người dẫn chương trình trong đêm nhạc là MC Nguyễn Cao Kỳ Duyên.          </div>
                             </div>
                         </div>
-                        <div className="news-item new" style={{ display: 'block', position: 'absolute', left: 780, top: 571 }}>
+                        <div className="news-item new" style={{ display: 'block', position: 'absolute', left: 780, top: 590 }}>
                             <div className="news-bg">
-                                <a classname="view-detail" href="https://cinestar.com.vn/tintuc/mortalkombatcuocchiensinhtutattantatvegiaidauhuyenthoaimortalkombatsegaybaothangtunay">
+                                <a className="view-detail" href="/Tintuc">
                                 </a>
 
                                 <div className="news-pic">
@@ -77,7 +77,7 @@ export default function News() {
                         </div>
                         <div className="news-item new" style={{ display: 'block', position: 'absolute', left: 0, top: 731 }}>
                             <div className="news-bg">
-                                <a classname="view-detail" href="https://cinestar.com.vn/tintuc/godzilladaichienkongdulichvutrumonsterversequanhungboicanhsieuquaivatdaoanhtac">
+                                <a className="view-detail" href="/Tintuc">
                                 </a>
 
                                 <div className="news-pic">
@@ -90,7 +90,7 @@ export default function News() {
                         </div>
                         <div className="news-item new" style={{ display: 'block', position: 'absolute', left: 390, top: 1094 }}>
                             <div className="news-bg">
-                                <a classname="view-detail" href="https://cinestar.com.vn/tintuc/dalat–sapkhaitruongnhahatoperahiendaibacnhatthanhphonganhoa">
+                                <a className="view-detail" href="/Tintuc">
                                 </a>
 
                                 <div className="news-pic">

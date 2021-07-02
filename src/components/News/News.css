@@ -33,7 +33,7 @@
     top: 5px;
     width: 46px;
     height: 31px;
-    background: url(../images/icon-news.png) no-repeat center center;
+    background: url(../../images/icon-news.png) no-repeat center center;
     z-index: 1;
 }
 .news-bg {
@@ -42,6 +42,9 @@
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
     position: relative;
+}
+.news-bg:hover {
+    background-color: #21094e;
 }
 .view-detail {
     position: absolute;
