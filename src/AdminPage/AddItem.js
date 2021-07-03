@@ -50,7 +50,10 @@ export default function FeatureAdd() {
 
   const [countX, setCountX] = React.useState(1);
   const [countY, setCountY] = React.useState(1);
-  const handleSubmit = () => {
+  const handleSubmit1 = () => {
+
+  }
+  const handleSubmit2 = () => {
 
   }
   return (
@@ -59,7 +62,7 @@ export default function FeatureAdd() {
         <div>
           <label><h4>Thêm rạp</h4></label>
         </div>
-        <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Rạp"/>
+        <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Rạp" />
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label">Loại Rạp</InputLabel>
           <Select
@@ -89,11 +92,11 @@ export default function FeatureAdd() {
           <AddIcon fontSize="small" />
         </Fab>
         <InputLabel id="demo-simple-select-label">Chiều dọc</InputLabel>
-          <Fab size="small" color="primary" aria-label="chieudoc" onClick={() => {
-            setCountY(Math.max(countY - 1, 10));
-          }} className={classes.addButton}>
-            <RemoveIcon fontSize="small" />
-          </Fab>
+        <Fab size="small" color="primary" aria-label="chieudoc" onClick={() => {
+          setCountY(Math.max(countY - 1, 10));
+        }} className={classes.addButton}>
+          <RemoveIcon fontSize="small" />
+        </Fab>
         <TextField className={classes.size} value={countY} />
         <Fab size="small" color="primary" aria-label="chieudoc" onClick={() => {
           setCountY(Math.min(countY + 1, 20));
@@ -106,7 +109,19 @@ export default function FeatureAdd() {
         </div>
         <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Cụm Rạp" />
         <TextField style={{ margin: 8 }} id="standard-basic" label="Địa Chỉ" />
-
+        <hr />
+        <div>
+          <label><h4>Thêm Suất Chiếu</h4></label>
+        </div>
+        <TextField style={{ margin: 8 }} id="standard-basic" label="Thời điểm bắt đầu" />
+        <TextField style={{ margin: 8 }} id="standard-basic" label="Thời điểm kết thúc" />
+        <p></p>
+        <InputLabel id="demo-simple-select-label">Submit</InputLabel>
+        <Fab size="small" color="secondary" aria-label="submit" className={classes.reduceButton} onSubmit={handleSubmit1} >
+          <QueueIcon />
+        </Fab>
+      </form>
+      <form className={classes.root} autoComplete="auto">
         <hr />
         <div>
           <label><h4>Thêm Phim</h4></label>
@@ -116,14 +131,9 @@ export default function FeatureAdd() {
         <TextField style={{ margin: 8 }} id="standard-basic" label="Ngày công chiếu" />
 
         <ImageUpload cardName="Input Image" />
-        <hr />
-        <div>
-          <label><h4>Thêm Suất Chiếu</h4></label>
-        </div>
-        <TextField style={{ margin: 8 }} id="standard-basic" label="Thời điểm bắt đầu" />
-        <TextField style={{ margin: 8 }} id="standard-basic" label="Thời điểm kết thúc" />
+        <p></p>
         <InputLabel id="demo-simple-select-label">Submit</InputLabel>
-        <Fab size="small" color="secondary" aria-label="submit" className={classes.reduceButton} onSubmit={handleSubmit} >
+        <Fab size="small" color="secondary" aria-label="submit" className={classes.reduceButton} onSubmit={handleSubmit2} >
           <QueueIcon />
         </Fab>
       </form>
