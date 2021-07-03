@@ -12,6 +12,7 @@ const Cinema = require('./tables/cinema');
 const Showtime = require('./tables/showtime');
 const Theater = require('./tables/theater');
 const Ticket = require('./tables/ticket');
+const Movie = require('./tables/movie');
 
 
 const sequelize = require('./db');
