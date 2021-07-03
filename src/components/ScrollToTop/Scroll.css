@@ -12,10 +12,13 @@
     }
     to {
         opacity: 80%;
+        border-radius: 65%;
+        border: #0dc0e0 1px solid;
+        box-shadow: 3px 5px 5px 0px #0dc0e0;
     }
 }
 
 .ArrowUp{
     background: #21094e;
-    border-radius: 45%;
+    border-radius: 65%;
 }

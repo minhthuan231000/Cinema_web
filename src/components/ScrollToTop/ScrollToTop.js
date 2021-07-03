@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './Scroll.css'
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 export default class ScrollToTop extends Component {
     constructor(props) {
         super(props);
@@ -41,7 +41,7 @@ export default class ScrollToTop extends Component {
             <div className="scroll-to-top">
                 {is_visible && (
                     <div onClick={() => this.scrollToTop()}>
-                       <ArrowUpwardIcon className="ArrowUp" style={{fontSize: '4em'}} />
+                       <KeyboardArrowUpIcon className="ArrowUp" style={{fontSize: '4em'}} />
                     </div>
                 )}
             </div>
