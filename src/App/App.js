@@ -21,6 +21,7 @@ import BookingTicket from '../components/BookingTicket/BookingTicket'
 import PriceTicket from '../components/PriceTicket/PriceTicket';
 import PageNotFound404 from '../components/Page404/404';
 import News from '../components/News/News';
+import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -89,25 +90,27 @@ export default class App extends Component {
                             <PageNotFound404 />
                         </Route>
                     </Switch>
+                    
                 </div>
                 <div className="bottom-page">
                     <Bottom />
                 </div>
             </BrowserRouter>
+            <ScrollToTopBtn />
         </div>
     }
     showButton = () => {
         const loggedInUser = localStorage.getItem('user');
-        if(!loggedInUser){
+        if (!loggedInUser) {
             return this.UserPage();
         }
-        if(loggedInUser){
-        let role = JSON.parse(loggedInUser).role;
-        
-            if(role === 'user' ){
+        if (loggedInUser) {
+            let role = JSON.parse(loggedInUser).role;
+
+            if (role === 'user') {
                 console.log(role)
                 return this.UserPage();
-            }else if(role === 'staff'){
+            } else if (role === 'staff') {
                 return this.AdminPage()
             }
         }
