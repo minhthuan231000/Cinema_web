@@ -34,11 +34,11 @@ header.admin_header .navbar-brand{
 }
 .admin_content{
     display: inline-flex;
+    width: 100%;
 }
 .admin_content .admin_sliderbar{
-    display: flex;
-    flex-grow: 1;
-    height: 224;
+    display: inline-flex;
+    height: 999;
 }
 .admin_sliderbar .divider{
     height: 0.3vmax;
@@ -55,4 +55,70 @@ header.admin_header .navbar-brand{
 }
 .admin_content .admin_layout{
     display: flex;
+    width: 100%;
 }
+/* -------css for feature add -------*/
+.col-5{
+    margin-inline-end: 1em;
+}
+.addFeature-root{
+    display: inline-flex;
+    color: black;
+}
+.groupAdd-rap{
+}
+.groupAdd-rap .groupControl-rap{
+    display: flex;
+    width: 480px;
+}
+.input-TypeRap{
+    width: 4.45em;
+}
+#textField-TenRap{
+    width: 23.3em;
+}
+.textField-SizeRap{
+    width: 3em;
+}
+.groupCauHinhGhe{
+    display: inline;
+}
+.groupSize{
+    display: inline-block;
+    margin-inline-end: 1em;
+    width: 200px;
+    padding-left: 1em;
+}
+.groupSize:hover{
+    border-right: #d22519 2px solid;
+}
+
+.groupAdd-rap h4{
+    width: 480px;
+    padding: 0.3em;
+    border-radius: 15px 15px;
+    box-shadow: 3px 3px 5px 1px #2d2f30;
+    background-color: #2f8ce9;
+}
+.groupAdd-phim h4{
+    width: 480px;
+    padding: 0.3em;
+    border-radius: 15px 15px;
+    box-shadow: 3px 3px 5px 1px #2d2f30;
+    background-color: #2f8ce9;
+}
+.groupCumRap h4{
+    width: 480px;
+    padding: 0.3em;
+    border-radius: 15px 15px;
+    box-shadow: 3px 3px 5px 1px #2d2f30;
+    background-color: #2f8ce9;
+}
+.groupSuatChieu h4{
+    width: 480px;
+    padding: 0.3em;
+    border-radius: 15px 15px;
+    box-shadow: 3px 3px 5px 1px #2d2f30;
+    background-color: #2f8ce9;
+}
+/* ------- end css for feature add ------- */
