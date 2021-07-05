@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {makeStyles} from 'react';
 import './admin.css'
 import { Badge } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,9 +12,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import InsertChartIcon from '@material-ui/icons/InsertChart';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import FeatureAdd from './AddItem'
 import FeatureDel from './DeleteItem'
+import Chart from './Chart';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -57,7 +62,7 @@ export default function AdminPage() {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
-    
+
     let logout = () => {
         localStorage.removeItem('user')
         window.location.reload();
@@ -116,15 +121,17 @@ export default function AdminPage() {
                 <div className="admin_sliderbar">
                     <Tabs
                         orientation="vertical"
+                        indicatorColor="MuiTabs-indicator"
                         variant="scrollable"
                         value={value}
                         onChange={handleChange}
                         aria-label="Vertical tabs example"
                         className="tabs"
                     >
-                        <Tab className="tab" label="add" {...a11yProps(0)} />
-                        <Tab className="tab" label="delete" {...a11yProps(1)} />
-                        <Tab className="tab" label="manage" {...a11yProps(2)} />
+
+                        <Tab className="tab" style={{display: 'inline !important'}} label="add" {...a11yProps(0)} icon={<AddBoxIcon />} />
+                        <Tab className="tab" label="delete" {...a11yProps(1)} icon={<DeleteIcon />} />
+                        <Tab className="tab" label="revenue" {...a11yProps(2)} icon={<InsertChartIcon />} />
                     </Tabs>
                 </div>
                 <div className="admin_layout">
@@ -136,7 +143,7 @@ export default function AdminPage() {
                         <FeatureDel />
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        Manage
+                        <Chart />
                     </TabPanel>
                 </div>
             </div>
