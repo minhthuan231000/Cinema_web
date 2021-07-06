@@ -153,7 +153,7 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle" component="span">
-        Xóa Cụm Rạp
+          Xóa Cụm Rạp
         </Typography>
       )}
 
@@ -186,6 +186,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
+    boxShadow: '3px 4px 3px 3px rgb(0,0,0,0.7)'
   },
   table: {
     minWidth: 750,
@@ -261,7 +262,7 @@ export default function EnhancedTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length}/>
+        <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
             className={classes.table}

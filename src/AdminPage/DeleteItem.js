@@ -5,11 +5,16 @@ import DeletePhim from './DeletePhim'
 import DeleteSuatChieu from './DeleteSuatChieu'
 export default function EnhancedTable() {
   return (
-    <div>
-      <DeleteRap />
-      <DeleteCumRap />
-      <DeletePhim />
-      <DeleteSuatChieu />
+    <div className="row">
+      <div className="col-5" >
+        <DeleteRap />
+        <DeletePhim />
+      </div>
+      <div className="col-5" >
+        <DeleteSuatChieu />
+        <DeleteCumRap />
+      </div>
+
     </div>
   );
 }

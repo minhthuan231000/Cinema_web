@@ -186,6 +186,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
+    boxShadow: '3px 4px 3px 3px rgb(0,0,0,0.7)'
   },
   table: {
     minWidth: 750,
