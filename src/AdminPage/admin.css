@@ -49,6 +49,13 @@ header.admin_header .navbar-brand{
     background-size: cover;
     height: 900px;
 }
+.MuiTab-wrapper{
+    justify-content: start !important;
+    flex-direction: row !important;
+}
+.tabLabel{
+    padding-left: 10px;
+}
 .MuiTabs-indicator{
     border-right: 10px solid #9aa81e;
 }
@@ -59,6 +66,7 @@ header.admin_header .navbar-brand{
     background-color: #1976d29d;
 }
 .admin_content .admin_layout{
+    color: black;
     display: flex;
     width: 100%;
 }
@@ -68,13 +76,13 @@ header.admin_header .navbar-brand{
 }
 .addFeature-root{
     display: inline-flex;
-    color: black;
 }
 .groupAdd-rap{
 }
 .groupAdd-rap .groupControl-rap{
     display: flex;
     width: 480px;
+    padding-left: 10px;
 }
 .input-TypeRap{
     width: 4.45em;
@@ -87,6 +95,9 @@ header.admin_header .navbar-brand{
 }
 .groupCauHinhGhe{
     display: inline;
+}
+.groupCauHinhGhe h6{
+    padding-left: 10px;
 }
 .groupSize{
     display: inline-block;
@@ -101,29 +112,29 @@ header.admin_header .navbar-brand{
 .groupAdd-rap h4{
     width: 480px;
     padding: 0.3em;
-    border-radius: 15px 15px;
-    box-shadow: 3px 3px 5px 1px #2d2f30;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0px 3px 4px 0px #2d2f30;
     background-color: #2f8ce9;
 }
 .groupAdd-phim h4{
     width: 480px;
     padding: 0.3em;
-    border-radius: 15px 15px;
-    box-shadow: 3px 3px 5px 1px #2d2f30;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0px 3px 4px 0px #2d2f30;
     background-color: #2f8ce9;
 }
 .groupCumRap h4{
     width: 480px;
     padding: 0.3em;
-    border-radius: 15px 15px;
-    box-shadow: 3px 3px 5px 1px #2d2f30;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0px 3px 4px 0px #2d2f30;
     background-color: #2f8ce9;
 }
 .groupSuatChieu h4{
     width: 480px;
     padding: 0.3em;
-    border-radius: 15px 15px;
-    box-shadow: 3px 3px 5px 1px #2d2f30;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0px 3px 4px 0px #2d2f30;
     background-color: #2f8ce9;
 }
 /* ------- end css for feature add ------- */

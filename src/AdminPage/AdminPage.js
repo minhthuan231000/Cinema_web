@@ -1,4 +1,4 @@
-import React, {makeStyles} from 'react';
+import React from 'react';
 import './admin.css'
 import { Badge } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,6 +19,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FeatureAdd from './AddItem'
 import FeatureDel from './DeleteItem'
 import Chart from './Chart';
+
+import {
+    BrowserRouter,
+    Switch,
+    Route,
+    Redirect
+} from "react-router-dom";
+import Profile from './Profile';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -67,6 +75,11 @@ export default function AdminPage() {
         localStorage.removeItem('user')
         window.location.reload();
     };
+    const [isProfile, setProfile] = React.useState(false);
+    const handleProfile = () => {
+        setProfile(true)
+        console.log(isProfile);
+    }
     const menuId = 'primary-search-account-menu';
     const renderProfile = (
         <Menu
@@ -78,7 +91,7 @@ export default function AdminPage() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleProfile} >Profile</MenuItem>
             <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
     );
@@ -87,6 +100,7 @@ export default function AdminPage() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
     return (
         <div className="admin_main">
             <header className="admin_header">
@@ -121,7 +135,6 @@ export default function AdminPage() {
                 <div className="admin_sliderbar">
                     <Tabs
                         orientation="vertical"
-                        indicatorColor="MuiTabs-indicator"
                         variant="scrollable"
                         value={value}
                         onChange={handleChange}
@@ -129,22 +142,36 @@ export default function AdminPage() {
                         className="tabs"
                     >
 
-                        <Tab className="tab" style={{display: 'inline !important'}} label="add" {...a11yProps(0)} icon={<AddBoxIcon />} />
-                        <Tab className="tab" label="delete" {...a11yProps(1)} icon={<DeleteIcon />} />
-                        <Tab className="tab" label="revenue" {...a11yProps(2)} icon={<InsertChartIcon />} />
+                        <Tab className="tab" label={<span className="tabLabel">add</span>} {...a11yProps(0)} icon={<AddBoxIcon />} />
+                        <Tab className="tab" label={<span className="tabLabel">delete</span>} {...a11yProps(1)} icon={<DeleteIcon />} />
+                        <Tab className="tab" label={<span className="tabLabel">revenue</span>} {...a11yProps(2)} icon={<InsertChartIcon />} />
                     </Tabs>
                 </div>
                 <div className="admin_layout">
-                    {/* here add components contents */}
-                    <TabPanel value={value} index={0}>
-                        <FeatureAdd />
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                        <FeatureDel />
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
-                        <Chart />
-                    </TabPanel>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route exact path="/" render={() => {
+                                return (
+                                    isProfile ? <Redirect to="/Profile" /> : <Redirect to="/Dashboard" />
+                                )
+                            }} />
+                            <Route path="/Dashboard">
+                                {/* here add components contents */}
+                                <TabPanel value={value} index={0}>
+                                    <FeatureAdd />
+                                </TabPanel>
+                                <TabPanel value={value} index={1}>
+                                    <FeatureDel />
+                                </TabPanel>
+                                <TabPanel value={value} index={2}>
+                                    <Chart />
+                                </TabPanel>
+                            </Route>
+                            <Route path="/Profile">
+                                <Profile />
+                            </Route>
+                        </Switch>
+                    </BrowserRouter>
                 </div>
             </div>
             <footer>
