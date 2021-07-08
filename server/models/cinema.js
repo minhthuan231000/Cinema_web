@@ -1,18 +1,15 @@
-const Sequelize = require('sequelize');
-const db = require('../db')
-const Utils = require("./utils");
+module.exports = (sequelize, Datatypes) => {
 
-const Cinema = db.define("Cinema", {
+const Cinema = sequelize.define("Cinema", {
   name: {
-    type: Sequelize.STRING,
+    type: Datatypes.STRING,
     allowNull: false,
   },
   address: {
-    type: Sequelize.TEXT,
+    type: Datatypes.TEXT,
     allowNull: true
   }
 });
-
 Cinema.associate = function (models) {
   Cinema.hasMany(models.Theater, {
     foreignKey: 'cinema_id',
@@ -20,5 +17,7 @@ Cinema.associate = function (models) {
     as: 'theaters'
   });
 };
+return Cinema;
+}
 
-module.exports = Cinema;
+

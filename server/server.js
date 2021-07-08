@@ -6,16 +6,8 @@ const bodyParser = require('body-parser');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 
-const User = require('./tables/users');
-const Booking = require('./tables/booking');
-const Cinema = require('./tables/cinema');
-const Showtime = require('./tables/showtime');
-const Theater = require('./tables/theater');
-const Ticket = require('./tables/ticket');
-const Movie = require('./tables/movie');
 
-
-const sequelize = require('./db');
+const db = require('./models');
 var app = express();
 var port = process.env.PORT_SERVER || 9080;
 
@@ -65,7 +57,8 @@ app.post('/api/register',asyncHandler(async function(request, response){
 }))
 
 
-sequelize.sync().then(function() {
-  console.log(`Server is listening on http://localhost:${port}`);
-  app.listen(port);
+db.sequelize.sync().then(function() {
+  app.listen(port,()=>{
+    console.log(`Server is listening on http://localhost:${port}`);
+  });
 }).catch(console.error);

@@ -1,3 +1,4 @@
 Cài đặt các module cần thiết : 
+npm i --save
 npm install express 
 npm install react-scripts --save

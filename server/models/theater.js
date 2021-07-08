@@ -1,14 +1,12 @@
-const Sequelize = require('sequelize');
-const db = require('../db')
-const Utils = require("./utils");
+module.exports = (sequelize, Datatypes) => {
 //Rạp chiếu phim
-const Theater = db.define("Theater", {
+const Theater = sequelize.define("Theater", {
   name: {
-    type: Sequelize.STRING,
+    type: Datatypes.STRING,
     allowNull: false,
   },
   cinema_id: {
-    type: Sequelize.INTEGER,
+    type: Datatypes.INTEGER,
     allowNull: false,
     references: {
       model: 'Cinemas',
@@ -16,7 +14,7 @@ const Theater = db.define("Theater", {
     }
   },
   type: {
-    type: Sequelize.ENUM,
+    type: Datatypes.ENUM,
     values: ['2d', '3d', '4dx'],
     allowNull: false,
     validate: {
@@ -24,21 +22,20 @@ const Theater = db.define("Theater", {
     },
   },
   number_row: {
-    type: Sequelize.INTEGER,
+    type: Datatypes.INTEGER,
     allowNull: false,
     validate: {
       notNull: { args: true, msg: "number_row cannot be null" }
     },
   },
   number_column: {
-    type: Sequelize.INTEGER,
+    type: Datatypes.INTEGER,
     allowNull: false,
     validate: {
       notNull: { args: true, msg: "number_column cannot be null" }
     },
   },
 });
-
 Theater.associate = function (models) {
   Theater.belongsTo(models.Cinema, {
     foreignKey: 'cinema_id',
@@ -55,4 +52,7 @@ Theater.associate = function (models) {
     as: 'showtimes'
   });
 };
-module.exports = Theater;
+return Theater;
+};
+
+

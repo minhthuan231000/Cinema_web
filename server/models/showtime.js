@@ -1,10 +1,9 @@
-const Sequelize = require('sequelize');
-const db = require('../db')
-const Utils = require("./utils");
 
-const Showtime = db.define("Showtime", {
+const Utils = require("../utils/utils");
+module.exports = (sequelize, Datatypes) => {
+const Showtime = sequelize.define("Showtime", {
     id: {
-        type: Sequelize.INTEGER,
+        type: Datatypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         unique: true,
@@ -14,7 +13,7 @@ const Showtime = db.define("Showtime", {
         }
     },
     movie_id: {
-        type: Sequelize.INTEGER,
+        type: Datatypes.INTEGER,
         allowNull: false,
         unique: false,
         validate: {
@@ -22,7 +21,7 @@ const Showtime = db.define("Showtime", {
         }
     },
     theater_id: {
-        type: Sequelize.INTEGER,
+        type: Datatypes.INTEGER,
         allowNull: false,
         unique: false,
         validate: {
@@ -30,7 +29,7 @@ const Showtime = db.define("Showtime", {
         }
     },
     start_time: {
-        type: Sequelize.DATE,
+        type: Datatypes.DATE,
         allowNull: false,
         validate: {
             notNull: { args: true, msg: "start_time cannot be null" }
@@ -40,7 +39,7 @@ const Showtime = db.define("Showtime", {
         }
     },
     end_time: {
-        type: Sequelize.DATE,
+        type: Datatypes.DATE,
         allowNull: false,
         validate: {
             notNull: { args: true, msg: "end_time cannot be null" }
@@ -50,13 +49,13 @@ const Showtime = db.define("Showtime", {
         }
     },
     price: {
-        type: Sequelize.INTEGER,
+        type: Datatypes.INTEGER,
         allowNull: false,
         validate: {
             notNull: { args: true, msg: "price cannot be null" }
         }
     },
-});
+})
 
 Showtime.associate = function (models) {
     Showtime.hasMany(models.Booking, {
@@ -75,5 +74,7 @@ Showtime.associate = function (models) {
         as: 'movie'
     });
 };
+return Showtime;
+};
 
-module.exports = Showtime;
+

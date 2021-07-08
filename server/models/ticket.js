@@ -1,37 +1,34 @@
-const Sequelize = require('sequelize');
-const db = require('../db')
-
+module.exports = (sequelize, Datatypes) => {
 //Vé
-const Ticket = db.define("Ticket", {
+const Ticket = sequelize.define("Ticket", {
   booking_id: {
-    type: Sequelize.UUID,
+    type: Datatypes.UUID,
     allowNull: true,
   },
   chair_id: {
-    type: Sequelize.STRING,
+    type: Datatypes.STRING,
     allowNull: true,
     unique: false
   },
   address_x: {
-    type: Sequelize.STRING,
+    type: Datatypes.STRING,
     allowNull: false
   },
   address_y: {
-    type: Sequelize.STRING,
+    type: Datatypes.STRING,
     allowNull: false
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Datatypes.INTEGER,
     allowNull: false
   }
 
 });
-
 Ticket.associate = function (models) {
   Ticket.belongsTo(models.Booking, {
     foreignKey: 'booking_id',
     as: 'booking'
   });
+}
+return Ticket;
 };
-
-module.exports = Ticket;
