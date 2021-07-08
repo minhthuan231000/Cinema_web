@@ -27,7 +27,15 @@ const User = sequelize.define('User', {
     role: {
       type: DataTypes.STRING(7),
       allowNull: false,
-    }
+    },
+    token: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   });
     User.associate = models => {
       User.hasMany(models.Booking, {

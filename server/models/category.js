@@ -1,7 +1,7 @@
 module.exports = (sequelize, Datatypes) => {
     var Category = sequelize.define("Category", {
       category_name: {
-        type: Datatypes.INTEGER,
+        type: Datatypes.STRING,
         allowNull: false
       },
     });
