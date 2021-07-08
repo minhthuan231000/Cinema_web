@@ -25,7 +25,7 @@ router.post('/', asyncHandler(async function (req, res) {
         from: 'CCG Cinema <buingocyen055@gmail.com>',
         to: email,
         subject: "Forget password CCG Cinema",
-        html: `You have to take one more step before you can change password! <br> Account verification code: <b>${token}</b>`
+        html: `Account verification code: <b><h2>${token}</h2></b><br>You have to take one more step before you can change password!  `
     });
 
     if (token) {
@@ -43,5 +43,18 @@ router.post('/', asyncHandler(async function (req, res) {
         }
     }
 }));
-
+router.post('/resetpassword', asyncHandler(async function (req, res) {
+    const {password,email} = req.body;
+    if(password){
+      const user = await User.findOne({where: {email: email}});
+      if(user){
+          await User.update({ password: bcrypt.hashSync(password, 10) }, {
+            where: {
+              email: email
+            }})
+          return res.status(200).send({ Status: 'Complete' });
+      }else return res.status(400).send({ Status: 'Invalid' });
+    }
+  
+  }));
 module.exports = router;

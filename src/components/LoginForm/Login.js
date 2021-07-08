@@ -257,10 +257,6 @@ class Login extends Component { // class parent login
             }
             const validateLoginForm = (e) => {
                 let errors = {};
-
-                if (formData == null) {
-                    errors.form = "null";
-                }
                 if (isEmpty(formData.password)) {
                     errors.password = "Password can't be blank";
                 } else if (isContainWhiteSpace(formData.password)) {
@@ -284,11 +280,12 @@ class Login extends Component { // class parent login
                 e.preventDefault();
 
                 const validation = validateLoginForm();
-                if (validation) {
+                console.log(validation);
+                if (!validation) {
                     if (validation.confirm) {
-                    alert(validation.confirm);
+                        alert(validation.confirm);
                   } else {
-                    alert('Please fill in the information to complete the registration')
+                    alert('Please fill in the information to complete the reset password')
                   };
 
                 } else {
@@ -297,7 +294,7 @@ class Login extends Component { // class parent login
                         password: formData.password
                     };
                     //Login code
-                    let request = new Request(`http://localhost:${post_server}/api/confirm`, {
+                    let request = new Request(`http://localhost:${post_server}/api/forgetpassword/resetpassword`, {
                         method: 'POST',
                         headers: new Headers({ 'Content-Type': 'application/json' }),
                         body: JSON.stringify(data)
@@ -308,7 +305,9 @@ class Login extends Component { // class parent login
                         .then((result) => {
                             console.log(result.Status);
                             if (result.Status === 'Complete') {
-                                this.setState({ LogForm: 3 })
+                                this.setState({ LogForm: 3 });
+                                alert("Đổi mật khẩu thành công!");
+                                window.location.reload();
                             } else if (result.Status === 'Invalid') {
                                 alert("Thử lại!");
                             }
@@ -322,7 +321,6 @@ class Login extends Component { // class parent login
                                 }
                             }
                         )
-                    
                 }
             })
             return (
@@ -332,7 +330,7 @@ class Login extends Component { // class parent login
                         <input type="password" name='password' className="form-control" onChange={handleInputChange} placeholder="New password (*)" />
                     </div>
                     <div className="form-group">
-                        <input type="password" name='repassword' className="form-control" onChange={handleInputChange} placeholder="Confirm password (*)" />
+                        <input type="password" name='confirm_password' className="form-control" onChange={handleInputChange} placeholder="Confirm password (*)" />
                     </div>
                     <div className="forget-password">
                         <button onClick={e => onSubmitReset(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">ResetPassword</button>
@@ -347,7 +345,7 @@ class Login extends Component { // class parent login
                 return <ShowForget />
             } else if (this.state.LogForm === 2) {
                 return <ShowConfirmEmail />
-            } else if (this.state.LogForm === 2) {
+            } else if (this.state.LogForm === 3) {
                 return <ResetPassword />
             }
         }

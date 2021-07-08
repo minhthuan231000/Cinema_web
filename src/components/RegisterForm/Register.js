@@ -188,11 +188,7 @@ class Register extends Component {
           </div>
           <div className="form-group" onChange={handleInputChange}>
             <div className="form-check">
-<<<<<<< HEAD
-              <input className="form-check-input" type="radio" name="gender" value="Nam"/>
-=======
               <input className="form-check-input" type="radio" name="gender" value="Nam" />
->>>>>>> 3c6af53bf860ce1d40a0f4770b759a50f6336975
               <label className="form-check-label" htmlFor="flexRadioDefault1">NAM</label>
             </div>
             <div className="form-check">

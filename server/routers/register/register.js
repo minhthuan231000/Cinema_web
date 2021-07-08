@@ -25,7 +25,7 @@ router.post('/', asyncHandler(async function (request, response) {
         from: 'CCG Cinema<buingocyen055@gmail.com>',
         to: email,
         subject: "Sign up Account",
-        html: `You have to take one more step before you can create an account to log in! <br> Account verification code: <b>${token}</b>`
+        html: `Account verification code: <b><h2>${token}</h2></b><br> You have to take one more step before you can create an account to log in! `
     });
 
     // Create a new user
