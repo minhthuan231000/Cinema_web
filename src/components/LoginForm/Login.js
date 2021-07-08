@@ -5,16 +5,16 @@ import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../model
 import icon_fb from '../../images/icons/icon-facebook.jpg'
 import icon_gg from '../../images/icons/icon-google.jpg'
 
-const post_server = "9080";
+const post_server = process.env.POST_SERVER || "9080";
 class Login extends Component { // class parent login
     /* Xử lý nodejs tại component này */
     constructor(props) {
         super(props);
         this.state = {
-            user: [],
+            email: '',
             formData: {},
             errors: null, // Contains login field errors
-            LogForm: true
+            LogForm: 0
         }
     }
     render() {
@@ -62,8 +62,11 @@ class Login extends Component { // class parent login
                         email: formData.email,
                         password: formData.password
                     };
+
+                    this.setState({ email: data.email });
+
                     if (formData) {
-                        var request = new Request(`http://localhost:${post_server}/api/login`, {
+                        let request = new Request(`http://localhost:${post_server}/api/login`, {
                             method: 'POST',
                             headers: new Headers({ 'Content-Type': 'application/json' }),
                             body: JSON.stringify(data)
@@ -93,9 +96,9 @@ class Login extends Component { // class parent login
                     }
                 }
             }
-            const onClick = () => {
+            const onClick = (e) => {
                 this.setState({
-                    LogForm: false
+                    LogForm: 1
                 })
             }
             return (
@@ -109,7 +112,7 @@ class Login extends Component { // class parent login
                         <input type="password" className="form-control" name='password' onChange={handleInputChange} placeholder="MẬT KHẨU (*)" />
                     </div>
                     <div className="forget-password">
-                        <span onClick={onClick}>Quên mật khẩu?</span>
+                        <span onClick={e => { onClick(e) }}>Quên mật khẩu?</span>
                     </div>
                     <span>&nbsp;</span>
                     <button onClick={(e) => { submitForm(e) }} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
@@ -132,14 +135,43 @@ class Login extends Component { // class parent login
                 const target = event.target;
                 const value = target.value;
                 const name = target.name;
-
-                console.log(value)
                 formData[name] = value;
             }
-            const onClick = () => {
-                this.setState({
-                    LogForm: true
-                })
+            const ShowForgetonClick = (e) => {
+                e.preventDefault();
+                let data = {
+                    email: formData.email
+                }
+                let request = new Request(`http://localhost:${post_server}/api/forgetpassword`, {
+                    method: 'POST',
+                    headers: new Headers({ 'Content-Type': 'application/json' }),
+                    body: JSON.stringify(data)
+                });
+
+                fetch(request)
+                    .then(res => res.json())
+                    .then((result) => {
+                        if (result) {
+                            if (result.Status === 'Complete') {
+                                this.setState({ LogForm: 2,email:formData.email })
+                            } else if (result.Status === 'Don\'t exist') {
+                                alert('Email don\'t exist')
+                            }
+                        }
+                    },
+                        (error) => {
+                            this.setState({
+                                error: error
+                            });
+                            if (error) {
+                                console.log(error);
+                            }
+                        }
+                    )
+            }
+
+            const reLogin = (e) => {
+                this.setState({ LogForm: 1 });
             }
             return (
                 <form method="POST">
@@ -148,13 +180,176 @@ class Login extends Component { // class parent login
                         <input type="email" name='email' className="form-control" onChange={handleInputChange} placeholder="EMAIL (*)" />
                     </div>
                     <div className="forget-password">
-                        <button onClick={onClick} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Đến Đăng Nhập</button>
+                        <button onClick={e => reLogin(e)} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Đến Đăng Nhập</button>
+                    </div>
+                    <div className="forget-password">
+                        <button onClick={e => (ShowForgetonClick(e))} enabled="false" type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Xác nhận</button>
                     </div>
                 </form>
             )
         }
+        const ShowConfirmEmail = () => {
+            let token = {};
+            const handleInputChange = (event) => {
+                const target = event.target;
+                const value = target.value;
+                const name = target.name;
+                token[name] = value;
+            }
+            const onSubmitConfirm = ((e) => {
+                //Chặn các event mặc định của form
+                e.preventDefault();
+                if (token == null) {
+                    // vui lòg nhập đầy đủ thôg tin để dki
+                    alert('Please fill in the information to complete the registration')
+                } else {
+                    let data = {
+                        ...token,
+                        email: this.state.email
+                    };
+                    //Login code
+                    let request = new Request(`http://localhost:${post_server}/api/confirm`, {
+                        method: 'POST',
+                        headers: new Headers({ 'Content-Type': 'application/json' }),
+                        body: JSON.stringify(data)
+                    });
+
+                    fetch(request)
+                        .then(res => res.json())
+                        .then((result) => {
+                            console.log(result.Status);
+                            if (result.Status === 'Complete') {
+                                this.setState({ LogForm: 3 })
+                            } else if (result.Status === 'Invalid') {
+                                alert("Thử lại!");
+                            }
+                        },
+                            (error) => {
+                                this.setState({
+                                    error: error
+                                });
+                                if (error) {
+                                    console.log(error);
+                                }
+                            }
+                        )
+                }
+            })
+            return (
+                <div>
+                    <h6>Nhập mã xác thực (Vui lòng kiểm tra email)</h6>
+                    <div className="form-group">
+                        <input type="text" name='token' className="form-control" onChange={handleInputChange} placeholder="CODE (*)" />
+                    </div>
+                    <div className="forget-password">
+                        <button onClick={e => onSubmitConfirm(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">Go to enter password</button>
+                    </div>
+                </div>
+            )
+        }
+        const ResetPassword = () => {
+            let formData = {};
+            const handleInputChange = (event) => {
+                const target = event.target;
+                const value = target.value;
+                const name = target.name;
+                formData[name] = value;
+            }
+            const validateLoginForm = (e) => {
+                let errors = {};
+
+                if (formData == null) {
+                    errors.form = "null";
+                }
+                if (isEmpty(formData.password)) {
+                    errors.password = "Password can't be blank";
+                } else if (isContainWhiteSpace(formData.password)) {
+                    errors.password = "Password should not contain white spaces";
+                } else if (!isLength(formData.password, { gte: 6, lte: 16, trim: true })) {
+                    errors.password = "Password's length must between 6 to 16";
+                }
+                if (isEmpty(formData.confirm_password)) {
+                    errors.confirm_password = "Confirm password can't be blank";
+                } else if (formData.password !== formData.confirm_password) {
+                    errors.confirm = "Passwords don't match";
+                }
+                if (isEmpty(errors)) {
+                    return true;
+                } else {
+                    return errors;
+                }
+            }
+            const onSubmitReset = ((e) => {
+                //Chặn các event mặc định của form
+                e.preventDefault();
+
+                const validation = validateLoginForm();
+                if (validation) {
+                    if (validation.confirm) {
+                    alert(validation.confirm);
+                  } else {
+                    alert('Please fill in the information to complete the registration')
+                  };
+
+                } else {
+                    let data = {
+                        email: this.state.email,
+                        password: formData.password
+                    };
+                    //Login code
+                    let request = new Request(`http://localhost:${post_server}/api/confirm`, {
+                        method: 'POST',
+                        headers: new Headers({ 'Content-Type': 'application/json' }),
+                        body: JSON.stringify(data)
+                    });
+
+                    fetch(request)
+                        .then(res => res.json())
+                        .then((result) => {
+                            console.log(result.Status);
+                            if (result.Status === 'Complete') {
+                                this.setState({ LogForm: 3 })
+                            } else if (result.Status === 'Invalid') {
+                                alert("Thử lại!");
+                            }
+                        },
+                            (error) => {
+                                this.setState({
+                                    error: error
+                                });
+                                if (error) {
+                                    console.log(error);
+                                }
+                            }
+                        )
+                    
+                }
+            })
+            return (
+                <div>
+                    <h6>Reset password:</h6>
+                    <div className="form-group">
+                        <input type="password" name='password' className="form-control" onChange={handleInputChange} placeholder="New password (*)" />
+                    </div>
+                    <div className="form-group">
+                        <input type="password" name='repassword' className="form-control" onChange={handleInputChange} placeholder="Confirm password (*)" />
+                    </div>
+                    <div className="forget-password">
+                        <button onClick={e => onSubmitReset(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">ResetPassword</button>
+                    </div>
+                </div>
+            )
+        }
         const HandleShow = () => {
-            return this.state.LogForm ? <ShowLog /> : <ShowForget />
+            if (this.state.LogForm === 0) {
+                return <ShowLog />
+            } else if (this.state.LogForm === 1) {
+                return <ShowForget />
+            } else if (this.state.LogForm === 2) {
+                return <ShowConfirmEmail />
+            } else if (this.state.LogForm === 2) {
+                return <ResetPassword />
+            }
         }
         return (
             <div className="Login container">

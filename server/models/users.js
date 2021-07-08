@@ -27,7 +27,15 @@ const User = sequelize.define('User', {
     role: {
       type: DataTypes.STRING(7),
       allowNull: false,
-    }
+    },
+    token: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   });
     User.associate = models => {
       User.hasMany(models.Booking, {
@@ -36,19 +44,20 @@ const User = sequelize.define('User', {
         as: 'booking'
       });
     };
+    User.findByEmail = async function(email){
+    return User.findOne({
+        where:{
+              email,
+          },
+      }); 
+    };
+
+    User.findById = async function(id){
+        return User.findByPk(id);
+    };
+
 return User;
 };
 
-// User.findByEmail = async function(email){
-//     return User.findOne({
-//         where:{
-//             email,
-//         },
-//     }); 
-// };
-
-// User.findById = async function(id){
-//     return User.findByPk(id);
-// };
 
 
