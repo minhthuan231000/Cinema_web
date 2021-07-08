@@ -85,7 +85,7 @@ class Movies extends Component {
         ]}
     };
     random
-    showMovie = (number) => {
+    showMovie = () => {
         const movies = this.state.films.map((item, key) => {
             if(item.id < 7){
                 return (
@@ -124,7 +124,7 @@ class Movies extends Component {
     render() {
         return (
             <div className="List_movies">
-                {this.showMovie(3)}
+                {this.showMovie()}
             </div>
         );
     }

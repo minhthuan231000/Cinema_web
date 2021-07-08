@@ -1,4 +1,5 @@
 body{
+  width: 100%;
   line-height: 1;
 }
 .App {
@@ -455,7 +456,6 @@ li.hotline:hover {
 .List_movies .card {
   width: 18rem;
   display: inline-block;
-  border-radius: 30px 30px;
   margin: 10px;
   box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.7);
   background-color: rgba(0, 0, 0, 0.7);
