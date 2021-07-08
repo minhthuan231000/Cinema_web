@@ -28,7 +28,8 @@ module.exports = (sequelize, Datatypes) => {
     Booking.belongsTo(models.Showtime, {
       foreignKey: 'showtime_id',
       onDelete: "CASCADE",
-      onUpdate: "CASCADE"
+      onUpdate: "CASCADE",
+      as: "showtime"
     });
   
     Booking.belongsTo(models.User, {

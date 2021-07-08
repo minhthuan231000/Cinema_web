@@ -11,7 +11,7 @@ class Register extends Component {
       user: [],
       formData: {},
       errors: null, // Contains login field errors
-      isRegisted: false
+      isRegister: false
     }
   }
 
@@ -46,13 +46,9 @@ class Register extends Component {
         const value = target.value;;
         const name = target.name;
         formData[name] = value;
-        this.setState({
-          formData: formData,
-        }) 
       }
       const validateLoginForm = (e) => {
         let errors = {};
-        const { formData } = this.state;
         if (isEmpty(formData.email)) {
           errors.email = "Email can't be blank";
         } else if (!isEmail(formData.email)) {
@@ -99,7 +95,6 @@ class Register extends Component {
           alert(Object.values(validation))
         } else {
           //Login code
-          const { formData } = this.state;
           let data = {
             fullname: formData.fullname,
             phone: formData.phone,
@@ -121,7 +116,7 @@ class Register extends Component {
               .then((result) => {
                 console.log(result)
                 this.setState({
-                  isRegisted: true // Nếu đăng ký thành công thì gửi mã xác thực, chỗ này code mã xác thực
+                  isRegister: true // Nếu đăng ký thành công thì gửi mã xác thực, chỗ này code mã xác thực
                 })
                 refreshPage();
               },
@@ -145,36 +140,36 @@ class Register extends Component {
         <form method="POST">
           <center><h3>Đăng ký</h3></center>
           <div className="form-group col-6 Name">
-            <input type="text" name="fullname" className="form-control" onChange={e => handleInputChange(e)} placeholder="HỌ TÊN (*)" />
+            <input type="text" name="fullname" className="form-control" onChange={handleInputChange} placeholder="HỌ TÊN (*)" />
           </div>
           <div className="form-group col-6 Tel">
-            <input type="text" name="phone" className="form-control" onChange={e => handleInputChange(e)} placeholder="ĐIỆN THOẠI (*)" />
+            <input type="text" name="phone" className="form-control" onChange={handleInputChange} placeholder="ĐIỆN THOẠI (*)" />
           </div>
-          <div className="form-group" onChange={e => handleInputChange(e)}>
+          <div className="form-group" onChange={handleInputChange}>
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="gender" value="Nam" checked={true} />
+              <input className="form-check-input" type="radio" name="gender" value="Nam"/>
               <label className="form-check-label" htmlFor="flexRadioDefault1">NAM</label>
             </div>
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="gender" value="Nữ" />
+              <input className="form-check-input" type="radio" name="gender" value="Nữ"/>
               <label className="form-check-label" htmlFor="flexRadioDefault2">NỮ</label>
             </div>
           </div>
           <div className="form-group">
-            <input type="email" name="email" className="form-control" onChange={e => handleInputChange(e)} placeholder="EMAIL (*)" />
+            <input type="email" name="email" className="form-control" onChange={handleInputChange} placeholder="EMAIL (*)" />
           </div>
           <div className="form-group">
-            <input type="password" name="password" className="form-control" onChange={e => handleInputChange(e)} placeholder="MẬT KHẨU (*)" />
+            <input type="password" name="password" className="form-control" onChange={handleInputChange} placeholder="MẬT KHẨU (*)" />
           </div>
           <div className="form-group">
-            <input type="password" name="confirm_password" className="form-control" onChange={e => handleInputChange(e)} placeholder="NHẬP LẠI MẬT KHẨU (*)" />
+            <input type="password" name="confirm_password" className="form-control" onChange={handleInputChange} placeholder="NHẬP LẠI MẬT KHẨU (*)" />
           </div>
-          <button onClick={submitForm} id="btnSubmitForm" type="submit" className="btn btn-dark btn-lg btn-block col-5 btnReg">Đăng ký</button>
+          <button onClick={e => submitForm(e)} id="btnSubmitForm" type="submit" className="btn btn-dark btn-lg btn-block col-5 btnReg">Đăng ký</button>
         </form>
       </div>
     }
     const handleShow = () => {
-      return this.state.isRegisted ? <ShowConfirmEmail /> : <ShowReg />
+      return this.state.isRegister ? <ShowConfirmEmail /> : <ShowReg />
     }
     return (
       <div>

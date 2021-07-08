@@ -62,6 +62,7 @@ class Login extends Component { // class parent login
                         email: formData.email,
                         password: formData.password
                     };
+                    
                     if (formData) {
                         var request = new Request(`http://localhost:${post_server}/api/login`, {
                             method: 'POST',
@@ -82,12 +83,13 @@ class Login extends Component { // class parent login
                                     localStorage.setItem('user', JSON.stringify(data));
                                     window.location.reload();
                                 }
-                            },
+                                },
                                 (error) => {
                                     this.error = error;
                                     if (error) {
                                         console.log(error);
                                     }
+                                    //alert(error);
                                 }
                             )
                     }
@@ -149,6 +151,9 @@ class Login extends Component { // class parent login
                     </div>
                     <div className="forget-password">
                         <button onClick={onClick} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Đến Đăng Nhập</button>
+                    </div>
+                    <div className="forget-password">
+                        <button enabled="false" type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Đặt lại mật khẩu</button>
                     </div>
                 </form>
             )
