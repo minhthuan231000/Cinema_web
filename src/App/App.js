@@ -23,8 +23,8 @@ import PageNotFound404 from '../components/Page404/404';
 import News from '../components/News/News';
 import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 export default class App extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             isAdmin: false, /* true là đi đến Admin, false là đi đến home */
         };

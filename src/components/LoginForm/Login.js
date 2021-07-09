@@ -83,10 +83,12 @@ class Login extends Component { // class parent login
                                         alert("Please active your account!");
                                     } else if (result.Status === 'Complete') {
                                         data = {
-                                            ...data,
+                                            email: result.user.email,
                                             fullname: result.user.fullname,
+                                            numphone: result.user.numphone,
                                             role: result.user.role,
                                         }
+                                        console.log(JSON.stringify(data).numphone);
                                         localStorage.setItem('user', JSON.stringify(data));
                                         window.location.reload();
                                     } else if (result.Status === 'Email is not exist.') {
@@ -128,7 +130,7 @@ class Login extends Component { // class parent login
                     </div>
                     <div className="forget-password">
                         <span className="forget" onClick={e => { onClickForget(e) }}>Quên mật khẩu?</span>
-                        <span  className="active"  onClick={e => { onClickActive(e) }}>Active account?</span>
+                        <span  className="active-account"  onClick={e => { onClickActive(e) }}>Active account?</span>
                     </div>
                     
                     <span>&nbsp;</span>

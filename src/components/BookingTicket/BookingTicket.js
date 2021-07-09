@@ -15,6 +15,13 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
+const date1 = new Date("06/24/2021");
+const date2 = new Date("06/26/2021");
+const rows = [  
+  createData('Bố Già', '2D', 'CCG Quốc Thanh', 'F4', ),
+  createData('Avenger EndGame', '3D', 'CCG Đà Lạt', 'G3'),
+];
+
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -22,8 +29,6 @@ const useRowStyles = makeStyles({
     },
   },
 });
-const date1 = new Date("06/24/2021");
-const date2 = new Date("06/26/2021");
 
 function createData(ten, rap, cumrap, ghe, price) {
   return {
@@ -37,11 +42,6 @@ function createData(ten, rap, cumrap, ghe, price) {
     ],
   };
 }
-
-const rows = [  
-  createData('Bố Già', '2D', 'CCG Quốc Thanh', 'F4', ),
-  createData('Avenger EndGame', '3D', 'CCG Đà Lạt', 'G3'),
-];
 
 function Row(props) {
   const { row } = props;

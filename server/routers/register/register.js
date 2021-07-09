@@ -28,7 +28,7 @@ router.post('/', asyncHandler(async function (request, response) {
         html: `Account verification code: <b><h2>${token}</h2></b><br> You have to take one more step before you can create an account to log in! `
     });
 
-    // Create a new user
+     // Create a new user
     const found = await User.findByEmail(email);
     if (found) {
         console.log('User is exist');
