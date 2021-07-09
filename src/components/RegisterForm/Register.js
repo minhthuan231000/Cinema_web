@@ -70,7 +70,7 @@ class Register extends Component {
             <input type="text" name='token' className="form-control" onChange={handleInputChange} placeholder="CODE (*)" />
           </div>
           <div className="forget-password">
-            <button onClick={e => onSubmit(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">Hoàn Tất Đăng Ký</button>
+            <button onClick={e => onSubmit(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">Kích hoạt tài khoản</button>
           </div>
         </div>
       )

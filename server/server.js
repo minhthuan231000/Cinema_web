@@ -19,6 +19,7 @@ const loginRoute = require('./routers/login/login');
 const registerRoute = require('./routers/register/register');
 const confirmRoute = require('./routers/register/confirm');
 const forgetpassRoute = require('./routers/login/forgetpassword');
+const activeRoute = require('./routers/login/active');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -31,6 +32,7 @@ app.use('/api/login',loginRoute);
 app.use('/api/register',registerRoute);
 app.use('/api/confirm',confirmRoute);
 app.use('/api/forgetpassword',forgetpassRoute);
+app.use('/api/active',activeRoute);
 
 
 db.sequelize.sync().then(function() {

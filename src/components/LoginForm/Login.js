@@ -20,13 +20,14 @@ class Login extends Component { // class parent login
     render() {
         const ShowLog = () => { // class child Show Login
             const formData = {};
-
+            //Lấy giá trị từ form lưu vào biến
             const handleInputChange = (event) => {
                 const target = event.target;
                 const value = target.value;;
                 const name = target.name;
                 formData[name] = value;
             }
+            //Kiểm tra thông tin Input
             const validateLoginForm = (e) => {
                 let errors = {};
                 if (isEmpty(formData.email)) {
@@ -48,6 +49,7 @@ class Login extends Component { // class parent login
                     return errors;
                 }
             }
+            //Sự kiện submit khi hoàn thành nhập thông tin
             const submitForm = (e) => {
                 //Chặn các event mặc định của form
                 e.preventDefault();
@@ -77,13 +79,19 @@ class Login extends Component { // class parent login
                             .then((result) => {
                                 this.user = result;
                                 if (result) {
-                                    data = {
-                                        ...data,
-                                        fullname: result.fullname,
-                                        role: result.role,
+                                    if (result.Status === 'Please active acc!') {
+                                        alert("Please active your account!");
+                                    } else if (result.Status === 'Complete') {
+                                        data = {
+                                            ...data,
+                                            fullname: result.user.fullname,
+                                            role: result.user.role,
+                                        }
+                                        localStorage.setItem('user', JSON.stringify(data));
+                                        window.location.reload();
+                                    } else if (result.Status === 'Email is not exist.') {
+                                        alert("Email is not exist. Please sign up!");
                                     }
-                                    localStorage.setItem('user', JSON.stringify(data));
-                                    window.location.reload();
                                 }
                             },
                                 (error) => {
@@ -96,9 +104,16 @@ class Login extends Component { // class parent login
                     }
                 }
             }
-            const onClick = (e) => {
+            //Sự kiện quên mật khẩu
+            const onClickForget = (e) => {
                 this.setState({
                     LogForm: 1
+                })
+            }
+            //Kích hoạt tài khoản
+            const onClickActive = (e) => {
+                this.setState({
+                    LogForm: 4
                 })
             }
             return (
@@ -112,8 +127,10 @@ class Login extends Component { // class parent login
                         <input type="password" className="form-control" name='password' onChange={handleInputChange} placeholder="MẬT KHẨU (*)" />
                     </div>
                     <div className="forget-password">
-                        <span onClick={e => { onClick(e) }}>Quên mật khẩu?</span>
+                        <span className="forget" onClick={e => { onClickForget(e) }}>Quên mật khẩu?</span>
+                        <span  className="active"  onClick={e => { onClickActive(e) }}>Active account?</span>
                     </div>
+                    
                     <span>&nbsp;</span>
                     <button onClick={(e) => { submitForm(e) }} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
                     <span>&nbsp;</span>
@@ -169,18 +186,11 @@ class Login extends Component { // class parent login
                         }
                     )
             }
-
-            const reLogin = (e) => {
-                this.setState({ LogForm: 1 });
-            }
             return (
                 <form method="POST">
                     <h6>Vui lòng nhập email để tìm lại mật khẩu</h6>
                     <div className="form-group">
                         <input type="email" name='email' className="form-control" onChange={handleInputChange} placeholder="EMAIL (*)" />
-                    </div>
-                    <div className="forget-password">
-                        <button onClick={e => reLogin(e)} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Đến Đăng Nhập</button>
                     </div>
                     <div className="forget-password">
                         <button onClick={e => (ShowForgetonClick(e))} enabled="false" type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Xác nhận</button>
@@ -242,7 +252,7 @@ class Login extends Component { // class parent login
                         <input type="text" name='token' className="form-control" onChange={handleInputChange} placeholder="CODE (*)" />
                     </div>
                     <div className="forget-password">
-                        <button onClick={e => onSubmitConfirm(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">Go to enter password</button>
+                        <button onClick={e => onSubmitConfirm(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">Tạo mật khẩu mới</button>
                     </div>
                 </div>
             )
@@ -338,17 +348,141 @@ class Login extends Component { // class parent login
                 </div>
             )
         }
+        const ShowActiveForm = () => { // class child Show Active account
+            const formData = {};
+            const handleInputChange = (event) => {
+                const target = event.target;
+                const value = target.value;
+                const name = target.name;
+                formData[name] = value;
+            }
+            const ShowActiveForm = (e) => {
+                e.preventDefault();
+                let data = {
+                    email: formData.email
+                }
+                let request = new Request(`http://localhost:${post_server}/api/active`, {
+                    method: 'POST',
+                    headers: new Headers({ 'Content-Type': 'application/json' }),
+                    body: JSON.stringify(data)
+                });
+
+                fetch(request)
+                    .then(res => res.json())
+                    .then((result) => {
+                        if (result) {
+                            if (result.Status === 'Complete') {
+                                this.setState({ LogForm: 5,email:formData.email })
+                            } else if (result.Status === 'Don\'t exist') {
+                                alert('Email don\'t exist')
+                            }
+                        }
+                    },
+                        (error) => {
+                            this.setState({
+                                error: error
+                            });
+                            if (error) {
+                                console.log(error);
+                            }
+                        }
+                    )
+            }
+            return (
+                <form method="POST">
+                    <h6>Vui lòng nhập email để kích hoạt tài khoản: </h6>
+                    <div className="form-group">
+                        <input type="email" name='email' className="form-control" onChange={handleInputChange} placeholder="EMAIL (*)" />
+                    </div>
+                    <div className="forget-password">
+                        <button onClick={e => (ShowActiveForm(e))} enabled="false" type="submit" className="btn btn-dark btn-lg btn-block col-5 btnForget">Xác nhận</button>
+                    </div>
+                </form>
+            )
+        }
+        const ShowConfirmEmailActive = () => {
+            let token = {};
+      
+            const handleInputChange = (event) => {
+              const target = event.target;
+              const value = target.value;
+              const name = target.name;
+              token[name] = value;
+            }
+            const onSubmit = ((e) => {
+              //Chặn các event mặc định của form
+              e.preventDefault();
+              if (token == null) {
+                // vui lòg nhập đầy đủ thôg tin để dki
+                alert('Please fill in the information to complete the registration')
+              } else {
+                let data = {
+                  ...token,
+                  email: this.state.email
+                };
+                //Login code
+                let request = new Request(`http://localhost:${post_server}/api/confirm`, {
+                  method: 'POST',
+                  headers: new Headers({ 'Content-Type': 'application/json' }),
+                  body: JSON.stringify(data)
+                });
+      
+                fetch(request)
+                  .then(res => res.json())
+                  .then((result) => {
+                    console.log(result.Status);
+                    if (result.Status === 'Complete') {
+                      alert("Kích hoạt thành công!");
+                      window.location.reload();
+                    } else if (result.Status === 'Invalid') {
+                      alert("Thử lại!");
+                    }
+                  },
+                    (error) => {
+                      this.setState({
+                        error: error
+                      });
+                      if (error) {
+                        console.log(error);
+                      }
+                    }
+                  )
+              }
+            })
+            return (
+              <div>
+                <h6>Nhập mã xác thực (Vui lòng kiểm tra email)</h6>
+                <div className="form-group">
+                  <input type="text" name='token' className="form-control" onChange={handleInputChange} placeholder="CODE (*)" />
+                </div>
+                <div className="forget-password">
+                  <button onClick={e => onSubmit(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">Kích Hoạt</button>
+                </div>
+              </div>
+            )
+          }
+
         const HandleShow = () => {
-            if (this.state.LogForm === 0) {
-                return <ShowLog />
-            } else if (this.state.LogForm === 1) {
-                return <ShowForget />
-            } else if (this.state.LogForm === 2) {
-                return <ShowConfirmEmail />
-            } else if (this.state.LogForm === 3) {
-                return <ResetPassword />
+            const choose = this.state.LogForm;
+            switch (choose) {
+                case 0:
+                    return <ShowLog />
+                case 1:
+                    return <ShowForget />
+                case 2:
+                    return <ShowConfirmEmail />
+                case 3:
+                    return <ResetPassword />
+                case 4:
+                    return <ShowActiveForm />
+                case 5:
+                    return <ShowConfirmEmailActive/>
+                default:
+                        return;
             }
         }
+
+        //Main
         return (
             <div className="Login container">
                 <HandleShow />
