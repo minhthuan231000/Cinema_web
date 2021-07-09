@@ -90,7 +90,6 @@ export default class App extends Component {
                             <PageNotFound404 />
                         </Route>
                     </Switch>
-                    
                 </div>
                 <div className="bottom-page">
                     <Bottom />

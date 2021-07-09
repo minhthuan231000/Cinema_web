@@ -4,6 +4,7 @@ import { Modal } from 'react-responsive-modal';
 import './member.css'
 import Register from '../RegisterForm/Register';
 import Login from '../LoginForm/Login';
+import Info from '../InfoForm/InfoForm';
 
 import { Badge } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,6 +18,11 @@ export default function Member() {
     const [openLog, setOpen2] = useState(false);
     const onOpenModalLog = () => setOpen2(true);
     const onCloseModalLog = () => setOpen2(false);
+
+    const [openInfo, setOpen3] = useState(false);
+    const onOpenModalInfo = () => setOpen3(true);
+    const onCloseModalInfo = () => setOpen3(false);
+
     const refreshPage = () => {
         window.location.reload();
     }
@@ -38,7 +44,16 @@ export default function Member() {
                                 <button onClick={logout}>Log Out</button>
                             </li>
                             <li className="btn-login">
-                                <button>{username}</button>
+                                <button onClick={onOpenModalInfo}>{username}</button>
+                                <Modal open={openInfo} onClose={onCloseModalInfo} center classNames={{
+                                    overlay: 'customOverlay', modal: 'ModalInfo',
+                                    overlayAnimationIn: 'customEnterOverlayAnimation',
+                                    overlayAnimationOut: 'customLeaveOverlayAnimation',
+                                    modalAnimationIn: 'customEnterModalAnimation',
+                                    modalAnimationOut: 'customLeaveModalAnimation',
+                                }} animationDuration={1000}>
+                                    <Info />
+                                </Modal>
                             </li>
                             <li className="btn-cart">
                                 <IconButton aria-label="show 4 new item" color="inherit" href="/shopping"> {/* xem lịch sử đặt vé */}
@@ -73,7 +88,7 @@ export default function Member() {
                             </li>
                             <li className="btn-login">
                                 <button onClick={onOpenModalLog}>Đăng nhập</button>
-                                <Modal open={openLog} onClose={onCloseModalLog} center classNames={{ 
+                                <Modal open={openLog} onClose={onCloseModalLog} center classNames={{
                                     overlay: 'customOverlay', modal: 'ModalLog',
                                     overlayAnimationIn: 'customEnterOverlayAnimation',
                                     overlayAnimationOut: 'customLeaveOverlayAnimation',
