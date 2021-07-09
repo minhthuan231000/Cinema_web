@@ -9,7 +9,7 @@ export default class IntroService extends Component {
                         <img src="https://cinestar.com.vn/pictures/dich%20vu/350x250.jpg" alt="" />
                     </div>
                     <div className="service-txt">
-                        <div class="service-title">
+                        <div className="service-title">
                             <h3>NHÀ HÁT - DALAT OPERA HOUSE</h3>
                         </div>
                         <p>Nhà hát nằm trong công trình Bông Hoa Dã Quỳ, tọa lạc bên bờ Hồ Xuân Hương - một trong những vị trí đẹp nhất của thành phố.</p>
@@ -19,12 +19,12 @@ export default class IntroService extends Component {
                         <p>Hotline: 035 621 3536</p>
                     </div>
                 </div>
-                <div class="service-item">
-                    <div class="service-pic">
+                <div className="service-item">
+                    <div className="service-pic">
                         <img src="https://cinestar.com.vn/pictures/dich%20vu/gamexu.jpg" alt="" />
                     </div>
-                    <div class="service-txt">
-                        <div class="service-title">
+                    <div className="service-txt">
+                        <div className="service-title">
                             <h3>HỆ THỐNG C'GAME - GAME XU GẮP THÚ</h3>
                         </div>
                         <p>Với nhiều trò chơi game xu đa dạng hấp dẫn, phù hợp với mọi lứa tuổi thuộc hệ thống của CCG STAR</p>
@@ -35,12 +35,12 @@ export default class IntroService extends Component {
                         <p>- C'Game Mỹ Tho</p>
                     </div>
                 </div>
-                <div class="service-item">
-                    <div class="service-pic">
+                <div className="service-item">
+                    <div className="service-pic">
                         <img src="https://cinestar.com.vn/pictures/dich%20vu/monngon.jpg" alt="" />
                     </div>
-                    <div class="service-txt">
-                        <div class="service-title">
+                    <div className="service-txt">
+                        <div className="service-title">
                             <h3>HỆ THỐNG NHÀ HÀNG MÓN NGON</h3>
                         </div>
                         <p><strong>1.&nbsp;Nhà hàng Món ngon Đà Lạt</strong></p>
@@ -67,12 +67,12 @@ export default class IntroService extends Component {
                         <p></p>
                     </div>
                 </div>
-                <div class="service-item">
-                    <div class="service-pic">
+                <div className="service-item">
+                    <div className="service-pic">
                         <img src="https://cinestar.com.vn/pictures/dich%20vu/bowling.jpg" alt="" />
                     </div>
-                    <div class="service-txt">
-                        <div class="service-title">
+                    <div className="service-txt">
+                        <div className="service-title">
                             <h3>HỆ THỐNG C'BOWLING </h3>
                         </div>
                         <p><strong>1. C’Bowling Đà Lạt</strong></p>
@@ -96,12 +96,12 @@ export default class IntroService extends Component {
                         </ul>
                     </div>
                 </div>
-                <div class="service-item">
-                    <div class="service-pic">
+                <div className="service-item">
+                    <div className="service-pic">
                         <img src="https://cinestar.com.vn/pictures/dich%20vu/kidzone.jpg" alt="" />
                     </div>
-                    <div class="service-txt">
-                        <div class="service-title">
+                    <div className="service-txt">
+                        <div className="service-title">
                             <h3>HỆ THỐNG KHU VUI CHƠI TRẺ EM C'KIDZONE</h3>
                         </div>
                         <p><strong>1. C’Kidzone Huế </strong></p>
@@ -135,12 +135,12 @@ export default class IntroService extends Component {
                         </ul>
                     </div>
                 </div>
-                <div class="service-item">
-                    <div class="service-pic">
+                <div className="service-item">
+                    <div className="service-pic">
                         <img src="https://cinestar.com.vn/pictures/dich%20vu/gymq1.jpg" alt="" />
                     </div>
-                    <div class="service-txt">
-                        <div class="service-title">
+                    <div className="service-txt">
+                        <div className="service-title">
                             <h3>HỆ THỐNG C'GYM</h3>
                         </div>
                         <p><strong>1. C’Gym Quận 1:</strong></p>
@@ -162,12 +162,12 @@ export default class IntroService extends Component {
                         </ul>
                     </div>
                 </div>
-                <div class="service-item">
-                    <div class="service-pic">
+                <div className="service-item">
+                    <div className="service-pic">
                         <img src="https://i.pinimg.com/originals/3b/ae/86/3bae869bf2cc16d5626b32fdb26574fd.png" alt="" />
                     </div>
-                    <div class="service-txt">
-                        <div class="service-title">
+                    <div className="service-txt">
+                        <div className="service-title">
                             <h3>HỆ THỐNG C'COFFEE</h3>
                         </div>
                         <div>
@@ -184,7 +184,6 @@ export default class IntroService extends Component {
                             <p style={{ boxSizing: 'border-box', WebkitFontSmoothing: 'antialiased', margin: '0px 0px 10px', padding: 0, border: 0, verticalAlign: 'baseline', fontSize: 15, fontFamily: 'Arial, Helvetica, sans-serif', lineHeight: '22.4px', color: 'rgb(0, 0, 0)', textAlign: 'justify' }}><span style={{ color: '#FFF0F5' }}><span style={{ boxSizing: 'border-box', WebkitFontSmoothing: 'antialiased', margin: 0, padding: 0, border: 0, verticalAlign: 'baseline' }}><span style={{ boxSizing: 'border-box', WebkitFontSmoothing: 'antialiased', margin: 0, padding: 0, border: 0, verticalAlign: 'baseline', textAlign: 'center' }}>+&nbsp;</span></span><span style={{ fontFamily: '"Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif', fontSize: 17 }}>52 Đinh Bộ Lĩnh, P.3, TP. Mỹ Tho,Tiền Giang - Tel: (</span><span style={{ fontFamily: '"Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif', fontSize: 15 }}>0273) 7308 881</span></span></p>
                             <p style={{ boxSizing: 'border-box', WebkitFontSmoothing: 'antialiased', margin: '0px 0px 10px', padding: 0, border: 0, verticalAlign: 'baseline', fontSize: 15, fontFamily: 'Arial, Helvetica, sans-serif', lineHeight: '22.4px', color: 'rgb(0, 0, 0)', textAlign: 'justify' }}><span style={{ color: '#FFF0F5' }}><span style={{ boxSizing: 'border-box', WebkitFontSmoothing: 'antialiased', margin: 0, padding: 0, border: 0, verticalAlign: 'baseline' }}><span style={{ boxSizing: 'border-box', WebkitFontSmoothing: 'antialiased', margin: 0, padding: 0, border: 0, verticalAlign: 'baseline', textAlign: 'center' }}>Xem thêm thông tin tại fanpage:&nbsp;</span></span></span><a href="https://www.facebook.com/cinestarcoffeeshop/" style={{color:'white'}}>https://www.facebook.com/ccgstarcoffeeshop/</a></p>
                         </div>
-
                     </div>
                 </div>
             </div>

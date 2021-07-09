@@ -8,6 +8,10 @@
     display: block;
     opacity: 1;
 }
+.active{
+    position: relative;
+    right: 0;
+}
 .intro-wrap {
     position: relative;
     display: block;
