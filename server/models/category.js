@@ -12,6 +12,13 @@ module.exports = (sequelize, Datatypes) => {
             as: 'movies'
         });
     }
+    Category.findByEmail = async function(email){
+      return User.findOne({
+          where:{
+                email,
+            },
+        }); 
+      };
     return Category;
   }
   
