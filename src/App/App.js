@@ -22,6 +22,7 @@ import PriceTicket from '../components/PriceTicket/PriceTicket';
 import PageNotFound404 from '../components/Page404/404';
 import News from '../components/News/News';
 import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
+const post_server = process.env.POST_SERVER || "9080";
 export default class App extends Component {
     constructor() {
         super();
@@ -65,13 +66,13 @@ export default class App extends Component {
                             <div className="sub-tab">
                                 <SubTab />
                             </div>
-                            <Movies />
+                            <Movies name="home-page" />
                         </Route>
                         <Route path="/Phim">
                             <div className="sub-tab">
                                 <SubTab />
                             </div>
-                            <Movies />
+                            <Movies name="phim-page" />
                         </Route>
                         <Route path="/Lichchieu">
                         </Route>
@@ -100,6 +101,7 @@ export default class App extends Component {
     }
     showButton = () => {
         const loggedInUser = localStorage.getItem('user');
+        this.loadMovies();
         if (!loggedInUser) {
             return this.UserPage();
         }
@@ -107,12 +109,36 @@ export default class App extends Component {
             let role = JSON.parse(loggedInUser).role;
 
             if (role === 'user') {
-                console.log(role)
                 return this.UserPage();
             } else if (role === 'staff') {
                 return this.AdminPage()
             }
         }
+    }
+    
+    loadMovies = () => {
+        //Kiểm tra lỗi của input trong form và hiển thị
+        let request = new Request(`http://localhost:${post_server}/load/movie`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({req: "load-movie"})
+        });
+        fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    //console.log(result.movie)
+                    localStorage.setItem('movie', JSON.stringify(result.movie));
+                }
+            },
+                (error) => {
+                    this.error = error;
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
+            return ;
     }
     render() {
         return (

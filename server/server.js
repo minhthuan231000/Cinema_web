@@ -20,6 +20,7 @@ const registerRoute = require('./routers/register/register');
 const confirmRoute = require('./routers/register/confirm');
 const forgetpassRoute = require('./routers/login/forgetpassword');
 const activeRoute = require('./routers/login/active');
+const movieRoute = require('./routers/load/movies');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -33,6 +34,7 @@ app.use('/api/register',registerRoute);
 app.use('/api/confirm',confirmRoute);
 app.use('/api/forgetpassword',forgetpassRoute);
 app.use('/api/active',activeRoute);
+app.use('/load/movie',movieRoute);
 
 
 db.sequelize.sync().then(function() {

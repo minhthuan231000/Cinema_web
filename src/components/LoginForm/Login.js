@@ -77,7 +77,6 @@ class Login extends Component { // class parent login
                         fetch(request)
                             .then(res => res.json())
                             .then((result) => {
-                                this.user = result;
                                 if (result) {
                                     if (result.Status === 'Please active acc!') {
                                         alert("Please active your account!");
