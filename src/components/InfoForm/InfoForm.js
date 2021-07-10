@@ -18,6 +18,7 @@ export default class Info extends Component {
           <label>SỐ ĐIỆN THOẠI:</label>
           <input type="text" className="form-control" name='phone' value={user.numphone} readOnly={true} />
         </div>
+        <label><i><small><a href="/History" style={{color: 'white'}}>LICH SỬ ĐẶT VÉ</a></small></i></label>
       </div>
     );
   }

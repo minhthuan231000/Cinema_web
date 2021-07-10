@@ -1,0 +1,42 @@
+.List_movies {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.List_movies .card {
+    width: 21rem;
+    height: 40rem;
+    margin: 10px;
+    box-shadow: 5px 10px 10px 5px rgb(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.card-title {
+    white-space: normal;
+}
+.card-img, .card-img-top {
+    height: 25em;
+}
+
+.Card_Text {
+    overflow: hidden ;
+    text-align:left;
+    height: 25%;
+    width: fit-content;
+    white-space: normal;
+    margin-block-end: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+}
+
+.btn-primary {
+    color: #fbfbfb;
+    background-color: #e00d7a;
+    border-color: #e00d7a;
+}
+
+.btn-text {
+    color: #fbfbfb;
+    background-color: #0dc0e0;
+    border-color: #0dc0e0;
+}

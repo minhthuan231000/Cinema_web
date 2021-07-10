@@ -56,7 +56,7 @@ export default function Member() {
                                 </Modal>
                             </li>
                             <li className="btn-cart">
-                                <IconButton aria-label="show 4 new item" color="inherit" href="/shopping"> {/* xem lịch sử đặt vé */}
+                                <IconButton aria-label="show 4 new item" color="inherit" href="/Payment"> {/* xem thanh toán vé */}
                                     <Badge badgeContent={0} color="secondary" showZero>
                                         <ShoppingCartIcon style={{ color: '#e00d7a', fontSize: '35px' }} />
                                     </Badge>

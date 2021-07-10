@@ -29,42 +29,29 @@ class CartContent extends Component {
     }
     ShowItemPhim = () => {
         const ListPhim = this.state.listPhim.map((item, index) =>
-            <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
+            <option key={index}>{item.name}</option>
         )
         return ListPhim;
     }
     ShowItemRap = () => {
         const ListPhim = this.state.listRap.map((item, index) =>
-            <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
+            <option key={index}>{item.name}</option>
         )
         return ListPhim;
     }
     ShowItemNgay = () => {
         const ListPhim = this.state.listNgay.map((item, index) =>
-            <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
+            <option key={index}>{item.name}</option>
         )
         return ListPhim;
     }
     ShowItemGio = () => {
         const ListPhim = this.state.listGio.map((item, index) =>
-            <Dropdown.Item key={index}>{item.name}</Dropdown.Item>
+            <option key={index}>{item.name}</option>
         )
         return ListPhim;
     }
     render() {
-        const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-            <li
-                ref={ref}
-                onClick={(e) => {
-                    e.preventDefault();
-                    onClick(e);
-                }}
-                style={{ listStyle: 'none', display: 'inline', width: '100%' }}
-            >
-                {children}
-                <span></span>
-            </li>
-        ));
         return (
             <div className="cart-wrap">
                 <div className="block-title">
@@ -73,50 +60,36 @@ class CartContent extends Component {
                 <div className="block-list">
                     <div className="select-list" data-cate="film">
                         <div className="select-header">
-                            <Dropdown>
-                                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                                    <h3>Chọn Phim</h3>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {this.ShowItemPhim()}
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <select>
+                                <option hidden={true}>Chọn phim</option>
+                                {this.ShowItemPhim()}
+                            </select>
                         </div>
                     </div>
                     <div className="select-list" data-cate="cine">
                         <div className="select-header">
-                            <Dropdown>
-                                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                                    <h3>Chọn Rạp</h3>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
+                            <div className="select-header">
+                                <select>
+                                    <option hidden={true}>Chọn rạp</option>
                                     {this.ShowItemRap()}
-                                </Dropdown.Menu>
-                            </Dropdown>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div className="select-list" data-cate="day">
                         <div className="select-header">
-                            <Dropdown>
-                                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                                    <h3>Chọn Ngày</h3>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {this.ShowItemNgay()}
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <select>
+                                <option hidden={true}>Chọn ngày</option>
+                                {this.ShowItemNgay()}
+                            </select>
                         </div>
                     </div>
                     <div className="select-list" data-cate="hour">
                         <div className="select-header">
-                            <Dropdown>
-                                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                                    <h3>Chọn Suất Chiếu</h3>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu style={{ width: '290px', alignSelf: 'left' }}>
-                                    {this.ShowItemGio()}
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <select>
+                                <option hidden={true}>Chọn giờ</option>
+                                {this.ShowItemGio()}
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,6 @@ import Member from '../components/Member/Member';
 import HeaderTop from '../components/Header/Header';
 import CartContent from '../components/CartContent/CartContent';
 import ContentPage from '../components/ContentPage/ContentPage';
-import Movies from '../components/Movies/Movies';
 import SubTab from '../components/SubTab/SubTab';
 import Bottom from '../components/Bottom/Bottom';
 import Introduce from '../components/Introduce/introduce';
@@ -22,6 +21,7 @@ import PriceTicket from '../components/PriceTicket/PriceTicket';
 import PageNotFound404 from '../components/Page404/404';
 import News from '../components/News/News';
 import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
+import Payment from '../components/Payment/Payment';
 const post_server = process.env.POST_SERVER || "9080";
 export default class App extends Component {
     constructor() {
@@ -34,8 +34,8 @@ export default class App extends Component {
         return <AdminPage />
     }
     UserPage = () => {
-        return <div className="App">
-            <BrowserRouter>
+        return (
+            <div className="App">
                 <div className="container-fluid">
                     <HeaderTop />
                 </div>
@@ -48,56 +48,55 @@ export default class App extends Component {
                 </div>
                 <div className="content-page">
                     <ContentPage />
-                    <Switch>
-                        <Route
-                            exact
-                            path="/"
-                            render={() => {
-                                return (
-                                    this.state.isUserAuthenticated ?
-                                        <Redirect to="/Home" /> :
-                                        <Redirect to="/Home" />
-                                )
-                            }} />
-                        <Route path="/shopping">
-                            <BookingTicket />
-                        </Route>
-                        <Route path="/Home">
-                            <div className="sub-tab">
-                                <SubTab />
-                            </div>
-                            <Movies name="home-page" />
-                        </Route>
-                        <Route path="/Phim">
-                            <div className="sub-tab">
-                                <SubTab />
-                            </div>
-                            <Movies name="phim-page" />
-                        </Route>
-                        <Route path="/Lichchieu">
-                        </Route>
-                        <Route path="/RapvaGia">
-                            <PriceTicket />
-                        </Route>
-                        <Route path="/Tintuc">
-                            <News />
-                        </Route>
-                        <Route path="/Gioithieu">
-                            <div className="container">
-                                <Introduce />
-                            </div>
-                        </Route>
-                        <Route path="/PageNotFound">
-                            <PageNotFound404 />
-                        </Route>
-                    </Switch>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route
+                                exact
+                                path="/"
+                                render={() => {
+                                    return <Redirect to="/Home" />
+                                }} />
+                            <Route path="/Payment">
+                                <Payment />
+                            </Route>
+                            <Route path="/History">
+                                <BookingTicket />
+                            </Route>
+                            <Route path="/Home">
+                                <div className="sub-tab">
+                                    <SubTab />
+                                </div>
+                            </Route>
+                            <Route path="/Phim">
+                                <div className="sub-tab">
+                                    <SubTab />
+                                </div>
+                            </Route>
+                            <Route path="/Lichchieu">
+                            </Route>
+                            <Route path="/RapvaGia">
+                                <PriceTicket />
+                            </Route>
+                            <Route path="/Tintuc">
+                                <News />
+                            </Route>
+                            <Route path="/Gioithieu">
+                                <div className="container">
+                                    <Introduce />
+                                </div>
+                            </Route>
+                            <Route path="/PageNotFound">
+                                <PageNotFound404 />
+                            </Route>
+                        </Switch>
+                    </BrowserRouter>
                 </div>
                 <div className="bottom-page">
                     <Bottom />
                 </div>
-            </BrowserRouter>
-            <ScrollToTopBtn />
-        </div>
+                <ScrollToTopBtn />
+            </div>
+        )
     }
     showButton = () => {
         const loggedInUser = localStorage.getItem('user');
@@ -115,13 +114,13 @@ export default class App extends Component {
             }
         }
     }
-    
+
     loadMovies = () => {
         //Kiểm tra lỗi của input trong form và hiển thị
         let request = new Request(`http://localhost:${post_server}/load/movie`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({req: "load-movie"})
+            body: JSON.stringify({ req: "load-movie" })
         });
         fetch(request)
             .then(res => res.json())
@@ -138,7 +137,7 @@ export default class App extends Component {
                     }
                 }
             )
-            return ;
+        return;
     }
     render() {
         return (
