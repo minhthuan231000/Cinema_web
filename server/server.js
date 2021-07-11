@@ -21,6 +21,10 @@ const confirmRoute = require('./routers/register/confirm');
 const forgetpassRoute = require('./routers/login/forgetpassword');
 const activeRoute = require('./routers/login/active');
 const dataRoute = require('./routers/load/load-data');
+const deleteShowtimeRoute = require('./routers/delete/showtime');
+const deleteCinemaRoute = require('./routers/delete/cinema');
+const deleteTheaterRoute = require('./routers/delete/theater');
+const deleteMovieRoute = require('./routers/delete/movie');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -35,6 +39,10 @@ app.use('/api/confirm',confirmRoute);
 app.use('/api/forgetpassword',forgetpassRoute);
 app.use('/api/active',activeRoute);
 app.use('/load/data',dataRoute);
+app.use('/delete/showtime',deleteShowtimeRoute);
+app.use('/delete/cinema',deleteCinemaRoute);
+app.use('/delete/theater',deleteTheaterRoute);
+app.use('/delete/movie',deleteMovieRoute);
 
 
 db.sequelize.sync().then(function() {

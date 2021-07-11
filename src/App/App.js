@@ -104,7 +104,6 @@ export default class App extends Component {
     }
     showButton = () => {
         const loggedInUser = localStorage.getItem('user');
-        this.loadMovies();
         if (!loggedInUser) {
             return this.UserPage();
         }
@@ -147,6 +146,7 @@ export default class App extends Component {
         return;
     }
     render() {
+        this.loadMovies();
         return (
             <div className="App">
                 {this.showButton()}

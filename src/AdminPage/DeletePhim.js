@@ -22,6 +22,8 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 
 let rows = JSON.parse(localStorage.getItem('movie'));
 
+
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -129,8 +131,33 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected,selected } = props;
+  const click_delete = () => {
+    let data = { listId: selected };
+    let request = new Request(`http://localhost:9080/delete/movie`, {
+        method: 'POST',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(data)
+    });
 
+    fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+            if (result) {
+                if(result.Status === 'Complete'){
+                    console.log('Complete');
+                }else if(result.Status === 'Error'){
+                    console.log('Del showtime error');
+                }
+            }
+        },
+            (error) => {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        )
+}
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -143,13 +170,13 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle" component="span">
-        Xóa Phim
+          Xóa Phim
         </Typography>
       )}
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={() => click_delete()}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -166,6 +193,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  selected: PropTypes.array.isRequired,
 };
 
 
@@ -252,7 +280,7 @@ export default function EnhancedTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length}/>
+        <EnhancedTableToolbar numSelected={selected.length} selected={selected} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -261,7 +289,7 @@ export default function EnhancedTable() {
             aria-label="enhanced table"
           >
             {/* <-- Select all --> */}
-            <EnhancedTableHead 
+            <EnhancedTableHead
               classes={classes}
               numSelected={selected.length}
               order={order}
