@@ -77,7 +77,7 @@ export default function Revenue() {
     };
     console.log(date)
     return (
-        <div>
+        <div className="revenue_main">
             <div className="revenue_content">
                 <h2>Thống kê doanh thu theo cụm rạp</h2>
             </div>
@@ -106,7 +106,7 @@ export default function Revenue() {
                         }}
                     />
                 </form>
-                <Table className="revenue_table" aria-label="spanning table">
+                <Table aria-label="spanning table">
                     <TableHead>
                         <TableRow>
                             <TableCell align="center" colSpan={3}>
@@ -175,7 +175,7 @@ export default function Revenue() {
                         }}
                     />
                 </form>
-                <Table className="revenue_table" aria-label="spanning table">
+                <Table aria-label="spanning table">
                     <TableHead>
                         <TableRow>
                             <TableCell align="center" colSpan={3}>
