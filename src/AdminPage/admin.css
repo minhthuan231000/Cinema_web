@@ -102,11 +102,12 @@ header.admin_header .navbar-brand {
     width: 480px;
     padding-left: 10px;
 }
-
 .input-TypeRap {
-    width: 4.45em;
+    width: 5em;
 }
-
+#datetime{
+    width: 14em;
+}
 #textField-TenRap {
     width: 23.3em;
 }

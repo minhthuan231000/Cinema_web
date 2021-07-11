@@ -40,7 +40,7 @@ export default class App extends Component {
                     <HeaderTop />
                 </div>
                 <div className="content">
-                    <Member />
+                    <Member isLogin={false} />
                     <SliderAuto />
                 </div>
                 <div className="cart-content">

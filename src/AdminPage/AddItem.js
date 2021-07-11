@@ -13,15 +13,24 @@ import QueueIcon from '@material-ui/icons/Queue';
 import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
 
+import moment from 'moment';
 import './admin.css'
 
 export default function FeatureAdd() {
 
   const [type, setType] = React.useState('');
+  const [tenRap, setTenRap] = React.useState('');
+  const [tenPhim, setTenFilm] = React.useState('');
+
   const handleChangeType = (event) => {
     setType(event.target.value);
   }
-
+  const handleChangeRap = (event) => {
+    setTenRap(event.target.value);
+  }
+  const handleChangePhim = (event) => {
+    setTenFilm(event.target.value);
+  }
   const [countX, setCountX] = React.useState(10);
   const [countY, setCountY] = React.useState(10);
   const handleSubmit1 = () => {
@@ -30,16 +39,41 @@ export default function FeatureAdd() {
   const handleSubmit2 = () => {
 
   }
+  const showListItemPhim = () => {
+    return <MenuItem value={1}>Phim 1</MenuItem>
+  }
+  const showListItemRap = () => {
+    return <MenuItem value={1}>Rap 1</MenuItem>
+  }
+  const [date, setDate] = React.useState("2021-07-12T10:30");
+  // handles when user changes input in date inputfield
+  const handleChangeDate = e => {
+    setDate(e.target.value);
+  };
   return (
     <div className="addFeature-root">
       <div className="col-5" >
         <form autoComplete="auto" >
+          <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)' }}>
+            <div className="groupCumRap">
+              <div><label><h4>Thêm cụm rạp</h4></label></div>
+              <TextField style={{ marginLeft: 10 }} id="standard-basic" label="Tên Cụm Rạp" />
+              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" label="Địa Chỉ" />
+            </div>
+            <p></p>
+            <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
+            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
+              <QueueIcon />
+            </Fab>
+          </Paper>
+        </form>
+        <form autoComplete="auto" >
           <div className="groupAdd-rap">
-            <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)' }}>
+            <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
               <label><h4>Thêm rạp</h4></label>
               <div className="groupControl-rap">
-                <TextField style={{ marginInlineEnd: '0.5em' }} id="textField-TenRap" label="Tên Rạp" />
-                <FormControl className="input-TypeRap">
+                <TextField style={{ marginInlineEnd: '0.5em' }} id="textField-TenRap" label="Tên Rạp" onChange={handleChangeRap} value={tenRap} />
+                <FormControl className="input-TypeRap" style={{ marginInlineEnd: '0.5em' }}>
                   <InputLabel id="demo-simple-select-label">Loại Rạp</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
@@ -50,6 +84,17 @@ export default function FeatureAdd() {
                     <MenuItem value={'2D'}>2D</MenuItem>
                     <MenuItem value={'3D'}>3D</MenuItem>
                     <MenuItem value={'4DX'}>4DX</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl className="input-TypeRap">
+                  <InputLabel id="demo-simple-select-label">Cụm Rạp</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                  >
+                    <MenuItem value={1}>Cụm 1</MenuItem>
+                    <MenuItem value={2}>Cụm 2</MenuItem>
+                    <MenuItem value={3}>Cụm 3</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -94,26 +139,50 @@ export default function FeatureAdd() {
         </form>
         <form autoComplete="auto" >
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
-            <div className="groupCumRap">
-              <div><label><h4>Thêm cụm rạp</h4></label></div>
-              <TextField style={{ marginLeft: 10 }} id="standard-basic" label="Tên Cụm Rạp" />
-              <TextField style={{ margin: '8px 5px 5px 10px', paddingInlineEnd: 15 }} fullWidth={true} id="standard-basic" label="Địa Chỉ" />
-            </div>
-            <p></p>
-            <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
-              <QueueIcon />
-            </Fab>
-          </Paper>
-        </form>
-        <form autoComplete="auto" >
-          <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
             <div className="groupSuatChieu">
               <div>
                 <label><h4>Thêm Suất Chiếu</h4></label>
               </div>
-              <TextField style={{ margin: '3px 8px 0 10px' }} id="standard-basic" label="Thời điểm bắt đầu" />
-              <TextField style={{ marginTop: 3 }} id="standard-basic" label="Thời điểm kết thúc" />
+              <TextField
+                id="datetime"
+                label="Thời điểm bắt đầu"
+                type="datetime-local"
+                defaultValue={date}
+                onChange={handleChangeDate}
+                style={{ margin: '3px 8px 0 10px' }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                id="datetime"
+                label="Thời điểm kết thúc"
+                type="datetime-local"
+                defaultValue={date}
+                onChange={handleChangeDate}
+                style={{ marginTop: 3 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <FormControl style={{ margin: '3px 8px 0 10px', width: '10em' }}>
+                <InputLabel id="demo-simple-select-label">Phim</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                >
+                  {showListItemPhim()}
+                </Select>
+              </FormControl>
+              <FormControl style={{ margin: '3px 8px 0 10px', width: '5.8em' }}>
+                <InputLabel id="demo-simple-select-label">Rạp</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                >
+                  {showListItemRap()}
+                </Select>
+              </FormControl>
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
               <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
@@ -130,7 +199,7 @@ export default function FeatureAdd() {
               <div>
                 <label><h4>Thêm Phim</h4></label>
               </div>
-              <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" />
+              <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" onChange={handleChangePhim} value={tenPhim} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Ngày công chiếu" placeholder="(MM/DD/YYYY)" />
 
