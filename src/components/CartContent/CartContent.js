@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'react-bootstrap';
 
 class CartContent extends Component {
     constructor(props) {
