@@ -18,7 +18,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import FeatureAdd from './AddItem'
 import FeatureDel from './DeleteItem'
-import Chart from './Chart';
+import Revenue from './Revenue';
 
 import {
     BrowserRouter,
@@ -164,7 +164,7 @@ export default function AdminPage() {
                                     <FeatureDel />
                                 </TabPanel>
                                 <TabPanel value={value} index={2}>
-                                    <Chart />
+                                    <Revenue />
                                 </TabPanel>
                             </Route>
                             <Route path="/Profile">
