@@ -20,7 +20,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 let rows = JSON.parse(localStorage.getItem('showtime'));
-
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -130,9 +129,34 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected } = props;
-    const click_delete = () =>{
-        console.log("Thử")
+    const { numSelected, selected } = props;
+    const click_delete = () => {
+        let data = { listId: selected };
+        let request = new Request(`http://localhost:9080/delete/showtime`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(data)
+        });
+
+        fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    if(result.Status === 'Complete'){
+                        console.log('Complete');
+                    //localStorage.removeItem('showtime');
+                    //localStorage.setItem('showtime', JSON.stringify(result.showtime));
+                    }else if(result.Status === 'Error'){
+                        console.log('Del showtime error');
+                    }
+                }
+            },
+                (error) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
     }
     return (
         <Toolbar
@@ -169,6 +193,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
+    selected: PropTypes.array.isRequired
 };
 
 
@@ -199,6 +224,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable() {
     const classes = useStyles();
+
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('ID');
     const [selected, setSelected] = React.useState([]);
@@ -217,6 +243,7 @@ export default function EnhancedTable() {
             return;
         }
         setSelected([]);
+
     };
     // Tiêu chí chọn selected
     const handleClick = (event, id) => {
@@ -235,8 +262,8 @@ export default function EnhancedTable() {
                 selected.slice(selectedIndex + 1),
             );
         }
-
         setSelected(newSelected);
+        //
     };
 
     const handleChangePage = (event, newPage) => {
@@ -255,7 +282,7 @@ export default function EnhancedTable() {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <EnhancedTableToolbar numSelected={selected.length} />
+                <EnhancedTableToolbar numSelected={selected.length} selected={selected} />
                 <TableContainer>
                     <Table
                         className={classes.table}

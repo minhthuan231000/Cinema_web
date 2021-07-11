@@ -131,8 +131,33 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected,selected } = props;
+  const click_delete = () => {
+    let data = { listId: selected };
+    let request = new Request(`http://localhost:9080/delete/cinema`, {
+        method: 'POST',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(data)
+    });
 
+    fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+            if (result) {
+                if(result.Status === 'Complete'){
+                    console.log('Complete');
+                }else if(result.Status === 'Error'){
+                    console.log('Del showtime error');
+                }
+            }
+        },
+            (error) => {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        )
+}
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -151,7 +176,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={() => click_delete()} >
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -168,6 +193,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  selected: PropTypes.array.isRequired
 };
 
 
@@ -237,7 +263,6 @@ export default function EnhancedTable() {
 
     setSelected(newSelected);
   };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -254,7 +279,7 @@ export default function EnhancedTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} selected = {selected}/>
         <TableContainer>
           <Table
             className={classes.table}

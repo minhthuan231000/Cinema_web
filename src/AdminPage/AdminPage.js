@@ -61,7 +61,7 @@ function a11yProps(index) {
     };
 }
 export default function AdminPage() {
-    const [numberMail, numNoti] = [1, 3];
+    const [numberMail, numNoti] = [0,0];
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const handleProfileMenuOpen = (event) => {
