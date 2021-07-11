@@ -22,6 +22,8 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 
 let rows = JSON.parse(localStorage.getItem('movie'));
 
+
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -191,6 +193,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  selected: PropTypes.array.isRequired,
 };
 
 
