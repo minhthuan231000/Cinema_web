@@ -84,15 +84,29 @@ export default function FeatureAdd() {
                   </Fab>
                 </div>
               </div>
+              <p></p>
+              <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
+                <QueueIcon />
+              </Fab>
             </Paper>
           </div>
+        </form>
+        <form autoComplete="auto" >
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
             <div className="groupCumRap">
               <div><label><h4>Thêm cụm rạp</h4></label></div>
               <TextField style={{ marginLeft: 10 }} id="standard-basic" label="Tên Cụm Rạp" />
               <TextField style={{ margin: '8px 5px 5px 10px', paddingInlineEnd: 15 }} fullWidth={true} id="standard-basic" label="Địa Chỉ" />
             </div>
+            <p></p>
+            <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
+            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
+              <QueueIcon />
+            </Fab>
           </Paper>
+        </form>
+        <form autoComplete="auto" >
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
             <div className="groupSuatChieu">
               <div>
@@ -102,7 +116,7 @@ export default function FeatureAdd() {
               <TextField style={{ marginTop: 3 }} id="standard-basic" label="Thời điểm kết thúc" />
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{margin: '0 0 5px 5px'}} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
                 <QueueIcon />
               </Fab>
             </div>
@@ -111,7 +125,7 @@ export default function FeatureAdd() {
       </div>
       <div className="col-5" >
         <form autoComplete="auto">
-          <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)'}}>
+          <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)' }}>
             <div className="groupAdd-phim">
               <div>
                 <label><h4>Thêm Phim</h4></label>
@@ -123,7 +137,7 @@ export default function FeatureAdd() {
               <ImageUpload cardName="Input Image" />
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{margin: '0 0 5px 5px'}} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit2} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit2} >
                 <QueueIcon />
               </Fab>
             </div>
