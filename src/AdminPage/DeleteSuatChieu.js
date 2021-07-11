@@ -19,27 +19,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(IdPhim, IdRap, startTime, endTime, price) {
-    return { IdPhim, IdRap, startTime, endTime, price };
-}
-
-const rows = [
-    createData(1, 3, '9:00', '11:30', 50000),
-    createData(2, 2, '9:00', '11:30', 60000),
-    createData(3, 1, '9:00', '11:30', 60000),
-    createData(4, 10, '9:00', '11:30', 50000),
-    createData(5, 6, '9:00', '11:30', 50000),
-    createData(6, 5, '9:00', '11:30', 50000),
-    createData(1, 4, '12:00', '14:30', 50000),
-    createData(2, 8, '12:00', '14:30', 50000),
-    createData(3, 15, '12:00', '14:30', 50000),
-    createData(4, 7, '12:00', '14:30', 50000),
-    createData(5, 13, '12:00', '14:30', 50000),
-    createData(6, 12, '12:00', '14:30', 50000),
-    createData(1, 11, '15:00', '17:30', 50000),
-    createData(2, 14, '15:00', '17:30', 50000),
-    createData(3, 9, '15:00', '17:30', 60000),
-];
+let rows = JSON.parse(localStorage.getItem('showtime'));
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -89,7 +69,7 @@ function EnhancedTableHead(props) {
                         indeterminate={numSelected > 0 && numSelected < rowCount}
                         checked={rowCount > 0 && numSelected === rowCount}
                         onChange={onSelectAllClick}
-                        inputProps={{ 'aria-label': 'select all code' }}
+                        inputProps={{ 'aria-label': 'select all id' }}
                     />
                 </TableCell>
                 {headCells.map((headCell) => (
@@ -151,7 +131,9 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
-
+    const click_delete = () =>{
+        console.log("Thử")
+    }
     return (
         <Toolbar
             className={clsx(classes.root, {
@@ -170,7 +152,7 @@ const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
-                    <IconButton aria-label="delete">
+                    <IconButton aria-label="delete" onClick={() => click_delete()}>
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>
@@ -230,19 +212,19 @@ export default function EnhancedTable() {
     // Tiêu chí chọn all selected
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.code);
+            const newSelecteds = rows.map((n) => n.id);
             setSelected(newSelecteds);
             return;
         }
         setSelected([]);
     };
     // Tiêu chí chọn selected
-    const handleClick = (event, code) => {
-        const selectedIndex = selected.indexOf(code);
+    const handleClick = (event, id) => {
+        const selectedIndex = selected.indexOf(id);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, code);
+            newSelected = newSelected.concat(selected, id);
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
@@ -267,7 +249,7 @@ export default function EnhancedTable() {
     };
 
 
-    const isSelected = (code) => selected.indexOf(code) !== -1;
+    const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
     return (
@@ -294,17 +276,16 @@ export default function EnhancedTable() {
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.code); // Tiêu chí chọn selected
+                                    const isItemSelected = isSelected(row.id); // Tiêu chí chọn selected
                                     const labelId = `enhanced-table-checkbox-${index}`;
-
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, row.code)} // Tiêu chí chọn selected
+                                            onClick={(event) => handleClick(event, row.id)} // Tiêu chí chọn selected
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.code} // Tiêu chí chọn selected
+                                            key={row.id} // Tiêu chí chọn selected
                                             selected={isItemSelected}
                                         >
                                             <TableCell padding="checkbox">
@@ -314,11 +295,11 @@ export default function EnhancedTable() {
                                                 />
                                             </TableCell>
                                             <TableCell component="th" id={labelId} scope="row" padding="none" align="left">
-                                                {row.IdPhim}
+                                                {row.movie_id}
                                             </TableCell>
-                                            <TableCell align="left">{row.IdRap}</TableCell>
-                                            <TableCell align="left">{row.startTime}</TableCell>
-                                            <TableCell align="left">{row.endTime}</TableCell>
+                                            <TableCell align="left">{row.theater_id}</TableCell>
+                                            <TableCell align="left">{row.start_time}</TableCell>
+                                            <TableCell align="left">{row.end_time}</TableCell>
                                             <TableCell align="left">{row.price}</TableCell>
                                         </TableRow>
                                     );

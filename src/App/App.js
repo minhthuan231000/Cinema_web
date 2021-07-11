@@ -117,7 +117,7 @@ export default class App extends Component {
 
     loadMovies = () => {
         //Kiểm tra lỗi của input trong form và hiển thị
-        let request = new Request(`http://localhost:${post_server}/load/movie`, {
+        let request = new Request(`http://localhost:${post_server}/load/data`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
@@ -128,6 +128,9 @@ export default class App extends Component {
                 if (result) {
                     //console.log(result.movie)
                     localStorage.setItem('movie', JSON.stringify(result.movie));
+                    localStorage.setItem('theater', JSON.stringify(result.theater));
+                    localStorage.setItem('showtime', JSON.stringify(result.showtime));
+                    localStorage.setItem('cinema', JSON.stringify(result.cinema));
                 }
             },
                 (error) => {

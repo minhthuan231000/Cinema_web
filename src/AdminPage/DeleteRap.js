@@ -19,27 +19,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(code, name, type, sizeX, sizeY) {
-  return { code, name, type, sizeX, sizeY };
-}
-
-const rows = [
-  createData(1, 'CCG Quốc Thanh', '2D', 15, 20),
-  createData(2, 'CCG Đà Lạt', '2D', 15, 17),
-  createData(3, 'CCG Hai Bà Trưng', '3D', 14, 12),
-  createData(4, 'CCG Quốc Thanh', '4DX', 16, 10),
-  createData(5, 'CCG Đà Lạt', '4DX', 14, 12),
-  createData(6, 'CCG Huế', '3D', 10, 18),
-  createData(7, 'CCG Hai Bà Trưng', '3D', 12, 14),
-  createData(8, 'CCG Mỹ Tho', '2D', 11, 16),
-  createData(9, 'CCG Bình Dương', '2D', 15, 12),
-  createData(10, 'CCG Quốc Thanh', '2D', 18, 10),
-  createData(11, 'CCG Bình Dương', '4DX', 12, 18),
-  createData(12, 'CCG Mỹ Tho', '4DX', 10, 16),
-  createData(13, 'CCG Hai Bà Trưng', '4DX', 14, 16),
-  createData(14, 'CCG Huế', '2D', 15, 15),
-  createData(15, 'CCG Quốc Thanh', '2D', 20, 15),
-];
+let rows = JSON.parse(localStorage.getItem('theater'));
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -68,7 +48,7 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'code', numeric: true, disablePadding: true, label: 'ID' },
+  { id: 'id', numeric: true, disablePadding: true, label: 'ID' },
   { id: 'name', numeric: false, disablePadding: false, label: 'Tên Rạp' },
   { id: 'type', numeric: true, disablePadding: false, label: 'Loại Rạp' },
   { id: 'sizeX', numeric: true, disablePadding: false, label: 'Ngang' },
@@ -89,7 +69,7 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all code' }}
+            inputProps={{ 'aria-label': 'select all id' }}
           />
         </TableCell>
         {headCells.map((headCell) => (
@@ -230,19 +210,19 @@ export default function EnhancedTable() {
   // Tiêu chí chọn all selected
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.code);
+      const newSelecteds = rows.map((n) => n.id);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
   // Tiêu chí chọn selected
-  const handleClick = (event, code) => {
-    const selectedIndex = selected.indexOf(code);
+  const handleClick = (event, id) => {
+    const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, code);
+      newSelected = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -267,7 +247,7 @@ export default function EnhancedTable() {
   };
 
 
-  const isSelected = (code) => selected.indexOf(code) !== -1;
+  const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   return (
@@ -294,17 +274,17 @@ export default function EnhancedTable() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.code); // Tiêu chí chọn selected
+                  const isItemSelected = isSelected(row.id); // Tiêu chí chọn selected
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.code)} // Tiêu chí chọn selected
+                      onClick={(event) => handleClick(event, row.id)} // Tiêu chí chọn selected
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.code} // Tiêu chí chọn selected
+                      key={row.id} // Tiêu chí chọn selected
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -314,12 +294,12 @@ export default function EnhancedTable() {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none" align="left">
-                        {row.code}
+                        {row.id}
                       </TableCell>
                       <TableCell align="left">{row.name}</TableCell>
                       <TableCell align="left">{row.type}</TableCell>
-                      <TableCell align="left">{row.sizeX}</TableCell>
-                      <TableCell align="left">{row.sizeY}</TableCell>
+                      <TableCell align="left">{row.number_row}</TableCell>
+                      <TableCell align="left">{row.number_column}</TableCell>
                     </TableRow>
                   );
                 })}

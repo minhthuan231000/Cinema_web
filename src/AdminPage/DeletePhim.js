@@ -19,18 +19,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(code, name, poster) {
-  return { code, name, poster };
-}
 
-const rows = [
-  createData(1, 'Avenger Endgame', 'Avenger_Endgame.jpg'),
-  createData(2, 'Bố Già 2021', 'BoGia_2021.jpg'),
-  createData(3, 'Conan Movie 24', 'Conan_Movie_24.jpg'),
-  createData(4, 'Godzilla Vs Kong', 'Godzilla_Vs_Kong.jpg'),
-  createData(5, 'Lật Mặt 48h', 'Lat_Mat_48h.jpg'),
-  createData(6, 'Bàn Tay Diệt Quỷ', 'Ban_Tay_Diet_Quy.jpg'),
-];
+let rows = JSON.parse(localStorage.getItem('movie'));
+
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -59,9 +51,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'code', numeric: true, disablePadding: true, label: 'ID' },
+  { id: 'id', numeric: true, disablePadding: true, label: 'ID' },
   { id: 'name', numeric: false, disablePadding: false, label: 'Tên Phim' },
-  { id: 'poster', numeric: false, disablePadding: false, label: 'Hình Ảnh' }
+  { id: 'day-open', numeric: false, disablePadding: false, label: 'Ngày công chiếu' }
 ];
 
 function EnhancedTableHead(props) {
@@ -78,7 +70,7 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all code' }}
+            inputProps={{ 'aria-label': 'select all id' }}
           />
         </TableCell>
         {headCells.map((headCell) => (
@@ -219,19 +211,19 @@ export default function EnhancedTable() {
   // Tiêu chí chọn all selected
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.code);
+      const newSelecteds = rows.map((n) => n.id);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
   // Tiêu chí chọn selected
-  const handleClick = (event, code) => {
-    const selectedIndex = selected.indexOf(code);
+  const handleClick = (event, id) => {
+    const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, code);
+      newSelected = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -256,7 +248,7 @@ export default function EnhancedTable() {
   };
 
 
-  const isSelected = (code) => selected.indexOf(code) !== -1;
+  const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   return (
@@ -270,7 +262,8 @@ export default function EnhancedTable() {
             size={'medium'}
             aria-label="enhanced table"
           >
-            <EnhancedTableHead
+            {/* <-- Select all --> */}
+            <EnhancedTableHead 
               classes={classes}
               numSelected={selected.length}
               order={order}
@@ -283,17 +276,17 @@ export default function EnhancedTable() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.code); // Tiêu chí chọn selected
+                  const isItemSelected = isSelected(row.id); // Tiêu chí chọn selected
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.code)} // Tiêu chí chọn selected
+                      onClick={(event) => handleClick(event, row.id)} // Tiêu chí chọn selected
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.code} // Tiêu chí chọn selected
+                      key={row.id} // Tiêu chí chọn selected
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -303,10 +296,10 @@ export default function EnhancedTable() {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none" align="left">
-                        {row.code}
+                        {row.id}
                       </TableCell>
                       <TableCell align="left">{row.name}</TableCell>
-                      <TableCell align="left">{row.poster}</TableCell>
+                      <TableCell align="left">{row.opening_day}</TableCell>
                     </TableRow>
                   );
                 })}
