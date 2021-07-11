@@ -1,10 +1,18 @@
 Cài đặt các module cần thiết : 
 npm i --save
-npm install express 
-npm install react-scripts --save
 
-Setup file .env: =>
-DATABASE_URL = postgres://postgres:2039@localhost:5432/ltw2
+Add database từ file data_database
+
+Chỉnh sửa file: Folder: server/config/config.json 
+
+"development": {
+    "username": "postgres",
+    "password": "<pass của bạn>",
+    "database": "<database bạn tạo>",
+    "dialect": "postgres"
+  },
+
+Tạo file .env ngoài thư mục lớn: =>
 POST_SERVER = 9080
 EMAIL=buingocyen055@gmail.com
 PASSWORD=************

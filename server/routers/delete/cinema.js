@@ -19,7 +19,7 @@ router.post('/', asyncHandler(async function (request, response) {
     const { listId } = request.body;
     if (listId) {
         let result = await destroy_multiple(listId);
-        if (result){            
+        if (result){
             return response.status(200).send({ Status: 'Complete' });
         }
     }

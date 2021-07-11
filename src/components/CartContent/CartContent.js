@@ -86,7 +86,7 @@ class CartContent extends Component {
                     <div className="select-list" data-cate="hour">
                         <div className="select-header">
                             <select>
-                                <option hidden={true}>Chọn giờ</option>
+                                <option hidden={true}>Chọn cụm rạp</option>
                                 {this.ShowItemGio()}
                             </select>
                         </div>
