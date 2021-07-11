@@ -155,7 +155,7 @@ export default function AdminPage() {
                                     isProfile ? <Redirect to="/Profile" /> : <Redirect to="/Dashboard" />
                                 )
                             }} />
-                            <Route path="/Dashboard">
+                            <Route path="/">
                                 {/* here add components contents */}
                                 <TabPanel value={value} index={0}>
                                     <FeatureAdd />

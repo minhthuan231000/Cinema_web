@@ -54,7 +54,11 @@ export default class App extends Component {
                                 exact
                                 path="/"
                                 render={() => {
-                                    return <Redirect to="/Home" />
+                                    return (
+                                        this.state.isAdmin ?
+                                            <Redirect to="/Dashboard" /> :
+                                            <Redirect to="/Home" />
+                                    )
                                 }} />
                             <Route path="/Payment">
                                 <Payment />
@@ -110,7 +114,7 @@ export default class App extends Component {
             if (role === 'user') {
                 return this.UserPage();
             } else if (role === 'staff') {
-                return this.AdminPage()
+                return this.AdminPage();
             }
         }
     }
