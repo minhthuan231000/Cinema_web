@@ -15,11 +15,12 @@ import Box from '@material-ui/core/Box';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 import FeatureAdd from './AddItem'
 import FeatureDel from './DeleteItem'
 import Revenue from './Revenue';
-
+import ManageAccount from './ManageAccount'
 import {
     BrowserRouter,
     Switch,
@@ -145,6 +146,7 @@ export default function AdminPage() {
                         <Tab className="tab" label={<span className="tabLabel">add</span>} {...a11yProps(0)} icon={<AddBoxIcon />} />
                         <Tab className="tab" label={<span className="tabLabel">delete</span>} {...a11yProps(1)} icon={<DeleteIcon />} />
                         <Tab className="tab" label={<span className="tabLabel">revenue</span>} {...a11yProps(2)} icon={<InsertChartIcon />} />
+                        <Tab className="tab" label={<span className="tabLabel">manage</span>} {...a11yProps(3)} icon={<AccountBoxIcon />} />
                     </Tabs>
                 </div>
                 <div className="admin_layout">
@@ -165,6 +167,9 @@ export default function AdminPage() {
                                 </TabPanel>
                                 <TabPanel value={value} index={2}>
                                     <Revenue />
+                                </TabPanel>
+                                <TabPanel value={value} index={3}>
+                                    <ManageAccount />
                                 </TabPanel>
                             </Route>
                             <Route path="/Profile">
