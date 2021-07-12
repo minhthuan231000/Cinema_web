@@ -1,31 +1,6 @@
 import React, { Component } from 'react';
 
 class CartContent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            listPhim: [
-                { name: "Phim 1" },
-                { name: "Phim 2" },
-                { name: "Phim 3" }
-            ],
-            listRap: [
-                { name: "Rap 1" },
-                { name: "Rap 2" },
-                { name: "Rap 3" },
-            ],
-            listNgay: [
-                { name: "Ngay 1" },
-                { name: "Ngay 2" },
-                { name: "Ngay 3" },
-            ],
-            listGio: [
-                { name: "Gio 1" },
-                { name: "Gio 2" },
-                { name: "Gio 3" },
-            ]
-        }
-    }
     ShowItemPhim = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
         const ListPhim = list_movie.map((item, index) => {
