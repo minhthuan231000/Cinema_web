@@ -14,6 +14,7 @@
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "bootstrap": "^4.6.0",
+    "concurrently": "^6.2.0",
     "dotenv": "^10.0.0",
     "express-async-handler": "^1.1.4",
     "formik": "^2.2.7",
@@ -42,11 +43,13 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon server/server"
+    "dev": "nodemon server/server",
+    "client": " react-scripts start",
+    "server": "cd server && node server",
+    "start": "concurrently \"npm run client\" \"npm run server\""
   },
   "eslintConfig": {
     "extends": [
