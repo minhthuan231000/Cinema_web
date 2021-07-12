@@ -31,7 +31,7 @@ export default class App extends Component {
         };
     }
     AdminPage = () => {
-        this.load_data_user()
+        this.load_data_user();
         return <AdminPage />
     }
     UserPage = () => {
@@ -106,12 +106,14 @@ export default class App extends Component {
     showButton = () => {
         const loggedInUser = localStorage.getItem('user');
         if (!loggedInUser) {
+            localStorage.removeItem('list_user');
             return this.UserPage();
         }
         if (loggedInUser) {
             let role = JSON.parse(loggedInUser).role;
 
             if (role === 'user') {
+                localStorage.removeItem('list_user');
                 return this.UserPage();
             } else if (role === 'staff') {
                 return this.AdminPage();
