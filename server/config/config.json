@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "2039",
     "database": "ltw2",
     "dialect": "postgres"
   },
@@ -13,8 +13,8 @@
   },
   "production": {
     "username": "postgres",
-    "password": null,
-    "database": "database_production",
+    "password": "2039",
+    "database": "ltw2",
     "dialect": "postgres"
   }
 }
