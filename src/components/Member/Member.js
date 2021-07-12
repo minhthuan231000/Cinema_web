@@ -27,7 +27,7 @@ export default function Member(props) {
         window.location.reload();
     }
     let logout = () => {
-        localStorage.removeItem('user')
+        localStorage.removeItem('user');
         refreshPage();
     };
 
