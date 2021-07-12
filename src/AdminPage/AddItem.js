@@ -45,7 +45,7 @@ export default function FeatureAdd() {
   const showListItemRap = () => {
     return <MenuItem value={1}>Rap 1</MenuItem>
   }
-  const [date, setDate] = React.useState("2021-07-12T10:30");
+  const [date, setDate] = React.useState("2021-07-12T10:30"); // value date fomat with 2021-07-12T10:30
   // handles when user changes input in date inputfield
   const handleChangeDate = e => {
     setDate(e.target.value);
