@@ -213,7 +213,15 @@ li {
   border: none;
   background-color: transparent;
 }
-
+.register-wrap ul li.btn-logout a {
+  color: #2d096e;
+  border: none;
+  background-color: transparent;
+}
+.register-wrap ul li.btn-logout a:hover {
+  color: #e00d7a;
+  text-decoration: none;
+}
 .hotline {
   float: right;
   font-family: 'Futurab';

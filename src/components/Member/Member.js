@@ -9,6 +9,7 @@ import Info from '../InfoForm/InfoForm';
 import { Badge } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 export default function Member(props) {
 
     const [openReg, setOpen] = useState(false);
@@ -35,14 +36,14 @@ export default function Member(props) {
 
     if (loggedInUser) { // neu da login thi Redirect
         let username = JSON.parse(loggedInUser).fullname;
-        
+
         return (
             <div className="register-content">
                 <div className="container">
                     <div className="register-wrap">
                         <ul>
                             <li className="btn-logout">
-                                <button onClick={logout}>Log Out</button>
+                                <button onClick={logout}><a href="/">Log Out</a></button>
                             </li>
                             <li className="btn-login">
                                 <button onClick={onOpenModalInfo}>{username}</button>
