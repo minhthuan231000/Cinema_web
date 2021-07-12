@@ -19,7 +19,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-let rows = JSON.parse(localStorage.getItem('theater'));
+let ROWS = JSON.parse(localStorage.getItem('theater'));
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -144,7 +144,8 @@ const EnhancedTableToolbar = (props) => {
         .then((result) => {
             if (result) {
                 if(result.Status === 'Complete'){
-                    console.log('Complete');
+                    localStorage.removeItem('theater');
+                    localStorage.setItem('theater', JSON.stringify(result.new_list));
                 }else if(result.Status === 'Error'){
                     console.log('Del showtime error');
                 }
@@ -223,6 +224,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable() {
   const classes = useStyles();
+  const [rows,setRows] = React.useState(ROWS);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('ID');
   const [selected, setSelected] = React.useState([]);
@@ -279,7 +281,7 @@ export default function EnhancedTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} selected={selected}/>
+        <EnhancedTableToolbar numSelected={selected.length} selected={selected} setRows={setRows}/>
         <TableContainer>
           <Table
             className={classes.table}

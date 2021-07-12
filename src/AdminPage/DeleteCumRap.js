@@ -21,7 +21,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 
 
 
-let rows = JSON.parse(localStorage.getItem('cinema'));
+let ROWS = JSON.parse(localStorage.getItem('cinema'));
 
 
 function descendingComparator(a, b, orderBy) {
@@ -131,7 +131,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected,selected } = props;
+  const { numSelected,selected, setRows } = props;
   const click_delete = () => {
     let data = { listId: selected };
     let request = new Request(`http://localhost:9080/delete/cinema`, {
@@ -145,7 +145,9 @@ const EnhancedTableToolbar = (props) => {
         .then((result) => {
             if (result) {
                 if(result.Status === 'Complete'){
-                    console.log('Complete');
+                    localStorage.removeItem('cinema');
+                    localStorage.setItem('cinema', JSON.stringify(result.new_list));
+                    setRows(result.new_list);
                 }else if(result.Status === 'Error'){
                     console.log('Del showtime error');
                 }
@@ -193,7 +195,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
-  selected: PropTypes.array.isRequired
+  selected: PropTypes.array.isRequired,
 };
 
 
@@ -222,13 +224,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+console.log("123");
+
 export default function EnhancedTable() {
   const classes = useStyles();
+  const [rows,setRows] = React.useState(ROWS);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('ID');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(2);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -279,7 +285,7 @@ export default function EnhancedTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} selected = {selected}/>
+        <EnhancedTableToolbar numSelected={selected.length} selected = {selected} setRows={setRows}/>
         <TableContainer>
           <Table
             className={classes.table}

@@ -19,8 +19,9 @@ router.post('/', asyncHandler(async function (request, response) {
     const { listId } = request.body;
     if (listId) {
         let result = await destroy_multiple(listId);
+        let new_list =await Cinema.findAll();
         if (result){
-            return response.status(200).send({ Status: 'Complete' });
+            return response.status(200).send({ Status: 'Complete' ,new_list:new_list});
         }
     }
     else {
