@@ -5,8 +5,13 @@ export default class MoviesOpen extends Component {
     /* Xử lý nodejs tại component này */
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            isLogin: false, // kiểm tra đã login trước khi đặt vé hay chưa
+        };
     };
+    goToBooking = () => {
+        
+    }
     showMovie = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
         console.log(list_movie);
@@ -26,7 +31,7 @@ export default class MoviesOpen extends Component {
                                 {item.introduce}
                             </Card.Text>
                             <Button variant="primary">Trailer</Button>
-                            <Button style={{ marginLeft: '5px' }} variant="text">Mua Vé</Button>
+                            <Button style={{ marginLeft: '5px' }} variant="text" onClick={this.goToBooking} >Mua Vé</Button>
                             <Card.Footer>
                                 <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
                             </Card.Footer>

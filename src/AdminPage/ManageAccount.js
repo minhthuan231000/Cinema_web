@@ -18,7 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import UpdateIcon from '@material-ui/icons/Update';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
+import BlockIcon from '@material-ui/icons/Block';
 
 let ROWS = JSON.parse(localStorage.getItem('list_user'));
 
@@ -134,7 +134,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected, selected, setRows,setSelected} = props;
+    const { numSelected, selected, setRows, setSelected } = props;
     const click_delete = () => {
         let data = { listId: selected };
         let request = new Request(`http://localhost:9080/delete/user`, {
@@ -181,11 +181,18 @@ const EnhancedTableToolbar = (props) => {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Lock account">
-                    <IconButton aria-label="delete" onClick={() => click_delete()}>
-                        <UpdateIcon />
-                    </IconButton>
-                </Tooltip>
+                <div style={{display: 'inline-flex'}}>
+                    <Tooltip title="Lock account">
+                        <IconButton aria-label="delete" onClick={() => click_delete()}>
+                            <BlockIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="active account">
+                        <IconButton aria-label="active" onClick={() => click_delete()}>
+                            <UpdateIcon />
+                        </IconButton>
+                    </Tooltip>
+                </div>
             ) : (
                 <Tooltip title="Filter list">
                     <IconButton aria-label="filter list">
@@ -287,7 +294,7 @@ export default function EnhancedTable() {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <EnhancedTableToolbar numSelected={selected.length} selected={selected} setRows={setRows} setSelected={setSelected}/>
+                <EnhancedTableToolbar numSelected={selected.length} selected={selected} setRows={setRows} setSelected={setSelected} />
                 <TableContainer>
                     <Table
                         className={classes.table}

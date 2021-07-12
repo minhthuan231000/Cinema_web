@@ -22,6 +22,7 @@ import News from '../components/News/News';
 import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 import Payment from '../components/Payment/Payment';
 import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
+import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
 const post_server = process.env.POST_SERVER || "9080";
 export default class App extends Component {
     constructor() {
@@ -61,6 +62,9 @@ export default class App extends Component {
                                             <Redirect to="/Home" />
                                     )
                                 }} />
+                            <Route path="/LichChieu">
+                                <MovieSchedule />
+                            </Route>
                             <Route path="/Payment">
                                 <Payment />
                             </Route>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 class CartContent extends Component {
     ShowItemPhim = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
