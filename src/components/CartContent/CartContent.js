@@ -27,29 +27,43 @@ class CartContent extends Component {
         }
     }
     ShowItemPhim = () => {
-        const ListPhim = this.state.listPhim.map((item, index) =>
-            <option key={index}>{item.name}</option>
-        )
+        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        const ListPhim = list_movie.map((item, index) => {
+            if (item.id < 4) {
+                return <option key={index}>{item.name}</option>
+            }
+        })
         return ListPhim;
     }
     ShowItemRap = () => {
-        const ListPhim = this.state.listRap.map((item, index) =>
-            <option key={index}>{item.name}</option>
-        )
-        return ListPhim;
+        let list_theater = JSON.parse(localStorage.getItem('theater'));
+        const ListRap = list_theater.map((item, index) => {
+            if (item.id < 5) {
+                return <option key={index}>{item.name}</option>
+            }
+        })
+        return ListRap;
     }
     ShowItemNgay = () => {
-        const ListPhim = this.state.listNgay.map((item, index) =>
-            <option key={index}>{item.name}</option>
+        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        const ListNgay = list_movie.map((item, index) => {
+            if(item.id < 5){
+                return <option key={index}>{item.opening_day}</option>
+            }
+        }
         )
-        return ListPhim;
+        return ListNgay;
     }
     ShowItemGio = () => {
-        const ListPhim = this.state.listGio.map((item, index) =>
-            <option key={index}>{item.name}</option>
-        )
-        return ListPhim;
+        let list_showtime = JSON.parse(localStorage.getItem('showtime'));
+        const ListGio = list_showtime.map((item, index) => {
+            if (item.id < 5) {
+                return <option key={index}>{item.start_time}</option>
+            }
+        })
+        return ListGio;
     }
+
     render() {
         return (
             <div className="cart-wrap">
@@ -86,7 +100,7 @@ class CartContent extends Component {
                     <div className="select-list" data-cate="hour">
                         <div className="select-header">
                             <select>
-                                <option hidden={true}>Chọn cụm rạp</option>
+                                <option hidden={true}>Chọn suất chiếu</option>
                                 {this.ShowItemGio()}
                             </select>
                         </div>
