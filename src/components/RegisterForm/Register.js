@@ -34,7 +34,7 @@ class Register extends Component {
             email: this.state.email
           };
           //Login code
-          let request = new Request(`${process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_PORT}/api/confirm`, {
+          let request = new Request(`${process.env.REACT_APP_DOMAIN} /api/confirm`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
@@ -143,7 +143,7 @@ class Register extends Component {
             role: "user"
           };
           //Login code
-          let request = new Request(`${process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_PORT}/api/register`, {
+          let request = new Request(`${process.env.REACT_APP_DOMAIN} /api/register`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)

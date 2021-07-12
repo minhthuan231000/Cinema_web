@@ -13,8 +13,11 @@ Chỉnh sửa file: Folder: server/config/config.json
   },
 
 Tạo file .env ngoài thư mục lớn: =>
-POST_SERVER = 9080
-EMAIL=buingocyen055@gmail.com
-PASSWORD=************
+DATABASE_URL = postgres://postgres:2039@localhost:5432/ltw2
+EMAIL= buingocyen055@gmail.com
+PASSWORD=**********************
+NODE_ENV=development
+REACT_APP_DOMAIN=http://localhost:9080
+
 
 -----------------------

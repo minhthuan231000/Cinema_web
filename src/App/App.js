@@ -127,7 +127,7 @@ export default class App extends Component {
         }
     }
     load_data_user = () => {
-        let request = new Request(`${process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_PORT}/load/data/user`, {
+        let request = new Request(`${process.env.REACT_APP_DOMAIN}/load/data/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
@@ -150,7 +150,7 @@ export default class App extends Component {
         return;
     }
     load_data = () => {
-        let request = new Request(`${process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_PORT}/load/data`, {
+        let request = new Request(`${process.env.REACT_APP_DOMAIN}/load/data`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })

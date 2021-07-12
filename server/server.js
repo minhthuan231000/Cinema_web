@@ -48,6 +48,6 @@ app.use('/delete/user',deleteUserRoute);
 
 db.sequelize.sync().then(function() {
   app.listen(port_server,()=>{
-    console.log(`Server is listening on ${process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_PORT}`);
+    console.log(`Server is listening on ${process.env.REACT_APP_DOMAIN} `);
   });
 }).catch(console.error);
