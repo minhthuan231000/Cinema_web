@@ -16,12 +16,12 @@ import SubTab from '../components/SubTab/SubTab';
 import Bottom from '../components/Bottom/Bottom';
 import Introduce from '../components/Introduce/introduce';
 import AdminPage from '../AdminPage/AdminPage'
-import BookingTicket from '../components/BookingTicket/BookingTicket'
 import PriceTicket from '../components/PriceTicket/PriceTicket';
 import PageNotFound404 from '../components/Page404/404';
 import News from '../components/News/News';
 import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 import Payment from '../components/Payment/Payment';
+import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
 const post_server = process.env.POST_SERVER || "9080";
 export default class App extends Component {
     constructor() {
@@ -65,7 +65,7 @@ export default class App extends Component {
                                 <Payment />
                             </Route>
                             <Route path="/History">
-                                <BookingTicket />
+                                <HistoryBooking />
                             </Route>
                             <Route path="/Home">
                                 <div className="sub-tab">
