@@ -31,6 +31,7 @@ export default class App extends Component {
         };
     }
     AdminPage = () => {
+        this.load_data_user()
         return <AdminPage />
     }
     UserPage = () => {
@@ -114,12 +115,37 @@ export default class App extends Component {
                 return this.UserPage();
             } else if (role === 'staff') {
                 return this.AdminPage();
+            } else if (role === 'lock') {
+                localStorage.removeItem('user');
+                alert("Your acc")
+                return this.UserPage();
             }
         }
     }
-
-    loadMovies = () => {
-        //Kiểm tra lỗi của input trong form và hiển thị
+    load_data_user = () => {
+        let request = new Request(`http://localhost:${post_server}/load/data/user`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({ req: "load-movie" })
+        });
+        fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    //console.log(result.movie)
+                    localStorage.setItem('list_user', JSON.stringify(result.user));
+                }
+            },
+                (error) => {
+                    this.error = error;
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
+        return;
+    }
+    load_data = () => {
         let request = new Request(`http://localhost:${post_server}/load/data`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -146,7 +172,7 @@ export default class App extends Component {
         return;
     }
     render() {
-        this.loadMovies();
+        this.load_data();
         return (
             <div className="App">
                 {this.showButton()}

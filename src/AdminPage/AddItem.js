@@ -34,7 +34,7 @@ export default function FeatureAdd() {
   const [countX, setCountX] = React.useState(10);
   const [countY, setCountY] = React.useState(10);
   const handleSubmit1 = () => {
-
+    console.log("submit1");
   }
   const handleSubmit2 = () => {
 
@@ -62,7 +62,7 @@ export default function FeatureAdd() {
             </div>
             <p></p>
             <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
+            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={()=>handleSubmit1()} >
               <QueueIcon />
             </Fab>
           </Paper>

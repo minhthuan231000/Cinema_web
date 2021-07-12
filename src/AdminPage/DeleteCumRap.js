@@ -131,7 +131,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected,selected, setRows } = props;
+  const { numSelected,selected, setRows,setSelected } = props;
   const click_delete = () => {
     let data = { listId: selected };
     let request = new Request(`http://localhost:9080/delete/cinema`, {
@@ -148,6 +148,7 @@ const EnhancedTableToolbar = (props) => {
                     localStorage.removeItem('cinema');
                     localStorage.setItem('cinema', JSON.stringify(result.new_list));
                     setRows(result.new_list);
+                    setSelected([]);
                 }else if(result.Status === 'Error'){
                     console.log('Del showtime error');
                 }
@@ -285,7 +286,7 @@ export default function EnhancedTable() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} selected = {selected} setRows={setRows}/>
+        <EnhancedTableToolbar numSelected={selected.length} selected = {selected} setSelected={setSelected} setRows={setRows}/>
         <TableContainer>
           <Table
             className={classes.table}

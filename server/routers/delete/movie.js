@@ -20,7 +20,8 @@ router.post('/', asyncHandler(async function (request, response) {
     if (listId) {
         let result = await destroy_multiple(listId);
         if (result){            
-            return response.status(200).send({ Status: 'Complete' });
+            let new_list =await Movie.findAll();
+            return response.status(200).send({ Status: 'Complete',new_list:new_list });
         }
        
     }

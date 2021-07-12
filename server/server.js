@@ -25,6 +25,7 @@ const deleteShowtimeRoute = require('./routers/delete/showtime');
 const deleteCinemaRoute = require('./routers/delete/cinema');
 const deleteTheaterRoute = require('./routers/delete/theater');
 const deleteMovieRoute = require('./routers/delete/movie');
+const deleteUserRoute = require('./routers/delete/user');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -43,6 +44,8 @@ app.use('/delete/showtime',deleteShowtimeRoute);
 app.use('/delete/cinema',deleteCinemaRoute);
 app.use('/delete/theater',deleteTheaterRoute);
 app.use('/delete/movie',deleteMovieRoute);
+app.use('/delete/user',deleteUserRoute);
+
 
 
 db.sequelize.sync().then(function() {

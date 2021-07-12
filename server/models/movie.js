@@ -45,6 +45,8 @@ module.exports = (sequelize, Datatypes) => {
 
     Movie.belongsTo(models.Category, {
       foreignKey: 'category_id',
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
       as :'category'
     });
   };

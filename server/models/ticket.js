@@ -27,6 +27,8 @@ const Ticket = sequelize.define("Ticket", {
 Ticket.associate = function (models) {
   Ticket.belongsTo(models.Booking, {
     foreignKey: 'booking_id',
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
     as: 'booking'
   });
 }

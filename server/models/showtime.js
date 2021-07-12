@@ -66,11 +66,15 @@ Showtime.associate = function (models) {
 
     Showtime.belongsTo(models.Theater, {
         foreignKey: 'theater_id',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
         as: 'theater'
     });
 
     Showtime.belongsTo(models.Movie, {
         foreignKey: 'movie_id',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
         as: 'movie'
     });
 };

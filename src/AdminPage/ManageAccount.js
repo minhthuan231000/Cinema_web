@@ -16,11 +16,11 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
+import UpdateIcon from '@material-ui/icons/Update';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 
-let rows = JSON.parse(localStorage.getItem('movie'));
+let ROWS = JSON.parse(localStorage.getItem('list_user'));
 
 
 
@@ -53,10 +53,10 @@ function stableSort(array, comparator) {
 const headCells = [
     { id: 'id', numeric: true, disablePadding: true, label: 'ID' },
     { id: 'email', numeric: false, disablePadding: true, label: 'EMAIL' },
-    { id: 'pass', numeric: true, disablePadding: true, label: 'PASSWORD' },
+    { id: 'pass', numeric: true, disablePadding: true, label: 'SỐ ĐIỆN THOẠI' },
     { id: 'name', numeric: false, disablePadding: false, label: 'HỌ TÊN' },
-    { id: 'tel', numeric: false, disablePadding: false, label: 'SỐ ĐIỆN THOẠI' },
-    { id: 'role', numeric: false, disablePadding: false, label: 'VAI TRÒ' }
+    { id: 'tel', numeric: false, disablePadding: false, label: 'VAI TRÒ' },
+    { id: 'role', numeric: false, disablePadding: false, label: 'KÍCH HOẠT' }
 ];
 
 function EnhancedTableHead(props) {
@@ -134,10 +134,10 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected, selected } = props;
+    const { numSelected, selected, setRows,setSelected} = props;
     const click_delete = () => {
         let data = { listId: selected };
-        let request = new Request(`http://localhost:9080/delete/movie`, {
+        let request = new Request(`http://localhost:9080/delete/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
@@ -148,7 +148,10 @@ const EnhancedTableToolbar = (props) => {
             .then((result) => {
                 if (result) {
                     if (result.Status === 'Complete') {
-                        console.log('Complete');
+                        localStorage.removeItem('showtime');
+                        localStorage.setItem('showtime', JSON.stringify(result.new_list));
+                        setRows(result.new_list);
+                        setSelected([]);
                     } else if (result.Status === 'Error') {
                         console.log('Del showtime error');
                     }
@@ -178,9 +181,9 @@ const EnhancedTableToolbar = (props) => {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Delete">
+                <Tooltip title="Lock account">
                     <IconButton aria-label="delete" onClick={() => click_delete()}>
-                        <DeleteIcon />
+                        <UpdateIcon />
                     </IconButton>
                 </Tooltip>
             ) : (
@@ -228,6 +231,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EnhancedTable() {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
+    const [rows, setRows] = React.useState(ROWS);
     const [orderBy, setOrderBy] = React.useState('ID');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
@@ -283,7 +287,7 @@ export default function EnhancedTable() {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <EnhancedTableToolbar numSelected={selected.length} selected={selected} />
+                <EnhancedTableToolbar numSelected={selected.length} selected={selected} setRows={setRows} setSelected={setSelected}/>
                 <TableContainer>
                     <Table
                         className={classes.table}
@@ -327,11 +331,11 @@ export default function EnhancedTable() {
                                             <TableCell component="th" id={labelId} scope="row" padding="none" align="left">
                                                 {row.id}
                                             </TableCell>
-                                            <TableCell align="left">{row.emial}</TableCell>
-                                            <TableCell align="left">{row.pass}</TableCell>
-                                            <TableCell align="left">{row.name}</TableCell>
-                                            <TableCell align="left">{row.tel}</TableCell>
+                                            <TableCell align="left">{row.email}</TableCell>
+                                            <TableCell align="left">{row.numphone}</TableCell>
+                                            <TableCell align="left">{row.fullname}</TableCell>
                                             <TableCell align="left">{row.role}</TableCell>
+                                            <TableCell align="left">{row.active.toString()}</TableCell>
                                         </TableRow>
                                     );
                                 })}

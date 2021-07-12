@@ -39,6 +39,8 @@ const Theater = sequelize.define("Theater", {
 Theater.associate = function (models) {
   Theater.belongsTo(models.Cinema, {
     foreignKey: 'cinema_id',
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
     as: 'cinema'
   });
   // Theater.belongsToMany(models.Showtime, {

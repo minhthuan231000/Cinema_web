@@ -34,7 +34,7 @@ const User = sequelize.define('User', {
     },
     active: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
   });
     User.associate = models => {
