@@ -9,7 +9,7 @@ const Cinema = require('../../models').Cinema;
 const User = require('../../models').User;
 router.post('/',asyncHandler(async function(request, response){
     const movie = await Movie.findAll({
-      order: [
+      opening_day: [
         ['view', 'DESC'],
     ],
     });
