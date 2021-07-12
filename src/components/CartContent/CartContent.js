@@ -6,6 +6,7 @@ class CartContent extends Component {
             if (item.id < 4) {
                 return <option key={index}>{item.name}</option>
             }
+            return <option key={index} hidden={true} >{item.name}</option>
         })
         return ListPhim;
     }
@@ -15,6 +16,7 @@ class CartContent extends Component {
             if (item.id < 5) {
                 return <option key={index}>{item.name}</option>
             }
+            return <option key={index} hidden={true} >{item.name}</option>
         })
         return ListRap;
     }
@@ -24,8 +26,8 @@ class CartContent extends Component {
             if(item.id < 5){
                 return <option key={index}>{item.opening_day}</option>
             }
-        }
-        )
+            return <option key={index} hidden={true} >{item.name}</option>
+        })
         return ListNgay;
     }
     ShowItemGio = () => {
@@ -34,6 +36,7 @@ class CartContent extends Component {
             if (item.id < 5) {
                 return <option key={index}>{item.start_time}</option>
             }
+            return <option key={index} hidden={true} >{item.name}</option>
         })
         return ListGio;
     }
