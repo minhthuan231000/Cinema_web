@@ -9,11 +9,9 @@ export default class MoviesOpen extends Component {
     };
     showMovie = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
-        console.log(list_movie);
         let list_sort = list_movie.sort(function(a, b) {
             return a.view - b.view;
         })
-        console.log(list_sort)
         const movies = list_sort.map((item, key) => {
             if (item.id < 7) {
                 let img = new Buffer.from(item.image.data).toString("ascii")

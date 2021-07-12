@@ -22,13 +22,15 @@ import PageNotFound404 from '../components/Page404/404';
 import News from '../components/News/News';
 import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 import Payment from '../components/Payment/Payment';
-const post_server = process.env.POST_SERVER || "9080";
+require('dotenv').config({ path: '../.env' });
 export default class App extends Component {
     constructor() {
         super();
         this.state = {
             isAdmin: false, /* true là đi đến Admin, false là đi đến home */
         };
+       
+
     }
     AdminPage = () => {
         this.load_data_user();
@@ -125,7 +127,7 @@ export default class App extends Component {
         }
     }
     load_data_user = () => {
-        let request = new Request(`http://localhost:${post_server}/load/data/user`, {
+        let request = new Request(`${process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_PORT}/load/data/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
@@ -148,7 +150,7 @@ export default class App extends Component {
         return;
     }
     load_data = () => {
-        let request = new Request(`http://localhost:${post_server}/load/data`, {
+        let request = new Request(`${process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_PORT}/load/data`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
@@ -173,7 +175,8 @@ export default class App extends Component {
             )
         return;
     }
-    render() {
+    render() { 
+        console.log(process.env.REACT_APP_PORT);
         this.load_data();
         return (
             <div className="App">

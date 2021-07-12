@@ -3,16 +3,14 @@ const express = require('express');
 const morgan = require('morgan')
 const bodyParser = require('body-parser');
 
-
 const db = require('./models');
 var app = express();
-var port = process.env.PORT_SERVER || 9080;
+var port_server = process.env.REACT_APP_PORT || "9080";
 
 //app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-
 
 //routers
 const loginRoute = require('./routers/login/login');
@@ -49,7 +47,7 @@ app.use('/delete/user',deleteUserRoute);
 
 
 db.sequelize.sync().then(function() {
-  app.listen(port,()=>{
-    console.log(`Server is listening on http://localhost:${port}`);
+  app.listen(port_server,()=>{
+    console.log(`Server is listening on ${process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_PORT}`);
   });
 }).catch(console.error);
