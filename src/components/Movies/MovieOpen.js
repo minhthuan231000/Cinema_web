@@ -13,7 +13,7 @@ export default class MoviesOpen extends Component {
     showMovie = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
         console.log(list_movie);
-        let list_sort = list_movie.sort(function(a, b) {
+        let list_sort = list_movie.sort(function (a, b) {
             return a.view - b.view;
         })
         console.log(list_sort)
@@ -29,7 +29,7 @@ export default class MoviesOpen extends Component {
                                 {item.introduce}
                             </Card.Text>
                             <Button variant="primary">Trailer</Button>
-                            <Button style={{ marginLeft: '5px' }} variant="text"><Link to="/Booking" id="btn-muave">Mua Vé</Link></Button>
+                            <Button style={{ marginLeft: '5px' }} variant="text"><Link to="/BookingForm" id="btn-muave">Mua Vé</Link></Button>
                             <Card.Footer>
                                 <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
                             </Card.Footer>
@@ -49,7 +49,7 @@ export default class MoviesOpen extends Component {
                             </Card.Text>
                         </div>
                         <Button variant="primary">Trailer</Button>
-                        <Button style={{ marginLeft: '5px' }} variant="text">Mua Vé</Button>
+                        <Button style={{ marginLeft: '5px' }} variant="text"><Link to="/BookingForm" id="btn-muave">Mua Vé</Link></Button>
                         <Card.Footer>
                             <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
                         </Card.Footer>

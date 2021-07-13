@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import './Movies.css'
 export default class MoviesTopView extends Component {
     /* Xử lý nodejs tại component này */
@@ -21,7 +22,7 @@ export default class MoviesTopView extends Component {
                                 {item.introduce}
                             </Card.Text>
                             <Button variant="primary">Trailer</Button>
-                            <Button style={{ marginLeft: '5px' }} variant="text">Mua Vé</Button>
+                            <Button style={{ marginLeft: '5px' }} variant="text"><Link to="/BookingForm" id="btn-muave">Mua Vé</Link></Button>
                             <Card.Footer>
                                 <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
                             </Card.Footer>
@@ -41,7 +42,7 @@ export default class MoviesTopView extends Component {
                             </Card.Text>
                         </div>
                         <Button variant="primary">Trailer</Button>
-                        <Button style={{ marginLeft: '5px' }} variant="text">Mua Vé</Button>
+                        <Button style={{ marginLeft: '5px' }} variant="text"><Link to="/BookingForm" id="btn-muave">Mua Vé</Link></Button>
                         <Card.Footer>
                             <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
                         </Card.Footer>
