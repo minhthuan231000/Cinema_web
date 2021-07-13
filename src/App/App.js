@@ -26,7 +26,6 @@ import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
 
 import BookingForm from '../components/BooingForm/BookingForm';
 const DOMAIN = process.env.REACT_APP_DOMAIN;
-const post_server = process.env.POST_SERVER || "9080";
 export default class App extends Component {
     constructor() {
         super();
@@ -132,13 +131,13 @@ export default class App extends Component {
             }
         }
     }
-    load_data_user = () => {
+    load_data_user = async() => {
         let request = new Request(`${DOMAIN}/load/data/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
         });
-        fetch(request)
+        await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {
