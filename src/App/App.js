@@ -23,8 +23,13 @@ import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 import Payment from '../components/Payment/Payment';
 import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
 import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
+<<<<<<< Updated upstream
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
+=======
+import BookingForm from '../components/BooingForm/BookingForm';
+const post_server = process.env.POST_SERVER || "9080";
+>>>>>>> Stashed changes
 export default class App extends Component {
     constructor() {
         super();
@@ -58,11 +63,12 @@ export default class App extends Component {
                                 path="/"
                                 render={() => {
                                     return (
-                                        this.state.isAdmin ?
-                                            <Redirect to="/Dashboard" /> :
-                                            <Redirect to="/Home" />
+                                        <Redirect to="/Home" />
                                     )
                                 }} />
+                            <Route path="/BookingForm">
+                                <BookingForm />
+                            </Route>
                             <Route path="/LichChieu">
                                 <MovieSchedule />
                             </Route>

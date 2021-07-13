@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import './Movies.css'
 export default class MoviesOpen extends Component {
     /* Xử lý nodejs tại component này */
@@ -9,9 +10,6 @@ export default class MoviesOpen extends Component {
             isLogin: false, // kiểm tra đã login trước khi đặt vé hay chưa
         };
     };
-    goToBooking = () => {
-        
-    }
     showMovie = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
         console.log(list_movie);
@@ -31,7 +29,7 @@ export default class MoviesOpen extends Component {
                                 {item.introduce}
                             </Card.Text>
                             <Button variant="primary">Trailer</Button>
-                            <Button style={{ marginLeft: '5px' }} variant="text" onClick={this.goToBooking} >Mua Vé</Button>
+                            <Button style={{ marginLeft: '5px' }} variant="text"><Link to="/Booking" id="btn-muave">Mua Vé</Link></Button>
                             <Card.Footer>
                                 <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
                             </Card.Footer>

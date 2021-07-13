@@ -40,3 +40,10 @@
     background-color: #0dc0e0;
     border-color: #0dc0e0;
 }
+#btn-muave{
+    color: white;
+    text-decoration: none;
+}
+#btn-muave:hover{
+    color: #212529;
+}
