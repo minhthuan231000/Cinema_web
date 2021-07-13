@@ -32,7 +32,7 @@ router.post('/', asyncHandler(async function (request, response) {
     const found = await User.findByEmail(email);
     if (found) {
         console.log('User is exist');
-        return response.status(400).send({ Status: 'Email is exist' });
+        return response.status(422).send({ Status: 'Email is exist' });
     }
     else {
         console.log(request.body);
@@ -42,7 +42,7 @@ router.post('/', asyncHandler(async function (request, response) {
         });
         //console.log(bcrypt.hashSync('123456',10));
         if (user) {
-            return response.status(200).send({ Status: 'Complete' });
+            return response.status(201).send({ Status: 'Complete' });
         }
     }
 }))

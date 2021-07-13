@@ -37,9 +37,9 @@ router.post('/', asyncHandler(async function (req, res) {
                     email: email
                 }
             })
-            return res.status(200).send({ Status: 'Complete' });
+            return res.status(201).send({ Status: 'Complete' });
         } else {
-            return res.status(400).send({ Status: 'Don\'t exist' });
+            return res.status(422).send({ Status: 'Don\'t exist' });
         }
     }
 }));
@@ -52,8 +52,8 @@ router.post('/resetpassword', asyncHandler(async function (req, res) {
             where: {
               email: email
             }})
-          return res.status(200).send({ Status: 'Complete' });
-      }else return res.status(400).send({ Status: 'Invalid' });
+          return res.status(201).send({ Status: 'Complete' });
+      }else return res.status(42).send({ Status: 'Invalid' });
     }
   
   }));

@@ -22,7 +22,7 @@ router.post('/', asyncHandler(async function (request, response) {
         
         let new_list =await Showtime.findAll();
         if (result){            
-            return response.status(200).send({ Status: 'Complete',new_list:new_list });
+            return response.status(204).send({ Status: 'Complete',new_list:new_list });
         }
        
     }

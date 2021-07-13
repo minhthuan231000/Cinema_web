@@ -16,11 +16,11 @@ router.post('/', asyncHandler(async function (req, res) {
           where: {
             email: email
           }})
-        return res.status(200).send({ Status: 'Complete' });
+        return res.status(201).send({ Status: 'Complete' });
       }else{
         return res.status(400).send({ Status: 'Invalid' });
       }
-    }else return res.status(400).send({ Status: 'Invalid' });
+    }else return res.status(422).send({ Status: 'Invalid' });
   }
        
   

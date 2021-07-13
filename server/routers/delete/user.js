@@ -23,7 +23,7 @@ router.post('/', asyncHandler(async function (request, response) {
             attributes: ['id','email','numphone','role','active','fullname']
           });
         if (result){            
-            return response.status(200).send({ Status: 'Complete',new_list:new_list});
+            return response.status(204).send({ Status: 'Complete',new_list:new_list});
         }
        
     }

@@ -36,7 +36,7 @@ router.post('/', asyncHandler(async function (request, response) {
                 email: email
             }
         })
-        return response.status(200).send({ Status: 'Complete' });
+        return response.status(201).send({ Status: 'Complete' });
     }
     else {
         return response.status(400).send({ Status: 'Do not exist' });
