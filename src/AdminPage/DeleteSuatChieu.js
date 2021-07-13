@@ -20,6 +20,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 let ROWS = JSON.parse(localStorage.getItem('showtime'));
+const DOMAIN =process.env.REACT_APP_DOMAIN;
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -132,7 +133,7 @@ const EnhancedTableToolbar = (props) => {
     const { numSelected, selected, setRows,setSelected } = props;
     const click_delete = () => {
         let data = { listId: selected };    
-        let request = new Request(`http://localhost:9080/delete/showtime`, {
+        let request = new Request(`${DOMAIN}/delete/showtime`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)

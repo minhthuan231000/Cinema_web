@@ -4,8 +4,7 @@ import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../model
 
 import icon_fb from '../../images/icons/icon-facebook.jpg'
 import icon_gg from '../../images/icons/icon-google.jpg'
-
-const post_server = process.env.POST_SERVER || "9080";
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 class Login extends Component { // class parent login
     /* Xử lý nodejs tại component này */
     constructor(props) {
@@ -68,7 +67,7 @@ class Login extends Component { // class parent login
                     this.setState({ email: data.email });
 
                     if (formData) {
-                        let request = new Request(`http://localhost:${post_server}/api/login`, {
+                        let request = new Request(`${DOMAIN}/api/login`, {
                             method: 'POST',
                             headers: new Headers({ 'Content-Type': 'application/json' }),
                             body: JSON.stringify(data)
@@ -160,7 +159,7 @@ class Login extends Component { // class parent login
                 let data = {
                     email: formData.email
                 }
-                let request = new Request(`http://localhost:${post_server}/api/forgetpassword`, {
+                let request = new Request(`${DOMAIN}/api/forgetpassword`, {
                     method: 'POST',
                     headers: new Headers({ 'Content-Type': 'application/json' }),
                     body: JSON.stringify(data)
@@ -219,7 +218,7 @@ class Login extends Component { // class parent login
                         email: this.state.email
                     };
                     //Login code
-                    let request = new Request(`http://localhost:${post_server}/api/confirm`, {
+                    let request = new Request(`${DOMAIN}/api/confirm`, {
                         method: 'POST',
                         headers: new Headers({ 'Content-Type': 'application/json' }),
                         body: JSON.stringify(data)
@@ -305,7 +304,7 @@ class Login extends Component { // class parent login
                         password: formData.password
                     };
                     //Login code
-                    let request = new Request(`http://localhost:${post_server}/api/forgetpassword/resetpassword`, {
+                    let request = new Request(`${DOMAIN}/api/forgetpassword/resetpassword`, {
                         method: 'POST',
                         headers: new Headers({ 'Content-Type': 'application/json' }),
                         body: JSON.stringify(data)
@@ -362,7 +361,7 @@ class Login extends Component { // class parent login
                 let data = {
                     email: formData.email
                 }
-                let request = new Request(`http://localhost:${post_server}/api/active`, {
+                let request = new Request(`${DOMAIN}/api/active`, {
                     method: 'POST',
                     headers: new Headers({ 'Content-Type': 'application/json' }),
                     body: JSON.stringify(data)
@@ -422,7 +421,7 @@ class Login extends Component { // class parent login
                   email: this.state.email
                 };
                 //Login code
-                let request = new Request(`http://localhost:${post_server}/api/confirm`, {
+                let request = new Request(`${DOMAIN}/api/confirm`, {
                   method: 'POST',
                   headers: new Headers({ 'Content-Type': 'application/json' }),
                   body: JSON.stringify(data)

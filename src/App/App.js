@@ -23,7 +23,8 @@ import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 import Payment from '../components/Payment/Payment';
 import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
 import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
-const post_server = process.env.POST_SERVER || "9080";
+
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default class App extends Component {
     constructor() {
         super();
@@ -129,7 +130,7 @@ export default class App extends Component {
         }
     }
     load_data_user = () => {
-        let request = new Request(`http://localhost:${post_server}/load/data/user`, {
+        let request = new Request(`${DOMAIN}/load/data/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
@@ -152,7 +153,7 @@ export default class App extends Component {
         return;
     }
     load_data = async() => {
-        let request = new Request(`http://localhost:${post_server}/load/data`, {
+        let request = new Request(`${DOMAIN}/load/data`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })

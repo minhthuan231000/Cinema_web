@@ -20,6 +20,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 let ROWS = JSON.parse(localStorage.getItem('theater'));
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -133,7 +134,7 @@ const EnhancedTableToolbar = (props) => {
   const { numSelected,selected,setRows,setSelected } = props;
   const click_delete = () => {
     let data = { listId: selected };
-    let request = new Request(`http://localhost:9080/delete/theater`, {
+    let request = new Request(`${DOMAIN}/delete/theater`, {
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(data)

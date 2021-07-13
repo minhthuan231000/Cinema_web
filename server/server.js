@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser');
 
 
+const DOMAIN =process.envREACT_APP_DOMAIN;
 const db = require('./models');
 var app = express();
 var port = process.env.PORT_SERVER || 9080;
@@ -50,6 +51,6 @@ app.use('/delete/user',deleteUserRoute);
 
 db.sequelize.sync().then(function() {
   app.listen(port,()=>{
-    console.log(`Server is listening on http://localhost:${port}`);
+    console.log(`Server is listening on ${DOMAIN}`);
   });
 }).catch(console.error);

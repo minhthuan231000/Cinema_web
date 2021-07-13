@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Register.css';
 import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../models/validator';
-const post_server = process.env.POST_SERVER || "9080";
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 class Register extends Component {
   /* Xử lý nodejs tại component này */
   constructor() {
@@ -35,7 +35,7 @@ class Register extends Component {
             email: this.state.email
           };
           //Login code
-          let request = new Request(`http://localhost:${post_server}/api/confirm`, {
+          let request = new Request(`${DOMAIN}/api/confirm`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
@@ -144,7 +144,7 @@ class Register extends Component {
             role: "user"
           };
           //Login code
-          let request = new Request(`http://localhost:${post_server}/api/register`, {
+          let request = new Request(`${DOMAIN}/api/register`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
