@@ -151,13 +151,13 @@ export default class App extends Component {
             )
         return;
     }
-    load_data = () => {
+    load_data = async() => {
         let request = new Request(`http://localhost:${post_server}/load/data`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
         });
-        fetch(request)
+        await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {
