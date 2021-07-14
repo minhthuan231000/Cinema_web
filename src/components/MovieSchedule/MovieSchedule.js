@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './movieschedule.css'
 import moment from 'moment'
 import CartContent from './../CartContent/CartContent';
+
 import {
     BrowserRouter as Router,
     Route,
@@ -125,6 +126,7 @@ export default class MovieSchedule extends Component {
                         <p></p>
                         <p>&nbsp;</p>
                     </div>
+                    
                     <Route path="/LichChieu">
                         <Route path="/LichChieu/id=1" component={ShowItemCine} />
                     </Route>

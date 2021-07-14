@@ -146,7 +146,11 @@ export default function BookingForm() {
                             <span>{totalPrice} VND</span>
                         </div>
                         <div className="note-item">
+<<<<<<< Updated upstream
                             <button  className="btn btn-info">Add to cart</button>
+=======
+                            <button type="submit" className="btn btn-info">Payment</button>
+>>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
@@ -155,72 +159,74 @@ export default function BookingForm() {
         );
     };
     return (
-        <div className="detai-booking">
-            <div className="img_booking">
-                <img src={img} alt="" />
-                <div className="img_booking_content">
-                    <h6>Director</h6>
-                    <small>chris evans</small>
-                    <h6>Cast</h6>
-                    <small>joe russo, anthony russo</small>
-                    <h6>Genre</h6>
-                    <small>adventure</small>
+        <form method="POST">
+            <div className="detai-booking">
+                <div className="img_booking">
+                    <img src={img} alt="" />
+                    <div className="img_booking_content">
+                        <h6>Director</h6>
+                        <small>chris evans</small>
+                        <h6>Cast</h6>
+                        <small>joe russo, anthony russo</small>
+                        <h6>Genre</h6>
+                        <small>adventure</small>
+                    </div>
                 </div>
-            </div>
-            <div className="content_booking">
-                <div className="booking_nav">
-                    <FormControl className={classes.formControl}>
-                        <InputLabel className={classes.inputLabel}>Select Cinema</InputLabel>
-                        <Select
-                            className={classes.select}
-                            open={open1}
-                            onClose={handleClose}
-                            onOpen={handleOpen}
-                            value={cine}
-                            onChange={handleChangeCinema}
-                        >
-                            <MenuItem value={1}>Item 1</MenuItem>
-                            <MenuItem value={2}>Item 2</MenuItem>
-                            <MenuItem value={3}>Item 3</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel className={classes.inputLabel}>Start Date</InputLabel>
-                        <Select
-                            className={classes.select}
-                            open={open2}
-                            onClose={handleClose2}
-                            onOpen={handleOpen2}
-                            value={date}
-                            onChange={handleChangeDate}
-                        >
-                            <MenuItem value={1}>Date 1</MenuItem>
-                            <MenuItem value={2}>Date 2</MenuItem>
-                            <MenuItem value={3}>Date 3</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel className={classes.inputLabel}>Start Time</InputLabel>
-                        <Select
-                            className={classes.select}
-                            open={open3}
-                            onClose={handleClose3}
-                            onOpen={handleOpen3}
-                            value={time}
-                            onChange={handleChangeTime}
-                        >
-                            <MenuItem value={1}>Time 1</MenuItem>
-                            <MenuItem value={2}>Time 2</MenuItem>
-                            <MenuItem value={3}>Time 3</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-                <div className="seat_booking">
-                    <div className="container seat_wrap">
-                        {seatsGenerator()}
+                <div className="content_booking">
+                    <div className="booking_nav">
+                        <FormControl className={classes.formControl}>
+                            <InputLabel className={classes.inputLabel}>Select Cinema</InputLabel>
+                            <Select
+                                className={classes.select}
+                                open={open1}
+                                onClose={handleClose}
+                                onOpen={handleOpen}
+                                value={cine}
+                                onChange={handleChangeCinema}
+                            >
+                                <MenuItem value={1}>Item 1</MenuItem>
+                                <MenuItem value={2}>Item 2</MenuItem>
+                                <MenuItem value={3}>Item 3</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel className={classes.inputLabel}>Start Date</InputLabel>
+                            <Select
+                                className={classes.select}
+                                open={open2}
+                                onClose={handleClose2}
+                                onOpen={handleOpen2}
+                                value={date}
+                                onChange={handleChangeDate}
+                            >
+                                <MenuItem value={1}>Date 1</MenuItem>
+                                <MenuItem value={2}>Date 2</MenuItem>
+                                <MenuItem value={3}>Date 3</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel className={classes.inputLabel}>Start Time</InputLabel>
+                            <Select
+                                className={classes.select}
+                                open={open3}
+                                onClose={handleClose3}
+                                onOpen={handleOpen3}
+                                value={time}
+                                onChange={handleChangeTime}
+                            >
+                                <MenuItem value={1}>Time 1</MenuItem>
+                                <MenuItem value={2}>Time 2</MenuItem>
+                                <MenuItem value={3}>Time 3</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className="seat_booking">
+                        <div className="container seat_wrap">
+                            {seatsGenerator()}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     );
 }

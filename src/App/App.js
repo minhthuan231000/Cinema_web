@@ -23,8 +23,9 @@ import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 import Payment from '../components/Payment/Payment';
 import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
 import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
-
 import BookingForm from '../components/BooingForm/BookingForm';
+
+import Alert from 'react-popup-alert'
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default class App extends Component {
     constructor() {
@@ -52,6 +53,7 @@ export default class App extends Component {
                 </div>
                 <div className="content-page">
                     <ContentPage />
+                    
                     <BrowserRouter>
                         <Switch>
                             <Route
