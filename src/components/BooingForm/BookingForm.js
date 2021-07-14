@@ -146,11 +146,8 @@ export default function BookingForm() {
                             <span>{totalPrice} VND</span>
                         </div>
                         <div className="note-item">
-<<<<<<< Updated upstream
                             <button  className="btn btn-info">Add to cart</button>
-=======
                             <button type="submit" className="btn btn-info">Payment</button>
->>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
@@ -159,7 +156,7 @@ export default function BookingForm() {
         );
     };
     return (
-        <form method="POST">
+        <foethod="POST">rm m
             <div className="detai-booking">
                 <div className="img_booking">
                     <img src={img} alt="" />
