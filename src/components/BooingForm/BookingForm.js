@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 export default function BookingForm() {
+
+    
     const classes = useStyles();
     const [cine, setCine] = React.useState('');
     const [date, setDate] = React.useState('');
@@ -32,12 +34,13 @@ export default function BookingForm() {
     const [open1, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
+    const [listSeats, setListSeats] = React.useState([]);
     const handleChangeCinema = (event) => {
         setCine(event.target.value);
     };
     const handleChangeDate = (event) => {
         setDate(event.target.value);
-    };
+    };  
     const handleChangeTime = (event) => {
         setTime(event.target.value);
     };
@@ -62,11 +65,35 @@ export default function BookingForm() {
     const handleOpen3 = () => {
         setOpen3(true);
     };
-    const seatsColumns = ['1', '2', '3', '4', '5', '6', '7', '', '8', '9', '10', '11', '12', '13', '14'];
-    const seatsRows = ['A', 'B', 'C', 'D', 'E', '', 'F', 'G', 'H', 'I', 'J'];
-    const numberSeat = 5;
-    const priceSeat = 45000;
-    const totalPrice = numberSeat * priceSeat
+    const loggedInUser = localStorage.getItem('user');
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const foo = params.get('id');
+    console.log(foo)
+        if (!loggedInUser) {
+            window.location.href="/Home";
+
+        }else if (loggedInUser) {
+           // const target = e.target;
+            //xu li get Parameter
+            //console.log(target.id)//get db from server
+        }
+        const seatsColumns = ['1', '2', '3', '4', '5', '6', '7', '', '8', '9', '10', '11', '12', '13', '14'];
+        const seatsRows = ['A', 'B', 'C', 'D', 'E', '', 'F', 'G', 'H', 'I', 'J'];
+        const priceSeat = 45000;
+        const totalPrice = listSeats.length * priceSeat
+    const changeSeats = (event)=>{
+        const target = event.target;
+        const value = target.value;
+        const check = target.checked;
+        if(check){
+              const newList = listSeats.concat({value});
+            setListSeats(newList);
+        }else if (!check){
+            const newList = listSeats.filter((item) => item.value !== value);
+            setListSeats(newList);
+        }
+    }
     const seatsGenerator = () => {
 
         return (
@@ -89,7 +116,7 @@ export default function BookingForm() {
                                             return (
                                                 column === '' ? <td key={index}>&emsp;&emsp;</td> :
                                                     <td key={index}>
-                                                        <input type="checkbox" className="seat" id={`${row}${column}`} value={`${row}${column}`} />
+                                                        <input type="checkbox" onChange={changeSeats} className="seat" id={`${row}${column}`} value={`${row}${column}`} />
                                                     </td>
                                             )
                                         })}
@@ -111,7 +138,7 @@ export default function BookingForm() {
                         <div className="note-item">
                             <h6>Tickets: </h6>
                             &nbsp;
-                            <span>{numberSeat}</span>
+                            <span>{listSeats.length}</span>
                         </div>
                         <div className="note-item">
                             <h6>Price: </h6>
@@ -119,7 +146,7 @@ export default function BookingForm() {
                             <span>{totalPrice} VND</span>
                         </div>
                         <div className="note-item">
-                            <button className="btn btn-info">Payment</button>
+                            <button  className="btn btn-info">Add to cart</button>
                         </div>
                     </div>
                 </div>

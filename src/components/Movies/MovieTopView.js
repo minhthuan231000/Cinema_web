@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import './Movies.css'
 export default class MoviesTopView extends Component {
     /* Xử lý nodejs tại component này */
@@ -8,6 +8,19 @@ export default class MoviesTopView extends Component {
         super(props);
         this.state = {};
     };
+    
+    check_login = (e)=>{
+        const loggedInUser = localStorage.getItem('user');
+        if (loggedInUser) {
+            const target = e.target;
+            console.log(target.id)
+            return window.location.href="/BookingForm?id="+target.id;
+        }else if (!loggedInUser) {
+            alert("Please login !!!");
+            return;
+        }
+    }
+    
     showMovie = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
         const movies = list_movie.map((item, key) => {
@@ -22,7 +35,7 @@ export default class MoviesTopView extends Component {
                                 {item.introduce}
                             </Card.Text>
                             <Button variant="primary">Trailer</Button>
-                            <Button style={{ marginLeft: '5px' }} variant="text"><Link to="/BookingForm" id="btn-muave">Mua Vé</Link></Button>
+                            <Button style={{ marginLeft: '5px' }} id={item.id} variant="text" onClick={this.check_login}>Mua Vé</Button>
                             <Card.Footer>
                                 <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
                             </Card.Footer>
@@ -42,7 +55,7 @@ export default class MoviesTopView extends Component {
                             </Card.Text>
                         </div>
                         <Button variant="primary">Trailer</Button>
-                        <Button style={{ marginLeft: '5px' }} variant="text"><Link to="/BookingForm" id="btn-muave">Mua Vé</Link></Button>
+                        <Button style={{ marginLeft: '5px' }} variant="text" id={item.id} onClick={this.check_login}>Mua Vé</Button>
                         <Card.Footer>
                             <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
                         </Card.Footer>
