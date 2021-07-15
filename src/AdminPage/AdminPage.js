@@ -73,7 +73,7 @@ export default function AdminPage() {
     };
 
     let logout = () => {
-        localStorage.removeItem('user')
+        sessionStorage.removeItem('user');
         window.location.reload();
     };
     const [isProfile, setProfile] = React.useState(false);

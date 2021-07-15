@@ -7,8 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
+//import { SelectionState } from '@devexpress/dx-react-chart';
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
+const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
 
 const useStyles = makeStyles({
     table: {
@@ -42,60 +44,90 @@ const rows = [
 const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceSubtotal - invoiceTaxes;
-
-export default function Payment() {
+export default  function Payment() {
     const classes = useStyles();
+
+    const [data,setData] = React.useState([]);
+
+    React.useEffect(()=> {
+        if (loggedInUser) {
+            requestData();
+        }
+        console.log(data.length);
+        console.log(data);
+    }, []);
+
+    async function requestData() {
+        let request = new Request(`${DOMAIN}/api/booking/${loggedInUser.id}`, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+
+        await fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+            if (result) {
+                setData([result.data])
+            }
+        },
+            (error) => {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        )
+    }
 
     return (
         <div className="row">
-            <div className="col-sm-1"></div>
-            <div className="col-sm-10">
-                <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="spanning table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="center" colSpan={3}>
-                                    Details
-                                </TableCell>
-                                <TableCell align="right">Price</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell align="right">Seat</TableCell>
-                                <TableCell align="right">Qty.</TableCell>
-                                <TableCell align="right">Unit</TableCell>
-                                <TableCell align="right">Sum</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map((row) => (
-                                <TableRow key={row.name}>
-                                    <TableCell>{row.name}</TableCell>
-                                    <TableCell align="right">{row.seat}</TableCell>
-                                    <TableCell align="right">{row.qty}</TableCell>
-                                    <TableCell align="right">{row.unit}</TableCell>
-                                    <TableCell align="right">{row.price}</TableCell>
+                <div className="col-sm-1"></div>
+                <div className="col-sm-10">
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="spanning table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center" colSpan={3}>
+                                        Details
+                                    </TableCell>
+                                    <TableCell align="right">Price</TableCell>
                                 </TableRow>
-                            ))}
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell align="right">Seat</TableCell>
+                                    <TableCell align="right">Quantity</TableCell>
+                                    <TableCell align="right">Unit</TableCell>
+                                    <TableCell align="right">Time order</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row) => (
+                                    <TableRow key={row.name}>
+                                        <TableCell>{row.name}</TableCell>
+                                        <TableCell align="right">{row.seat}</TableCell>
+                                        <TableCell align="right">{row.qty}</TableCell>
+                                        <TableCell align="right">{row.unit}</TableCell>
+                                        <TableCell align="right">{row.price}</TableCell>
+                                    </TableRow>
+                                ))}
 
-                            <TableRow>
-                                <TableCell rowSpan={3} />
-                                <TableCell colSpan={3}>Subtotal</TableCell>
-                                <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell colSpan={2}>Discount</TableCell>
-                                <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-                                <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell colSpan={3}>Total</TableCell>
-                                <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                                <TableRow>
+                                    <TableCell rowSpan={3} />
+                                    <TableCell colSpan={3}>Subtotal</TableCell>
+                                    <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell colSpan={2}>Discount</TableCell>
+                                    <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
+                                    <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell colSpan={3}>Total</TableCell>
+                                    <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
             </div>
-        </div>
     );
 }

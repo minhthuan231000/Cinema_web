@@ -34,7 +34,6 @@ export default class App extends Component {
         };
     }
     AdminPage = () => {
-        this.load_data_user();
         return <AdminPage />
         
     }
@@ -113,18 +112,19 @@ export default class App extends Component {
         )
     }
     showButton = () => {
-        const loggedInUser = localStorage.getItem('user');
+        const loggedInUser = sessionStorage.getItem('user');
+         this.load_data();
         if (!loggedInUser) {
             localStorage.removeItem('list_user');
             return this.UserPage();
         }
         if (loggedInUser) {
             let role = JSON.parse(loggedInUser).role;
-
             if (role === 'user') {
                 localStorage.removeItem('list_user');
                 return this.UserPage();
             } else if (role === 'staff') {
+                this.load_data_user();
                 return this.AdminPage();
             } else if (role === 'lock') {
                 localStorage.removeItem('user');
@@ -134,21 +134,19 @@ export default class App extends Component {
         }
     }
     load_data_user = async() => {
-        let request = new Request(`${DOMAIN}/load/data/user`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({ req: "load-movie" })
+        let request = new Request(`${DOMAIN}/api/user?`, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
         });
         await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {
-                    //console.log(result.movie)
-                    localStorage.setItem('list_user', JSON.stringify(result.user));
+                    let data = JSON.stringify(result.data);
+                    localStorage.setItem('list_user', data);
                 }
             },
                 (error) => {
-                    this.error = error;
                     if (error) {
                         console.log(error);
                     }
@@ -157,16 +155,14 @@ export default class App extends Component {
         return;
     }
     load_data = async() => {
-        let request = new Request(`${DOMAIN}/load/data`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({ req: "load-movie" })
+        let request = new Request(`${DOMAIN}/load/data?`, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
         });
         await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {
-                    //console.log(result.movie)
                     localStorage.setItem('movie', JSON.stringify(result.movie));
                     localStorage.setItem('theater', JSON.stringify(result.theater));
                     localStorage.setItem('showtime', JSON.stringify(result.showtime));
@@ -174,7 +170,6 @@ export default class App extends Component {
                 }
             },
                 (error) => {
-                    this.error = error;
                     if (error) {
                         console.log(error);
                     }
@@ -183,7 +178,6 @@ export default class App extends Component {
         return;
     }
     render() {
-        this.load_data();
         return (
             <div className="App">
                 {this.showButton()}

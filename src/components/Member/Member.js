@@ -28,11 +28,11 @@ export default function Member(props) {
         window.location.reload();
     }
     let logout = () => {
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
         refreshPage();
     };
 
-    const loggedInUser = localStorage.getItem('user');
+    const loggedInUser = sessionStorage.getItem('user');
 
     if (loggedInUser) { // neu da login thi Redirect
         let username = JSON.parse(loggedInUser).fullname;

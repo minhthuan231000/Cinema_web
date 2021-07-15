@@ -63,10 +63,14 @@ export default function BookingForm() {
     const handleOpen3 = () => {
         setOpen3(true);
     };
-    const loggedInUser = localStorage.getItem('user');
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const foo = params.get('id');
+    console.log(foo);
+
+    const loggedInUser = sessionStorage.getItem('user');
     if (!loggedInUser) {
         window.location.href = "/Home";
-
     } else if (loggedInUser) {
         // const target = e.target;
         //xu li get Parameter
@@ -150,11 +154,12 @@ export default function BookingForm() {
                     <div className="note">
                         <div className="note-item">
                             <input type="checkbox" checked={true} readOnly={true} />
+
                             &nbsp;
                             <span>Selected Seat</span>
                         </div>
                         <div className="note-item">
-                            <input type="checkbox" checked={false} />
+                            <input type="checkbox" checked={false} readOnly={true} />
                             &nbsp;
                             <span>Seat Availabel</span>
                         </div>
