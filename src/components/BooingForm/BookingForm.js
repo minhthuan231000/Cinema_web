@@ -76,6 +76,9 @@ export default function BookingForm() {
         //xu li get Parameter
         //console.log(target.id)//get db from server
     }
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const foo = params.get('id');
     const createRow = (sizeRow) => {
         const Row = [];
         for (let index = 0; index < sizeRow; index++) {
@@ -105,7 +108,6 @@ export default function BookingForm() {
         "showtime_id":1,
         "bookingtime": "13:30"
     } */
-
     const seatsColumns = createCol(6);
     const seatsRows = createRow(6);
     const priceSeat = 45000;
