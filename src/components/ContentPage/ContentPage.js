@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import './Modal.css'
-import DemoAlert from '../DemoAlert';
 export default function ContentPage() {
     const [openMd1, setOpen1] = useState(false);
     const [openMd2, setOpen2] = useState(false);

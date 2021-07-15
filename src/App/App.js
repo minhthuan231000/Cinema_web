@@ -24,8 +24,6 @@ import Payment from '../components/Payment/Payment';
 import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
 import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
 import BookingForm from '../components/BooingForm/BookingForm';
-
-import Alert from 'react-popup-alert'
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default class App extends Component {
     constructor() {
@@ -37,6 +35,7 @@ export default class App extends Component {
     AdminPage = () => {
         this.load_data_user();
         return <AdminPage />
+        
     }
     UserPage = () => {
         return (

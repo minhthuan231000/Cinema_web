@@ -1,10 +1,11 @@
+
 import React, { Component } from 'react';
 import './movieschedule.css'
 import moment from 'moment'
-import CartContent from './../CartContent/CartContent';
+//import CartContent from './../CartContent/CartContent';
 
 import {
-    BrowserRouter as Router,
+    //BrowserRouter as Router,
     Route,
 } from "react-router-dom";
 
@@ -61,15 +62,15 @@ export default class MovieSchedule extends Component {
     ]
     ShowItemRap = () => {
         let list_cinema = JSON.parse(localStorage.getItem('cinema'));
-        const ListCinema = list_cinema.map((item, index) => {
-            if (item.id === 1) {
-                return <span key={index}>{item.name} <a href="/LichChieu/id=1" className="btn btn-primary">Go to Test</a></span>
-            }
-            if (item.id < 6) {
-                return <span key={index}>{item.name}</span>
-            }
-        })
-        return ListCinema;
+        // const ListCinema = list_cinema.map((item, index) => {
+        //     if (item.id === 1) {
+        //         return <span key={index}>{item.name} <a href="/LichChieu/id=1" className="btn btn-primary">Go to Test</a></span>
+        //     }
+        //     if (item.id < 6) {
+        //         return <span key={index}>{item.name}</span>
+        //     }
+        //      return ListCinema;
+        // })
     }
     ShowItemDay = () => {
         const ListRap = this.List_Day.map((item, index) => {

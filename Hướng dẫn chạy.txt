@@ -13,8 +13,8 @@ Chỉnh sửa file: Folder: server/config/config.json
   },
 
 Tạo file .env ngoài thư mục lớn: =>
-POST_SERVER = 9080
 EMAIL=buingocyen055@gmail.com
-PASSWORD=************
+PASSWORD=**********
+REACT_APP_DOMAIN=http://localhost:9080
 
 -----------------------

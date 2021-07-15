@@ -14,8 +14,8 @@ export default class MoviesOpen extends Component {
         const loggedInUser = localStorage.getItem('user');
         if (loggedInUser) {
             const target = e.target;
-            console.log(target.id)
-            return window.location.href="/BookingForm?id="+target.id;
+            console.log(target.id);
+            return window.location.href=("/BookingForm/"+target.id);
         }else if (!loggedInUser) {
             alert("Please login !!!");
             return;
