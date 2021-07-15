@@ -26,22 +26,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function BookingForm() {
     const classes = useStyles();
-    const [cine, setCine] = React.useState('');
-    const [date, setDate] = React.useState('');
-    const [time, setTime] = React.useState('');
+
     const [open1, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
-    const [listSeats, setListSeats] = React.useState([]);
-    const handleChangeCinema = (event) => {
-        setCine(event.target.value);
-    };
-    const handleChangeDate = (event) => {
-        setDate(event.target.value);
-    };
-    const handleChangeTime = (event) => {
-        setTime(event.target.value);
-    };
     // Handle Open - Close
     const handleClose = () => {
         setOpen(false);
@@ -63,6 +51,33 @@ export default function BookingForm() {
     const handleOpen3 = () => {
         setOpen3(true);
     };
+    /* need POST {
+        "list_Seat": ["A1","A2"],
+        "location_Seat": {"A1":[2,3],"A2":[2,4]},
+        "movie_id":1,
+        "user_id": 1,
+        "showtime_id":1,
+        "bookingtime": "13:30"
+    } */
+    const [cine, setCine] = React.useState('');
+    const [date, setDate] = React.useState('');
+    const [time, setTime] = React.useState('');
+    const [listSeats, setListSeats] = React.useState([]);
+
+    const [user_id, setUserId] = React.useState();
+    const [showtime_id, setShowtimeId] = React.useState();
+    const [bookingtime, setBookingTime] = React.useState();
+
+    const handleChangeCinema = (event) => {
+        setCine(event.target.value);
+    };
+    const handleChangeDate = (event) => {
+        setDate(event.target.value);
+    };
+    const handleChangeTime = (event) => {
+        setTime(event.target.value);
+    };
+
     const loggedInUser = localStorage.getItem('user');
     if (!loggedInUser) {
         window.location.href = "/Home";
@@ -75,7 +90,11 @@ export default function BookingForm() {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const foo = params.get('id');
+    console.log(foo)
+    const [movie_id, setMovieId] = React.useState(foo);
+    console.log(movie_id)
     const createRow = (sizeRow) => {
+
         const Row = [];
         for (let index = 0; index < sizeRow; index++) {
             Row[index] = index + 1;
@@ -96,15 +115,8 @@ export default function BookingForm() {
         }
         return Col;
     }
-    /* need POST {
-        "list_Seat": ["A1","A2"],
-        "location_Seat": {"A1":[2,3],"A2":[2,4]},
-        "movie_id":1,
-        "user_id": 1,
-        "showtime_id":1,
-        "bookingtime": "13:30"
-    } */
-    const seatsColumns = createCol(6);
+
+    const seatsColumns = createCol(10);
     const seatsRows = createRow(6);
     const priceSeat = 45000;
     const totalPrice = listSeats.length * priceSeat
@@ -120,11 +132,32 @@ export default function BookingForm() {
             setListSeats(newList);
         }
     }
+    const ShowSelectCinema = () => {
+        let list_cinema = JSON.parse(localStorage.getItem('cinema'));
+        const show_list = list_cinema.map((item, index) => {
+            return <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+        })
+        return show_list;
+    }
+    const ShowSelectStartDate = () => {
+        let list_SDate = JSON.parse(localStorage.getItem('movie'));
+        const show_list = list_SDate.map((item, index) => {
+            return <MenuItem key={index} value={item.id}>{item.opening_day.split(" ")[0]}</MenuItem>
+        })
+        return show_list;
+    }
+    const ShowSelectStartTime = () => {
+        let list_STime = JSON.parse(localStorage.getItem('showtime'));
+        const show_list = list_STime.map((item, index) => {
+            return <MenuItem key={index} value={item.id}>{item.start_time.split(" ")[1]}</MenuItem>
+        })
+        return show_list;
+    }
     const seatsGenerator = () => {
         return (
             <div className="container">
-                <h2>Movie Seat Selection</h2>
                 <div className="matrix_table">
+                    <h2>Movie Seat Selection</h2>
                     <table>
                         <tbody>
                             <tr>
@@ -149,33 +182,33 @@ export default function BookingForm() {
                             }
                         </tbody>
                     </table>
-                    <div className="note">
-                        <div className="note-item">
-                            <input type="checkbox" checked={true} readOnly={true} />
-                            &nbsp;
-                            <span>Selected Seat</span>
-                        </div>
-                        <div className="note-item">
-                            <input type="checkbox" checked={false} />
-                            &nbsp;
-                            <span>Seat Availabel</span>
-                        </div>
-                        <div className="note-item">
-                            <h6>Tickets: </h6>
-                            &nbsp;
-                            <span>{listSeats.length}</span>
-                        </div>
-                        <div className="note-item">
-                            <h6>Price: </h6>
-                            &nbsp;
-                            <span>{totalPrice} VND</span>
-                        </div>
-                        <div className="note-item">
-                            <button className="btn btn-info">Add to cart</button>
-                        </div>
+                    <h3>Screen this way</h3>
+                </div>
+                <div className="note">
+                    <div className="note-item">
+                        <input type="checkbox" checked={true} readOnly={true} />
+                        &nbsp;
+                        <span>Selected Seat</span>
+                    </div>
+                    <div className="note-item">
+                        <input type="checkbox" checked={false} readOnly={true} />
+                        &nbsp;
+                        <span>Seat Availabel</span>
+                    </div>
+                    <div className="note-item">
+                        <h6>Tickets: </h6>
+                        &nbsp;
+                        <span>{listSeats.length}</span>
+                    </div>
+                    <div className="note-item">
+                        <h6>Price: </h6>
+                        &nbsp;
+                        <span>{totalPrice} VND</span>
+                    </div>
+                    <div className="note-item">
+                        <button className="btn btn-info">Add to cart</button>
                     </div>
                 </div>
-                <h3>Screen this way</h3>
             </div>
         );
     };
@@ -204,9 +237,7 @@ export default function BookingForm() {
                             value={cine}
                             onChange={handleChangeCinema}
                         >
-                            <MenuItem value={1}>Item 1</MenuItem>
-                            <MenuItem value={2}>Item 2</MenuItem>
-                            <MenuItem value={3}>Item 3</MenuItem>
+                            {ShowSelectCinema()}
                         </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
@@ -219,9 +250,7 @@ export default function BookingForm() {
                             value={date}
                             onChange={handleChangeDate}
                         >
-                            <MenuItem value={1}>Date 1</MenuItem>
-                            <MenuItem value={2}>Date 2</MenuItem>
-                            <MenuItem value={3}>Date 3</MenuItem>
+                            {ShowSelectStartDate()}
                         </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
@@ -234,9 +263,7 @@ export default function BookingForm() {
                             value={time}
                             onChange={handleChangeTime}
                         >
-                            <MenuItem value={1}>Time 1</MenuItem>
-                            <MenuItem value={2}>Time 2</MenuItem>
-                            <MenuItem value={3}>Time 3</MenuItem>
+                            {ShowSelectStartTime()}
                         </Select>
                     </FormControl>
                 </div>

@@ -36,7 +36,7 @@ export default class App extends Component {
     AdminPage = () => {
         this.load_data_user();
         return <AdminPage />
-        
+
     }
     UserPage = () => {
         return (
@@ -53,7 +53,7 @@ export default class App extends Component {
                 </div>
                 <div className="content-page">
                     <ContentPage />
-                    
+
                     <BrowserRouter>
                         <Switch>
                             <Route
@@ -133,7 +133,7 @@ export default class App extends Component {
             }
         }
     }
-    load_data_user = async() => {
+    load_data_user = async () => {
         let request = new Request(`${DOMAIN}/load/data/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -156,7 +156,7 @@ export default class App extends Component {
             )
         return;
     }
-    load_data = async() => {
+    load_data = async () => {
         let request = new Request(`${DOMAIN}/load/data`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
