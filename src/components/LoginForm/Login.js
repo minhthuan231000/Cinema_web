@@ -81,13 +81,13 @@ class Login extends Component { // class parent login
                                         alert("Please active your account!");
                                     } else if (result.Status === 'Complete') {
                                         data = {
+                                            id: result.user.id,
                                             email: result.user.email,
                                             fullname: result.user.fullname,
                                             numphone: result.user.numphone,
                                             role: result.user.role,
                                         }
-                                        console.log(JSON.stringify(data).numphone);
-                                        localStorage.setItem('user', JSON.stringify(data));
+                                        sessionStorage.setItem('user', JSON.stringify(data));
                                         window.location.reload();
                                     } else if (result.Status === 'Email is not exist.') {
                                         alert("Email is not exist. Please sign up!");

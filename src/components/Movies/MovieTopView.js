@@ -10,7 +10,7 @@ export default class MoviesTopView extends Component {
     };
     
     check_login = (e)=>{
-        const loggedInUser = localStorage.getItem('user');
+        const loggedInUser = sessionStorage.getItem('user');
         if (loggedInUser) {
             const target = e.target;
             console.log(target.id)

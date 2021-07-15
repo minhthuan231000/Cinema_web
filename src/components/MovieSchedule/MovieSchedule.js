@@ -61,7 +61,7 @@ export default class MovieSchedule extends Component {
         },
     ]
     ShowItemRap = () => {
-        let list_cinema = JSON.parse(localStorage.getItem('cinema'));
+        // let list_cinema = JSON.parse(localStorage.getItem('cinema'));
         // const ListCinema = list_cinema.map((item, index) => {
         //     if (item.id === 1) {
         //         return <span key={index}>{item.name} <a href="/LichChieu/id=1" className="btn btn-primary">Go to Test</a></span>

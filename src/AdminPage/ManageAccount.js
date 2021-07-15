@@ -138,7 +138,7 @@ const EnhancedTableToolbar = (props) => {
     const { numSelected, selected, setRows, setSelected } = props;
     const click_delete = () => {
         let data = { listId: selected };
-        let request = new Request(`${DOMAIN}/delete/user`, {
+        let request = new Request(`${DOMAIN}/api/user/lock`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
@@ -149,12 +149,41 @@ const EnhancedTableToolbar = (props) => {
             .then((result) => {
                 if (result) {
                     if (result.Status === 'Complete') {
-                        localStorage.removeItem('showtime');
-                        localStorage.setItem('showtime', JSON.stringify(result.new_list));
-                        setRows(result.new_list);
+                        localStorage.removeItem('list_user');
+                        localStorage.setItem('list_user', JSON.stringify(result.data));
+                        setRows(result.data);
                         setSelected([]);
                     } else if (result.Status === 'Error') {
                         console.log('Del showtime error');
+                    }
+                }
+            },
+                (error) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
+    }
+    const click_active = () => {
+        let data = { listId: selected };
+        let request = new Request(`${DOMAIN}/api/user/active`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(data)
+        });
+
+        fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    if (result.Status === 'Complete') {
+                        localStorage.removeItem('list_user');
+                        localStorage.setItem('list_user', JSON.stringify(result.data));
+                        setRows(result.data);
+                        setSelected([]);
+                    } else if (result.Status === 'Error') {
+                        console.log('Active user error');
                     }
                 }
             },
@@ -189,7 +218,7 @@ const EnhancedTableToolbar = (props) => {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="active account">
-                        <IconButton aria-label="active" onClick={() => click_delete()}>
+                        <IconButton aria-label="active" onClick={() => click_active()}>
                             <UpdateIcon />
                         </IconButton>
                     </Tooltip>

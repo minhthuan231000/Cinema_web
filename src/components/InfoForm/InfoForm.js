@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Info.css'
 export default class Info extends Component {
   render() {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(sessionStorage.getItem('user'));
     return (
       <div className="Info">
         <h2>Thông tin tài khoản</h2>

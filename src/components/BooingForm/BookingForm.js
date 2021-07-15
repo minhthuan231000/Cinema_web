@@ -81,7 +81,6 @@ export default function BookingForm() {
     const loggedInUser = localStorage.getItem('user');
     if (!loggedInUser) {
         window.location.href = "/Home";
-
     } else if (loggedInUser) {
         // const target = e.target;
         //xu li get Parameter
