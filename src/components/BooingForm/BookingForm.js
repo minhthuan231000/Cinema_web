@@ -72,6 +72,9 @@ export default function BookingForm() {
         //xu li get Parameter
         //console.log(target.id)//get db from server
     }
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const foo = params.get('id');
     const createRow = (sizeRow) => {
         const Row = [];
         for (let index = 0; index < sizeRow; index++) {
