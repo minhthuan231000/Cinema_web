@@ -25,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 export default function BookingForm() {
-
-
     const classes = useStyles();
     const [cine, setCine] = React.useState('');
     const [date, setDate] = React.useState('');
@@ -66,35 +64,14 @@ export default function BookingForm() {
         setOpen3(true);
     };
     const loggedInUser = localStorage.getItem('user');
-<<<<<<< Updated upstream
-    // const search = window.location.search;
-    // const params = new URLSearchParams(search);
-    // const foo = params.get('id');
-    if (!loggedInUser) {
-        window.location.href="/Home";
-
-    }else if (loggedInUser) {
-=======
-    const search = window.location.search;
-    const params = new URLSearchParams(search);
-    const foo = params.get('id');
-    console.log(foo)
     if (!loggedInUser) {
         window.location.href = "/Home";
 
     } else if (loggedInUser) {
->>>>>>> Stashed changes
         // const target = e.target;
         //xu li get Parameter
         //console.log(target.id)//get db from server
     }
-<<<<<<< Updated upstream
-    const seatsColumns = ['1', '2', '3', '4', '5', '6', '7', '', '8', '9', '10', '11', '12', '13', '14'];
-    const seatsRows = ['A', 'B', 'C', 'D', 'E', '', 'F', 'G', 'H', 'I', 'J'];
-    const priceSeat = 45000;
-    const totalPrice = listSeats.length * priceSeat
-    const changeSeats = (event)=>{
-=======
     const createRow = (sizeRow) => {
         const Row = [];
         for (let index = 0; index < sizeRow; index++) {
@@ -124,12 +101,12 @@ export default function BookingForm() {
         "showtime_id":1,
         "bookingtime": "13:30"
     } */
+
     const seatsColumns = createCol(6);
     const seatsRows = createRow(6);
     const priceSeat = 45000;
     const totalPrice = listSeats.length * priceSeat
     const changeSeats = (event) => {
->>>>>>> Stashed changes
         const target = event.target;
         const value = target.value;
         const check = target.checked;
@@ -142,7 +119,6 @@ export default function BookingForm() {
         }
     }
     const seatsGenerator = () => {
-
         return (
             <div className="container">
                 <h2>Movie Seat Selection</h2>
@@ -178,7 +154,7 @@ export default function BookingForm() {
                             <span>Selected Seat</span>
                         </div>
                         <div className="note-item">
-                            <input type="checkbox" checked={false}/>
+                            <input type="checkbox" checked={false} />
                             &nbsp;
                             <span>Seat Availabel</span>
                         </div>
@@ -193,12 +169,7 @@ export default function BookingForm() {
                             <span>{totalPrice} VND</span>
                         </div>
                         <div className="note-item">
-<<<<<<< Updated upstream
-                            <button  className="btn btn-info">Add to cart</button>
-=======
                             <button className="btn btn-info">Add to cart</button>
-                            <button type="submit" className="btn btn-info">Payment</button>
->>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
@@ -207,11 +178,7 @@ export default function BookingForm() {
         );
     };
     return (
-<<<<<<< Updated upstream
         <div className="detail-booking">
-=======
-        <div className="detai-booking">
->>>>>>> Stashed changes
             <div className="img_booking">
                 <img src={img} alt="" />
                 <div className="img_booking_content">
