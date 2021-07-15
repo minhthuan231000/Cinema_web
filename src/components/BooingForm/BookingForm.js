@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function BookingForm() {
 
-    
+
     const classes = useStyles();
     const [cine, setCine] = React.useState('');
     const [date, setDate] = React.useState('');
@@ -40,7 +40,7 @@ export default function BookingForm() {
     };
     const handleChangeDate = (event) => {
         setDate(event.target.value);
-    };  
+    };
     const handleChangeTime = (event) => {
         setTime(event.target.value);
     };
@@ -66,6 +66,7 @@ export default function BookingForm() {
         setOpen3(true);
     };
     const loggedInUser = localStorage.getItem('user');
+<<<<<<< Updated upstream
     // const search = window.location.search;
     // const params = new URLSearchParams(search);
     // const foo = params.get('id');
@@ -73,22 +74,69 @@ export default function BookingForm() {
         window.location.href="/Home";
 
     }else if (loggedInUser) {
+=======
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const foo = params.get('id');
+    console.log(foo)
+    if (!loggedInUser) {
+        window.location.href = "/Home";
+
+    } else if (loggedInUser) {
+>>>>>>> Stashed changes
         // const target = e.target;
         //xu li get Parameter
         //console.log(target.id)//get db from server
     }
+<<<<<<< Updated upstream
     const seatsColumns = ['1', '2', '3', '4', '5', '6', '7', '', '8', '9', '10', '11', '12', '13', '14'];
     const seatsRows = ['A', 'B', 'C', 'D', 'E', '', 'F', 'G', 'H', 'I', 'J'];
     const priceSeat = 45000;
     const totalPrice = listSeats.length * priceSeat
     const changeSeats = (event)=>{
+=======
+    const createRow = (sizeRow) => {
+        const Row = [];
+        for (let index = 0; index < sizeRow; index++) {
+            Row[index] = index + 1;
+            Row[index].toString()
+        }
+        return Row;
+    }
+    const createCol = (sizeCol) => {
+        const Col = [];
+        let i = 97;
+        for (let index = 0; index <= sizeCol; index++) {
+            if (sizeCol / 2 === index) {
+                Col[index] = ''
+            }
+            else {
+                Col[index] = String.fromCharCode(i++);
+            }
+        }
+        return Col;
+    }
+    /* need POST {
+        "list_Seat": ["A1","A2"],
+        "location_Seat": {"A1":[2,3],"A2":[2,4]},
+        "movie_id":1,
+        "user_id": 1,
+        "showtime_id":1,
+        "bookingtime": "13:30"
+    } */
+    const seatsColumns = createCol(6);
+    const seatsRows = createRow(6);
+    const priceSeat = 45000;
+    const totalPrice = listSeats.length * priceSeat
+    const changeSeats = (event) => {
+>>>>>>> Stashed changes
         const target = event.target;
         const value = target.value;
         const check = target.checked;
-        if(check){
-              const newList = listSeats.concat({value});
+        if (check) {
+            const newList = listSeats.concat({ value });
             setListSeats(newList);
-        }else if (!check){
+        } else if (!check) {
             const newList = listSeats.filter((item) => item.value !== value);
             setListSeats(newList);
         }
@@ -113,9 +161,9 @@ export default function BookingForm() {
                                         </td>
                                         {seatsColumns.map((column, index) => {
                                             return (
-                                                column === '' ? <td key={index}>&emsp;&emsp;</td> :
+                                                column === '' ? <td key={index}>&nbsp;way&nbsp;</td> :
                                                     <td key={index}>
-                                                        <input type="checkbox" onChange={changeSeats} className="seat" id={`${row}${column}`} value={`${row}${column}`} />
+                                                        <input type="checkbox" onChange={(e) => changeSeats(e)} className="seat" id={`${row}${column}`} value={`${row}${column}`} />
                                                     </td>
                                             )
                                         })}
@@ -125,7 +173,7 @@ export default function BookingForm() {
                     </table>
                     <div className="note">
                         <div className="note-item">
-                            <input type="checkbox" checked={true} />
+                            <input type="checkbox" checked={true} readOnly={true} />
                             &nbsp;
                             <span>Selected Seat</span>
                         </div>
@@ -145,7 +193,12 @@ export default function BookingForm() {
                             <span>{totalPrice} VND</span>
                         </div>
                         <div className="note-item">
+<<<<<<< Updated upstream
                             <button  className="btn btn-info">Add to cart</button>
+=======
+                            <button className="btn btn-info">Add to cart</button>
+                            <button type="submit" className="btn btn-info">Payment</button>
+>>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
@@ -154,7 +207,11 @@ export default function BookingForm() {
         );
     };
     return (
+<<<<<<< Updated upstream
         <div className="detail-booking">
+=======
+        <div className="detai-booking">
+>>>>>>> Stashed changes
             <div className="img_booking">
                 <img src={img} alt="" />
                 <div className="img_booking_content">

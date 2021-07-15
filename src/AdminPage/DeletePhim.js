@@ -22,8 +22,6 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 const DOMAIN =process.env.REACT_APP_DOMAIN;
 let ROWS = JSON.parse(localStorage.getItem('movie'));
 
-
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;

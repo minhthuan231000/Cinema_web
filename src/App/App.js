@@ -24,6 +24,10 @@ import Payment from '../components/Payment/Payment';
 import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
 import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
 import BookingForm from '../components/BooingForm/BookingForm';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default class App extends Component {
     constructor() {

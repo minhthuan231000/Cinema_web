@@ -2,7 +2,10 @@
 import React, { Component } from 'react';
 import './movieschedule.css'
 import moment from 'moment'
+<<<<<<< Updated upstream
 //import CartContent from './../CartContent/CartContent';
+=======
+>>>>>>> Stashed changes
 
 import {
     //BrowserRouter as Router,
