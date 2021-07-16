@@ -35,7 +35,7 @@ export default class App extends Component {
     }
     AdminPage = () => {
         return <AdminPage />
-        
+
     }
     UserPage = () => {
         return (
@@ -52,7 +52,7 @@ export default class App extends Component {
                 </div>
                 <div className="content-page">
                     <ContentPage />
-                    
+
                     <BrowserRouter>
                         <Switch>
                             <Route
@@ -134,10 +134,11 @@ export default class App extends Component {
             }
         }
     }
-    load_data_user = async() => {
-        let request = new Request(`${DOMAIN}/api/user?`, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
+    load_data_user = async () => {
+        let request = new Request(`${DOMAIN}/load/data/user`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({ req: "load-movie" })
         });
         await fetch(request)
             .then(res => res.json())
@@ -155,10 +156,11 @@ export default class App extends Component {
             )
         return;
     }
-    load_data = async() => {
-        let request = new Request(`${DOMAIN}/load/data?`, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
+    load_data = async () => {
+        let request = new Request(`${DOMAIN}/load/data`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({ req: "load-movie" })
         });
         await fetch(request)
             .then(res => res.json())

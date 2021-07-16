@@ -62,7 +62,7 @@ input.seat{
     width: 35px;
 }
 .matrix_table{
-    display: inline-flex;
+    display: inline-block;
 }
 .note{
     width: 200px;
