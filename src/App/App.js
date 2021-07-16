@@ -135,10 +135,9 @@ export default class App extends Component {
         }
     }
     load_data_user = async () => {
-        let request = new Request(`${DOMAIN}/load/data/user`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({ req: "load-movie" })
+        let request = new Request(`${DOMAIN}/api/user`, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
         });
         await fetch(request)
             .then(res => res.json())
