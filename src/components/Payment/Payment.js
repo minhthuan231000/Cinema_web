@@ -105,6 +105,9 @@ export default function Payment() {
             )
 
         const rows = createListRow(booking);
+        const PaymentClick = () => {
+            alert("Đặt vé thành công")
+        }
         return (
             <div className="row">
                 <div className="col-sm-1"></div>
@@ -158,6 +161,7 @@ export default function Payment() {
                                             color="primary"
                                             size="small"
                                             startIcon={<PaymentIcon />}
+                                            onClick={PaymentClick}
                                         >
                                             Thanh Toán
                                         </Button>
