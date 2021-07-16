@@ -158,7 +158,11 @@ export default class App extends Component {
     load_data = async () => {
         let request = new Request(`${DOMAIN}/load/data`, {
             method: 'GET',
+<<<<<<< Updated upstream
             headers: new Headers({ 'Content-Type': 'application/json' }),
+=======
+            headers: new Headers({ 'Content-Type': 'application/json' })
+>>>>>>> Stashed changes
         });
         await fetch(request)
             .then(res => res.json())

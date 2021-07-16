@@ -69,7 +69,7 @@ export default function BookingForm() {
         setShowtimeId(event.target.value)
     };
 
-    const loggedInUser = localStorage.getItem('user');
+    const loggedInUser = sessionStorage.getItem('user');
     if (!loggedInUser) {
         window.location.href = "/Home";
     } else if (loggedInUser) {

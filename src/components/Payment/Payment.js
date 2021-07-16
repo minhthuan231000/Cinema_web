@@ -56,8 +56,13 @@ function createRow(bookings) {
     let seat = getListChair(bookings.tickets)[1];
     let quantity = getListChair(bookings.tickets)[0];
     let unit = "Ticket";
+<<<<<<< Updated upstream
     let total_price = getListChair(bookings.tickets)[2];
     return [name, seat, quantity, unit, total_price];
+=======
+    let total_price =  getListChair(bookings.tickets)[3];;
+    return [name,seat,quantity,unit,total_price] ;
+>>>>>>> Stashed changes
 }
 function createListRow(booking_obj) {
     let rows = [];
@@ -72,7 +77,11 @@ function createListRow(booking_obj) {
 
 const rows = [];
 function subtotal(items) {
+<<<<<<< Updated upstream
     return items.map((total) => total).reduce((sum, i) => sum + i, 0);
+=======
+    return items.map(({ total }) => total).reduce((sum, i) => sum + i, 0);
+>>>>>>> Stashed changes
 }
 const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;

@@ -2,42 +2,53 @@ import React, { Component } from 'react';
 class CartContent extends Component {
     ShowItemPhim = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
-        const ListPhim = list_movie.map((item, index) => {
-            if (item.id < 4) {
-                return <option key={index}>{item.name}</option>
-            }
-            return <option key={index} hidden={true} >{item.name}</option>
-        })
+        var ListPhim = [];
+        if(list_movie){
+            ListPhim = list_movie.map((item, index) => {
+                if (item.id < 4) {
+                    return <option key={index}>{item.name}</option>
+                }
+                return <option key={index} hidden={true} >{item.name}</option>
+            })
+        }
         return ListPhim;
     }
     ShowItemRap = () => {
         let list_theater = JSON.parse(localStorage.getItem('theater'));
-        const ListRap = list_theater.map((item, index) => {
+        var ListRap = [];
+        if(list_theater) {
+        ListRap = list_theater.map((item, index) => {
             if (item.id < 5) {
                 return <option key={index}>{item.name}</option>
             }
             return <option key={index} hidden={true} >{item.name}</option>
         })
+    }
         return ListRap;
     }
     ShowItemNgay = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'));
-        const ListNgay = list_movie.map((item, index) => {
-            if(item.id < 5){
-                return <option key={index}>{item.opening_day}</option>
-            }
-            return <option key={index} hidden={true} >{item.name}</option>
-        })
+        var ListNgay = [];
+        if(list_movie){
+            ListNgay = list_movie.map((item, index) => {
+                if(item.id < 5){
+                    return <option key={index}>{item.opening_day}</option>
+                }
+                return <option key={index} hidden={true} >{item.name}</option>
+            })
+        }
         return ListNgay;
     }
     ShowItemGio = () => {
         let list_showtime = JSON.parse(localStorage.getItem('showtime'));
-        const ListGio = list_showtime.map((item, index) => {
+        var ListGio = [];
+        if(list_showtime){
+         ListGio = list_showtime.map((item, index) => {
             if (item.id < 5) {
                 return <option key={index}>{item.start_time}</option>
             }
             return <option key={index} hidden={true} >{item.name}</option>
-        })
+        })}
         return ListGio;
     }
 
