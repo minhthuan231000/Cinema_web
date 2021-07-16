@@ -1,7 +1,6 @@
 import React from 'react';
 import './booking.css'
 import { makeStyles } from '@material-ui/core/styles';
-import img from '../../images/Poster/Avenger_Endgame.jpg'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -28,7 +27,6 @@ export default function BookingForm() {
     const classes = useStyles();
 
     const [open1, setOpen] = React.useState(false);
-    const [open2, setOpen2] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
     // Handle Open - Close
     const handleClose = () => {
@@ -38,44 +36,37 @@ export default function BookingForm() {
         setOpen(true);
     };
     // --
-    const handleClose2 = () => {
-        setOpen2(false);
-    };
-    const handleOpen2 = () => {
-        setOpen2(true);
-    };
-    // --
     const handleClose3 = () => {
         setOpen3(false);
     };
     const handleOpen3 = () => {
         setOpen3(true);
     };
-    /* need POST {
-        "list_Seat": ["A1","A2"],
-        "location_Seat": {"A1":[2,3],"A2":[2,4]},
-        "movie_id":1,
-        "user_id": 1,
+    /* need POST 
+    {
+        "list_Seat": ["D1","F8"],
+        "location_Seat": {"D1":[4,1],"F8":[7,8]},
+        "cinema_id": 1,
+        "user_id": 2,
         "showtime_id":1,
-        "bookingtime": "13:30"
     } */
+
+    let item = JSON.parse(sessionStorage.getItem('user'));
     const [cine, setCine] = React.useState('');
-    const [date, setDate] = React.useState('');
     const [time, setTime] = React.useState('');
+
     const [listSeats, setListSeats] = React.useState([]);
-
-    const [user_id, setUserId] = React.useState();
+    const [locationSeat, setLocationSeat] = React.useState([]);
+    const [user_id, setUserId] = React.useState(item.id);
+    const [cinema_id, setCinemaId] = React.useState();
     const [showtime_id, setShowtimeId] = React.useState();
-    const [bookingtime, setBookingTime] = React.useState();
-
     const handleChangeCinema = (event) => {
         setCine(event.target.value);
-    };
-    const handleChangeDate = (event) => {
-        setDate(event.target.value);
+        setCinemaId(event.target.value);
     };
     const handleChangeTime = (event) => {
         setTime(event.target.value);
+        setShowtimeId(event.target.value)
     };
 
     const loggedInUser = localStorage.getItem('user');
@@ -85,13 +76,13 @@ export default function BookingForm() {
         // const target = e.target;
         //xu li get Parameter
         //console.log(target.id)//get db from server
+
     }
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    const foo = params.get('id');
-    console.log(foo)
-    const [movie_id, setMovieId] = React.useState(foo);
-    console.log(movie_id)
+    const foo = params.get('id'); // movie_id
+    const [movie_id, setMovieId] = React.useState(foo); // set dữ liệu cho movie_id thành công
+
     const createRow = (sizeRow) => {
 
         const Row = [];
@@ -114,7 +105,6 @@ export default function BookingForm() {
         }
         return Col;
     }
-
     const seatsColumns = createCol(10);
     const seatsRows = createRow(6);
     const priceSeat = 45000;
@@ -126,9 +116,11 @@ export default function BookingForm() {
         if (check) {
             const newList = listSeats.concat({ value });
             setListSeats(newList);
+            setLocationSeat(newList);
         } else if (!check) {
             const newList = listSeats.filter((item) => item.value !== value);
             setListSeats(newList);
+            setLocationSeat(newList);
         }
     }
     const ShowSelectCinema = () => {
@@ -138,19 +130,68 @@ export default function BookingForm() {
         })
         return show_list;
     }
-    const ShowSelectStartDate = () => {
-        let list_SDate = JSON.parse(localStorage.getItem('movie'));
-        const show_list = list_SDate.map((item, index) => {
-            return <MenuItem key={index} value={item.id}>{item.opening_day.split(" ")[0]}</MenuItem>
+    const ShowImage = () => {
+        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        const movies = list_movie.map((item, index) => {
+            let img = new Buffer.from(item.image.data).toString("ascii")
+            if (item.id == movie_id) {
+                return <img key={index} src={`data:image/png;base64,${img}`} alt="" />
+            }
         })
-        return show_list;
+        return movies
+    }
+    const ShowContentImage = () => {
+        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        const movies = list_movie.map((item, index) => {
+            if (item.id == movie_id) {
+                return (
+                    <div key={index} className="img_booking_content">
+                        <h6>Tên Phim</h6>
+                        <small>{item.name}</small>
+                        <h6>Ngày Công Chiếu</h6>
+                        <small>{item.opening_day}</small>
+                        <h6>Tóm Tắt</h6>
+                        <small>{item.introduce}</small>
+                    </div>
+                )
+            }
+        })
+        return movies
     }
     const ShowSelectStartTime = () => {
         let list_STime = JSON.parse(localStorage.getItem('showtime'));
         const show_list = list_STime.map((item, index) => {
-            return <MenuItem key={index} value={item.id}>{item.start_time.split(" ")[1]}</MenuItem>
+            return <MenuItem key={index} value={item.id}>{item.start_time}</MenuItem>
         })
         return show_list;
+    }
+    const ArrConvert = {
+        'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12, 'm': 13,
+        'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26
+    }
+    const AddToCartClick = () => {
+        var dic = [{}]
+        let listSeatConvert = listSeats.map(o => { return o.value })
+        for (let index = 0; index < listSeats.length; index++) {
+            var temp = listSeats[index].value.charAt(1);
+            dic.push({
+                key: listSeats[index].value,
+                value: listSeats[index].value.charAt(0) + ArrConvert[temp]
+            })
+
+        }
+        const obj = {
+            list_Seat: listSeatConvert,
+            location_Seat: dic,
+            user_id: user_id,
+            showtime_id: showtime_id,
+        }
+        console.log(obj)
+        /* console.log('listSeatConvert: ' + listSeatConvert)
+        console.log('dic: key:' + dic.map(o => { return o.key }) + " value: " + dic.map(o => { return o.value }))
+        console.log('user_id:' + user_id);
+        console.log('cinema_id:' + cinema_id);
+        console.log('showtime_id:' + showtime_id); */
     }
     const seatsGenerator = () => {
         return (
@@ -171,7 +212,7 @@ export default function BookingForm() {
                                         </td>
                                         {seatsColumns.map((column, index) => {
                                             return (
-                                                column === '' ? <td key={index}>&nbsp;way&nbsp;</td> :
+                                                column === '' ? <td key={index}>&emsp;&emsp;</td> :
                                                     <td key={index}>
                                                         <input type="checkbox" onChange={(e) => changeSeats(e)} className="seat" id={`${row}${column}`} value={`${row}${column}`} />
                                                     </td>
@@ -205,7 +246,7 @@ export default function BookingForm() {
                         <span>{totalPrice} VND</span>
                     </div>
                     <div className="note-item">
-                        <button className="btn btn-info">Add to cart</button>
+                        <button className="btn btn-info" onClick={AddToCartClick}>Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -214,20 +255,13 @@ export default function BookingForm() {
     return (
         <div className="detail-booking">
             <div className="img_booking">
-                <img src={img} alt="" />
-                <div className="img_booking_content">
-                    <h6>Director</h6>
-                    <small>chris evans</small>
-                    <h6>Cast</h6>
-                    <small>joe russo, anthony russo</small>
-                    <h6>Genre</h6>
-                    <small>adventure</small>
-                </div>
+                {ShowImage()}
+                {ShowContentImage()}
             </div>
             <div className="content_booking">
                 <div className="booking_nav">
                     <FormControl className={classes.formControl}>
-                        <InputLabel className={classes.inputLabel}>Select Cinema</InputLabel>
+                        <InputLabel className={classes.inputLabel}>Chọn Rạp</InputLabel>
                         <Select
                             className={classes.select}
                             open={open1}
@@ -240,20 +274,7 @@ export default function BookingForm() {
                         </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
-                        <InputLabel className={classes.inputLabel}>Start Date</InputLabel>
-                        <Select
-                            className={classes.select}
-                            open={open2}
-                            onClose={handleClose2}
-                            onOpen={handleOpen2}
-                            value={date}
-                            onChange={handleChangeDate}
-                        >
-                            {ShowSelectStartDate()}
-                        </Select>
-                    </FormControl>
-                    <FormControl className={classes.formControl}>
-                        <InputLabel className={classes.inputLabel}>Start Time</InputLabel>
+                        <InputLabel className={classes.inputLabel}>Chọn Suất chiếu</InputLabel>
                         <Select
                             className={classes.select}
                             open={open3}

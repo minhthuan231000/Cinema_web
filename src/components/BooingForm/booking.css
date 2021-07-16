@@ -20,7 +20,7 @@
 
 .img_booking_content {
     text-align: left;
-    width: 100%;
+    width: 30%;
     padding: 40px;
     position: absolute;
 }
@@ -54,7 +54,6 @@
 
 .seat_wrap button {
     height: 3em;
-    width: 5em;
     background-color: cadetblue;
 }
 input.seat{
@@ -72,6 +71,5 @@ input.seat{
 }
 .note-item{
     padding: 10px;
-    width: 200px;
     display: flex;
 }
