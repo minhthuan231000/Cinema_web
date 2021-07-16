@@ -155,15 +155,6 @@ export default function Payment() {
                                     <TableCell colSpan={4} align="right">
                                         <Button
                                             variant="outlined"
-                                            color="secondary"
-                                            size="small"
-                                            startIcon={<DeleteIcon />}
-                                            style={{marginInlineEnd: 10}}
-                                        >
-                                            Hủy Vé
-                                        </Button>
-                                        <Button
-                                            variant="outlined"
                                             color="primary"
                                             size="small"
                                             startIcon={<PaymentIcon />}
