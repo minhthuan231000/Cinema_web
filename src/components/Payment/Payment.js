@@ -114,6 +114,9 @@ export default function Payment() {
             )
 
         const rows = createListRow(booking);
+        const DelPaymentClick = () => {
+            alert("Hủy vé thành công")
+        }
         const PaymentClick = () => {
             alert("Đặt vé thành công")
         }
@@ -165,6 +168,16 @@ export default function Payment() {
                                 <TableRow>
                                     <TableCell colSpan={1} />
                                     <TableCell colSpan={4} align="right">
+                                        <Button
+                                            variant="outlined"
+                                            color="secondary"
+                                            size="small"
+                                            startIcon={<DeleteIcon />}
+                                            onClick={DelPaymentClick}
+                                            style={{marginInlineEnd: 10}}
+                                        >
+                                            Hủy Vé
+                                        </Button>
                                         <Button
                                             variant="outlined"
                                             color="primary"
