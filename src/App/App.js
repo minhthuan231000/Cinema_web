@@ -115,6 +115,7 @@ export default class App extends Component {
         const loggedInUser = sessionStorage.getItem('user');
          this.load_data();
         if (!loggedInUser) {
+            localStorage.removeItem('booking');
             localStorage.removeItem('list_user');
             return this.UserPage();
         }
