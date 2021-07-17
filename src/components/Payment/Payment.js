@@ -7,95 +7,203 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import PaymentIcon from '@material-ui/icons/Payment';
+//import { SelectionState } from '@devexpress/dx-react-chart';
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
+const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+const movie = JSON.parse(localStorage.getItem('movie'));
+const booking = JSON.parse(localStorage.getItem('booking'));
 
 const useStyles = makeStyles({
     table: {
         minWidth: 700,
     },
 });
-
 function ccyFormat(num) {
     return `${num.toFixed(3)}`;
 }
-
-function priceRow(qty, unit) {
-    return qty * unit;
+function search(nameKey, myArray) {
+    for (var i = 0; i < myArray.length; i++) {
+        if (myArray[i].id === nameKey) {
+            return myArray[i];
+        }
+    }
 }
 
-function createRow(name, seat, qty, unit) {
-    const price = priceRow(qty, unit);
-    return { name, seat, qty, unit, price };
+//Name Movie
+function getNameMovie(id) {
+    return search(id, movie).name;
+}
+//Get chair_id
+function getListChair(list_tickets) {
+    let count = 0;
+    let total = 0;
+    let chair = '';
+    let price = 0;
+    count = list_tickets.length;
+    list_tickets.map((p) => (price = p.price));
+    list_tickets.map((ticket) => (total += ticket.price));
+    list_tickets.map((str) => (
+        chair += str.chair_id + ' '
+    ));
+    return [count, chair, price, total];
+}
+function createRow(bookings) {
+    let name = getNameMovie(bookings.showtime.movie_id);
+    let seat = getListChair(bookings.tickets)[1];
+    let quantity = getListChair(bookings.tickets)[0];
+    let unit = "Ticket";
+
+    let total_price =  getListChair(bookings.tickets)[3];;
+    return [name,seat,quantity,unit,total_price] ;
+}
+function createListRow(booking_obj) {
+    let rows = [];
+    if (booking_obj) {
+        booking_obj.map((b) => (rows.push(createRow(b))));
+    }
+    return rows;
 }
 
+
+//const rows = createListRow(booking);
+
+const rows = [];
 function subtotal(items) {
-    return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+    return items.map((total) => total).reduce((sum, i) => sum + i, 0);
+
 }
-
-const rows = [
-    createRow('Avenger', 'F4', 3, 45000),
-    createRow('Spiderman 3', 'G5', 2, 55000),
-    createRow('Flash 3', 'H3', 1, 65000),
-];
-
 const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceSubtotal - invoiceTaxes;
-
 export default function Payment() {
     const classes = useStyles();
+    if (!loggedInUser) {
+        window.location.href = "/";
+        return;
+    }
+    if (loggedInUser) {
 
-    return (
-        <div className="row">
-            <div className="col-sm-1"></div>
-            <div className="col-sm-10">
-                <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="spanning table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="center" colSpan={3}>
-                                    Details
-                                </TableCell>
-                                <TableCell align="right">Price</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell align="right">Seat</TableCell>
-                                <TableCell align="right">Qty.</TableCell>
-                                <TableCell align="right">Unit</TableCell>
-                                <TableCell align="right">Sum</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map((row) => (
-                                <TableRow key={row.name}>
-                                    <TableCell>{row.name}</TableCell>
-                                    <TableCell align="right">{row.seat}</TableCell>
-                                    <TableCell align="right">{row.qty}</TableCell>
-                                    <TableCell align="right">{row.unit}</TableCell>
-                                    <TableCell align="right">{row.price}</TableCell>
+        const rows = createListRow(booking);
+        function getCountBooking(booking) {
+            let count_booking = [];
+            booking.map((p) => (
+                count_booking.push(p.id)
+            ));
+            return count_booking;
+        
+        }
+        const DelPaymentClick = () => {
+            alert("Hủy vé thành công")
+        }
+        const PaymentClick = async() => {
+            let listId = getCountBooking(booking);
+            let data = {
+                listId: listId,
+            }
+
+            const request = new Request(`${DOMAIN}/api/booking/buy`, {
+                method: 'POST',
+                headers: new Headers({ 'Content-Type': 'application/json' }),
+                body: JSON.stringify(data)
+            });
+    
+            await fetch(request)
+                .then(res => res.json())
+                .then((result) => {
+                    if (result) {
+                        if(result.status === '200'){
+                            alert("Đặt vé thành công");
+                            localStorage.removeItem('booking');
+                            window.location.href = "/Payment";
+                        }
+                    }
+                },
+                    (error) => {
+                        if (error) {
+                            console.log(error);
+                        }
+                    }
+                )
+        }
+        return (
+            <div className="row">
+                <div className="col-sm-1"></div>
+                <div className="col-sm-10">
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="spanning table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center" colSpan={3}>
+                                        Details
+                                    </TableCell>
+                                    <TableCell align="right" colSpan={2} >Price</TableCell>
                                 </TableRow>
-                            ))}
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell align="right">Seat</TableCell>
+                                    <TableCell align="right">Quantity</TableCell>
+                                    <TableCell align="right">Unit</TableCell>
+                                    <TableCell align="right">Price</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row) => (
+                                    <TableRow key={row[0]}>
+                                        <TableCell>{row[0]}</TableCell>
+                                        <TableCell align="right">{row[1]}</TableCell>
+                                        <TableCell align="right">{row[2]}</TableCell>
+                                        <TableCell align="right">{row[3]}</TableCell>
+                                        <TableCell align="right">{row[4]}</TableCell>
+                                    </TableRow>
+                                ))}
+                                <TableRow>
+                                    <TableCell rowSpan={3} />
+                                    <TableCell colSpan={3}>Subtotal</TableCell>
+                                    <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell colSpan={2}>Discount</TableCell>
+                                    <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
+                                    <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell colSpan={3}>Total</TableCell>
+                                    <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell colSpan={1} />
+                                    <TableCell colSpan={4} align="right">
+                                        <Button
+                                            variant="outlined"
+                                            color="secondary"
+                                            size="small"
+                                            startIcon={<DeleteIcon />}
+                                            onClick={DelPaymentClick}
+                                            style={{marginInlineEnd: 10}}
+                                        >
+                                            Hủy Vé
+                                        </Button>
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            size="small"
+                                            startIcon={<PaymentIcon />}
+                                            onClick={PaymentClick}
+                                        >
+                                            Thanh Toán
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
 
-                            <TableRow>
-                                <TableCell rowSpan={3} />
-                                <TableCell colSpan={3}>Subtotal</TableCell>
-                                <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell colSpan={2}>Discount</TableCell>
-                                <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-                                <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell colSpan={3}>Total</TableCell>
-                                <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                    </TableContainer>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }

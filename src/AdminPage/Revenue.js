@@ -105,6 +105,7 @@ export default function Revenue() {
                             shrink: true,
                         }}
                     />
+                    <button type="submit" className="btn btn-info">Load</button>
                 </form>
                 <Table aria-label="spanning table">
                     <TableHead>
@@ -174,6 +175,7 @@ export default function Revenue() {
                             shrink: true,
                         }}
                     />
+                    <button type="submit" className="btn btn-info">Load</button>
                 </form>
                 <Table aria-label="spanning table">
                     <TableHead>

@@ -16,13 +16,20 @@ import SubTab from '../components/SubTab/SubTab';
 import Bottom from '../components/Bottom/Bottom';
 import Introduce from '../components/Introduce/introduce';
 import AdminPage from '../AdminPage/AdminPage'
-import BookingTicket from '../components/BookingTicket/BookingTicket'
 import PriceTicket from '../components/PriceTicket/PriceTicket';
 import PageNotFound404 from '../components/Page404/404';
 import News from '../components/News/News';
 import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 import Payment from '../components/Payment/Payment';
+<<<<<<< HEAD
 require('dotenv').config({ path: '../.env' });
+=======
+import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
+import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
+import BookingForm from '../components/BooingForm/BookingForm';
+
+const DOMAIN = process.env.REACT_APP_DOMAIN;
+>>>>>>> main
 export default class App extends Component {
     constructor() {
         super();
@@ -33,8 +40,8 @@ export default class App extends Component {
 
     }
     AdminPage = () => {
-        this.load_data_user();
         return <AdminPage />
+
     }
     UserPage = () => {
         return (
@@ -51,6 +58,7 @@ export default class App extends Component {
                 </div>
                 <div className="content-page">
                     <ContentPage />
+
                     <BrowserRouter>
                         <Switch>
                             <Route
@@ -58,16 +66,20 @@ export default class App extends Component {
                                 path="/"
                                 render={() => {
                                     return (
-                                        this.state.isAdmin ?
-                                            <Redirect to="/Dashboard" /> :
-                                            <Redirect to="/Home" />
+                                        <Redirect to="/Home" />
                                     )
                                 }} />
+                            <Route path="/BookingForm">
+                                <BookingForm />
+                            </Route>
+                            <Route path="/LichChieu">
+                                <MovieSchedule />
+                            </Route>
                             <Route path="/Payment">
                                 <Payment />
                             </Route>
                             <Route path="/History">
-                                <BookingTicket />
+                                <HistoryBooking />
                             </Route>
                             <Route path="/Home">
                                 <div className="sub-tab">
@@ -106,18 +118,22 @@ export default class App extends Component {
         )
     }
     showButton = () => {
-        const loggedInUser = localStorage.getItem('user');
+        const loggedInUser = sessionStorage.getItem('user');
+         this.load_data();
         if (!loggedInUser) {
+            localStorage.removeItem('history_booking');
+            localStorage.removeItem('booking');
             localStorage.removeItem('list_user');
             return this.UserPage();
         }
         if (loggedInUser) {
             let role = JSON.parse(loggedInUser).role;
-
             if (role === 'user') {
+                this.load_booking();
                 localStorage.removeItem('list_user');
                 return this.UserPage();
             } else if (role === 'staff') {
+                this.load_data_user();
                 return this.AdminPage();
             } else if (role === 'lock') {
                 localStorage.removeItem('user');
@@ -126,22 +142,50 @@ export default class App extends Component {
             }
         }
     }
+<<<<<<< HEAD
     load_data_user = () => {
         let request = new Request(`${process.env.REACT_APP_DOMAIN}/load/data/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
+=======
+    load_booking = async()=>{
+        const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+        const request = new Request(`${DOMAIN}/api/booking/${loggedInUser.id}`, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
         });
-        fetch(request)
+
+        await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {
-                    //console.log(result.movie)
-                    localStorage.setItem('list_user', JSON.stringify(result.user));
+                    localStorage.removeItem('booking');
+                    localStorage.setItem('booking', JSON.stringify(result.data));
                 }
             },
                 (error) => {
-                    this.error = error;
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
+    }
+    load_data_user = async () => {
+        let request = new Request(`${DOMAIN}/api/user`, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+>>>>>>> main
+        });
+        await fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    let data = JSON.stringify(result.data);
+                    localStorage.setItem('list_user', data);
+                }
+            },
+                (error) => {
                     if (error) {
                         console.log(error);
                     }
@@ -149,17 +193,23 @@ export default class App extends Component {
             )
         return;
     }
+<<<<<<< HEAD
     load_data = () => {
         let request = new Request(`${process.env.REACT_APP_DOMAIN}/load/data`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ req: "load-movie" })
+=======
+    load_data = async () => {
+        let request = new Request(`${DOMAIN}/load/data`, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+>>>>>>> main
         });
-        fetch(request)
+        await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {
-                    //console.log(result.movie)
                     localStorage.setItem('movie', JSON.stringify(result.movie));
                     localStorage.setItem('theater', JSON.stringify(result.theater));
                     localStorage.setItem('showtime', JSON.stringify(result.showtime));
@@ -167,7 +217,6 @@ export default class App extends Component {
                 }
             },
                 (error) => {
-                    this.error = error;
                     if (error) {
                         console.log(error);
                     }
@@ -175,9 +224,13 @@ export default class App extends Component {
             )
         return;
     }
+<<<<<<< HEAD
     render() { 
         console.log(process.env.REACT_APP_PORT);
         this.load_data();
+=======
+    render() {
+>>>>>>> main
         return (
             <div className="App">
                 {this.showButton()}

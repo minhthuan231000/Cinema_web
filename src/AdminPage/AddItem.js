@@ -12,8 +12,11 @@ import Fab from '@material-ui/core/Fab';
 import QueueIcon from '@material-ui/icons/Queue';
 import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
+<<<<<<< HEAD
 
 //import moment from 'moment';
+=======
+>>>>>>> main
 import './admin.css'
 
 export default function FeatureAdd() {
@@ -33,11 +36,26 @@ export default function FeatureAdd() {
   }
   const [countX, setCountX] = React.useState(10);
   const [countY, setCountY] = React.useState(10);
+  let token = {};
+  const handleChangeThemRap = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    token[name] = value;
+    console.log(value)
+  }
   const handleSubmit1 = () => {
 
   }
   const handleSubmit2 = () => {
 
+  }
+  const showCumRap = () => {
+    let list_cumrap = JSON.parse(localStorage.getItem('cinema'));
+    const showlist = list_cumrap.map((item, index) => {
+      return <MenuItem key={index} value={index} onClick={handleClick}>{item.name}</MenuItem>
+    })
+    return showlist;
   }
   const showListItemPhim = () => {
     return <MenuItem value={1}>Phim 1</MenuItem>
@@ -50,6 +68,10 @@ export default function FeatureAdd() {
   const handleChangeDate = e => {
     setDate(e.target.value);
   };
+  const handleClick = event => {
+    const { myValue } = event.target.value;
+    console.log(myValue) // --> 123
+  }
   return (
     <div className="addFeature-root">
       <div className="col-5" >
@@ -57,11 +79,11 @@ export default function FeatureAdd() {
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)' }}>
             <div className="groupCumRap">
               <div><label><h4>Thêm cụm rạp</h4></label></div>
-              <TextField style={{ marginLeft: 10 }} id="standard-basic" label="Tên Cụm Rạp" />
+              <TextField style={{ marginLeft: 10 }} id="standard-basic" label="Tên Cụm Rạp" onChange={(e) => handleChangeThemRap(e)} />
               <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" label="Địa Chỉ" />
             </div>
             <p></p>
-            <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
+            <InputLabel id="demo-simple-select-label" onClick={handleSubmit1()}>&ensp;Submit</InputLabel>
             <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
               <QueueIcon />
             </Fab>
@@ -91,10 +113,9 @@ export default function FeatureAdd() {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
+                    value={3}
                   >
-                    <MenuItem value={1}>Cụm 1</MenuItem>
-                    <MenuItem value={2}>Cụm 2</MenuItem>
-                    <MenuItem value={3}>Cụm 3</MenuItem>
+                    {showCumRap()}
                   </Select>
                 </FormControl>
               </div>
@@ -130,7 +151,7 @@ export default function FeatureAdd() {
                 </div>
               </div>
               <p></p>
-              <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
+              <InputLabel id="demo-simple-select-label" >&ensp;Submit</InputLabel>
               <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
                 <QueueIcon />
               </Fab>
@@ -201,7 +222,17 @@ export default function FeatureAdd() {
               </div>
               <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" onChange={handleChangePhim} value={tenPhim} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" />
-              <TextField style={{ margin: 8 }} id="standard-basic" label="Ngày công chiếu" placeholder="(MM/DD/YYYY)" />
+              <TextField
+                id="datetime"
+                label="Them suat chieu"
+                type="datetime-local"
+                defaultValue={date}
+                onChange={handleChangeDate}
+                style={{ margin: '3px 8px 0 10px' }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
 
               <ImageUpload cardName="Input Image" />
               <p></p>

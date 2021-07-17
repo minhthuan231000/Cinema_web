@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import './Modal.css'
-
 export default function ContentPage() {
     const [openMd1, setOpen1] = useState(false);
     const [openMd2, setOpen2] = useState(false);
@@ -104,7 +103,7 @@ export default function ContentPage() {
                                 <p>Phim 3D được quay từ tối thiểu hai máy cùng một lúc, từ hai góc nhìn khác nhau tương ứng với hoạt động của hai mắt người. Khi xem phim khán giả sẽ cần đeo kính 3D để lọc hình ảnh cho mỗi mắt, khi qua não bộ sẽ chập lại tạo thành hình ảnh không gian ba chiều.</p>
                                 <p>&nbsp;</p>
                                 <p>Các phòng chiếu phim 3D Digital này đều sử dụng màn hình tráng bạc để giảm thiểu lượng hao hụt ánh sáng một cách tối đa.</p>
-                                <img alt="" src="https://cinestar.com.vn/pictures/moi/8DinhDang/3d2.jpg" style={{width: 599, height: 426}} />
+                                <img alt="" src="https://cinestar.com.vn/pictures/moi/8DinhDang/3d2.jpg" style={{ width: 599, height: 426 }} />
                             </div>
                         </Modal>
                     </li>

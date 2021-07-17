@@ -18,9 +18,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import UpdateIcon from '@material-ui/icons/Update';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
+import BlockIcon from '@material-ui/icons/Block';
 
 let ROWS = JSON.parse(localStorage.getItem('list_user'));
+const DOMAIN =process.env.REACT_APP_DOMAIN;
 
 
 
@@ -134,26 +135,59 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected, selected, setRows,setSelected} = props;
-    const click_delete = () => {
+    const { numSelected, selected, setRows, setSelected } = props;
+    const click_delete = async() => {
         let data = { listId: selected };
+<<<<<<< HEAD
         let request = new Request(`${process.env.REACT_APP_DOMAIN}/delete/user`, {
+=======
+        let request = new Request(`${DOMAIN}/api/user/lock`, {
+>>>>>>> main
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
         });
 
-        fetch(request)
+        await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {
                     if (result.Status === 'Complete') {
-                        localStorage.removeItem('showtime');
-                        localStorage.setItem('showtime', JSON.stringify(result.new_list));
-                        setRows(result.new_list);
+                        localStorage.removeItem('list_user');
+                        localStorage.setItem('list_user', JSON.stringify(result.data));
+                        setRows(result.data);
                         setSelected([]);
                     } else if (result.Status === 'Error') {
                         console.log('Del showtime error');
+                    }
+                }
+            },
+                (error) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
+    }
+    const click_active = async() => {
+        let data = { listId: selected };
+        let request = new Request(`${DOMAIN}/api/user/active`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(data)
+        });
+
+        await fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    if (result.Status === 'Complete') {
+                        localStorage.removeItem('list_user');
+                        localStorage.setItem('list_user', JSON.stringify(result.data));
+                        setRows(result.data);
+                        setSelected([]);
+                    } else if (result.Status === 'Error') {
+                        console.log('Active user error');
                     }
                 }
             },
@@ -181,11 +215,18 @@ const EnhancedTableToolbar = (props) => {
             )}
 
             {numSelected > 0 ? (
-                <Tooltip title="Lock account">
-                    <IconButton aria-label="delete" onClick={() => click_delete()}>
-                        <UpdateIcon />
-                    </IconButton>
-                </Tooltip>
+                <div style={{display: 'inline-flex'}}>
+                    <Tooltip title="Lock account">
+                        <IconButton aria-label="delete" onClick={() => click_delete()}>
+                            <BlockIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="active account">
+                        <IconButton aria-label="active" onClick={() => click_active()}>
+                            <UpdateIcon />
+                        </IconButton>
+                    </Tooltip>
+                </div>
             ) : (
                 <Tooltip title="Filter list">
                     <IconButton aria-label="filter list">
@@ -287,7 +328,7 @@ export default function EnhancedTable() {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <EnhancedTableToolbar numSelected={selected.length} selected={selected} setRows={setRows} setSelected={setSelected}/>
+                <EnhancedTableToolbar numSelected={selected.length} selected={selected} setRows={setRows} setSelected={setSelected} />
                 <TableContainer>
                     <Table
                         className={classes.table}

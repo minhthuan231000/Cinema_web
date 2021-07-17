@@ -9,6 +9,7 @@ import Info from '../InfoForm/InfoForm';
 import { Badge } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 export default function Member(props) {
 
     const [openReg, setOpen] = useState(false);
@@ -27,22 +28,22 @@ export default function Member(props) {
         window.location.reload();
     }
     let logout = () => {
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
         refreshPage();
     };
 
-    const loggedInUser = localStorage.getItem('user');
+    const loggedInUser = sessionStorage.getItem('user');
 
     if (loggedInUser) { // neu da login thi Redirect
         let username = JSON.parse(loggedInUser).fullname;
-        
+
         return (
             <div className="register-content">
                 <div className="container">
                     <div className="register-wrap">
                         <ul>
                             <li className="btn-logout">
-                                <button onClick={logout}>Log Out</button>
+                                <button onClick={logout}><a href="/">Log Out</a></button>
                             </li>
                             <li className="btn-login">
                                 <button onClick={onOpenModalInfo}>{username}</button>
@@ -58,7 +59,7 @@ export default function Member(props) {
                             </li>
                             <li className="btn-cart">
                                 <IconButton aria-label="show 4 new item" color="inherit" href="/Payment"> {/* xem thanh toán vé */}
-                                    <Badge badgeContent={0} color="secondary" showZero>
+                                    <Badge badgeContent={JSON.parse(localStorage.getItem('booking')).length} color="secondary" showZero>
                                         <ShoppingCartIcon style={{ color: '#e00d7a', fontSize: '35px' }} />
                                     </Badge>
                                 </IconButton>

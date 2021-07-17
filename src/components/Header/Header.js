@@ -3,7 +3,7 @@ class HeaderTop extends Component {
     render() {
         return (
             <div className="container HeaderTop">
-                <div><a className="logo" href="/Home">
+                <div><a className="logo" href="/">
                 </a>
                 </div>
                 <div className="navbox">
