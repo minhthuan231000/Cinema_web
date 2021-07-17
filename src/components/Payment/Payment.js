@@ -69,12 +69,7 @@ function createListRow(booking_obj) {
 //const rows = createListRow(booking);
 
 function subtotal(items) {
-<<<<<<< Updated upstream
-    return items.map((total) => total).reduce((sum, i) => sum + i, 0);
-
-=======
     return items.map((total_price) => total_price).reduce((sum, i) => sum + i, 0);
->>>>>>> Stashed changes
 }
 
 export default function Payment() {
@@ -86,7 +81,6 @@ export default function Payment() {
     if (loggedInUser) {
 
         const rows = createListRow(booking);
-<<<<<<< Updated upstream
         function getCountBooking(booking) {
             let count_booking = [];
             booking.map((p) => (
@@ -95,11 +89,9 @@ export default function Payment() {
             return count_booking;
         
         }
-=======
         const invoiceSubtotal = subtotal(rows.map(row => row[4]));
         const invoiceTaxes = TAX_RATE * invoiceSubtotal;
         const invoiceTotal = invoiceSubtotal - invoiceTaxes;
->>>>>>> Stashed changes
         const DelPaymentClick = () => {
             alert("Hủy vé thành công")
         }
