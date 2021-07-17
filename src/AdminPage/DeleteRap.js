@@ -134,11 +134,7 @@ const EnhancedTableToolbar = (props) => {
   const { numSelected,selected,setRows,setSelected } = props;
   const click_delete = () => {
     let data = { listId: selected };
-<<<<<<< HEAD
-    let request = new Request(`${process.env.REACT_APP_DOMAIN}/delete/theater`, {
-=======
     let request = new Request(`${DOMAIN}/delete/theater`, {
->>>>>>> main
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(data)

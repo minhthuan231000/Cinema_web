@@ -133,11 +133,9 @@ const EnhancedTableToolbar = (props) => {
   const { numSelected,selected, setRows,setSelected } = props;
   const click_delete = () => {
     let data = { listId: selected };
-<<<<<<< HEAD
-    let request = new Request(`${process.env.REACT_APP_DOMAIN}/delete/cinema`, {
-=======
+
     let request = new Request(`${DOMAIN}/delete/cinema`, {
->>>>>>> main
+
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(data)
@@ -228,10 +226,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 export default function EnhancedTable() {
   const classes = useStyles();
   const [rows,setRows] = React.useState(ROWS);

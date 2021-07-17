@@ -12,11 +12,7 @@ import Fab from '@material-ui/core/Fab';
 import QueueIcon from '@material-ui/icons/Queue';
 import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
-<<<<<<< HEAD
 
-//import moment from 'moment';
-=======
->>>>>>> main
 import './admin.css'
 
 export default function FeatureAdd() {

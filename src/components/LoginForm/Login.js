@@ -4,11 +4,9 @@ import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../model
 
 import icon_fb from '../../images/icons/icon-facebook.jpg'
 import icon_gg from '../../images/icons/icon-google.jpg'
-<<<<<<< HEAD
 
-=======
 const DOMAIN = process.env.REACT_APP_DOMAIN;
->>>>>>> main
+
 class Login extends Component { // class parent login
     /* Xử lý nodejs tại component này */
     constructor(props) {
@@ -71,11 +69,9 @@ class Login extends Component { // class parent login
                     this.setState({ email: data.email });
 
                     if (formData) {
-<<<<<<< HEAD
-                        let request = new Request(`${process.env.REACT_APP_DOMAIN}/api/login`, {
-=======
+
                         let request = new Request(`${DOMAIN}/api/login`, {
->>>>>>> main
+
                             method: 'POST',
                             headers: new Headers({ 'Content-Type': 'application/json' }),
                             body: JSON.stringify(data)
@@ -167,11 +163,9 @@ class Login extends Component { // class parent login
                 let data = {
                     email: formData.email
                 }
-<<<<<<< HEAD
-                let request = new Request(`${process.env.REACT_APP_DOMAIN}/api/forgetpassword`, {
-=======
+
                 let request = new Request(`${DOMAIN}/api/forgetpassword`, {
->>>>>>> main
+
                     method: 'POST',
                     headers: new Headers({ 'Content-Type': 'application/json' }),
                     body: JSON.stringify(data)
@@ -230,11 +224,9 @@ class Login extends Component { // class parent login
                         email: this.state.email
                     };
                     //Login code
-<<<<<<< HEAD
-                    let request = new Request(`${process.env.REACT_APP_DOMAIN}/api/confirm`, {
-=======
+
                     let request = new Request(`${DOMAIN}/api/confirm`, {
->>>>>>> main
+
                         method: 'POST',
                         headers: new Headers({ 'Content-Type': 'application/json' }),
                         body: JSON.stringify(data)
@@ -320,11 +312,9 @@ class Login extends Component { // class parent login
                         password: formData.password
                     };
                     //Login code
-<<<<<<< HEAD
-                    let request = new Request(`${process.env.REACT_APP_DOMAIN}/api/forgetpassword/resetpassword`, {
-=======
+
                     let request = new Request(`${DOMAIN}/api/forgetpassword/resetpassword`, {
->>>>>>> main
+
                         method: 'POST',
                         headers: new Headers({ 'Content-Type': 'application/json' }),
                         body: JSON.stringify(data)
@@ -381,11 +371,9 @@ class Login extends Component { // class parent login
                 let data = {
                     email: formData.email
                 }
-<<<<<<< HEAD
-                let request = new Request(`${process.env.REACT_APP_DOMAIN}/api/active`, {
-=======
+
                 let request = new Request(`${DOMAIN}/api/active`, {
->>>>>>> main
+
                     method: 'POST',
                     headers: new Headers({ 'Content-Type': 'application/json' }),
                     body: JSON.stringify(data)
@@ -445,11 +433,8 @@ class Login extends Component { // class parent login
                   email: this.state.email
                 };
                 //Login code
-<<<<<<< HEAD
-                let request = new Request(`${process.env.REACT_APP_DOMAIN}/api/confirm`, {
-=======
+
                 let request = new Request(`${DOMAIN}/api/confirm`, {
->>>>>>> main
                   method: 'POST',
                   headers: new Headers({ 'Content-Type': 'application/json' }),
                   body: JSON.stringify(data)

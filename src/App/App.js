@@ -21,15 +21,11 @@ import PageNotFound404 from '../components/Page404/404';
 import News from '../components/News/News';
 import ScrollToTopBtn from "../components/ScrollToTop/ScrollToTop";
 import Payment from '../components/Payment/Payment';
-<<<<<<< HEAD
-require('dotenv').config({ path: '../.env' });
-=======
 import HistoryBooking from '../components/HistoryBooking/HistoryBooking';
 import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
 import BookingForm from '../components/BooingForm/BookingForm';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
->>>>>>> main
 export default class App extends Component {
     constructor() {
         super();
@@ -142,13 +138,6 @@ export default class App extends Component {
             }
         }
     }
-<<<<<<< HEAD
-    load_data_user = () => {
-        let request = new Request(`${process.env.REACT_APP_DOMAIN}/load/data/user`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({ req: "load-movie" })
-=======
     load_booking = async()=>{
         const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
         const request = new Request(`${DOMAIN}/api/booking/${loggedInUser.id}`, {
@@ -175,7 +164,6 @@ export default class App extends Component {
         let request = new Request(`${DOMAIN}/api/user`, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
->>>>>>> main
         });
         await fetch(request)
             .then(res => res.json())
@@ -193,18 +181,11 @@ export default class App extends Component {
             )
         return;
     }
-<<<<<<< HEAD
-    load_data = () => {
-        let request = new Request(`${process.env.REACT_APP_DOMAIN}/load/data`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({ req: "load-movie" })
-=======
+
     load_data = async () => {
         let request = new Request(`${DOMAIN}/load/data`, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
->>>>>>> main
         });
         await fetch(request)
             .then(res => res.json())
@@ -224,13 +205,8 @@ export default class App extends Component {
             )
         return;
     }
-<<<<<<< HEAD
-    render() { 
-        console.log(process.env.REACT_APP_PORT);
-        this.load_data();
-=======
+
     render() {
->>>>>>> main
         return (
             <div className="App">
                 {this.showButton()}
