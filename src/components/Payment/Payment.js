@@ -22,9 +22,6 @@ const useStyles = makeStyles({
         minWidth: 700,
     },
 });
-function ccyFormat(num) {
-    return `${num.toFixed(3)}`;
-}
 function search(nameKey, myArray) {
     for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].id === nameKey) {
@@ -71,14 +68,15 @@ function createListRow(booking_obj) {
 
 //const rows = createListRow(booking);
 
-const rows = [];
 function subtotal(items) {
+<<<<<<< Updated upstream
     return items.map((total) => total).reduce((sum, i) => sum + i, 0);
 
+=======
+    return items.map((total_price) => total_price).reduce((sum, i) => sum + i, 0);
+>>>>>>> Stashed changes
 }
-const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceSubtotal - invoiceTaxes;
+
 export default function Payment() {
     const classes = useStyles();
     if (!loggedInUser) {
@@ -88,6 +86,7 @@ export default function Payment() {
     if (loggedInUser) {
 
         const rows = createListRow(booking);
+<<<<<<< Updated upstream
         function getCountBooking(booking) {
             let count_booking = [];
             booking.map((p) => (
@@ -96,6 +95,11 @@ export default function Payment() {
             return count_booking;
         
         }
+=======
+        const invoiceSubtotal = subtotal(rows.map(row => row[4]));
+        const invoiceTaxes = TAX_RATE * invoiceSubtotal;
+        const invoiceTotal = invoiceSubtotal - invoiceTaxes;
+>>>>>>> Stashed changes
         const DelPaymentClick = () => {
             alert("Hủy vé thành công")
         }
@@ -163,16 +167,16 @@ export default function Payment() {
                                 <TableRow>
                                     <TableCell rowSpan={3} />
                                     <TableCell colSpan={3}>Subtotal</TableCell>
-                                    <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+                                    <TableCell align="right">{invoiceSubtotal}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell colSpan={2}>Discount</TableCell>
                                     <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-                                    <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+                                    <TableCell align="right">{invoiceTaxes}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell colSpan={3}>Total</TableCell>
-                                    <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+                                    <TableCell align="right">{invoiceTotal}</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell colSpan={1} />
@@ -183,7 +187,7 @@ export default function Payment() {
                                             size="small"
                                             startIcon={<DeleteIcon />}
                                             onClick={DelPaymentClick}
-                                            style={{marginInlineEnd: 10}}
+                                            style={{ marginInlineEnd: 10 }}
                                         >
                                             Hủy Vé
                                         </Button>
