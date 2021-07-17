@@ -1,7 +1,8 @@
-body{
+body {
   width: 100%;
   line-height: 1;
 }
+
 .App {
   display: block;
   text-align: center;
@@ -88,14 +89,17 @@ a.item {
   color: #fff !important;
   margin-top: 4em;
 }
-a.item:first-child > li{
+
+a.item:first-child>li {
   border-radius: 30 0 0 30;
   -webkit-border-radius: 30px 0 0 30px;
 }
-a.item:last-child > li{
+
+a.item:last-child>li {
   border-radius: 0 30 30 0;
   -webkit-border-radius: 0 30px 30px 0;
 }
+
 .navitem a:hover {
   text-decoration: none;
 }
@@ -168,6 +172,7 @@ li {
   border: none;
   background-color: transparent;
 }
+
 .register-wrap ul li button {
   font-family: 'MyriadCondensed';
   font-size: 16px;
@@ -199,7 +204,6 @@ li {
   border: none;
   background-color: transparent;
 }
-
 .register-wrap ul li.btn-logout {
   height: 50px;
   background-size: 40px !important;
@@ -213,15 +217,18 @@ li {
   border: none;
   background-color: transparent;
 }
+
 .register-wrap ul li.btn-logout a {
   color: #2d096e;
   border: none;
   background-color: transparent;
 }
+
 .register-wrap ul li.btn-logout a:hover {
   color: #e00d7a;
   text-decoration: none;
 }
+
 .hotline {
   float: right;
   font-family: 'Futurab';
@@ -244,6 +251,7 @@ li.hotline:hover {
   position: relative;
   display: none;
 }
+
 .block-user .tab-register {
   position: absolute;
   left: 0px;
@@ -251,6 +259,7 @@ li.hotline:hover {
   height: auto;
   display: none;
 }
+
 .img-logo {
   height: 105px;
   width: 105px;
@@ -360,17 +369,20 @@ li.hotline:hover {
   cursor: pointer;
   position: absolute;
 }
-.select-header > select{
+
+.select-header>select {
   color: #fff;
   border: transparent;
   background-color: transparent;
   width: 90%;
   height: 100%;
   text-transform: uppercase;
-} 
-.select-header > select option{
+}
+
+.select-header>select option {
   background-color: rgba(60, 60, 60);
 }
+
 .select-list[data-cate='film'] .select-header {
   border-radius: 0 30px 30px 30px;
 }
@@ -387,12 +399,14 @@ li.hotline:hover {
   border-radius: 30px 30px 30px 0;
 }
 
-.dropdown-item{
+.dropdown-item {
   color: #fbfbfb;
 }
-.dropdown-item:focus{
+
+.dropdown-item:focus {
   color: #1d9feb;
 }
+
 .App .content-page {
   margin-bottom: 145px;
 }
@@ -434,7 +448,6 @@ li.hotline:hover {
   margin: 0 auto;
   text-align: center;
 }
-
 
 .nav-tabs {
   background-color: #21094e;
