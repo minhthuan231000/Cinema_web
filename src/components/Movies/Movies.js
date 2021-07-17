@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap'
 //import { Link } from 'react-router-dom';
 import './Movies.css'
-export default class MoviesTopView extends Component {
+export default class MoviesOpen extends Component {
     /* Xử lý nodejs tại component này */
     constructor(props) {
         super(props);
@@ -22,11 +22,8 @@ export default class MoviesTopView extends Component {
     }
     
     showMovie = () => {
-        let list_movie = JSON.parse(localStorage.getItem('movie')); 
-        let list_sort = list_movie.sort(function (a, b) {
-            return a.view - b.view;
-        })
-        const movies = list_sort.slice(0,9).map((item, key) => {
+        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        const movies = list_movie.map((item, key) => {
             if (item.id < 7) {
                 let img = new Buffer.from(item.image.data).toString("ascii")
                 return (
