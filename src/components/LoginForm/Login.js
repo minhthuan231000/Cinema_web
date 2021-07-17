@@ -132,7 +132,7 @@ class Login extends Component { // class parent login
                     </div>
                     
                     <span>&nbsp;</span>
-                    <button onClick={(e) => { submitForm(e) }} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng Nhập</button>
+                    <button onClick={(e) => { submitForm(e) }} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng nhập</button>
                     <span>&nbsp;</span>
                     <div className="social-login">
                         <span>

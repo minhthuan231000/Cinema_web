@@ -36,7 +36,7 @@ export default class PauseOnHover extends Component {
 ShowSliderFilm = () => {
     const list = this.state.films.map((item, key) => 
     <div key={item.id} className="slide-item">
-      <a href={item.name }>
+      <a href="/">
         <img className="img-poster" src= {item.url.default} alt="IMG" />
         <span className="title-poster"><h6>{item.name}</h6></span>
       </a>
