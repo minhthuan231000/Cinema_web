@@ -69,7 +69,7 @@ export default function BookingForm() {
         setShowtimeId(event.target.value)
     };
 
-    const loggedInUser = localStorage.getItem('user');
+    const loggedInUser = sessionStorage.getItem('user');
     if (!loggedInUser) {
         window.location.href = "/Home";
     } else if (loggedInUser) {
@@ -136,7 +136,7 @@ export default function BookingForm() {
             let img = new Buffer.from(item.image.data).toString("ascii")
             if (item.id == movie_id) {
                 return <img key={index} src={`data:image/png;base64,${img}`} alt="" />
-            }
+            } 
         })
         return movies
     }

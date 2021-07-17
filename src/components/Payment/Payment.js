@@ -56,8 +56,9 @@ function createRow(bookings) {
     let seat = getListChair(bookings.tickets)[1];
     let quantity = getListChair(bookings.tickets)[0];
     let unit = "Ticket";
-    let total_price = getListChair(bookings.tickets)[2];
-    return [name, seat, quantity, unit, total_price];
+
+    let total_price =  getListChair(bookings.tickets)[3];;
+    return [name,seat,quantity,unit,total_price] ;
 }
 function createListRow(booking_obj) {
     let rows = [];
@@ -73,6 +74,7 @@ function createListRow(booking_obj) {
 const rows = [];
 function subtotal(items) {
     return items.map((total) => total).reduce((sum, i) => sum + i, 0);
+
 }
 const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;
@@ -84,32 +86,48 @@ export default function Payment() {
         return;
     }
     if (loggedInUser) {
-        const request = new Request(`${DOMAIN}/api/booking/${loggedInUser.id}`, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
-        });
-
-        fetch(request)
-            .then(res => res.json())
-            .then((result) => {
-                if (result) {
-                    localStorage.removeItem('booking');
-                    localStorage.setItem('booking', JSON.stringify(result.data));
-                }
-            },
-                (error) => {
-                    if (error) {
-                        console.log(error);
-                    }
-                }
-            )
 
         const rows = createListRow(booking);
+        function getCountBooking(booking) {
+            let count_booking = [];
+            booking.map((p) => (
+                count_booking.push(p.id)
+            ));
+            return count_booking;
+        
+        }
         const DelPaymentClick = () => {
             alert("Hủy vé thành công")
         }
-        const PaymentClick = () => {
-            alert("Đặt vé thành công")
+        const PaymentClick = async() => {
+            let listId = getCountBooking(booking);
+            let data = {
+                listId: listId,
+            }
+
+            const request = new Request(`${DOMAIN}/api/booking/buy`, {
+                method: 'POST',
+                headers: new Headers({ 'Content-Type': 'application/json' }),
+                body: JSON.stringify(data)
+            });
+    
+            await fetch(request)
+                .then(res => res.json())
+                .then((result) => {
+                    if (result) {
+                        if(result.status === '200'){
+                            alert("Đặt vé thành công");
+                            localStorage.removeItem('booking');
+                            window.location.href = "/Payment";
+                        }
+                    }
+                },
+                    (error) => {
+                        if (error) {
+                            console.log(error);
+                        }
+                    }
+                )
         }
         return (
             <div className="row">

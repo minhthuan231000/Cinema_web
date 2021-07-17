@@ -136,7 +136,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected, selected, setRows, setSelected } = props;
-    const click_delete = () => {
+    const click_delete = async() => {
         let data = { listId: selected };
         let request = new Request(`${DOMAIN}/api/user/lock`, {
             method: 'POST',
@@ -144,7 +144,7 @@ const EnhancedTableToolbar = (props) => {
             body: JSON.stringify(data)
         });
 
-        fetch(request)
+        await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {
@@ -165,7 +165,7 @@ const EnhancedTableToolbar = (props) => {
                 }
             )
     }
-    const click_active = () => {
+    const click_active = async() => {
         let data = { listId: selected };
         let request = new Request(`${DOMAIN}/api/user/active`, {
             method: 'POST',
@@ -173,7 +173,7 @@ const EnhancedTableToolbar = (props) => {
             body: JSON.stringify(data)
         });
 
-        fetch(request)
+        await fetch(request)
             .then(res => res.json())
             .then((result) => {
                 if (result) {

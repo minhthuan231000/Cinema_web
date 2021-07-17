@@ -13,7 +13,10 @@ import QueueIcon from '@material-ui/icons/Queue';
 import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
 import './admin.css'
+import imageToBase64 from 'image-to-base64/browser';
+const fs = require('fs');
 
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function FeatureAdd() {
 
   const [type, setType] = React.useState('');
@@ -31,32 +34,204 @@ export default function FeatureAdd() {
   }
   const [countX, setCountX] = React.useState(10);
   const [countY, setCountY] = React.useState(10);
-  let token = {};
-  const handleChangeThemRap = (event) => {
+
+
+  let formCinemas = {};
+  const handleChangeThemCumRap = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    token[name] = value;
-    console.log(value)
+    formCinemas[name] = value;
   }
+
   const handleSubmit1 = () => {
-
+    let data = {
+      name : formCinemas.name,
+      address : formCinemas.address
+    };
+    let request = new Request(`${DOMAIN}/api/cinema`, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(data)
+    });
+    fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+            if (result) {
+                if(result.status === '200'){
+                  alert('Success');
+                }else if(result.status === '400'){
+                    console.log('Del showtime error');
+                }
+            }
+        },
+            (error) => {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        )
   }
+  
+  let formShowtimes = {};
+  const handleChangeShowtimes = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    formShowtimes[name] = value;
+  }
+
+  let formTheater = {};
+  const handleChangeTheater = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    formTheater[name] = value;
+  }
+
+  let formMovie = {};
+  const handleChangeMovie = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    formMovie[name] = value;
+  }
+
+  const handleFileSelect = (event) => {
+    
+  }
+
+  const handleSubmit3 = () => {
+    let data = {
+      theater_id : formShowtimes.cbRap,
+      movie_id : formShowtimes.cbPhim,
+      start_time : formShowtimes.start_time,
+      end_time : formShowtimes.end_time,
+      price : 80001
+    };
+    let request = new Request(`${DOMAIN}/api/showtime`, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(data)
+    });
+    fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+            if (result) {
+                if(result.status === '200'){
+                  alert('Success');
+                }else if(result.status === '400'){
+                    console.log('Del showtime error');
+                }
+            }
+        },
+            (error) => {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        )
+  }
+
+  const handleSubmit5 = () => {
+  }
+
+  const handleSubmit4 = () => {
+    let data = {
+      name : formMovie.name,
+      image : 'test1',
+      trailer : 'test1',
+      introduce : 'introduce',
+      minute_time : formMovie.minute_time,
+      opening_day : formMovie.opening_day,
+      view : 0
+    };
+    let request = new Request(`${DOMAIN}/api/movie`, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(data)
+    });
+    fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+            if (result) {
+                if(result.status === '200'){
+                  alert('Success');
+                }else if(result.status === '400'){
+                    console.log('Del showtime error');
+                }
+            }
+        },
+            (error) => {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        )
+  }
+
   const handleSubmit2 = () => {
+    let data = {
+      name : formTheater.tenrap,
+      cinema_id : formTheater.cumrap,
+      type : formTheater.loairap,
+      number_row : formTheater.cn,
+      number_column : formTheater.cd
+    };
 
+    let request = new Request(`${DOMAIN}/api/theater`, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(data)
+    });
+    fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+            if (result) {
+                if(result.status === '200'){
+                  alert('Success');
+                }else if(result.status === '400'){
+                    console.log('Del showtime error');
+                }
+            }
+        },
+            (error) => {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        )
   }
-  const showCumRap = () => {
-    let list_cumrap = JSON.parse(localStorage.getItem('cinema'));
-    const showlist = list_cumrap.map((item, index) => {
-      return <MenuItem key={index} value={index} onClick={handleClick}>{item.name}</MenuItem>
+  
+  const showLoaiRap = () => {
+    let list_loairap = [{"name":'2d'},{"name":'3d'},{"name":'4dx'}];
+    const showlist = list_loairap.map((item, index) => {
+      return <MenuItem key={index} value={item.name} onClick={handleClick}>{item.name}</MenuItem>
     })
     return showlist;
   }
+
+  const showCumRap = () => {
+    let list_cumrap = JSON.parse(localStorage.getItem('cinema'));
+    const showlist = list_cumrap.map((item, index) => {
+      return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
+    })
+    return showlist;
+  }
+
   const showListItemPhim = () => {
-    return <MenuItem value={1}>Phim 1</MenuItem>
+    let list_movie = JSON.parse(localStorage.getItem('movie'));
+    const showlist = list_movie.map((item, index) => {
+      return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
+    })
+    return showlist;
   }
   const showListItemRap = () => {
-    return <MenuItem value={1}>Rap 1</MenuItem>
+    let list_rap = JSON.parse(localStorage.getItem('theater'));
+    const showlist = list_rap.map((item, index) => {
+      return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
+    })
+    return showlist;
   }
   const [date, setDate] = React.useState("2021-07-12T10:30"); // value date fomat with 2021-07-12T10:30
   // handles when user changes input in date inputfield
@@ -74,12 +249,12 @@ export default function FeatureAdd() {
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)' }}>
             <div className="groupCumRap">
               <div><label><h4>Thêm cụm rạp</h4></label></div>
-              <TextField style={{ marginLeft: 10 }} id="standard-basic" label="Tên Cụm Rạp" onChange={(e) => handleChangeThemRap(e)} />
-              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" label="Địa Chỉ" />
+              <TextField style={{ marginLeft: 10 }} id="standard-basic" name="name" label="Tên Cụm Rạp" onChange={(e) => handleChangeThemCumRap(e)} />
+              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="address" label="Địa Chỉ" onChange={(e) => handleChangeThemCumRap(e)} />
             </div>
             <p></p>
             <InputLabel id="demo-simple-select-label" onClick={handleSubmit1()}>&ensp;Submit</InputLabel>
-            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
+            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={handleSubmit1} >
               <QueueIcon />
             </Fab>
           </Paper>
@@ -89,18 +264,16 @@ export default function FeatureAdd() {
             <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
               <label><h4>Thêm rạp</h4></label>
               <div className="groupControl-rap">
-                <TextField style={{ marginInlineEnd: '0.5em' }} id="textField-TenRap" label="Tên Rạp" onChange={handleChangeRap} value={tenRap} />
+                <TextField style={{ marginInlineEnd: '0.5em' }} id="textField-TenRap" name="tenrap" label="Tên Rạp" onChange={(e) => handleChangeTheater(e)}  />
                 <FormControl className="input-TypeRap" style={{ marginInlineEnd: '0.5em' }}>
                   <InputLabel id="demo-simple-select-label">Loại Rạp</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={type}
-                    onChange={handleChangeType}
+                    name="loairap"
+                    onChange={(e) => handleChangeTheater(e)}
                   >
-                    <MenuItem value={'2D'}>2D</MenuItem>
-                    <MenuItem value={'3D'}>3D</MenuItem>
-                    <MenuItem value={'4DX'}>4DX</MenuItem>
+                     {showLoaiRap()}
                   </Select>
                 </FormControl>
                 <FormControl className="input-TypeRap">
@@ -108,7 +281,8 @@ export default function FeatureAdd() {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={3}
+                    name="cumrap"
+                    onChange={(e) => handleChangeTheater(e)}
                   >
                     {showCumRap()}
                   </Select>
@@ -118,36 +292,16 @@ export default function FeatureAdd() {
                 <div><label><h6>Cấu hình ghế</h6></label></div>
                 <div className="groupSize">
                   <InputLabel>Chiều ngang</InputLabel>
-                  <Fab size="small" color="primary" aria-label="chieungang" onClick={() => {
-                    setCountX(Math.max(countX - 1, 10));
-                  }} className="">
-                    <RemoveIcon fontSize="small" />
-                  </Fab>
-                  <TextField helperText="Max 20" className="textField-SizeRap" value={countX} />
-                  <Fab size="small" color="primary" aria-label="chieungang" onClick={() => {
-                    setCountX(Math.min(countX + 1, 20));
-                  }} className="">
-                    <AddIcon fontSize="small" />
-                  </Fab>
+                  <TextField name="cn" className="textField-SizeRap" onChange={(e) => handleChangeTheater(e)} />
                 </div>
                 <div className="groupSize">
                   <InputLabel>Chiều dọc</InputLabel>
-                  <Fab size="small" color="primary" aria-label="chieudoc" onClick={() => {
-                    setCountY(Math.max(countY - 1, 10));
-                  }} className="">
-                    <RemoveIcon fontSize="small" />
-                  </Fab>
-                  <TextField helperText="Max 20" className="textField-SizeRap" value={countY} />
-                  <Fab size="small" color="primary" aria-label="chieudoc" onClick={() => {
-                    setCountY(Math.min(countY + 1, 20));
-                  }} className="">
-                    <AddIcon fontSize="small" />
-                  </Fab>
+                  <TextField className="textField-SizeRap"  name="cd" onChange={(e) => handleChangeTheater(e)} />
                 </div>
               </div>
               <p></p>
               <InputLabel id="demo-simple-select-label" >&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={handleSubmit2} >
                 <QueueIcon />
               </Fab>
             </Paper>
@@ -162,9 +316,10 @@ export default function FeatureAdd() {
               <TextField
                 id="datetime"
                 label="Thời điểm bắt đầu"
+                name="start_time"
                 type="datetime-local"
                 defaultValue={date}
-                onChange={handleChangeDate}
+                onChange={(e) => handleChangeShowtimes(e)}
                 style={{ margin: '3px 8px 0 10px' }}
                 InputLabelProps={{
                   shrink: true,
@@ -174,8 +329,9 @@ export default function FeatureAdd() {
                 id="datetime"
                 label="Thời điểm kết thúc"
                 type="datetime-local"
+                name="end_time"
                 defaultValue={date}
-                onChange={handleChangeDate}
+                onChange={(e) => handleChangeShowtimes(e)}
                 style={{ marginTop: 3 }}
                 InputLabelProps={{
                   shrink: true,
@@ -186,6 +342,8 @@ export default function FeatureAdd() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
+                  name="cbPhim"
+                  onChange={(e) => handleChangeShowtimes(e)}
                 >
                   {showListItemPhim()}
                 </Select>
@@ -195,13 +353,15 @@ export default function FeatureAdd() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
+                  name="cbRap"
+                  onChange={(e) => handleChangeShowtimes(e)}
                 >
                   {showListItemRap()}
                 </Select>
               </FormControl>
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit1} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={handleSubmit3} >
                 <QueueIcon />
               </Fab>
             </div>
@@ -215,24 +375,25 @@ export default function FeatureAdd() {
               <div>
                 <label><h4>Thêm Phim</h4></label>
               </div>
-              <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" onChange={handleChangePhim} value={tenPhim} />
-              <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" />
+              <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" name="name" onChange={(e) => handleChangeMovie(e)}  />
+              <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" name="minute_time" onChange={(e) => handleChangeMovie(e)} />
               <TextField
                 id="datetime"
                 label="Them suat chieu"
                 type="datetime-local"
+                name="opening_day"
+                onChange={(e) => handleChangeMovie(e)}
                 defaultValue={date}
-                onChange={handleChangeDate}
                 style={{ margin: '3px 8px 0 10px' }}
                 InputLabelProps={{
                   shrink: true,
                 }}
               />
 
-              <ImageUpload cardName="Input Image" />
+              <ImageUpload cardName="Input Image" onChange={(e) => handleFileSelect(e)} />
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onSubmit={handleSubmit2} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={handleSubmit4} >
                 <QueueIcon />
               </Fab>
             </div>
