@@ -22,7 +22,8 @@ export default class MoviesTopView extends Component {
     }
     
     showMovie = () => {
-        let list_movie = JSON.parse(localStorage.getItem('movie')); 
+        let list_movie= []
+        list_movie = JSON.parse(localStorage.getItem('movie'));
         let list_sort = list_movie.sort(function (a, b) {
             return a.view - b.view;
         })

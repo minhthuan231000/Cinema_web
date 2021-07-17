@@ -23,7 +23,8 @@ export default class MoviesOpen extends Component {
     }
     showMovie = () => {
        
-        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        let list_movie= []
+        list_movie = JSON.parse(localStorage.getItem('movie'));
         let list_sort = list_movie.sort(function (a, b) {
             return a.opening_day - b.opening_day;
         })
