@@ -36,7 +36,11 @@ export default function Member(props) {
 
     if (loggedInUser) { // neu da login thi Redirect
         let username = JSON.parse(loggedInUser).fullname;
-
+        let book = JSON.parse(localStorage.getItem('booking'));
+        let countBooking = 0; 
+        if(book){
+            countBooking =book.length;
+        }
         return (
             <div className="register-content">
                 <div className="container">
@@ -59,7 +63,7 @@ export default function Member(props) {
                             </li>
                             <li className="btn-cart">
                                 <IconButton aria-label="show 4 new item" color="inherit" href="/Payment"> {/* xem thanh toán vé */}
-                                    <Badge badgeContent={JSON.parse(localStorage.getItem('booking')).length} color="secondary" showZero>
+                                    <Badge badgeContent={countBooking?countBooking:0} color="secondary" showZero>
                                         <ShoppingCartIcon style={{ color: '#e00d7a', fontSize: '35px' }} />
                                     </Badge>
                                 </IconButton>

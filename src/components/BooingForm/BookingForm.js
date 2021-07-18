@@ -25,6 +25,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function BookingForm() {
     const classes = useStyles();
+    let item = JSON.parse(sessionStorage.getItem('user'));
+    const loggedInUser = sessionStorage.getItem('user');
+    if (!loggedInUser) {
+        window.location.href = "/Home";
+    } 
+
+
 
     const [open1, setOpen] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
@@ -42,46 +49,54 @@ export default function BookingForm() {
     const handleOpen3 = () => {
         setOpen3(true);
     };
-    /* need POST 
-    {
-        "list_Seat": ["D1","F8"],
-        "location_Seat": {"D1":[4,1],"F8":[7,8]},
-        "cinema_id": 1,
-        "user_id": 2,
-        "showtime_id":1,
-    } */
 
-    let item = JSON.parse(sessionStorage.getItem('user'));
     const [cine, setCine] = React.useState('');
     const [time, setTime] = React.useState('');
 
     const [listSeats, setListSeats] = React.useState([]);
+    const [listTime, setListTime] = React.useState([]);
     const [locationSeat, setLocationSeat] = React.useState([]);
     const [user_id, setUserId] = React.useState(item.id);
-    const [cinema_id, setCinemaId] = React.useState();
+    const [price, setPrice] = React.useState(0);
     const [showtime_id, setShowtimeId] = React.useState();
-    const handleChangeCinema = (event) => {
-        setCine(event.target.value);
-        setCinemaId(event.target.value);
-    };
-    const handleChangeTime = (event) => {
-        setTime(event.target.value);
-        setShowtimeId(event.target.value)
-    };
-
-    const loggedInUser = sessionStorage.getItem('user');
-    if (!loggedInUser) {
-        window.location.href = "/Home";
-    } else if (loggedInUser) {
-        // const target = e.target;
-        //xu li get Parameter
-        //console.log(target.id)//get db from server
-
-    }
+    const [listShowtimes, setListShowtimes] = React.useState([]);
+    const DOMAIN = process.env.REACT_APP_DOMAIN;
+    
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const foo = params.get('id'); // movie_id
     const [movie_id, setMovieId] = React.useState(foo); // set dữ liệu cho movie_id thành công
+
+    const handleChangeCinema = async(event) => {
+        setCine(event.target.value);
+        // setListTime([]);
+        const request = new Request(`${DOMAIN}/api/showtime/movie?movie=`+foo+'&theater='+event.target.value, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+
+        await fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    setListShowtimes(result.data);
+                    console.log(result.data)
+                }
+            },
+                (error) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
+        let list =await listShowtimes.map((time) => ([time.id,time.start_time,time.price]) );
+        await setListTime(list);
+    };
+    const handleChangeTime = (event) => {
+        setTime(event.target.value);
+        setShowtimeId(event.target.value[0])
+        setPrice(event.target.value[2])
+    };
 
     const createRow = (sizeRow) => {
 
@@ -105,10 +120,6 @@ export default function BookingForm() {
         }
         return Col;
     }
-    const seatsColumns = createCol(10);
-    const seatsRows = createRow(6);
-    const priceSeat = 45000;
-    const totalPrice = listSeats.length * priceSeat
     const changeSeats = (event) => {
         const target = event.target;
         const value = target.value;
@@ -126,7 +137,7 @@ export default function BookingForm() {
     const ShowSelectCinema = () => {
         let list_cinema = JSON.parse(localStorage.getItem('cinema'));
         const show_list = list_cinema.map((item, index) => {
-            return <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+            return <MenuItem key={index} value={item.id} >{item.name}</MenuItem>
         })
         return show_list;
     }
@@ -159,9 +170,8 @@ export default function BookingForm() {
         return movies
     }
     const ShowSelectStartTime = () => {
-        let list_STime = JSON.parse(localStorage.getItem('showtime'));
-        const show_list = list_STime.map((item, index) => {
-            return <MenuItem key={index} value={item.id}>{item.start_time}</MenuItem>
+        const show_list = listTime.map((item) => {
+            return <MenuItem key={item[0]} value={[item[0],item[1],item[2]]}>{item[1]}</MenuItem>
         })
         return show_list;
     }
@@ -169,30 +179,52 @@ export default function BookingForm() {
         'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12, 'm': 13,
         'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26
     }
-    const AddToCartClick = () => {
-        var dic = [{}]
+    const AddToCartClick = async() => {
+        var dic = {}
         let listSeatConvert = listSeats.map(o => { return o.value })
         for (let index = 0; index < listSeats.length; index++) {
             var temp = listSeats[index].value.charAt(1);
-            dic.push({
-                key: listSeats[index].value,
-                value: listSeats[index].value.charAt(0) + ArrConvert[temp]
-            })
+            let seat = listSeats[index].value;
+            let address_x = listSeats[index].value.charAt(0)  ;
+            let address_y =ArrConvert[temp];
+            dic[seat] =  [parseInt(address_x), address_y];
 
         }
-        const obj = {
+        const data = {
             list_Seat: listSeatConvert,
             location_Seat: dic,
             user_id: user_id,
             showtime_id: showtime_id,
         }
-        console.log(obj)
-        /* console.log('listSeatConvert: ' + listSeatConvert)
-        console.log('dic: key:' + dic.map(o => { return o.key }) + " value: " + dic.map(o => { return o.value }))
-        console.log('user_id:' + user_id);
-        console.log('cinema_id:' + cinema_id);
-        console.log('showtime_id:' + showtime_id); */
+        const request = new Request(`${DOMAIN}/api/booking`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(data)
+        });
+
+        await fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    if(result.status==="200"){
+                        alert("Đặt vé thành công!")
+                        window.location.href = "/Payment"
+                    }else{
+                        alert("Đặt vé thất bại !!!");
+                    }
+                }
+            },
+                (error) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
     }
+    
+    const seatsColumns = createCol(10);
+    const seatsRows = createRow(6);
+    const totalPrice = listSeats.length * price;
     const seatsGenerator = () => {
         return (
             <div className="container">
