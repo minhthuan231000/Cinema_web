@@ -15,7 +15,7 @@ const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
 const loggedInUser = JSON.parse(sessionStorage.getItem('user')||0);
 const movie = JSON.parse(localStorage.getItem('movie')||0);
-const booking = JSON.parse(localStorage.getItem('booking'))||0;
+const booking = JSON.parse(localStorage.getItem('booking')||0);
 
 const useStyles = makeStyles({
     table: {

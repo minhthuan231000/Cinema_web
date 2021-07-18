@@ -80,7 +80,6 @@ export default function BookingForm() {
             .then((result) => {
                 if (result) {
                     setListShowtimes(result.data);
-                    console.log(result.data)
                 }
             },
                 (error) => {
@@ -92,12 +91,19 @@ export default function BookingForm() {
         let list =await listShowtimes.map((time) => ([time.id,time.start_time,time.price]) );
         await setListTime(list);
     };
-    const handleChangeTime = (event) => {
-        setTime('');
+    const searchPrice = (nameKey)=>{
+        for (var i=0; i < listTime.length; i++) {
+            if (listTime[i][0] === nameKey) {
+                return listTime[i][2];
+            }
+        }
+    }
+    const handleChangeTime = async (event) => {
+        await setTime('');
         let temp = event.target.value;
         setTime(temp);
-        setShowtimeId(event.target.value)
-        setPrice(listTime[3])
+        setShowtimeId(event.target.value);
+        setPrice(searchPrice(temp));
     };
 
     const createRow = (sizeRow) => {
@@ -173,9 +179,8 @@ export default function BookingForm() {
     }
     const ShowSelectStartTime = () => {
         const show_list = listTime.map((item,index) => {
-            return <MenuItem key={index} value={item[0]}>{item[1]}</MenuItem>
+            return <MenuItem key={index}value={item[0]}>{item[1]}</MenuItem>
         })
-        console.log(listTime)
         return show_list;
     }
     const ArrConvert = {

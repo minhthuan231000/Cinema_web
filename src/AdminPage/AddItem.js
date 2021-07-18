@@ -42,13 +42,13 @@ export default function FeatureAdd() {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    formCinemas[name] = value;
+    formCinemas[name]= value;
   }
 
   const handleSubmit1 = () => {
     let data = {
-      name : formCinemas.name,
-      address : formCinemas.address
+      name: formCinemas.name,
+      address: formCinemas.address
     };
     let request = new Request(`${DOMAIN}/api/cinema`, {
       method: 'POST',
@@ -62,7 +62,7 @@ export default function FeatureAdd() {
                 if(result.status === '200'){
                   alert('Success');
                 }else if(result.status === '400'){
-                    console.log('Del showtime error');
+                  alert(result.message)
                 }
             }
         },
@@ -254,8 +254,8 @@ export default function FeatureAdd() {
               <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="address" label="Địa Chỉ" onChange={(e) => handleChangeThemCumRap(e)} />
             </div>
             <p></p>
-            <InputLabel id="demo-simple-select-label" onClick={handleSubmit1()}>&ensp;Submit</InputLabel>
-            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={handleSubmit1} >
+            <InputLabel id="demo-simple-select-label" >&ensp;Submit</InputLabel>
+            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" onClick={() => handleSubmit1()} aria-label="submit" className="" >
               <QueueIcon />
             </Fab>
           </Paper>
