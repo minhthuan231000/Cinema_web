@@ -18,11 +18,11 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 
-const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
-const movie = JSON.parse(localStorage.getItem('movie'));
-const booking = JSON.parse(localStorage.getItem('history_booking'));
-const theater = JSON.parse(localStorage.getItem('theater'));
-const cinema = JSON.parse(localStorage.getItem('cinema'));
+const loggedInUser = JSON.parse(sessionStorage.getItem('user')||0);
+const movie = JSON.parse(localStorage.getItem('movie')||0);
+const booking = JSON.parse(localStorage.getItem('history_booking')||0);
+const theater = JSON.parse(localStorage.getItem('theater')||0);
+const cinema = JSON.parse(localStorage.getItem('cinema')||0);
 
 
 const useRowStyles = makeStyles({

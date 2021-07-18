@@ -20,7 +20,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
 const DOMAIN =process.env.REACT_APP_DOMAIN;
-let ROWS = JSON.parse(localStorage.getItem('movie'));
+let ROWS = JSON.parse(localStorage.getItem('movie')||0);
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

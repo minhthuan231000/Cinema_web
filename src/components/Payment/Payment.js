@@ -13,9 +13,9 @@ import PaymentIcon from '@material-ui/icons/Payment';
 //import { SelectionState } from '@devexpress/dx-react-chart';
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
-const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
-const movie = JSON.parse(localStorage.getItem('movie'));
-const booking = JSON.parse(localStorage.getItem('booking'));
+const loggedInUser = JSON.parse(sessionStorage.getItem('user')||0);
+const movie = JSON.parse(localStorage.getItem('movie')||0);
+const booking = JSON.parse(localStorage.getItem('booking'))||0;
 
 const useStyles = makeStyles({
     table: {
@@ -118,7 +118,7 @@ export default function Payment() {
                         if(result.status === '200'){
                             alert("Đặt vé thành công");
                             localStorage.removeItem('booking');
-                            window.location.href = "/Payment";
+                            window.location.href = "/";
                         }
                     }
                 },

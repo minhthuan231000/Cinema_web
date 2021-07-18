@@ -23,7 +23,7 @@ export default class MoviesOpen extends Component {
     
     showMovie = () => {
         let list_movie= [];
-        list_movie = JSON.parse(localStorage.getItem('movie'));
+        list_movie = JSON.parse(localStorage.getItem('movie')||0);
         const movies = list_movie.map((item, key) => {
             if (item.id < 7) {
                 let img = new Buffer.from(item.image.data).toString("ascii")

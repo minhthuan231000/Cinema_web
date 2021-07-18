@@ -213,7 +213,7 @@ export default function FeatureAdd() {
   }
 
   const showCumRap = () => {
-    let list_cumrap = JSON.parse(localStorage.getItem('cinema'));
+    let list_cumrap = JSON.parse(localStorage.getItem('cinema')||0);
     const showlist = list_cumrap.map((item, index) => {
       return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
     })
@@ -221,14 +221,14 @@ export default function FeatureAdd() {
   }
 
   const showListItemPhim = () => {
-    let list_movie = JSON.parse(localStorage.getItem('movie'));
+    let list_movie = JSON.parse(localStorage.getItem('movie')||0);
     const showlist = list_movie.map((item, index) => {
       return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
     })
     return showlist;
   }
   const showListItemRap = () => {
-    let list_rap = JSON.parse(localStorage.getItem('theater'));
+    let list_rap = JSON.parse(localStorage.getItem('theater')||0);
     const showlist = list_rap.map((item, index) => {
       return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
     })

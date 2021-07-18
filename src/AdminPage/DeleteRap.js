@@ -19,7 +19,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-let ROWS = JSON.parse(localStorage.getItem('theater'));
+let ROWS = JSON.parse(localStorage.getItem('theater')||0);
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 function descendingComparator(a, b, orderBy) {
