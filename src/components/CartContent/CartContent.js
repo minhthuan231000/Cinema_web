@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 class CartContent extends Component {
     ShowItemPhim = () => {
-        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        let list_movie = JSON.parse(localStorage.getItem('movie')||0);
         var ListPhim = [];
         if(list_movie){
             ListPhim = list_movie.map((item, index) => {
@@ -14,7 +14,7 @@ class CartContent extends Component {
         return ListPhim;
     }
     ShowItemRap = () => {
-        let list_theater = JSON.parse(localStorage.getItem('theater'));
+        let list_theater = JSON.parse(localStorage.getItem('theater')||0);
         var ListRap = [];
         if(list_theater) {
         ListRap = list_theater.map((item, index) => {
@@ -27,7 +27,7 @@ class CartContent extends Component {
         return ListRap;
     }
     ShowItemNgay = () => {
-        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        let list_movie = JSON.parse(localStorage.getItem('movie')||0);
         var ListNgay = [];
         if(list_movie){
             ListNgay = list_movie.map((item, index) => {
@@ -40,7 +40,7 @@ class CartContent extends Component {
         return ListNgay;
     }
     ShowItemGio = () => {
-        let list_showtime = JSON.parse(localStorage.getItem('showtime'));
+        let list_showtime = JSON.parse(localStorage.getItem('showtime')||0);
         var ListGio = [];
         if(list_showtime){
          ListGio = list_showtime.map((item, index) => {

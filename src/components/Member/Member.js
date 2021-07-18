@@ -36,8 +36,9 @@ export default function Member(props) {
 
     if (loggedInUser) { // neu da login thi Redirect
         let username = JSON.parse(loggedInUser).fullname;
-        let book = JSON.parse(localStorage.getItem('booking'));
-        let countBooking = 0;
+
+        let book = JSON.parse(localStorage.getItem('booking')||0);
+        let countBooking = 0; 
         if(book){
             countBooking =book.length;
         }

@@ -20,7 +20,8 @@ import UpdateIcon from '@material-ui/icons/Update';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import BlockIcon from '@material-ui/icons/Block';
 
-let ROWS = JSON.parse(localStorage.getItem('list_user') || '0');
+let ROWS = JSON.parse(localStorage.getItem('list_user')||0);
+
 const DOMAIN =process.env.REACT_APP_DOMAIN;
 
 

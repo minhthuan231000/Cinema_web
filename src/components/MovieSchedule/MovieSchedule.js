@@ -40,10 +40,13 @@ export default class MovieSchedule extends Component {
             })
             return showList
         }
-        const ShowItemTheater = () => {
-            let list_theater = JSON.parse(localStorage.getItem('theater'))
-            const ListTheater = list_theater.map((item, index) => {
-                return <option key={index} value={index + 1}>{item.name}</option>
+        const ShowItemCine = () => {
+            let list_theater = JSON.parse(localStorage.getItem('theater')||0);
+            const ListRap = list_theater.map((item, index) => {
+                if (item.id < 5) {
+                    return <span key={index}>{item.name}</span>
+                }
+                return <span key={index} hidden={true} >{item.name}</span>
             })
             return ListTheater;
         }

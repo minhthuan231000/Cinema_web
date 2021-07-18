@@ -69,7 +69,7 @@ export default function BookingForm() {
 
     const handleChangeCinema = async(event) => {
         setCine(event.target.value);
-        // setListTime([]);
+        setListTime([]);
         const request = new Request(`${DOMAIN}/api/showtime/movie?movie=`+foo+'&theater='+event.target.value, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
@@ -80,7 +80,6 @@ export default function BookingForm() {
             .then((result) => {
                 if (result) {
                     setListShowtimes(result.data);
-                    console.log(result.data)
                 }
             },
                 (error) => {
@@ -92,10 +91,19 @@ export default function BookingForm() {
         let list =await listShowtimes.map((time) => ([time.id,time.start_time,time.price]) );
         await setListTime(list);
     };
-    const handleChangeTime = (event) => {
-        setTime(event.target.value);
-        setShowtimeId(event.target.value[0])
-        setPrice(event.target.value[2])
+    const searchPrice = (nameKey)=>{
+        for (var i=0; i < listTime.length; i++) {
+            if (listTime[i][0] === nameKey) {
+                return listTime[i][2];
+            }
+        }
+    }
+    const handleChangeTime = async (event) => {
+        await setTime('');
+        let temp = event.target.value;
+        setTime(temp);
+        setShowtimeId(event.target.value);
+        setPrice(searchPrice(temp));
     };
 
     const createRow = (sizeRow) => {
@@ -135,14 +143,14 @@ export default function BookingForm() {
         }
     }
     const ShowSelectCinema = () => {
-        let list_cinema = JSON.parse(localStorage.getItem('cinema'));
+        let list_cinema = JSON.parse(localStorage.getItem('cinema')||0);
         const show_list = list_cinema.map((item, index) => {
             return <MenuItem key={index} value={item.id} >{item.name}</MenuItem>
         })
         return show_list;
     }
     const ShowImage = () => {
-        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        let list_movie = JSON.parse(localStorage.getItem('movie')||0);
         const movies = list_movie.map((item, index) => {
             let img = new Buffer.from(item.image.data).toString("ascii")
             if (item.id == movie_id) {
@@ -152,7 +160,7 @@ export default function BookingForm() {
         return movies
     }
     const ShowContentImage = () => {
-        let list_movie = JSON.parse(localStorage.getItem('movie'));
+        let list_movie = JSON.parse(localStorage.getItem('movie'||0));
         const movies = list_movie.map((item, index) => {
             if (item.id == movie_id) {
                 return (
@@ -170,8 +178,8 @@ export default function BookingForm() {
         return movies
     }
     const ShowSelectStartTime = () => {
-        const show_list = listTime.map((item) => {
-            return <MenuItem key={item[0]} value={[item[0],item[1],item[2]]}>{item[1]}</MenuItem>
+        const show_list = listTime.map((item,index) => {
+            return <MenuItem key={index}value={item[0]}>{item[1]}</MenuItem>
         })
         return show_list;
     }
@@ -207,10 +215,10 @@ export default function BookingForm() {
             .then((result) => {
                 if (result) {
                     if(result.status==="200"){
-                        alert("Đặt vé thành công!")
+                        alert("Thêm vào giỏ hàng thành công!")
                         window.location.href = "/Payment"
                     }else{
-                        alert("Đặt vé thất bại !!!");
+                        alert("Thêm vào giỏi hàng thất bại !!!");
                     }
                 }
             },
@@ -312,7 +320,7 @@ export default function BookingForm() {
                             open={open3}
                             onClose={handleClose3}
                             onOpen={handleOpen3}
-                            value={time}
+                            value={time||''}
                             onChange={handleChangeTime}
                         >
                             {ShowSelectStartTime()}
