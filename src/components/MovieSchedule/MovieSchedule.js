@@ -57,7 +57,7 @@ export default class MovieSchedule extends Component {
                         <div className="block-list">
                             <div className="select-list" data-cate="cine">
                                 <div className="select-header">
-                                    <select onChange={this.handleChange} >
+                                    <select value={this.state.idTheater} onChange={this.handleChange} >
                                         <option hidden={true}>Chọn Rạp</option>
                                         <ShowItemTheater />
                                     </select>
