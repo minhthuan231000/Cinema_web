@@ -24,6 +24,14 @@ header.admin_header .navbar-brand {
     text-transform: uppercase;
 }
 
+#dashboard {
+    text-decoration: none;
+    color: white;
+    text-shadow: 5px 8px #000000;
+}
+#dashboard:hover {
+    color: rgb(3, 146, 189);
+}
 .navbar-auth {
     display: inline;
     float: right;
@@ -102,12 +110,15 @@ header.admin_header .navbar-brand {
     width: 480px;
     padding-left: 10px;
 }
+
 .input-TypeRap {
     width: 5em;
 }
-#datetime{
+
+#datetime {
     width: 14em;
 }
+
 #textField-TenRap {
     width: 23.3em;
 }
@@ -182,6 +193,7 @@ header.admin_header .navbar-brand {
     border-right: 100px solid transparent;
     margin-top: 20px;
 }
+
 .revenue_content h2 {
     position: absolute;
     padding: 20px;

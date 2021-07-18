@@ -31,7 +31,6 @@ import Profile from './Profile';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
             role="tabpanel"
@@ -61,25 +60,40 @@ function a11yProps(index) {
         'aria-controls': `vertical-tabpanel-${index}`,
     };
 }
-export default function AdminPage() {
-    const [numberMail, numNoti] = [0,0];
+export default function AdminPage(props) {
+    const [numMail, numNoti] = [JSON.parse(localStorage.getItem('booking') || '0').length, JSON.parse(localStorage.getItem('list_user') || '0').length];
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl2, setAnchorEl2] = React.useState(null);
+    const [anchorEl3, setAnchorEl3] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
+    const isMenuOpen2 = Boolean(anchorEl2);
+    const isMenuOpen3 = Boolean(anchorEl3);
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
+    };
+    const handleProfileMenuOpen2 = (event) => {
+        setAnchorEl2(event.currentTarget);
+    };
+    const handleProfileMenuOpen3 = (event) => {
+        setAnchorEl3(event.currentTarget);
     };
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
-
+    const handleMenuClose2 = () => {
+        setAnchorEl2(null);
+    };
+    const handleMenuClose3 = () => {
+        setAnchorEl3(null);
+    };
     let logout = () => {
         sessionStorage.removeItem('user');
         window.location.reload();
     };
-    const [isProfile, setProfile] = React.useState(false);
+    const [isProfile, setProfile] = React.useState(props.loggedInAdmin);
+    console.log(isProfile);
     const handleProfile = () => {
         setProfile(true)
-        console.log(isProfile);
     }
     const menuId = 'primary-search-account-menu';
     const renderProfile = (
@@ -92,8 +106,34 @@ export default function AdminPage() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleProfile} >Profile</MenuItem>
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem onClick={handleProfile}><a href='/Dashboard/Profile' style={{ textDecoration: 'none' }}>Profile</a></MenuItem>
+            <MenuItem onClick={logout}><a href='/' style={{ textDecoration: 'none' }}>Logout</a></MenuItem>
+        </Menu>
+    );
+    const renderMessage = (
+        <Menu
+            anchorEl={anchorEl3}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen3}
+            onClose={handleMenuClose3}
+        >
+            <MenuItem onClick={handleMenuClose3}>{JSON.parse(localStorage.getItem('booking') || '0').length} Tickets Booked</MenuItem>
+        </Menu>
+    );
+    const renderNofication = (
+        <Menu
+            anchorEl={anchorEl2}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen2}
+            onClose={handleMenuClose2}
+        >
+            <MenuItem onClick={handleMenuClose2}>{JSON.parse(localStorage.getItem('list_user') || '0').length} User Registed</MenuItem>
         </Menu>
     );
     const [value, setValue] = React.useState(0);
@@ -106,22 +146,21 @@ export default function AdminPage() {
         <div className="admin_main">
             <header className="admin_header">
                 <div className="admin_nav">
-                    <div className="navbar-brand"><h3>dashboard</h3></div>
+                    <div className="navbar-brand"><h3><a href="/" id="dashboard">dashboard</a></h3></div>
                     <div className="navbar-auth">
                         <li>
-                            <IconButton aria-label="show 4 new mails" color="inherit">
-                                <Badge badgeContent={numberMail} color="secondary">
+                            <IconButton color="inherit" onClick={handleProfileMenuOpen3}>
+                                <Badge badgeContent={numMail} color="secondary" showZero>
                                     <MailIcon />
                                 </Badge>
                             </IconButton>
                         </li>
                         <li>
-                            <IconButton aria-label="show 4 new notifications" color="inherit">
+                            <IconButton color="inherit" onClick={handleProfileMenuOpen2}>
                                 <Badge badgeContent={numNoti} color="secondary" showZero>
                                     <NotificationsIcon />
                                 </Badge>
                             </IconButton>
-
                         </li>
                         <li>
                             <IconButton aria-label="admin" color="inherit" onClick={handleProfileMenuOpen}>
@@ -130,6 +169,8 @@ export default function AdminPage() {
                         </li>
                     </div>
                 </div>
+                {renderMessage}
+                {renderNofication}
                 {renderProfile}
             </header>
             <div className="admin_content">
@@ -154,7 +195,7 @@ export default function AdminPage() {
                         <Switch>
                             <Route exact path="/" render={() => {
                                 return (
-                                    isProfile ? <Redirect to="/Profile" /> : <Redirect to="/Dashboard" />
+                                    <Redirect to="/Dashboard" />
                                 )
                             }} />
                             <Route path="/">
@@ -172,7 +213,7 @@ export default function AdminPage() {
                                     <ManageAccount />
                                 </TabPanel>
                             </Route>
-                            <Route path="/Profile">
+                            <Route path="/Dashboard/Profile">
                                 <Profile />
                             </Route>
                         </Switch>

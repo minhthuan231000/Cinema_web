@@ -34,10 +34,16 @@ export default class PauseOnHover extends Component {
     ]}
 };
 ShowSliderFilm = () => {
-    const list = this.state.films.map((item, key) => 
+  
+    const list_movie = JSON.parse(localStorage.getItem('movie'));
+    let list_sort= [];
+    list_sort = list_movie.sort(function (a, b) {
+        return a.opening_day - b.opening_day;
+    })
+    const list = list_sort.slice(0,5).map((item, key) =>
     <div key={item.id} className="slide-item">
-      <a href={item.name }>
-        <img className="img-poster" src= {item.url.default} alt="IMG" />
+      <a href="/">
+        <img className="img-poster" src={`data:image/png;base64,${new Buffer.from(item.image.data).toString("ascii")}`}  alt="IMG" />
         <span className="title-poster"><h6>{item.name}</h6></span>
       </a>
     </div>

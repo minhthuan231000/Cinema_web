@@ -1,8 +1,11 @@
-.movie_schedule_title{
+.movie_schedule_wrap{
+}
+.movie_schedule_title {
     display: inline-block;
     text-align: left;
 }
-.movie_schedule_title h2{
+
+.movie_schedule_title h2 {
     display: inline-block;
     font-family: 'Futurab';
     font-weight: bold;
@@ -11,43 +14,39 @@
     text-transform: uppercase;
     text-shadow: 6px 6px 0 rgb(0 0 0 / 90%);
 }
-.movie_schedule_content{
-    margin-inline-start: 15em;
+
+.movie_schedule_content {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     padding-top: 5px;
     color: black;
-    width: 75%;
+    height: 100%;
+    width: 100%;
     text-align: left;
-    background-color: white;
+    background-color: rgb(59, 59, 59, 0.8);
 }
-.movie_schedule_content .calendar{
-    display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
-    border-bottom: 2px solid #2b2b2b;
-    border-top: 2px solid #2b2b2b;
+
+.movie_schedule_content .calendar {
+    display: inline-flex;
+    border-top: 2px solid rgb(103, 26, 204);
 }
-.calendar span{
-    cursor: pointer;
-    width: 10%;
-    margin: 0.5em;
-    padding: 0.5em;
-    border: 2px dashed black;
-    text-transform: uppercase;
-}
-.movie_schedule_content .list_cine{
-    height: 2.1em;
-    border-bottom: 2px solid #2b2b2b;
-}
-.list_cine span{
-    cursor: pointer;
-    padding-top: 15px;
-    width: 10%;
-    margin: 0.5em;
-    padding: 0.5em;
-    border: 2px dashed black;
-    text-transform: uppercase;
-}
-.list_cine span:hover{
+
+.calendar span {
     color: white;
-    background-color: #292929;
+    cursor: pointer;
+    height: 60px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    border: 2px solid rgb(103, 26, 204);
+    border-radius: 10%;
+    box-shadow: 3px 3px 5px 1px rgb(0, 0, 0, 0.3);
+    text-transform: uppercase;
+}
+
+.calendar span:hover {
+    color: black;
+    background-color: rgb(103, 26, 204);
+    box-shadow: 3px 3px 5px 1px rgb(0, 0, 0, 0.7);
 }

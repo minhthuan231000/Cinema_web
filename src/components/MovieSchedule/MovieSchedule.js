@@ -1,136 +1,88 @@
 
 import React, { Component } from 'react';
 import './movieschedule.css'
-import moment from 'moment'
-//import CartContent from './../CartContent/CartContent';
-
-import {
-    //BrowserRouter as Router,
-    Route,
-} from "react-router-dom";
-
-const format = "DD-MM-YYYY"
-var date = new Date();
-var dateTime = moment(date).format(format);
 export default class MovieSchedule extends Component {
     constructor(props) {
-        super()
+        super(props)
         this.state = {
-            id: null,
-            history: null
+            idTheater: 0,
         }
-        
+
+    }
+    handleChange = (e) => {
+        this.setState({ idTheater: e.target.value });
     }
 
-    List_Day = [
-        {
-            label: 'Ngày',
-            day: date.getDate(),
-            month: date.getMonth() + 1,
-            year: date.getFullYear()
-        },
-        {
-            label: 'Ngày',
-            day: date.getDate() + 1,
-            month: date.getMonth() + 1,
-            year: date.getFullYear()
-        },
-        {
-            label: 'Ngày ',
-            day: date.getDate() + 2,
-            month: date.getMonth() + 1,
-            year: date.getFullYear()
-        },
-        {
-            label: 'Ngày ',
-            day: date.getDate() + 3,
-            month: date.getMonth() + 1,
-            year: date.getFullYear()
-        },
-        {
-            label: 'Ngày ',
-            day: date.getDate() + 4,
-            month: date.getMonth() + 1,
-            year: date.getFullYear()
-        },
-        {
-            label: 'Ngày ',
-            day: date.getDate() + 5,
-            month: date.getMonth() + 1,
-            year: date.getFullYear()
-        },
-    ]
-    ShowItemRap = () => {
-        // let list_cinema = JSON.parse(localStorage.getItem('cinema'));
-        // const ListCinema = list_cinema.map((item, index) => {
-        //     if (item.id === 1) {
-        //         return <span key={index}>{item.name} <a href="/LichChieu/id=1" className="btn btn-primary">Go to Test</a></span>
-        //     }
-        //     if (item.id < 6) {
-        //         return <span key={index}>{item.name}</span>
-        //     }
-        //      return ListCinema;
-        // })
-    }
-    ShowItemDay = () => {
-        const ListRap = this.List_Day.map((item, index) => {
-            console.log(date.getDate())
-            console.log(dateTime)
-            return <option key={index}>{item.label}: {item.day}-{item.month}-{item.year}</option>
-        })
-        return ListRap;
-    }
     render() {
-        const ShowCalendar = () => {
-            const list_day = this.List_Day.map((item, index) => {
-                return <span>{item.day}/{item.month}</span>
-            })
-            return list_day
-        }
-        const ShowItemCine = () => {
-            let list_theater = JSON.parse(localStorage.getItem('theater'));
-            const ListRap = list_theater.map((item, index) => {
-                if (item.id < 5) {
-                    return <span key={index}>{item.name}</span>
+        const ShowCalendar = (sortByTheater) => {
+            let list_showtime = JSON.parse(localStorage.getItem('showtime'))
+            /* var groupBy = function (xs, key) {
+                return xs.reduce(function (rv, x) {
+                    (rv[x[key]] = rv[x[key]] || []).push(x);
+                    return rv;
+                }, {});
+            };
+            var groubedByTeam = groupBy(list_showtime, 'theater_id')
+            let arrItem = []
+            console.log(Object.keys(groubedByTeam).forEach(function (category) {
+                console.log(`Rạp ${category} có ${groubedByTeam[category].length} suất chiếu: `);
+                groubedByTeam[category].forEach(function (memb, i) {
+                    console.log(`Suất chiếu ${i + 1}: ${memb.start_time}`)
+                    arrItem[i] = <span key={i}>{category} {memb.start_time} Movie: {memb.theater_id}</span>
+                })
+            })) */
+            const showList = list_showtime.map((item, index) => {
+                if (item.theater_id == sortByTheater) {
+                    return <div className="calendar" key={index}>
+                        <span>{item.start_time}</span>
+                    </div>
                 }
-                return <span key={index} hidden={true} >{item.name}</span>
             })
-            return ListRap;
+            return showList
+        }
+        const ShowItemTheater = () => {
+            let list_theater = JSON.parse(localStorage.getItem('theater'))
+            const ListTheater = list_theater.map((item, index) => {
+                return <option key={index} value={index + 1}>{item.name}</option>
+            })
+            return ListTheater;
         }
         return (
-            <div className="movie_schedule_wrap">
-                <div className="cart-wrap">
-                    <div className="movie_schedule_title">
-                        <h2>Lịch chiếu</h2>
-                    </div>
-                    <div className="block-list">
-                        <div className="select-list" data-cate="cine">
-                            <div className="select-header">
+            <div className="container">
+                <div className="movie_schedule_wrap">
+                    <div className="cart-wrap">
+                        <div className="movie_schedule_title">
+                            <h2>Hệ Thống Rạp</h2>
+                        </div>
+                        <div className="block-list">
+                            <div className="select-list" data-cate="cine">
                                 <div className="select-header">
-                                    <select>
-                                        {this.ShowItemDay()}
-                                    </select>
+                                    <div className="select-header">
+                                        <select value={this.state.idTheater} onChange={this.handleChange} >
+                                            <option hidden={true}>Chọn Rạp</option>
+                                            <ShowItemTheater />
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="movie_schedule_content">
-                    <div className="calendar">
-                        <ShowCalendar />
+                    <div className="container-fuild">
+                        <div className="movie_schedule_title">
+                            <h2>Suất Chiếu</h2>
+                        </div>
+                        <div className="movie_schedule_content">
+                            {ShowCalendar(this.state.idTheater)}
+                            <div className="list_cine">
+                                <p></p>
+                            </div>
+                            <div className="type_cine">
+                                <p></p>
+                                <p>&nbsp;</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="list_cine">
-                        <p></p>
-                        {this.ShowItemRap()}
-                    </div>
-                    <div className="type_cine">
-                        <p></p>
-                        <p>&nbsp;</p>
-                    </div>
-                    
-                    <Route path="/LichChieu">
-                        <Route path="/LichChieu/id=1" component={ShowItemCine} />
-                    </Route>
+
                 </div>
             </div>
         );

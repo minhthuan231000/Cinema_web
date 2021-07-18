@@ -36,7 +36,7 @@ export default class App extends Component {
 
     }
     AdminPage = () => {
-        return <AdminPage />
+        return <AdminPage loggedInAdmin={false} />
 
     }
     UserPage = () => {
@@ -115,7 +115,7 @@ export default class App extends Component {
     }
     showButton = () => {
         const loggedInUser = sessionStorage.getItem('user');
-         this.load_data();
+        this.load_data();
         if (!loggedInUser) {
             localStorage.removeItem('history_booking');
             localStorage.removeItem('booking');
@@ -129,6 +129,7 @@ export default class App extends Component {
                 localStorage.removeItem('list_user');
                 return this.UserPage();
             } else if (role === 'staff') {
+                this.load_booking();
                 this.load_data_user();
                 return this.AdminPage();
             } else if (role === 'lock') {
@@ -138,7 +139,7 @@ export default class App extends Component {
             }
         }
     }
-    load_booking = async()=>{
+    load_booking = async () => {
         const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
         const request = new Request(`${DOMAIN}/api/booking/${loggedInUser.id}`, {
             method: 'GET',
