@@ -38,15 +38,12 @@ export default class MovieSchedule extends Component {
                     </div>
                 }
             })
-            return showList
+            return showList;
         }
-        const ShowItemCine = () => {
-            let list_theater = JSON.parse(localStorage.getItem('theater')||0);
-            const ListRap = list_theater.map((item, index) => {
-                if (item.id < 5) {
-                    return <span key={index}>{item.name}</span>
-                }
-                return <span key={index} hidden={true} >{item.name}</span>
+        const ShowItemTheater = () => {
+            let list_theater = JSON.parse(localStorage.getItem('theater'))
+            const ListTheater = list_theater.map((item, index) => {
+                return <option key={index} value={index + 1}>{item.name}</option>
             })
             return ListTheater;
         }
@@ -60,32 +57,29 @@ export default class MovieSchedule extends Component {
                         <div className="block-list">
                             <div className="select-list" data-cate="cine">
                                 <div className="select-header">
-                                    <div className="select-header">
-                                        <select value={this.state.idTheater} onChange={this.handleChange} >
-                                            <option hidden={true}>Chọn Rạp</option>
-                                            <ShowItemTheater />
-                                        </select>
-                                    </div>
+                                    <select onChange={this.handleChange} >
+                                        <option hidden={true}>Chọn Rạp</option>
+                                        <ShowItemTheater />
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="container-fuild">
-                        <div className="movie_schedule_title">
-                            <h2>Suất Chiếu</h2>
+                </div>
+                <div className="container-fuild">
+                    <div className="movie_schedule_title">
+                        <h2>Suất Chiếu</h2>
+                    </div>
+                    <div className="movie_schedule_content">
+                        {ShowCalendar(this.state.idTheater)}
+                        <div className="list_cine">
+                            <p></p>
                         </div>
-                        <div className="movie_schedule_content">
-                            {ShowCalendar(this.state.idTheater)}
-                            <div className="list_cine">
-                                <p></p>
-                            </div>
-                            <div className="type_cine">
-                                <p></p>
-                                <p>&nbsp;</p>
-                            </div>
+                        <div className="type_cine">
+                            <p></p>
+                            <p>&nbsp;</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         );
