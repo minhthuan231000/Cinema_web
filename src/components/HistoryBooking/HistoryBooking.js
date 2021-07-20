@@ -20,7 +20,6 @@ const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 const loggedInUser = JSON.parse(sessionStorage.getItem('user')||0);
 const movie = JSON.parse(localStorage.getItem('movie')||0);
-const booking = JSON.parse(localStorage.getItem('history_booking')||0);
 const theater = JSON.parse(localStorage.getItem('theater')||0);
 const cinema = JSON.parse(localStorage.getItem('cinema')||0);
 
@@ -164,30 +163,25 @@ Row.propTypes = {
   }).isRequired,
 };
 export default function HistoryBooking() {
+
+  const [historyBooking,setHistoryBooking] = React.useState([]);
+  React.useEffect(function effectFunction() {
+      const request = new Request(`${DOMAIN}/api/booking/history/${loggedInUser.id}`, {
+        method: 'GET',
+        headers: new Headers({ 'Content-Type': 'application/json'})
+    });
+      async function fetchHistory() {
+          const response = await fetch(request);
+          const json = await response.json();
+          await setHistoryBooking(json.data);
+      }
+      fetchHistory();
+  }, []);
   if(!loggedInUser) {
     window.location.href = "/";
     return;
   }
-    if(loggedInUser){
-        const request = new Request(`${DOMAIN}/api/booking/history/${loggedInUser.id}`, {
-                method: 'GET',
-                headers: new Headers({ 'Content-Type': 'application/json' })
-            });
-        fetch(request)
-        .then(res => res.json())
-        .then((result) => {
-            if (result) {
-                localStorage.removeItem('history_booking');
-                localStorage.setItem('history_booking',JSON.stringify(result.data));
-            }
-        },
-            (error) => {
-                if (error) {
-                    console.log(error);
-                }
-            }
-        )
-      const rows = createListRow(booking);
+    const rows = createListRow(historyBooking);
     return (
       <div className="container">
         <TableContainer component={Paper} style={{background: 'rgba(247, 247, 247, 0.8)'}}>
@@ -210,5 +204,5 @@ export default function HistoryBooking() {
         </TableContainer>
       </div>
     );
-  }
+  
 }

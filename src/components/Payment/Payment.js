@@ -15,7 +15,6 @@ const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
 const loggedInUser = JSON.parse(sessionStorage.getItem('user')||0);
 const movie = JSON.parse(localStorage.getItem('movie')||0);
-const booking = JSON.parse(localStorage.getItem('booking')||0);
 
 const useStyles = makeStyles({
     table: {
@@ -73,14 +72,25 @@ function subtotal(items) {
 }
 
 export default function Payment() {
-    const classes = useStyles();
-    if (!loggedInUser) {
-        window.location.href = "/";
-        return;
-    }
-    if (loggedInUser) {
-
+        const classes = useStyles();
+        const [booking,setBooking] = React.useState([]);
+        React.useEffect(function effectFunction() {
+            const request = new Request(`${DOMAIN}/api/booking/`+loggedInUser.id, {
+                method: 'GET',
+                headers: new Headers({ 'Content-Type': 'application/json' })
+            });
+            async function fetchBooks() {
+                const response = await fetch(request);
+                const json = await response.json();
+                await setBooking(json.data);
+            }
+            fetchBooks();
+        }, []);
         const rows = createListRow(booking);
+        if (!loggedInUser) {
+            window.location.href = "/";
+            return;
+        }
         function getCountBooking(booking) {
             let count_booking = [];
             booking.map((p) => (
@@ -113,7 +123,7 @@ export default function Payment() {
                     if (result) {
                         if(result.status === '200'){
                             alert("Đặt vé thành công");
-                            localStorage.removeItem('booking');
+                            setBooking([]);
                             window.location.href = "/";
                         }
                     }
@@ -202,4 +212,3 @@ export default function Payment() {
             </div>
         );
     }
-}

@@ -61,7 +61,6 @@ function a11yProps(index) {
     };
 }
 export default function AdminPage(props) {
-    const [numMail, numNoti] = [JSON.parse(localStorage.getItem('booking') || '0').length, JSON.parse(localStorage.getItem('list_user') || '0').length];
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEl2, setAnchorEl2] = React.useState(null);
     const [anchorEl3, setAnchorEl3] = React.useState(null);
@@ -132,7 +131,7 @@ export default function AdminPage(props) {
             open={isMenuOpen2}
             onClose={handleMenuClose2}
         >
-            <MenuItem onClick={handleMenuClose2}>{JSON.parse(localStorage.getItem('list_user') || '0').length} User Registed</MenuItem>
+            <MenuItem onClick={handleMenuClose2}>{0} User Registed</MenuItem>
         </Menu>
     );
     const [value, setValue] = React.useState(0);
@@ -149,14 +148,14 @@ export default function AdminPage(props) {
                     <div className="navbar-auth">
                         <li>
                             <IconButton color="inherit" onClick={handleProfileMenuOpen3}>
-                                <Badge badgeContent={numMail} color="secondary" showZero>
+                                <Badge badgeContent={0} color="secondary" showZero>
                                     <MailIcon />
                                 </Badge>
                             </IconButton>
                         </li>
                         <li>
                             <IconButton color="inherit" onClick={handleProfileMenuOpen2}>
-                                <Badge badgeContent={numNoti} color="secondary" showZero>
+                                <Badge badgeContent={0} color="secondary" showZero>
                                     <NotificationsIcon />
                                 </Badge>
                             </IconButton>

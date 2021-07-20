@@ -117,18 +117,15 @@ export default class App extends Component {
         if (!loggedInUser) {
             localStorage.removeItem('history_booking');
             localStorage.removeItem('booking');
-            localStorage.removeItem('list_user');
             return this.UserPage();
         }
         if (loggedInUser) {
             let role = JSON.parse(loggedInUser).role;
             if (role === 'user') {
                 this.load_booking();
-                localStorage.removeItem('list_user');
                 return this.UserPage();
             } else if (role === 'staff') {
                 this.load_booking();
-                this.load_data_user();
                 return this.AdminPage();
             } else if (role === 'lock') {
                 localStorage.removeItem('user');
@@ -159,27 +156,7 @@ export default class App extends Component {
                 }
             )
     }
-    load_data_user = async () => {
-        let request = new Request(`${DOMAIN}/api/user`, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
-        });
-        await fetch(request)
-            .then(res => res.json())
-            .then((result) => {
-                if (result) {
-                    let data = JSON.stringify(result.data);
-                    localStorage.setItem('list_user', data);
-                }
-            },
-                (error) => {
-                    if (error) {
-                        console.log(error);
-                    }
-                }
-            )
-        return;
-    }
+
 
     load_data = async () => {
         let request = new Request(`${DOMAIN}/load/data`, {

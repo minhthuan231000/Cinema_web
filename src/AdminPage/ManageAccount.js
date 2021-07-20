@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -20,7 +20,6 @@ import UpdateIcon from '@material-ui/icons/Update';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import BlockIcon from '@material-ui/icons/Block';
 
-let ROWS = JSON.parse(localStorage.getItem('list_user')||0);
 
 const DOMAIN =process.env.REACT_APP_DOMAIN;
 
@@ -150,8 +149,6 @@ const EnhancedTableToolbar = (props) => {
             .then((result) => {
                 if (result) {
                     if (result.Status === 'Complete') {
-                        localStorage.removeItem('list_user');
-                        localStorage.setItem('list_user', JSON.stringify(result.data));
                         setRows(result.data);
                         setSelected([]);
                     } else if (result.Status === 'Error') {
@@ -179,8 +176,6 @@ const EnhancedTableToolbar = (props) => {
             .then((result) => {
                 if (result) {
                     if (result.Status === 'Complete') {
-                        localStorage.removeItem('list_user');
-                        localStorage.setItem('list_user', JSON.stringify(result.data));
                         setRows(result.data);
                         setSelected([]);
                     } else if (result.Status === 'Error') {
@@ -270,14 +265,25 @@ export default function EnhancedTable() {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [rows, setRows] = React.useState([]);
+
     const [orderBy, setOrderBy] = React.useState('ID');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    useEffect(()=>{
-        setRows(ROWS);
-    },[])
+    
+    React.useEffect(function effectFunction() {
+        const request = new Request(`${DOMAIN}/api/user`, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+        async function fetchBooks() {
+            const response = await fetch(request);
+            const json = await response.json();
+            await setRows(json.data);
+        }
+        fetchBooks();
+    }, []);
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
