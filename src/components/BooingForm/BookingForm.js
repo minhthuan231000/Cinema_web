@@ -25,14 +25,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function BookingForm() {
     const classes = useStyles();
-    let item = JSON.parse(sessionStorage.getItem('user'));
-    const loggedInUser = sessionStorage.getItem('user');
+    const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
     if (!loggedInUser) {
         window.location.href = "/Home";
     } 
-
-
-
     const [open1, setOpen] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
     // Handle Open - Close
@@ -55,8 +51,6 @@ export default function BookingForm() {
 
     const [listSeats, setListSeats] = React.useState([]);
     const [listTime, setListTime] = React.useState([]);
-    const [locationSeat, setLocationSeat] = React.useState([]);
-    const [user_id, setUserId] = React.useState(item.id);
     const [price, setPrice] = React.useState(0);
     const [showtime_id, setShowtimeId] = React.useState();
     const [listShowtimes, setListShowtimes] = React.useState([]);
@@ -65,7 +59,7 @@ export default function BookingForm() {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const foo = params.get('id'); // movie_id
-    const [movie_id, setMovieId] = React.useState(foo); // set dữ liệu cho movie_id thành công
+    const [movie_id] = React.useState(foo); // set dữ liệu cho movie_id thành công
 
     const handleChangeCinema = async(event) => {
         setCine(event.target.value);
@@ -135,11 +129,9 @@ export default function BookingForm() {
         if (check) {
             const newList = listSeats.concat({ value });
             setListSeats(newList);
-            setLocationSeat(newList);
         } else if (!check) {
             const newList = listSeats.filter((item) => item.value !== value);
             setListSeats(newList);
-            setLocationSeat(newList);
         }
     }
     const ShowSelectCinema = () => {
@@ -151,18 +143,19 @@ export default function BookingForm() {
     }
     const ShowImage = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie')||0);
-        const movies = list_movie.map((item, index) => {
-            let img = new Buffer.from(item.image.data).toString("ascii")
-            if (item.id == movie_id) {
-                return <img key={index} src={`data:image/png;base64,${img}`} alt="" />
-            } 
+            const movies = list_movie.map((item, index) => {
+                let img = new Buffer.from(item.image.data).toString("ascii")
+                if (item.id.toString() === movie_id) {
+                    return <img key={index} src={`data:image/png;base64,${img}`} alt="" />
+                } 
+                return ' ' ;
         })
         return movies
     }
     const ShowContentImage = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'||0));
         const movies = list_movie.map((item, index) => {
-            if (item.id == movie_id) {
+            if (item.id.toString() === movie_id) {
                 return (
                     <div key={index} className="img_booking_content">
                         <h6>Tên Phim</h6>
@@ -174,6 +167,7 @@ export default function BookingForm() {
                     </div>
                 )
             }
+            return ' ';
         })
         return movies
     }
@@ -201,7 +195,7 @@ export default function BookingForm() {
         const data = {
             list_Seat: listSeatConvert,
             location_Seat: dic,
-            user_id: user_id,
+            user_id: loggedInUser.id,
             showtime_id: showtime_id,
         }
         const request = new Request(`${DOMAIN}/api/booking`, {

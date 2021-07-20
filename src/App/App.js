@@ -32,8 +32,6 @@ export default class App extends Component {
         this.state = {
             isAdmin: false, /* true là đi đến Admin, false là đi đến home */
         };
-       
-
     }
     AdminPage = () => {
         return <AdminPage loggedInAdmin={false} />

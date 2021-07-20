@@ -32,11 +32,12 @@ export default class MovieSchedule extends Component {
                 })
             })) */
             const showList = list_showtime.map((item, index) => {
-                if (item.theater_id == sortByTheater) {
+                if (item.theater_id.toString() === sortByTheater) {
                     return <div className="calendar" key={index}>
                         <span>{item.start_time}</span>
                     </div>
                 }
+                return ' ';
             })
             return showList;
         }

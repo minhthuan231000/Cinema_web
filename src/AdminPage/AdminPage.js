@@ -90,10 +90,9 @@ export default function AdminPage(props) {
         sessionStorage.removeItem('user');
         window.location.reload();
     };
-    const [isProfile, setProfile] = React.useState(props.loggedInAdmin);
-    console.log(isProfile);
+    //const [isProfile, setProfile] = React.useState(props.loggedInAdmin);
     const handleProfile = () => {
-        setProfile(true)
+        //setProfile(true);
     }
     const menuId = 'primary-search-account-menu';
     const renderProfile = (

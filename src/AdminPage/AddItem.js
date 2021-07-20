@@ -6,35 +6,25 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
+// import AddIcon from '@material-ui/icons/Add';
+// import RemoveIcon from '@material-ui/icons/Remove';
 import Fab from '@material-ui/core/Fab';
 import QueueIcon from '@material-ui/icons/Queue';
 import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
 
 import './admin.css'
-import imageToBase64 from 'image-to-base64/browser';
-const fs = require('fs');
+// import imageToBase64 from 'image-to-base64/browser';
+// const fs = require('fs');
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function FeatureAdd() {
 
-  const [type, setType] = React.useState('');
-  const [tenRap, setTenRap] = React.useState('');
-  const [tenPhim, setTenFilm] = React.useState('');
-
-  const handleChangeType = (event) => {
-    setType(event.target.value);
-  }
-  const handleChangeRap = (event) => {
-    setTenRap(event.target.value);
-  }
-  const handleChangePhim = (event) => {
-    setTenFilm(event.target.value);
-  }
-  const [countX, setCountX] = React.useState(10);
-  const [countY, setCountY] = React.useState(10);
+  // const [type, setType] = React.useState('');
+  // const [tenRap, setTenRap] = React.useState('');
+  // const [tenPhim, setTenFilm] = React.useState('');
+  // const [countX, setCountX] = React.useState(10);
+  // const [countY, setCountY] = React.useState(10);
 
 
   let formCinemas = {};
@@ -135,8 +125,8 @@ export default function FeatureAdd() {
       )
   }
 
-  const handleSubmit5 = () => {
-  }
+  // const handleSubmit5 = () => {
+  // }
 
   const handleSubmit4 = () => {
     let data = {
@@ -235,11 +225,11 @@ export default function FeatureAdd() {
     })
     return showlist;
   }
-  const [date, setDate] = React.useState("2021-07-12T10:30"); // value date fomat with 2021-07-12T10:30
+  const [date] = React.useState("2021-07-12T10:30"); // value date fomat with 2021-07-12T10:30
   // handles when user changes input in date inputfield
-  const handleChangeDate = e => {
-    setDate(e.target.value);
-  };
+  // const handleChangeDate = e => {
+  //   setDate(e.target.value);
+  // };
   const handleClick = event => {
     const { myValue } = event.target.value;
     console.log(myValue) // --> 123
@@ -363,7 +353,7 @@ export default function FeatureAdd() {
               </FormControl>
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={handleSubmit3} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={() => handleSubmit3()} >
                 <QueueIcon />
               </Fab>
             </div>
