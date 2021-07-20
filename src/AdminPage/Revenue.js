@@ -16,9 +16,6 @@ import { useEffect } from 'react';
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
 const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
-// const theater = JSON.parse(localStorage.getItem('theater') || '0');
-// const booking = JSON.parse(localStorage.getItem('booking') || '0');
-// const movie = JSON.parse(localStorage.getItem('movie') || '0');
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -35,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-//Convert array
+//Convert array cinema
 function createRow(cinemas) {
     let name = cinemas.showtime.theater.cinema.name;
     let total = cinemas.total;
@@ -52,13 +49,32 @@ function createListRow(cinema_obj) {
     return rows;
 }
 
+//Convert array movie
+function createRowMovie(movies) {
+    let name = movies.showtime.movie.name;
+    let total = movies.total;
+    let count = movies.count;
+    let view = movies.showtime.movie.view;
+    let id = movies.showtime.movie.id;
+    return [name,count,view,total,id] ;
+}
+function createListRowMovie(movie_obj) {
+    let rows = [];
+    if (movie_obj) {
+        movie_obj.map((m) => (rows.push(createRowMovie(m))));
+    }
+    return rows;
+}
+
 
 export default function Revenue() {
     const classes = useStyles();
     const [date] = React.useState(moment(new Date()).format("YYYY-MM-DD"));
     // handles when user changes input in date input field
-    const [revenue,setRevenue] = React.useState([]);
+    const [revenue,setRevenue] = React.useState([]); //Thong ke theo cum rap
+    const [revenueMovie,setRevenueMovie] = React.useState([]); //Thong ke theo phim
     let rows = [];
+    let rowsMovie = [];
 
     useEffect(function effectFunction() {
         const dataSetup = {
@@ -77,7 +93,25 @@ export default function Revenue() {
         }
         fetchBooks();
     }, []);
+    useEffect(function effectFunction() {
+        const dataSetup = {
+            dateStart: '2021-01-01',
+            dateEnd: '2099-01-01'
+        }
+        const request = new Request(`${DOMAIN}/api/booking/movie`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(dataSetup)
+        });
+        async function fetchBooks() {
+            const response = await fetch(request);
+            const json = await response.json();
+            await setRevenueMovie(json.data);
+        }
+        fetchBooks();
+    }, []);
     rows =createListRow(revenue);
+    rowsMovie = createListRowMovie(revenueMovie);
     if (!loggedInUser) {
         window.location.href = "/";
         return;
@@ -100,6 +134,33 @@ export default function Revenue() {
                 .then((result) => {
                     if (result) {
                         setRevenue(result.data);
+                    }
+                },
+                    (error) => {
+                        if (error) {
+                            console.log(error);
+                        }
+                    }
+                )
+        }
+        const ThongKePhim = async()=>{
+            const dateStart = document.getElementById('from').value;
+            const dateEnd = document.getElementById('to').value;
+            const data = {
+                dateStart: dateStart,
+                dateEnd: dateEnd
+            }
+
+            const request = new Request(`${DOMAIN}/api/booking/movie`, {
+                method: 'POST',
+                headers: new Headers({ 'Content-Type': 'application/json' }),
+                body :  JSON.stringify(data)
+            });
+            await fetch(request)
+                .then(res => res.json())
+                .then((result) => {
+                    if (result) {
+                        setRevenueMovie(result.data);
                     }
                 },
                     (error) => {
@@ -182,7 +243,6 @@ export default function Revenue() {
                 <h2>Thống kê doanh thu theo phim</h2>
             </div>
             <TableContainer component={Paper}>
-                <form className={classes.container} noValidate method="POST" >
                     <TextField
                         id="date"
                         label="From"
@@ -203,8 +263,7 @@ export default function Revenue() {
                             shrink: true,
                         }}
                     />
-                    <button type="submit"  className="btn btn-info">Load</button>
-                </form>
+                    <button type="submit"  onClick={()=>ThongKePhim()} className="btn btn-info">Load</button>
                 <Table aria-label="spanning table">
                     <TableHead>
                         <TableRow>
@@ -216,17 +275,17 @@ export default function Revenue() {
                         <TableRow>
                             <TableCell>Tên Phim</TableCell>
                             <TableCell align="right">Số Lượng</TableCell>
-                            <TableCell align="right">Giá Vé</TableCell>
+                            <TableCell align="right">View</TableCell>
                             <TableCell align="right">Doanh Thu</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row[0]}>
+                        {rowsMovie.map((row) => (
+                            <TableRow key={row[4]}>
                                 <TableCell>{row[0]}</TableCell>
+                                <TableCell align="right">{row[1]}</TableCell>
                                 <TableCell align="right">{row[2]}</TableCell>
                                 <TableCell align="right">{row[3]}</TableCell>
-                                <TableCell align="right">{row[4]}</TableCell>
                             </TableRow>
                         ))}
                         <TableRow>
