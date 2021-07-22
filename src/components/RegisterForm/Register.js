@@ -53,7 +53,7 @@ class Register extends Component {
                 window.location.reload();
               } else if (result.Status === 'Invalid') {
                 alert("Thử lại!");
-              }
+              } 
             },
               (error) => {
                 this.setState({

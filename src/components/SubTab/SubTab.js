@@ -7,7 +7,7 @@ class SubTab extends Component {
     render() {
         return (
             <div className="container" >
-                <Tabs defaultActiveKey="topview" id="uncontrolled-tab-example">
+                <Tabs defaultActiveKey="view" id="uncontrolled-tab-example">
                     <Tab eventKey="view" title="Tất cả">
                         {/* Your component here */}
                         <Movie />
