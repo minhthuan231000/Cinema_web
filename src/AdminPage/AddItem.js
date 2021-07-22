@@ -40,13 +40,13 @@ export default function FeatureAdd() {
       name: formCinemas.name,
       address: formCinemas.address
     };
+    console.log(data) 
     let request = new Request(`${DOMAIN}/api/cinema`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(data)
     });
     fetch(request)
-
         .then(res => res.json())
         .then((result) => {
             if (result) {
@@ -170,7 +170,7 @@ export default function FeatureAdd() {
       number_row: formTheater.cn,
       number_column: formTheater.cd
     };
-
+    console.log(data)
     let request = new Request(`${DOMAIN}/api/theater`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
