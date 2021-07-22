@@ -112,6 +112,7 @@ export default function Revenue() {
     }, []);
     rows =createListRow(revenue);
     rowsMovie = createListRowMovie(revenueMovie);
+    
     if (!loggedInUser) {
         window.location.href = "/";
         return;

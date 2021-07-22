@@ -26,11 +26,22 @@ const useStyles = makeStyles((theme) => ({
 export default function BookingForm() {
     const classes = useStyles();
     const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+    const [open1, setOpen] = React.useState(false);
+    const [open3, setOpen3] = React.useState(false);
+
+    const [cine, setCine] = React.useState('');
+    const [time, setTime] = React.useState('');
+
+    const [listSeats, setListSeats] = React.useState([]);
+    const [listTime, setListTime] = React.useState([]);
+    const [price, setPrice] = React.useState(0);
+    const [showtime_id, setShowtimeId] = React.useState();
+    const [listShowtimes, setListShowtimes] = React.useState([]);
+    const DOMAIN = process.env.REACT_APP_DOMAIN;
+
     if (!loggedInUser) {
         window.location.href = "/Home";
     } 
-    const [open1, setOpen] = React.useState(false);
-    const [open3, setOpen3] = React.useState(false);
     // Handle Open - Close
     const handleClose = () => {
         setOpen(false);
@@ -46,25 +57,13 @@ export default function BookingForm() {
         setOpen3(true);
     };
 
-    const [cine, setCine] = React.useState('');
-    const [time, setTime] = React.useState('');
-
-    const [listSeats, setListSeats] = React.useState([]);
-    const [listTime, setListTime] = React.useState([]);
-    const [price, setPrice] = React.useState(0);
-    const [showtime_id, setShowtimeId] = React.useState();
-    const [listShowtimes, setListShowtimes] = React.useState([]);
-    const DOMAIN = process.env.REACT_APP_DOMAIN;
-    
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const foo = params.get('id'); // movie_id
     const [movie_id] = React.useState(foo); // set dữ liệu cho movie_id thành công
-
     const handleChangeCinema = async(event) => {
         setCine(event.target.value);
-        setListTime([]);
-        const request = new Request(`${DOMAIN}/api/showtime/movie?movie=`+foo+'&theater='+event.target.value, {
+        const request = new Request(`${DOMAIN}/api/showtime/movie?movie=`+movie_id+'&theater='+event.target.value, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
         });
@@ -82,7 +81,7 @@ export default function BookingForm() {
                     }
                 }
             )
-        let list =await listShowtimes.map((time) => ([time.id,time.start_time,time.price]) );
+        let list =await listShowtimes.map((time) => ([time.id,time.start_time,time.price,time.theater.number_row,time.theater.number_column]) );
         await setListTime(list);
     };
     const searchPrice = (nameKey)=>{
@@ -223,9 +222,14 @@ export default function BookingForm() {
                 }
             )
     }
-    
-    const seatsColumns = createCol(10);
-    const seatsRows = createRow(6);
+    let row = 0;
+    let column = 0
+    if(listTime.length !== 0){
+        row = listTime[0][4];
+        column = listTime[0][3];
+    }
+    const seatsColumns = createCol(row);
+    const seatsRows = createRow(column);
     const totalPrice = listSeats.length * price;
     const seatsGenerator = () => {
         return (
@@ -302,7 +306,7 @@ export default function BookingForm() {
                             onClose={handleClose}
                             onOpen={handleOpen}
                             value={cine}
-                            onChange={handleChangeCinema}
+                            onChange={(e)=>handleChangeCinema(e)}
                         >
                             {ShowSelectCinema()}
                         </Select>
@@ -315,7 +319,7 @@ export default function BookingForm() {
                             onClose={handleClose3}
                             onOpen={handleOpen3}
                             value={time||''}
-                            onChange={handleChangeTime}
+                            onChange={(e) =>handleChangeTime(e)}
                         >
                             {ShowSelectStartTime()}
                         </Select>
