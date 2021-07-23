@@ -14,19 +14,12 @@ import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
 
 import './admin.css'
-// import imageToBase64 from 'image-to-base64/browser';
-// const fs = require('fs');
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function FeatureAdd() {
 
-  // const [type, setType] = React.useState('');
-  // const [tenRap, setTenRap] = React.useState('');
-  // const [tenPhim, setTenFilm] = React.useState('');
-  // const [countX, setCountX] = React.useState(10);
-  // const [countY, setCountY] = React.useState(10);
 
-
+  //Add cinema
   let formCinemas = {};
   const handleChangeThemCumRap = (event) => {
     const target = event.target;
@@ -34,7 +27,6 @@ export default function FeatureAdd() {
     const name = target.name;
     formCinemas[name]= value;
   }
-
   const handleSubmit1 = () => {
     let data = {
       name: formCinemas.name,
@@ -73,6 +65,41 @@ export default function FeatureAdd() {
     formShowtimes[name] = value;
   }
 
+  const handleAddShowtime = () => {
+   
+    const timeStart = document.getElementById('timeStart').value;
+    const timeEnd = document.getElementById('timeEnd').value;
+    let data = {
+      theater_id: formShowtimes.cbRap,
+      movie_id: formShowtimes.cbPhim,
+      start_time: timeStart,
+      end_time: timeEnd,
+      price: formShowtimes.price
+    };
+    console.log(data)
+    // let request = new Request(`${DOMAIN}/api/showtime`, {
+    //   method: 'POST',
+    //   headers: new Headers({ 'Content-Type': 'application/json' }),
+    //   body: JSON.stringify(data)
+    // });
+    // fetch(request)
+    //   .then(res => res.json())
+    //   .then((result) => {
+    //     if (result) {
+    //       if (result.status === '200') {
+    //         alert('Success');
+    //       } else if (result.status === '400') {
+    //         console.log(result.message);;
+    //       }
+    //     }
+    //   },
+    //     (error) => {
+    //       if (error) {
+    //         console.log(error);
+    //       } 
+    //     }
+    //   )
+  }
   let formTheater = {};
   const handleChangeTheater = (event) => {
     const target = event.target;
@@ -92,41 +119,6 @@ export default function FeatureAdd() {
   const handleFileSelect = (event) => {
 
   }
-
-  const handleSubmit3 = () => {
-    let data = {
-      theater_id: formShowtimes.cbRap,
-      movie_id: formShowtimes.cbPhim,
-      start_time: formShowtimes.start_time,
-      end_time: formShowtimes.end_time,
-      price: 80001
-    };
-    let request = new Request(`${DOMAIN}/api/showtime`, {
-      method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify(data)
-    });
-    fetch(request)
-      .then(res => res.json())
-      .then((result) => {
-        if (result) {
-          if (result.status === '200') {
-            alert('Success');
-          } else if (result.status === '400') {
-            console.log('Del showtime error');
-          }
-        }
-      },
-        (error) => {
-          if (error) {
-            console.log(error);
-          }
-        }
-      )
-  }
-
-  // const handleSubmit5 = () => {
-  // }
 
   const handleSubmit4 = () => {
     let data = {
@@ -237,7 +229,7 @@ export default function FeatureAdd() {
   return (
     <div className="addFeature-root">
       <div className="col-5" >
-        <form autoComplete="auto" >
+        <form autoComplete="auto" > {/*them cum rap */}
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)' }}>
             <div className="groupCumRap">
               <div><label><h4>Thêm cụm rạp</h4></label></div>
@@ -251,7 +243,7 @@ export default function FeatureAdd() {
             </Fab>
           </Paper>
         </form>
-        <form autoComplete="auto" >
+        <form autoComplete="auto" > {/*them rap */}
           <div className="groupAdd-rap">
             <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
               <label><h4>Thêm rạp</h4></label>
@@ -299,31 +291,29 @@ export default function FeatureAdd() {
             </Paper>
           </div>
         </form>
-        <form autoComplete="auto" >
+        <form autoComplete="auto" > {/*them suat chieu*/}
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
             <div className="groupSuatChieu">
               <div>
                 <label><h4>Thêm Suất Chiếu</h4></label>
               </div>
               <TextField
-                id="datetime"
+                id="timeStart"
                 label="Thời điểm bắt đầu"
                 name="start_time"
                 type="datetime-local"
                 defaultValue={date}
-                onChange={(e) => handleChangeShowtimes(e)}
                 style={{ margin: '3px 8px 0 10px' }}
                 InputLabelProps={{
                   shrink: true,
                 }}
               />
               <TextField
-                id="datetime"
+                id="timeEnd"
                 label="Thời điểm kết thúc"
                 type="datetime-local"
                 name="end_time"
                 defaultValue={date}
-                onChange={(e) => handleChangeShowtimes(e)}
                 style={{ marginTop: 3 }}
                 InputLabelProps={{
                   shrink: true,
@@ -351,9 +341,10 @@ export default function FeatureAdd() {
                   {showListItemRap()}
                 </Select>
               </FormControl>
+              <TextField style={{ marginInlineEnd: '0.5em' }} id="textField-Price" name="price" label="Giá tiền" onChange={(e) => handleChangeShowtimes(e)} />
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={() => handleSubmit3()} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={(e) => handleAddShowtime(e)} >
                 <QueueIcon />
               </Fab>
             </div>
@@ -361,7 +352,7 @@ export default function FeatureAdd() {
         </form>
       </div>
       <div className="col-5" >
-        <form autoComplete="auto">
+        <form autoComplete="auto"> {/*them phim */}
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)' }}>
             <div className="groupAdd-phim">
               <div>
@@ -369,18 +360,7 @@ export default function FeatureAdd() {
               </div>
               <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" name="name" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" name="minute_time" onChange={(e) => handleChangeMovie(e)} />
-              <TextField
-                id="datetime"
-                label="Them suat chieu"
-                type="datetime-local"
-                name="opening_day"
-                onChange={(e) => handleChangeMovie(e)}
-                defaultValue={date}
-                style={{ margin: '3px 8px 0 10px' }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+              
 
               <ImageUpload cardName="Input Image" onChange={(e) => handleFileSelect(e)} />
               <p></p>
