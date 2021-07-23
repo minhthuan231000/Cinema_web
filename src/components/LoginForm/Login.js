@@ -5,6 +5,7 @@ import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../model
 import icon_fb from '../../images/icons/icon-facebook.jpg'
 import icon_gg from '../../images/icons/icon-google.jpg'
 
+import Alert from '@material-ui/lab/Alert';
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 class Login extends Component { // class parent login
@@ -15,7 +16,8 @@ class Login extends Component { // class parent login
             email: '',
             formData: {},
             errors: null, // Contains login field errors
-            LogForm: 0
+            LogForm: 0,
+            alert: 0
         }
     }
     render() {
@@ -82,7 +84,9 @@ class Login extends Component { // class parent login
                             .then((result) => {
                                 if (result) {
                                     if (result.Status === 'Please active acc!') {
-                                        alert("Please active your account!");
+                                        this.setState({
+                                            alert: 1
+                                        })
                                     } else if (result.Status === 'Complete') {
                                         data = {
                                             id: result.user.id,
@@ -92,9 +96,25 @@ class Login extends Component { // class parent login
                                             role: result.user.role,
                                         }
                                         sessionStorage.setItem('user', JSON.stringify(data));
-                                        window.location.reload();
+                                        this.setState({
+                                            alert: 2
+                                        })
+                                        setTimeout(
+                                            function () {
+                                                window.location.reload();
+                                            }
+                                                .bind(this),
+                                            4000
+                                        );
                                     } else if (result.Status === 'Email is not exist.') {
-                                        alert("Email is not exist. Please sign up!");
+                                        this.setState({
+                                            alert: 3
+                                        })
+                                    }
+                                    else if (result.Status === 'Password wrong!') {
+                                        this.setState({
+                                            alert: 4
+                                        })
                                     }
                                 }
                             },
@@ -107,6 +127,15 @@ class Login extends Component { // class parent login
                             )
                     }
                 }
+                setTimeout(
+                    function () {
+                        this.setState({
+                            alert: 0
+                        });
+                    }
+                        .bind(this),
+                    3000
+                )
             }
             //Sự kiện quên mật khẩu
             const onClickForget = (e) => {
@@ -132,9 +161,9 @@ class Login extends Component { // class parent login
                     </div>
                     <div className="forget-password">
                         <span className="forget" onClick={e => { onClickForget(e) }}>Quên mật khẩu?</span>
-                        <span  className="active-account"  onClick={e => { onClickActive(e) }}>Active account?</span>
+                        <span className="active-account" onClick={e => { onClickActive(e) }}>Active account?</span>
                     </div>
-                    
+
                     <span>&nbsp;</span>
                     <button onClick={(e) => { submitForm(e) }} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng nhập</button>
                     <span>&nbsp;</span>
@@ -176,9 +205,11 @@ class Login extends Component { // class parent login
                     .then((result) => {
                         if (result) {
                             if (result.Status === 'Complete') {
-                                this.setState({ LogForm: 2,email:formData.email })
+                                this.setState({ LogForm: 2, email: formData.email })
                             } else if (result.Status === 'Don\'t exist') {
-                                alert('Email don\'t exist')
+                                this.setState({
+                                    alert: 5
+                                })
                             }
                         }
                     },
@@ -217,7 +248,9 @@ class Login extends Component { // class parent login
                 e.preventDefault();
                 if (token == null) {
                     // vui lòg nhập đầy đủ thôg tin để dki
-                    alert('Please fill in the information to complete the registration')
+                    this.setState({
+                        alert: 6
+                    })
                 } else {
                     let data = {
                         ...token,
@@ -239,7 +272,9 @@ class Login extends Component { // class parent login
                             if (result.Status === 'Complete') {
                                 this.setState({ LogForm: 3 })
                             } else if (result.Status === 'Invalid') {
-                                alert("Thử lại!");
+                                this.setState({
+                                    alert: 7
+                                })
                             }
                         },
                             (error) => {
@@ -302,9 +337,11 @@ class Login extends Component { // class parent login
                 if (!validation) {
                     if (validation.confirm) {
                         alert(validation.confirm);
-                  } else {
-                    alert('Please fill in the information to complete the reset password')
-                  };
+                    } else {
+                        this.setState({
+                            alert: 8
+                        })
+                    };
 
                 } else {
                     let data = {
@@ -325,11 +362,12 @@ class Login extends Component { // class parent login
                         .then((result) => {
                             console.log(result.Status);
                             if (result.Status === 'Complete') {
-                                this.setState({ LogForm: 3 });
-                                alert("Đổi mật khẩu thành công!");
+                                this.setState({ LogForm: 3, alert: 9 });
                                 window.location.reload();
                             } else if (result.Status === 'Invalid') {
-                                alert("Thử lại!");
+                                this.setState({
+                                    alert: 7
+                                })
                             }
                         },
                             (error) => {
@@ -384,9 +422,11 @@ class Login extends Component { // class parent login
                     .then((result) => {
                         if (result) {
                             if (result.Status === 'Complete') {
-                                this.setState({ LogForm: 5,email:formData.email })
+                                this.setState({ LogForm: 5, email: formData.email })
                             } else if (result.Status === 'Don\'t exist') {
-                                alert('Email don\'t exist')
+                                this.setState({
+                                    alert: 5
+                                })
                             }
                         }
                     },
@@ -414,67 +454,82 @@ class Login extends Component { // class parent login
         }
         const ShowConfirmEmailActive = () => {
             let token = {};
-      
+
             const handleInputChange = (event) => {
-              const target = event.target;
-              const value = target.value;
-              const name = target.name;
-              token[name] = value;
+                const target = event.target;
+                const value = target.value;
+                const name = target.name;
+                token[name] = value;
             }
             const onSubmit = ((e) => {
-              //Chặn các event mặc định của form
-              e.preventDefault();
-              if (token == null) {
-                // vui lòg nhập đầy đủ thôg tin để dki
-                alert('Please fill in the information to complete the registration')
-              } else {
-                let data = {
-                  ...token,
-                  email: this.state.email
-                };
-                //Login code
+                //Chặn các event mặc định của form
+                e.preventDefault();
+                if (token == null) {
+                    // vui lòg nhập đầy đủ thôg tin để dki
+                    alert('Please fill in the information to complete the registration')
+                } else {
+                    let data = {
+                        ...token,
+                        email: this.state.email
+                    };
+                    //Login code
 
-                let request = new Request(`${DOMAIN}/api/confirm`, {
-                  method: 'POST',
-                  headers: new Headers({ 'Content-Type': 'application/json' }),
-                  body: JSON.stringify(data)
-                });
-      
-                fetch(request)
-                  .then(res => res.json())
-                  .then((result) => {
-                    console.log(result.Status);
-                    if (result.Status === 'Complete') {
-                      alert("Kích hoạt thành công!");
-                      window.location.reload();
-                    } else if (result.Status === 'Invalid') {
-                      alert("Thử lại!");
-                    }
-                  },
-                    (error) => {
-                      this.setState({
-                        error: error
-                      });
-                      if (error) {
-                        console.log(error);
-                      }
-                    }
-                  )
-              }
+                    let request = new Request(`${DOMAIN}/api/confirm`, {
+                        method: 'POST',
+                        headers: new Headers({ 'Content-Type': 'application/json' }),
+                        body: JSON.stringify(data)
+                    });
+
+                    fetch(request)
+                        .then(res => res.json())
+                        .then((result) => {
+                            console.log(result.Status);
+                            if (result.Status === 'Complete') {
+                                this.setState({
+                                    alert: 10
+                                })
+                                window.location.reload();
+                            } else if (result.Status === 'Invalid') {
+                                this.setState({
+                                    alert: 7
+                                })
+                            }
+                        },
+                            (error) => {
+                                this.setState({
+                                    error: error
+                                });
+                                if (error) {
+                                    console.log(error);
+                                }
+                            }
+                        )
+                }
             })
             return (
-              <div>
-                <h6>Nhập mã xác thực (Vui lòng kiểm tra email)</h6>
-                <div className="form-group">
-                  <input type="text" name='token' className="form-control" onChange={handleInputChange} placeholder="CODE (*)" />
+                <div>
+                    <h6>Nhập mã xác thực (Vui lòng kiểm tra email)</h6>
+                    <div className="form-group">
+                        <input type="text" name='token' className="form-control" onChange={handleInputChange} placeholder="CODE (*)" />
+                    </div>
+                    <div className="forget-password">
+                        <button onClick={e => onSubmit(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">Kích Hoạt</button>
+                    </div>
                 </div>
-                <div className="forget-password">
-                  <button onClick={e => onSubmit(e)} type="button" className="btn btn-dark btn-lg btn-block col-5 btnForget">Kích Hoạt</button>
-                </div>
-              </div>
             )
-          }
-
+        }
+        const HandleAlert = () => {
+            if (this.state.alert === 1) return <Alert severity="warning">Please active account !</Alert>
+            if (this.state.alert === 2) return <Alert severity="success">Login Success !</Alert>
+            if (this.state.alert === 3) return <Alert severity="warning">Email is not exist. Please sign up !</Alert>
+            if (this.state.alert === 4) return <Alert severity="error">Password was wrong. Please check again !</Alert>
+            if (this.state.alert === 5) return <Alert severity="warning">Email don't exist</Alert>
+            if (this.state.alert === 6) return <Alert severity="info">Please fill in the information to complete the registration</Alert>
+            if (this.state.alert === 7) return <Alert severity="warning">Please try again</Alert>
+            if (this.state.alert === 8) return <Alert severity="info">Please fill in the information to complete the reset password</Alert>
+            if (this.state.alert === 9) return <Alert severity="success">Change password success !</Alert>
+            if (this.state.alert === 10) return <Alert severity="success">Confirm success !</Alert>
+        }
         const HandleShow = () => {
             const choose = this.state.LogForm;
             switch (choose) {
@@ -489,9 +544,9 @@ class Login extends Component { // class parent login
                 case 4:
                     return <ShowActiveForm />
                 case 5:
-                    return <ShowConfirmEmailActive/>
+                    return <ShowConfirmEmailActive />
                 default:
-                        return;
+                    return;
             }
         }
 
@@ -499,6 +554,7 @@ class Login extends Component { // class parent login
         return (
             <div className="Login container">
                 <HandleShow />
+                {HandleAlert()}
             </div>
         );
 

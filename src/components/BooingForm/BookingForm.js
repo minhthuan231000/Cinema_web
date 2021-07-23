@@ -82,6 +82,7 @@ export default function BookingForm() {
                 }
             )
         let list =await listShowtimes.map((time) => ([time.id,time.start_time,time.price,time.theater.number_row,time.theater.number_column]) );
+        console.log(listShowtimes)
         await setListTime(list);
     };
     const searchPrice = (nameKey)=>{
@@ -224,6 +225,7 @@ export default function BookingForm() {
     }
     let row = 0;
     let column = 0
+    console.log(listTime)
     if(listTime.length !== 0){
         row = listTime[0][4];
         column = listTime[0][3];
