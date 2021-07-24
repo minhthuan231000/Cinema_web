@@ -38,13 +38,13 @@
     "react-refresh": "^0.10.0",
     "react-responsive-modal": "^6.1.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^4.0.3",
     "react-slick": "^0.28.1",
     "reactstrap": "^8.9.0",
     "request": "^2.88.2",
     "sequelize": "^6.6.5",
     "slick-carousel": "^1.8.1",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "build": "react-scripts build",
