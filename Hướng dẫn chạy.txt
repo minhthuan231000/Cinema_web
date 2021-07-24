@@ -1,5 +1,6 @@
 Cài đặt các module cần thiết : 
 npm i --save
+if can't: npm install --force || npm install --legacy-peer-deps --save radium
 
 Add database từ file data_database
 
