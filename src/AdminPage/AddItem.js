@@ -13,6 +13,8 @@ import QueueIcon from '@material-ui/icons/Queue';
 import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
 
+import Utils from "../Utils/Utils"
+
 import './admin.css'
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
@@ -117,12 +119,14 @@ const handleSubmit2 = () => {
       number_row: formTheater.cn,
       number_column: formTheater.cd
     };
-    console.log(data)
-    /*let request = new Request(`${DOMAIN}/api/theater`, {
+    console.log("🚀 ~ file: AddItem.js ~ line 120 ~ handleSubmit2 ~ data", data)
+
+    let request = new Request(`${DOMAIN}/api/theater`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(data)
     });
+    
     fetch(request)
       .then(res => res.json())
       .then((result) => {
@@ -130,54 +134,7 @@ const handleSubmit2 = () => {
           if (result.status === '200') {
             alert('Success');
           } else if (result.status === '400') {
-            console.log('Del showtime error');
-          }
-        }
-      },
-        (error) => {
-          if (error) {
-            console.log(error);
-          }
-        }
-      )*/
-  }
-
-//add movie
-  let formMovie = {};
-  const handleChangeMovie = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    formMovie[name] = value;
-  }
-
-  const handleFileSelect = (event) => {
-    console.log("Image");
-  }
-
-  const handleSubmit4 = () => {
-    let data = {
-      name: formMovie.name,
-      image: 'test1',
-      trailer: 'test1',
-      introduce: 'introduce',
-      minute_time: formMovie.minute_time,
-      opening_day: formMovie.opening_day,
-      view: 0
-    };
-    let request = new Request(`${DOMAIN}/api/movie`, {
-      method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify(data)
-    });
-    fetch(request)
-      .then(res => res.json())
-      .then((result) => {
-        if (result) {
-          if (result.status === '200') {
-            alert('Success');
-          } else if (result.status === '400') {
-            console.log('Del showtime error');
+            console.log(result.message);
           }
         }
       },
@@ -189,6 +146,58 @@ const handleSubmit2 = () => {
       )
   }
 
+//add movie
+  let formMovie = {};
+  const handleChangeMovie = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    formMovie[name] = value;
+  }
+  const handleSubmit4 = () => {
+
+  // Utils.toDataURL( a ,function(dataUrl) {
+  //   console.log('RESULT:', dataUrl)
+  // })
+    let data = {
+      name: formMovie.name,
+      image: 'test1',
+      trailer: 'test1',
+      introduce: 'introduce',
+      minute_time: formMovie.minute_time,
+      opening_day: formMovie.opening_day,
+      view: 0
+    };
+    console.log("🚀 ~ ", formMovie)
+    
+    // let request = new Request(`${DOMAIN}/api/movie`, {
+    //   method: 'POST',
+    //   headers: new Headers({ 'Content-Type': 'application/json' }),
+    //   body: JSON.stringify(data)
+    // });
+    // fetch(request)
+    //   .then(res => res.json())
+    //   .then((result) => {
+    //     if (result) {
+    //       if (result.status === '200') {
+    //         alert('Success');
+    //       } else if (result.status === '400') {
+    //         console.log('Del showtime error');
+    //       }
+    //     }
+    //   },
+    //     (error) => {
+    //       if (error) {
+    //         console.log(error);
+    //       }
+    //     }
+    //   )
+  }
+
+
+  const handleFileSelect = (event) => {
+    console.log("Image");
+  }
 
   const showLoaiRap = () => {
     let list_loairap = [{ "name": '2d' }, { "name": '3d' }, { "name": '4dx' }];
@@ -362,12 +371,12 @@ const handleSubmit2 = () => {
               </div>
               <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" name="name" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" name="minute_time" onChange={(e) => handleChangeMovie(e)} />
-              
-
-              <ImageUpload cardName="Input Image" onChange={(e) => handleFileSelect(e)} />
+              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="address" label="Mô tả" onChange={(e) => handleChangeMovie(e)} />
+           
+              <ImageUpload cardName="Input Image" />
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={handleSubmit4} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={e=>handleSubmit4(e)} >
                 <QueueIcon />
               </Fab>
             </div>

@@ -25,6 +25,7 @@ import ReplayIcon from "@material-ui/icons/Replay";
 
 //Tabs
 import { withStyles } from "@material-ui/core/styles";
+import Utils from "../Utils/Utils";
 
 const styles = theme => ({
     root: {
@@ -78,22 +79,24 @@ class ImageUploadCard extends React.Component {
         selectedFile: null
     };
 
-    handleUploadClick = event => {
-        console.log();
-        var file = event.target.files[0];
-        const reader = new FileReader();
-        var url = reader.readAsDataURL(file);
 
-        reader.onloadend = function (e) {
+    handleUploadClick = event => {
+        var image = document.getElementById('contained-button-file');
+	    image.src = URL.createObjectURL(event.target.files[0]);
+       Utils.toDataURL(image.src, function(dataUrl) {
+            console.log('RESULT:', dataUrl)
+        })
+        const reader = new FileReader();
+
+        reader.onload= function (e) {
             this.setState({
                 selectedFile: [reader.result]
             });
-        }.bind(this);
-        console.log(url); // Would see a path?
+        }.bind(this); 
 
         this.setState({
             mainState: "uploaded",
-            selectedFile: event.target.files[0],
+            selectedFile: image,
             imageUploaded: 1
         });
     };
@@ -126,7 +129,6 @@ class ImageUploadCard extends React.Component {
     }
 
     handleSearchURL = event => {
-        console.log();
         var file = event.target.files[0];
         var reader = new FileReader();
         var url = reader.readAsDataURL(file);
@@ -243,7 +245,6 @@ class ImageUploadCard extends React.Component {
     }
 
     imageResetHandler = event => {
-        console.log("Click!");
         this.setState({
             mainState: "initial",
             selectedFile: null,
