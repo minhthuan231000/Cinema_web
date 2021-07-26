@@ -55,8 +55,9 @@ export default function FeatureAdd() {
                 }
             }
         )
-  }
+  } 
 
+ //add showtime
   let formShowtimes = {};
   const handleChangeShowtimes = (event) => {
     const target = event.target;
@@ -64,7 +65,6 @@ export default function FeatureAdd() {
     const name = target.name;
     formShowtimes[name] = value;
   }
-
   const handleAddShowtime = () => {
    
     const timeStart = document.getElementById('timeStart').value;
@@ -77,29 +77,31 @@ export default function FeatureAdd() {
       price: formShowtimes.price
     };
     console.log(data)
-    // let request = new Request(`${DOMAIN}/api/showtime`, {
-    //   method: 'POST',
-    //   headers: new Headers({ 'Content-Type': 'application/json' }),
-    //   body: JSON.stringify(data)
-    // });
-    // fetch(request)
-    //   .then(res => res.json())
-    //   .then((result) => {
-    //     if (result) {
-    //       if (result.status === '200') {
-    //         alert('Success');
-    //       } else if (result.status === '400') {
-    //         console.log(result.message);;
-    //       }
-    //     }
-    //   },
-    //     (error) => {
-    //       if (error) {
-    //         console.log(error);
-    //       } 
-    //     }
-    //   )
+    let request = new Request(`${DOMAIN}/api/showtime`, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(data)
+    });
+    fetch(request)
+     .then(res => res.json())
+      .then((result) => {
+       if (result) {
+          if (result.status === '200') {
+            alert('Success');
+           } else if (result.status === '400') {
+             console.log(result.message);;
+          }
+        }
+      },
+        (error) => {
+           if (error) {
+             console.log(error);
+           }
+        }
+       )
   }
+
+  //add theater
   let formTheater = {};
   const handleChangeTheater = (event) => {
     const target = event.target;
@@ -107,7 +109,40 @@ export default function FeatureAdd() {
     const name = target.name;
     formTheater[name] = value;
   }
+const handleSubmit2 = () => {
+    let data = {
+      name: formTheater.name_theater,
+      cinema_id: formTheater.cumrap,
+      type: formTheater.loairap,
+      number_row: formTheater.cn,
+      number_column: formTheater.cd
+    };
+    console.log(data)
+    /*let request = new Request(`${DOMAIN}/api/theater`, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(data)
+    });
+    fetch(request)
+      .then(res => res.json())
+      .then((result) => {
+        if (result) {
+          if (result.status === '200') {
+            alert('Success');
+          } else if (result.status === '400') {
+            console.log('Del showtime error');
+          }
+        }
+      },
+        (error) => {
+          if (error) {
+            console.log(error);
+          }
+        }
+      )*/
+  }
 
+//add movie
   let formMovie = {};
   const handleChangeMovie = (event) => {
     const target = event.target;
@@ -117,7 +152,7 @@ export default function FeatureAdd() {
   }
 
   const handleFileSelect = (event) => {
-
+    console.log("Image");
   }
 
   const handleSubmit4 = () => {
@@ -154,38 +189,6 @@ export default function FeatureAdd() {
       )
   }
 
-  const handleSubmit2 = () => {
-    let data = {
-      name: formTheater.tenrap,
-      cinema_id: formTheater.cumrap,
-      type: formTheater.loairap,
-      number_row: formTheater.cn,
-      number_column: formTheater.cd
-    };
-    console.log(data)
-    let request = new Request(`${DOMAIN}/api/theater`, {
-      method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify(data)
-    });
-    fetch(request)
-      .then(res => res.json())
-      .then((result) => {
-        if (result) {
-          if (result.status === '200') {
-            alert('Success');
-          } else if (result.status === '400') {
-            console.log('Del showtime error');
-          }
-        }
-      },
-        (error) => {
-          if (error) {
-            console.log(error);
-          }
-        }
-      )
-  }
 
   const showLoaiRap = () => {
     let list_loairap = [{ "name": '2d' }, { "name": '3d' }, { "name": '4dx' }];
@@ -196,19 +199,19 @@ export default function FeatureAdd() {
   }
 
   const showCumRap = () => {
-    let list_cumrap = JSON.parse(localStorage.getItem('cinema')||0);
-    const showlist = list_cumrap.map((item, index) => {
-      return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
+    let list_cinema = JSON.parse(localStorage.getItem('cinema')||0);
+    const show_list = list_cinema.map((item, index) => {
+      return <MenuItem key={index} value={item.id} >{item.name}</MenuItem>
     })
-    return showlist;
+    return show_list;
   }
 
-  const showListItemPhim = () => {
+  const showListItemMovie = () => {
     let list_movie = JSON.parse(localStorage.getItem('movie')||0);
-    const showlist = list_movie.map((item, index) => {
+    const show_list = list_movie.map((item, index) => {
       return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
     })
-    return showlist;
+    return show_list;
   }
   const showListItemRap = () => {
     let list_rap = JSON.parse(localStorage.getItem('theater')||0);
@@ -223,8 +226,7 @@ export default function FeatureAdd() {
   //   setDate(e.target.value);
   // };
   const handleClick = event => {
-    const { myValue } = event.target.value;
-    console.log(myValue) // --> 123
+    //const { myValue } = event.target.value;
   }
   return (
     <div className="addFeature-root">
@@ -248,7 +250,7 @@ export default function FeatureAdd() {
             <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)', marginTop: '20px' }}>
               <label><h4>Thêm rạp</h4></label>
               <div className="groupControl-rap">
-                <TextField style={{ marginInlineEnd: '0.5em' }} id="textField-TenRap" name="tenrap" label="Tên Rạp" onChange={(e) => handleChangeTheater(e)} />
+                <TextField style={{ marginInlineEnd: '0.5em' }} id="textField-TenRap" name="name_theater" label="Tên Rạp" onChange={(e) => handleChangeTheater(e)} />
                 <FormControl className="input-TypeRap" style={{ marginInlineEnd: '0.5em' }}>
                   <InputLabel id="demo-simple-select-label">Loại Rạp</InputLabel>
                   <Select
@@ -327,7 +329,7 @@ export default function FeatureAdd() {
                   name="cbPhim"
                   onChange={(e) => handleChangeShowtimes(e)}
                 >
-                  {showListItemPhim()}
+                  {showListItemMovie()}
                 </Select>
               </FormControl>
               <FormControl style={{ margin: '3px 8px 0 10px', width: '5.8em' }}>
