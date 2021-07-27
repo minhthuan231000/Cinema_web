@@ -13,8 +13,6 @@ import QueueIcon from '@material-ui/icons/Queue';
 import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
 
-import Utils from "../Utils/Utils"
-
 import './admin.css'
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
