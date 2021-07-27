@@ -185,13 +185,21 @@ export default function BookingForm() {
         var dic = {}
         let listSeatConvert = listSeats.map(o => { return o.value })
         for (let index = 0; index < listSeats.length; index++) {
-            var temp = listSeats[index].value.charAt(1);
             let seat = listSeats[index].value;
-            let address_x = listSeats[index].value.charAt(0)  ;
-            let address_y =ArrConvert[temp];
-            dic[seat] =  [parseInt(address_x), address_y];
-
+            let address_x;
+            let address_y;
+            if (seat.length === 3) {
+                let temp = listSeats[index].value.charAt(2);
+                address_x = listSeats[index].value.charAt(0)+listSeats[index].value.charAt(1);
+                address_y = ArrConvert[temp];
+            } else if (seat.length === 2)  {
+                let temp = listSeats[index].value.charAt(1);
+                address_x = listSeats[index].value.charAt(0);
+                address_y = ArrConvert[temp];
+            }
+            dic[seat] = [parseInt(address_x), address_y];
         }
+
         const data = {
             list_Seat: listSeatConvert,
             location_Seat: dic,
@@ -254,7 +262,7 @@ export default function BookingForm() {
                                             return (
                                                 column === '' ? <td key={index}>&emsp;&emsp;</td> :
                                                     <td key={index}>
-                                                        <input type="checkbox" onChange={(e) => changeSeats(e)} className="seat" id={`${row}${column}`} value={`${row}${column}`} />
+                                                        <input type="checkbox" onChange={(e) => changeSeats(e)} className="seat" id={`${row}${column}`} value={`${row}${column}`}  />
                                                     </td>
                                             )
                                         })}

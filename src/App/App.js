@@ -116,13 +116,11 @@ export default class App extends Component {
         this.load_data();
         if (!loggedInUser) {
             localStorage.removeItem('history_booking');
-            localStorage.removeItem('booking');
             return this.UserPage();
         }
         if (loggedInUser) {
             let role = JSON.parse(loggedInUser).role;
             if (role === 'user') {
-                this.load_booking();
                 return this.UserPage();
             } else if (role === 'staff') {
                 this.load_booking();
@@ -133,28 +131,6 @@ export default class App extends Component {
                 return this.UserPage();
             }
         }
-    }
-    load_booking = async () => {
-        const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
-        const request = new Request(`${DOMAIN}/api/booking/${loggedInUser.id}`, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
-        });
-
-        await fetch(request)
-            .then(res => res.json())
-            .then((result) => {
-                if (result) {
-                    localStorage.removeItem('booking');
-                    localStorage.setItem('booking', JSON.stringify(result.data));
-                }
-            },
-                (error) => {
-                    if (error) {
-                        console.log(error);
-                    }
-                }
-            )
     }
 
 

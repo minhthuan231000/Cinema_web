@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PaymentIcon from '@material-ui/icons/Payment';
-//import { SelectionState } from '@devexpress/dx-react-chart';
+
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
 const loggedInUser = JSON.parse(sessionStorage.getItem('user')||0);
@@ -63,9 +63,6 @@ function createListRow(booking_obj) {
     }
     return rows;
 }
-
-
-//const rows = createListRow(booking);
 
 function subtotal(items) {
     return items.map((total_price) => total_price).reduce((sum, i) => sum + i, 0);

@@ -99,13 +99,7 @@ class Login extends Component { // class parent login
                                         this.setState({
                                             alert: 2
                                         })
-                                        setTimeout(
-                                            function () {
-                                                window.location.reload();
-                                            }
-                                                .bind(this),
-                                            4000
-                                        );
+                                        window.location.reload();
                                     } else if (result.Status === 'Email is not exist.') {
                                         this.setState({
                                             alert: 3

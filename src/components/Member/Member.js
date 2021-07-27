@@ -10,6 +10,7 @@ import { Badge } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function Member(props) {
 
     const [openReg, setOpen] = useState(false);
@@ -24,6 +25,24 @@ export default function Member(props) {
     const onOpenModalInfo = () => setOpen3(true);
     const onCloseModalInfo = () => setOpen3(false);
 
+    const [booking,setBooking] = React.useState([]);
+    const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+
+    React.useEffect(function effectFunction() {
+        const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+        if(loggedInUser){
+        const request = new Request(`${DOMAIN}/api/booking/`+loggedInUser.id, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+        async function fetchBooks() {
+            const response = await fetch(request);
+            const json = await response.json();
+            await setBooking(json.data);
+        }
+        fetchBooks();}
+    }, []);
+
     const refreshPage = () => {
         window.location.reload();
     }
@@ -32,10 +51,8 @@ export default function Member(props) {
         refreshPage();
     };
 
-    const loggedInUser = sessionStorage.getItem('user');
-
     if (loggedInUser) { // neu da login thi Redirect
-        let username = JSON.parse(loggedInUser).fullname;
+        let username = loggedInUser.fullname;
 
         return (
             <div className="register-content">
@@ -59,7 +76,7 @@ export default function Member(props) {
                             </li>
                             <li className="btn-cart">
                                 <IconButton aria-label="show 4 new item" color="inherit" href="/Payment"> {/* xem thanh toán vé */}
-                                    <Badge badgeContent={JSON.parse(localStorage.getItem('booking') || '0').length} color="secondary" showZero>
+                                    <Badge badgeContent={booking.length} color="secondary" showZero>
                                         <ShoppingCartIcon style={{ color: '#e00d7a', fontSize: '35px' }} />
                                     </Badge>
                                 </IconButton>

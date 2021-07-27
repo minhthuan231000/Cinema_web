@@ -166,7 +166,7 @@ const handleSubmit2 = () => {
       opening_day: formMovie.opening_day,
       view: 0
     };
-    console.log("🚀 ~ ", formMovie)
+    console.log("🚀 ~ file: AddItem.js ~ line 169 ~ handleSubmit4 ~ data", data)
     
     // let request = new Request(`${DOMAIN}/api/movie`, {
     //   method: 'POST',
@@ -192,10 +192,6 @@ const handleSubmit2 = () => {
     //   )
   }
 
-
-  const handleFileSelect = (event) => {
-    console.log("Image");
-  }
 
   const showLoaiRap = () => {
     let list_loairap = [{ "name": '2d' }, { "name": '3d' }, { "name": '4dx' }];

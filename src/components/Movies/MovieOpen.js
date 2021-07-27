@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap'
 //import { Link } from 'react-router-dom';
 import './Movies.css'
+const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default class MoviesOpen extends Component {
     /* Xử lý nodejs tại component này */
     constructor(props) {
@@ -10,16 +11,26 @@ export default class MoviesOpen extends Component {
             isLogin: false,
         };
     };
-    check_login = (e)=>{
+    check_login = async(e)=>{
         const loggedInUser = sessionStorage.getItem('user');
         if (loggedInUser) {
             const target = e.target;
-            console.log(target.id);
+
+            const request = new Request(`${DOMAIN}/api/movie/`+target.id, {
+                method: 'GET',
+                headers: new Headers({ 'Content-Type': 'application/json' })
+            });
+            async function fetchBooks() {
+                await fetch(request);
+            }
+            await fetchBooks();
+
             return window.location.href=("/BookingForm?id="+target.id);
         }else if (!loggedInUser) {
             alert("Please login !!!");
             return;
         }
+        
     }
     showMovie = () => {
        
