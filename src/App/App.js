@@ -123,7 +123,6 @@ export default class App extends Component {
             if (role === 'user') {
                 return this.UserPage();
             } else if (role === 'staff') {
-                this.load_booking();
                 return this.AdminPage();
             } else if (role === 'lock') {
                 localStorage.removeItem('user');
