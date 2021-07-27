@@ -25,8 +25,6 @@ import ReplayIcon from "@material-ui/icons/Replay";
 
 //Tabs
 import { withStyles } from "@material-ui/core/styles";
-import readUrl from "../utils/Utils";
-
 const styles = theme => ({
     root: {
         backgroundColor: theme.palette.background.paper,
@@ -80,10 +78,24 @@ class ImageUploadCard extends React.Component {
     };
 
 
+    static toDataURL(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+            callback(reader.result);
+          }
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+    }
+    
     handleUploadClick = event => {
         var image = document.getElementById('contained-button-file');
 	    image.src = URL.createObjectURL(event.target.files[0]);
-        readUrl.toDataURL(image.src, function(dataUrl) {
+        toDataURL(image.src, function(dataUrl) {
             console.log('RESULT:', dataUrl)
         })
         const reader = new FileReader();
