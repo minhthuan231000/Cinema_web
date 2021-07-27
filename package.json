@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "12.21.x"
+    "node": "12.21.x",
+    "npm":"7.5.x"
   },
   "dependencies": {
     "@devexpress/dx-react-chart": "^2.7.6",
