@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": "12.21.x",
-    "npm":"7.5.x"
+    "npm": "7.5.x"
   },
   "dependencies": {
     "@devexpress/dx-react-chart": "^2.7.6",
@@ -54,7 +54,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": " react-scripts start"
+    "start": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
