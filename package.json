@@ -24,7 +24,6 @@
     "image-to-base64": "^2.2.0",
     "morgan": "^1.10.0",
     "nodemailer": "^6.6.2",
-    "nodemon": "^2.0.10",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "radium": "^0.26.1",
@@ -51,7 +50,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon server/server",
     "start": " react-scripts start"
   },
   "eslintConfig": {
