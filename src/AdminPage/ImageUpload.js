@@ -78,7 +78,7 @@ class ImageUploadCard extends React.Component {
     };
 
 
-    static toDataURL(url, callback) {
+    toDataURL(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
           var reader = new FileReader();
@@ -95,7 +95,7 @@ class ImageUploadCard extends React.Component {
     handleUploadClick = event => {
         var image = document.getElementById('contained-button-file');
 	    image.src = URL.createObjectURL(event.target.files[0]);
-        toDataURL(image.src, function(dataUrl) {
+        this.toDataURL(image.src, function(dataUrl) {
             console.log('RESULT:', dataUrl)
         })
         const reader = new FileReader();
