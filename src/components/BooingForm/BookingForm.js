@@ -73,6 +73,7 @@ export default function BookingForm() {
             .then((result) => {
                 if (result) {
                     listShowtimes = result.data;
+                    console.log("🚀 ~ file: BookingForm.js ~ line 76 ~ .then ~  result.data",  result.data)
                 }
             },
                 (error) => {
@@ -126,7 +127,7 @@ export default function BookingForm() {
         const target = event.target;
         const value = target.value;
         const check = target.checked;
-        if(listSeats){
+        if(price === 0){
             alert("Please select showtime !!!") 
             return;
         }
@@ -139,7 +140,7 @@ export default function BookingForm() {
         }
     }
     const ShowSelectCinema = () => {
-        let list_cinema = JSON.parse(localStorage.getItem('cinema')||0);
+        let list_cinema = JSON.parse(localStorage.getItem('theater')||0);
         const show_list = list_cinema.map((item, index) => {
             return <MenuItem key={index} value={item.id} >{item.name}</MenuItem>
         })
