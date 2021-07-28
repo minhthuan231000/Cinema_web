@@ -126,6 +126,10 @@ export default function BookingForm() {
         const target = event.target;
         const value = target.value;
         const check = target.checked;
+        if(listSeats){
+            alert("Please select showtime !!!") 
+            return;
+        }
         if (check) {
             const newList = listSeats.concat({ value });
             setListSeats(newList);
