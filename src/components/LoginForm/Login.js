@@ -102,8 +102,7 @@ class Login extends Component { // class parent login
                                         setTimeout(
                                             function () {
                                                 window.location.reload();
-                                            }
-                                                .bind(this),
+                                            },
                                             4000
                                         );
                                     } else if (result.Status === 'Email is not exist.') {
