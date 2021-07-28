@@ -100,6 +100,7 @@ class Login extends Component { // class parent login
                                             alert: 2
                                         })
                                         window.location.reload();
+
                                     } else if (result.Status === 'Email is not exist.') {
                                         this.setState({
                                             alert: 3
