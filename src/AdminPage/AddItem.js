@@ -184,7 +184,6 @@ export default function FeatureAdd() {
     //       }
     //     }
     //   )
-  }
     console.log("🚀 ~ ", data)
   }
 
@@ -374,3 +373,4 @@ export default function FeatureAdd() {
     </div>
   );
 
+}
