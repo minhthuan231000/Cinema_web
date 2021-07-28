@@ -10,11 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 // import RemoveIcon from '@material-ui/icons/Remove';
 import Fab from '@material-ui/core/Fab';
 import QueueIcon from '@material-ui/icons/Queue';
-import ImageUpload from "./ImageUpload";
 import Paper from '@material-ui/core/Paper';
-
-import Utils from "../Utils/Utils"
-
+import UploadImages from './Upload-image';
 import './admin.css'
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
@@ -27,39 +24,39 @@ export default function FeatureAdd() {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    formCinemas[name]= value;
+    formCinemas[name] = value;
   }
   const handleSubmit1 = () => {
     let data = {
       name: formCinemas.name,
       address: formCinemas.address
     };
-    console.log(data) 
+    console.log(data)
     let request = new Request(`${DOMAIN}/api/cinema`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(data)
     });
     fetch(request)
-        .then(res => res.json())
-        .then((result) => {
-            if (result) {
-                if(result.status === '200'){
-                  alert('Success');
-                }else if(result.status === '400'){
-                  alert(result.message)
-                }
-            }
-        },
-            (error) => {
-                if (error) {
-                    console.log(error);
-                }
-            }
-        )
-  } 
+      .then(res => res.json())
+      .then((result) => {
+        if (result) {
+          if (result.status === '200') {
+            alert('Success');
+          } else if (result.status === '400') {
+            alert(result.message)
+          }
+        }
+      },
+        (error) => {
+          if (error) {
+            console.log(error);
+          }
+        }
+      )
+  }
 
- //add showtime
+  //add showtime
   let formShowtimes = {};
   const handleChangeShowtimes = (event) => {
     const target = event.target;
@@ -68,7 +65,7 @@ export default function FeatureAdd() {
     formShowtimes[name] = value;
   }
   const handleAddShowtime = () => {
-   
+
     const timeStart = document.getElementById('timeStart').value;
     const timeEnd = document.getElementById('timeEnd').value;
     let data = {
@@ -85,22 +82,22 @@ export default function FeatureAdd() {
       body: JSON.stringify(data)
     });
     fetch(request)
-     .then(res => res.json())
+      .then(res => res.json())
       .then((result) => {
-       if (result) {
+        if (result) {
           if (result.status === '200') {
             alert('Success');
-           } else if (result.status === '400') {
-             console.log(result.message);;
+          } else if (result.status === '400') {
+            console.log(result.message);;
           }
         }
       },
         (error) => {
-           if (error) {
-             console.log(error);
-           }
+          if (error) {
+            console.log(error);
+          }
         }
-       )
+      )
   }
 
   //add theater
@@ -111,7 +108,7 @@ export default function FeatureAdd() {
     const name = target.name;
     formTheater[name] = value;
   }
-const handleSubmit2 = () => {
+  const handleSubmit2 = () => {
     let data = {
       name: formTheater.name_theater,
       cinema_id: formTheater.cumrap,
@@ -119,14 +116,14 @@ const handleSubmit2 = () => {
       number_row: formTheater.cn,
       number_column: formTheater.cd
     };
-    console.log("🚀 ~ file: AddItem.js ~ line 120 ~ handleSubmit2 ~ data", data)
+    console.log(data)
 
     let request = new Request(`${DOMAIN}/api/theater`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(data)
     });
-    
+
     fetch(request)
       .then(res => res.json())
       .then((result) => {
@@ -146,7 +143,7 @@ const handleSubmit2 = () => {
       )
   }
 
-//add movie
+  //add movie
   let formMovie = {};
   const handleChangeMovie = (event) => {
     const target = event.target;
@@ -155,10 +152,6 @@ const handleSubmit2 = () => {
     formMovie[name] = value;
   }
   const handleSubmit4 = () => {
-
-  // Utils.toDataURL( a ,function(dataUrl) {
-  //   console.log('RESULT:', dataUrl)
-  // })
     let data = {
       name: formMovie.name,
       image: 'test1',
@@ -168,35 +161,7 @@ const handleSubmit2 = () => {
       opening_day: formMovie.opening_day,
       view: 0
     };
-    console.log("🚀 ~ ", formMovie)
-    
-    // let request = new Request(`${DOMAIN}/api/movie`, {
-    //   method: 'POST',
-    //   headers: new Headers({ 'Content-Type': 'application/json' }),
-    //   body: JSON.stringify(data)
-    // });
-    // fetch(request)
-    //   .then(res => res.json())
-    //   .then((result) => {
-    //     if (result) {
-    //       if (result.status === '200') {
-    //         alert('Success');
-    //       } else if (result.status === '400') {
-    //         console.log('Del showtime error');
-    //       }
-    //     }
-    //   },
-    //     (error) => {
-    //       if (error) {
-    //         console.log(error);
-    //       }
-    //     }
-    //   )
-  }
-
-
-  const handleFileSelect = (event) => {
-    console.log("Image");
+    console.log("🚀 ~ ", data)
   }
 
   const showLoaiRap = () => {
@@ -208,7 +173,7 @@ const handleSubmit2 = () => {
   }
 
   const showCumRap = () => {
-    let list_cinema = JSON.parse(localStorage.getItem('cinema')||0);
+    let list_cinema = JSON.parse(localStorage.getItem('cinema') || 0);
     const show_list = list_cinema.map((item, index) => {
       return <MenuItem key={index} value={item.id} >{item.name}</MenuItem>
     })
@@ -216,14 +181,14 @@ const handleSubmit2 = () => {
   }
 
   const showListItemMovie = () => {
-    let list_movie = JSON.parse(localStorage.getItem('movie')||0);
+    let list_movie = JSON.parse(localStorage.getItem('movie') || 0);
     const show_list = list_movie.map((item, index) => {
       return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
     })
     return show_list;
   }
   const showListItemRap = () => {
-    let list_rap = JSON.parse(localStorage.getItem('theater')||0);
+    let list_rap = JSON.parse(localStorage.getItem('theater') || 0);
     const showlist = list_rap.map((item, index) => {
       return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
     })
@@ -245,11 +210,11 @@ const handleSubmit2 = () => {
             <div className="groupCumRap">
               <div><label><h4>Thêm cụm rạp</h4></label></div>
               <TextField style={{ marginLeft: 10 }} id="standard-basic" name="name" label="Tên Cụm Rạp" onChange={(e) => handleChangeThemCumRap(e)} />
-              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="address" label="Địa Chỉ" onChange={(e) => handleChangeThemCumRap(e)} />
+              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="introduce" label="Địa Chỉ" onChange={(e) => handleChangeThemCumRap(e)} />
             </div>
             <p></p>
             <InputLabel id="demo-simple-select-label" >&ensp;Submit</InputLabel>
-            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" onClick={() => handleSubmit1()} aria-label="submit" className="" >
+            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" onClick={() => handleSubmit1()} aria-label="submit">
               <QueueIcon />
             </Fab>
           </Paper>
@@ -261,7 +226,7 @@ const handleSubmit2 = () => {
               <div className="groupControl-rap">
                 <TextField style={{ marginInlineEnd: '0.5em' }} id="textField-TenRap" name="name_theater" label="Tên Rạp" onChange={(e) => handleChangeTheater(e)} />
                 <FormControl className="input-TypeRap" style={{ marginInlineEnd: '0.5em' }}>
-                  <InputLabel id="demo-simple-select-label">Loại Rạp</InputLabel>
+                  <InputLabel>Loại Rạp</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -372,11 +337,10 @@ const handleSubmit2 = () => {
               <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" name="name" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" name="minute_time" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="address" label="Mô tả" onChange={(e) => handleChangeMovie(e)} />
-           
-              <ImageUpload cardName="Input Image" />
+              <UploadImages />
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={e=>handleSubmit4(e)} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={e => handleSubmit4(e)} >
                 <QueueIcon />
               </Fab>
             </div>
