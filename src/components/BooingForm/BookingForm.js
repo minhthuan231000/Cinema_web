@@ -73,7 +73,6 @@ export default function BookingForm() {
             .then((result) => {
                 if (result) {
                     listShowtimes = result.data;
-                    console.log("🚀 ~ file: BookingForm.js ~ line 76 ~ .then ~  result.data",  result.data)
                 }
             },
                 (error) => {
@@ -139,7 +138,32 @@ export default function BookingForm() {
             setListSeats(newList);
         }
     }
-    const ShowSelectCinema = () => {
+    const ShowSelectCinema = async() => {
+        let list_cinema1 ;
+
+        const request = new Request(`${DOMAIN}/api/movie/foundTheater/`+movie_id, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+        
+        await fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+            if (result) {
+                list_cinema1 = result.data;
+            }
+        },
+            (error) => {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        )
+
+        console.log("🚀 ~ file: BookingForm.js ~ line 144 ~ ShowSelectCinema ~ list_cinema1", list_cinema1)
+
+
+        
         let list_cinema = JSON.parse(localStorage.getItem('theater')||0);
         const show_list = list_cinema.map((item, index) => {
             return <MenuItem key={index} value={item.id} >{item.name}</MenuItem>
@@ -155,7 +179,7 @@ export default function BookingForm() {
                 } 
                 return ' ' ;
         })
-        return movies
+        return movies;
     }
     const ShowContentImage = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie'||0));
