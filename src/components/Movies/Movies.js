@@ -46,7 +46,7 @@ export default class MoviesOpen extends Component {
                             <Button variant="primary">Trailer</Button>
                             <Button style={{ marginLeft: '5px' }} id={item.id} variant="text" onClick={this.check_login}>Mua Vé</Button>
                             <Card.Footer>
-                                <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
+                                <small className="text-muted">View: {item.view} </small>
                             </Card.Footer>
                         </Card.Body>
                     </Card>);
@@ -66,7 +66,7 @@ export default class MoviesOpen extends Component {
                         <Button variant="primary">Trailer</Button>
                         <Button style={{ marginLeft: '5px' }} variant="text" id={item.id} onClick={this.check_login}>Mua Vé</Button>
                         <Card.Footer>
-                            <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
+                            <small className="text-muted">View: {item.view} </small>
                         </Card.Footer>
                     </Card.Body>
                 </Card>)

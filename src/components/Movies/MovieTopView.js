@@ -35,7 +35,7 @@ export default class MoviesTopView extends Component {
         const list_movie = JSON.parse(localStorage.getItem('movie')||0);
         let list_sort= [];
         list_sort = list_movie.sort(function (a, b) {
-            return a.view - b.view;
+            return b.view - a.view;
         })
         const movies = list_sort.slice(0,9).map((item, key) => {
             if (item.id < 7) {
@@ -51,7 +51,7 @@ export default class MoviesTopView extends Component {
                             <Button variant="primary">Trailer</Button>
                             <Button style={{ marginLeft: '5px' }} id={item.id} variant="text" onClick={this.check_login}>Mua Vé</Button>
                             <Card.Footer>
-                                <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
+                                <small className="text-muted">View: {item.view} </small>
                             </Card.Footer>
                         </Card.Body>
                     </Card>);
@@ -71,7 +71,7 @@ export default class MoviesTopView extends Component {
                         <Button variant="primary">Trailer</Button>
                         <Button style={{ marginLeft: '5px' }} variant="text" id={item.id} onClick={this.check_login}>Mua Vé</Button>
                         <Card.Footer>
-                            <small className="text-muted">Last updated {Math.floor(Math.random() * 10) + 1} mins ago</small>
+                            <small className="text-muted">View: {item.view}</small>
                         </Card.Footer>
                     </Card.Body>
                 </Card>)

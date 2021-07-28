@@ -18,3 +18,5 @@ Tạo file .env ngoài thư mục lớn: =>
 REACT_APP_DOMAIN=http://localhost:9080
 
 -----------------------
+Clone server from: https://github.com/jinjutroy/server-final-project-ltw2
+Heroku: https://final-project-ltw2.herokuapp.com/

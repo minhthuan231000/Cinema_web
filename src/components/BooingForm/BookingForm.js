@@ -36,7 +36,6 @@ export default function BookingForm() {
     const [listTime, setListTime] = React.useState([]);
     const [price, setPrice] = React.useState(0);
     const [showtime_id, setShowtimeId] = React.useState();
-    const [listShowtimes, setListShowtimes] = React.useState([]);
     const DOMAIN = process.env.REACT_APP_DOMAIN;
 
     if (!loggedInUser) {
@@ -63,6 +62,7 @@ export default function BookingForm() {
     const [movie_id] = React.useState(foo); // set dữ liệu cho movie_id thành công
     const handleChangeCinema = async(event) => {
         setCine(event.target.value);
+        let listShowtimes = {} ;
         const request = new Request(`${DOMAIN}/api/showtime/movie?movie=`+movie_id+'&theater='+event.target.value, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
@@ -72,7 +72,7 @@ export default function BookingForm() {
             .then(res => res.json())
             .then((result) => {
                 if (result) {
-                    setListShowtimes(result.data);
+                    listShowtimes = result.data;
                 }
             },
                 (error) => {
@@ -81,10 +81,10 @@ export default function BookingForm() {
                     }
                 }
             )
-        let list =await listShowtimes.map((time) => ([time.id,time.start_time,time.price,time.theater.number_row,time.theater.number_column]) );
-        console.log(listShowtimes)
-        await setListTime(list);
+        let list = listShowtimes.map((time) => ([time.id,time.start_time,time.price,time.theater.number_row,time.theater.number_column]) );
+        setListTime(list);
     };
+
     const searchPrice = (nameKey)=>{
         for (var i=0; i < listTime.length; i++) {
             if (listTime[i][0] === nameKey) {
@@ -233,7 +233,6 @@ export default function BookingForm() {
     }
     let row = 0;
     let column = 0
-    console.log(listTime)
     if(listTime.length !== 0){
         row = listTime[0][4];
         column = listTime[0][3];
