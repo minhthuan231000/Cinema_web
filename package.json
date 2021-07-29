@@ -48,6 +48,7 @@
     "request": "^2.88.2",
     "sequelize": "^6.6.5",
     "slick-carousel": "^1.8.1",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

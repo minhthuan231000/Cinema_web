@@ -158,6 +158,7 @@ export default function FeatureAdd() {
       opening_day: formMovie.opening_day,
       view: 0
     };
+    console.log("🚀 ~ file: AddItem.js ~ line 161 ~ handleSubmit4 ~ data", data)
     
     // let request = new Request(`${DOMAIN}/api/movie`, {
     //   method: 'POST',

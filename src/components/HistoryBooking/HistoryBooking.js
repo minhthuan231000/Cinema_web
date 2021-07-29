@@ -14,11 +14,13 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Cookies from 'universal-cookie'
+const cookies = new Cookies();
 
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 
-const loggedInUser = JSON.parse(sessionStorage.getItem('user')||0);
+const loggedInUser = cookies.get('user');
 const movie = JSON.parse(localStorage.getItem('movie')||0);
 const theater = JSON.parse(localStorage.getItem('theater')||0);
 const cinema = JSON.parse(localStorage.getItem('cinema')||0);

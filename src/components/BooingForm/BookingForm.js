@@ -5,6 +5,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Cookies from 'universal-cookie'
+const cookies = new Cookies();
 const useStyles = makeStyles((theme) => ({
     button: {
         display: 'block',
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function BookingForm() {
     const classes = useStyles();
-    const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+    const loggedInUser = cookies.get('user');
     const [open1, setOpen] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
 

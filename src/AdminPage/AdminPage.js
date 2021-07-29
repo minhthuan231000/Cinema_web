@@ -28,6 +28,8 @@ import {
     Redirect
 } from "react-router-dom";
 import Profile from './Profile';
+import Cookies from 'universal-cookie'
+const cookies = new Cookies();
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -86,7 +88,7 @@ export default function AdminPage(props) {
         setAnchorEl3(null);
     };
     let logout = () => {
-        sessionStorage.removeItem('user');
+        cookies.remove('user');
         window.location.reload();
     };
     //const [isProfile, setProfile] = React.useState(props.loggedInAdmin);

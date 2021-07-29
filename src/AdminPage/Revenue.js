@@ -12,10 +12,12 @@ import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 import './admin.css'
 import { useEffect } from 'react';
+import Cookies from 'universal-cookie'
+const cookies = new Cookies();
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
-const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+const loggedInUser = cookies.get('user');
 
 const useStyles = makeStyles((theme) => ({
     container: {

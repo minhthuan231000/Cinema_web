@@ -5,10 +5,12 @@ import './member.css'
 import Register from '../RegisterForm/Register';
 import Login from '../LoginForm/Login';
 import Info from '../InfoForm/InfoForm';
+import Cookies from 'universal-cookie';
 
 import { Badge } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+const cookies = new Cookies();
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function Member(props) {
@@ -26,10 +28,10 @@ export default function Member(props) {
     const onCloseModalInfo = () => setOpen3(false);
 
     const [booking,setBooking] = React.useState([]);
-    const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+    const loggedInUser = cookies.get('user');
 
     React.useEffect(function effectFunction() {
-        const loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+        const loggedInUser = cookies.get('user');
         if(loggedInUser){
         const request = new Request(`${DOMAIN}/api/booking/`+loggedInUser.id, {
             method: 'GET',
@@ -42,12 +44,13 @@ export default function Member(props) {
         }
         fetchBooks();}
     }, []);
-
     const refreshPage = () => {
         window.location.reload();
     }
     let logout = () => {
-        sessionStorage.removeItem('user');
+        
+        const cookies = new Cookies();
+        cookies.remove('user');
         refreshPage();
     };
 

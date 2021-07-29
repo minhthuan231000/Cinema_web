@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './Info.css'
+import Cookies from 'universal-cookie'
+const cookies = new Cookies();
 export default class Info extends Component {
   render() {
-    let user = JSON.parse(sessionStorage.getItem('user'));
+    let user = cookies.get('user');
     return (
       <div className="Info">
         <h2>Thông tin tài khoản</h2>

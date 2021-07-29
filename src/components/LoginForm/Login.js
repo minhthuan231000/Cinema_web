@@ -4,8 +4,10 @@ import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../model
 
 import icon_fb from '../../images/icons/icon-facebook.jpg'
 import icon_gg from '../../images/icons/icon-google.jpg'
-
+import Cookies from 'universal-cookie';
 import Alert from '@material-ui/lab/Alert';
+const cookies = new Cookies();
+
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 class Login extends Component { // class parent login
@@ -95,7 +97,8 @@ class Login extends Component { // class parent login
                                             numphone: result.user.numphone,
                                             role: result.user.role,
                                         }
-                                        sessionStorage.setItem('user', JSON.stringify(data));
+                                        cookies.set('user', data, { path: '/' });
+                                       
                                         this.setState({
                                             alert: 2
                                         })

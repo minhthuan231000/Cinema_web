@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap'
 //import { Link } from 'react-router-dom';
 import './Movies.css'
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default class MoviesTopView extends Component {
     /* Xử lý nodejs tại component này */
@@ -11,7 +14,7 @@ export default class MoviesTopView extends Component {
     };
     
     check_login = async (e)=>{
-        const loggedInUser = sessionStorage.getItem('user');
+        const loggedInUser = cookies.get('user');
         if (loggedInUser) {
             const target = e.target;
 
