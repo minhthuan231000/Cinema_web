@@ -34,9 +34,32 @@ export default function BookingForm() {
 
     const [listSeats, setListSeats] = React.useState([]);
     const [listTime, setListTime] = React.useState([]);
+    const [listTheater, setListTheater] = React.useState([]);
     const [price, setPrice] = React.useState(0);
     const [showtime_id, setShowtimeId] = React.useState();
     const DOMAIN = process.env.REACT_APP_DOMAIN;
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const foo = params.get('id'); // movie_id
+    const [movie_id] = React.useState(foo); // set dữ liệu cho movie_id thành công
+
+    React.useEffect(function effectFunction() {
+        const DOMAIN = process.env.REACT_APP_DOMAIN;
+        const search = window.location.search;
+        const params = new URLSearchParams(search);
+        const foo = params.get('id'); // movie_id
+        
+        const request = new Request(`${DOMAIN}/api/movie/foundTheater/`+foo, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+        async function fetchBooks() {
+            const response = await fetch(request);
+            const json = await response.json();
+            await setListTheater(json.data);
+        }
+        fetchBooks();
+    }, []);
 
     if (!loggedInUser) {
         window.location.href = "/Home";
@@ -56,10 +79,6 @@ export default function BookingForm() {
         setOpen3(true);
     };
 
-    const search = window.location.search;
-    const params = new URLSearchParams(search);
-    const foo = params.get('id'); // movie_id
-    const [movie_id] = React.useState(foo); // set dữ liệu cho movie_id thành công
     const handleChangeCinema = async(event) => {
         setCine(event.target.value);
         let listShowtimes = {} ;
@@ -94,6 +113,7 @@ export default function BookingForm() {
     }
     const handleChangeTime = async (event) => {
         await setTime('');
+        
         let temp = event.target.value;
         setTime(temp);
         setShowtimeId(event.target.value);
@@ -138,35 +158,11 @@ export default function BookingForm() {
             setListSeats(newList);
         }
     }
-    const ShowSelectCinema = async() => {
-        let list_cinema1 ;
-
-        const request = new Request(`${DOMAIN}/api/movie/foundTheater/`+movie_id, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
-        });
+    
+    const ShowSelectCinema = () => {
         
-        await fetch(request)
-        .then(res => res.json())
-        .then((result) => {
-            if (result) {
-                list_cinema1 = result.data;
-            }
-        },
-            (error) => {
-                if (error) {
-                    console.log(error);
-                }
-            }
-        )
-
-        console.log("🚀 ~ file: BookingForm.js ~ line 144 ~ ShowSelectCinema ~ list_cinema1", list_cinema1)
-
-
-        
-        let list_cinema = JSON.parse(localStorage.getItem('theater')||0);
-        const show_list = list_cinema.map((item, index) => {
-            return <MenuItem key={index} value={item.id} >{item.name}</MenuItem>
+        const show_list = listTheater.map((item, index) => {
+            return <MenuItem key={index} value={item.theater.id} >{item.theater.name}</MenuItem>
         })
         return show_list;
     }

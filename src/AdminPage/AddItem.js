@@ -31,7 +31,6 @@ export default function FeatureAdd() {
       name: formCinemas.name,
       address: formCinemas.address
     };
-    console.log(data)
     let request = new Request(`${DOMAIN}/api/cinema`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -50,7 +49,7 @@ export default function FeatureAdd() {
       },
         (error) => {
           if (error) {
-            console.log(error);
+            alert(error);
           }
         }
       )
@@ -75,7 +74,6 @@ export default function FeatureAdd() {
       end_time: timeEnd,
       price: formShowtimes.price
     };
-    console.log(data)
     let request = new Request(`${DOMAIN}/api/showtime`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -88,13 +86,13 @@ export default function FeatureAdd() {
           if (result.status === '200') {
             alert('Success');
           } else if (result.status === '400') {
-            console.log(result.message);;
+            alert(result.message);;
           }
         }
       },
         (error) => {
           if (error) {
-            console.log(error);
+            alert(error);
           }
         }
       )
@@ -116,7 +114,6 @@ export default function FeatureAdd() {
       number_row: formTheater.cn,
       number_column: formTheater.cd
     };
-    console.log(data)
 
     let request = new Request(`${DOMAIN}/api/theater`, {
       method: 'POST',
@@ -131,13 +128,13 @@ export default function FeatureAdd() {
           if (result.status === '200') {
             alert('Success');
           } else if (result.status === '400') {
-            console.log(result.message);
+            alert(result.message);
           }
         }
       },
         (error) => {
           if (error) {
-            console.log(error);
+            alert(error);
           }
         }
       )
@@ -184,7 +181,6 @@ export default function FeatureAdd() {
     //       }
     //     }
     //   )
-    console.log("🚀 ~ ", data)
   }
 
   const showLoaiRap = () => {

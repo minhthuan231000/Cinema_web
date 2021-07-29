@@ -152,7 +152,7 @@ const EnhancedTableToolbar = (props) => {
                         setRows(result.data);
                         setSelected([]);
                     } else if (result.Status === 'Error') {
-                        console.log('Del showtime error');
+                        alert('Del showtime error');
                     }
                 }
             },
@@ -179,7 +179,7 @@ const EnhancedTableToolbar = (props) => {
                         setRows(result.data);
                         setSelected([]);
                     } else if (result.Status === 'Error') {
-                        console.log('Active user error');
+                        alert('Active user error');
                     }
                 }
             },

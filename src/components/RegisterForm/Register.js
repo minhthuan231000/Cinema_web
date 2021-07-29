@@ -47,7 +47,6 @@ class Register extends Component {
           fetch(request)
             .then(res => res.json())
             .then((result) => {
-              console.log(result.Status);
               if (result.Status === 'Complete') {
                 alert("Đăng kí thành công!");
                 window.location.reload();

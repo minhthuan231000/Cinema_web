@@ -263,7 +263,6 @@ class Login extends Component { // class parent login
                     fetch(request)
                         .then(res => res.json())
                         .then((result) => {
-                            console.log(result.Status);
                             if (result.Status === 'Complete') {
                                 this.setState({ LogForm: 3 })
                             } else if (result.Status === 'Invalid') {
@@ -328,7 +327,6 @@ class Login extends Component { // class parent login
                 e.preventDefault();
 
                 const validation = validateLoginForm();
-                console.log(validation);
                 if (!validation) {
                     if (validation.confirm) {
                         alert(validation.confirm);
@@ -355,7 +353,6 @@ class Login extends Component { // class parent login
                     fetch(request)
                         .then(res => res.json())
                         .then((result) => {
-                            console.log(result.Status);
                             if (result.Status === 'Complete') {
                                 this.setState({ LogForm: 3, alert: 9 });
                                 window.location.reload();
@@ -478,7 +475,6 @@ class Login extends Component { // class parent login
                     fetch(request)
                         .then(res => res.json())
                         .then((result) => {
-                            console.log(result.Status);
                             if (result.Status === 'Complete') {
                                 this.setState({
                                     alert: 10
