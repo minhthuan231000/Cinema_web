@@ -73,6 +73,10 @@
     width: 100%;
     padding: 16px 10px;
     background-color: #fff;
+    font-family: 'MyriadBold';
+    line-height: 18px;
+    color: #000;
+    text-align: left;
 }
 .news-txt h3 {
     font-family: 'MyriadBold';

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import lgo1 from '../../images/logo-dolby-atmos.png'
+import lgo2 from '../../images/logo-CHRISTIE.png'
+import lgo3 from '../../images/logo-2D.png'
+import lgo4 from '../../images/logo-3D.png'
 export default function Bottom() {
     const [openMd1, setOpen1] = useState(false);
     const [openMd2, setOpen2] = useState(false);
@@ -64,7 +68,7 @@ export default function Bottom() {
                 <ul>
                     <li>
                         <span className="icon-modal" onClick={() => setOpen1(true)}>
-                            <img src="https://cinestar.com.vn/pictures/moi/8DinhDang/dolby2.png" align="DOBLY ATMOS - CÔNG NGHỆ ÂM THANH MỚI MANG TÍNH ĐỘT PHÁ" alt="" />
+                            <img src={lgo1} align="DOBLY ATMOS - CÔNG NGHỆ ÂM THANH MỚI MANG TÍNH ĐỘT PHÁ" alt="" />
                         </span>
                         <Modal open={openMd1} onClose={() => setOpen1(false)} center classNames={{
                             overlayAnimationIn: 'customEnterOverlayAnimation',
@@ -92,7 +96,7 @@ export default function Bottom() {
                     </li>
                     <li>
                         <span className="icon-modal" onClick={() => setOpen2(true)}>
-                            <img src="https://cinestar.com.vn/pictures/moi/8DinhDang/crhistie.png" align="Máy chiếu CHRISTIE" alt="" />
+                            <img src={lgo2} align="Máy chiếu CHRISTIE" alt="" />
                         </span>
                         <Modal open={openMd2} onClose={() => setOpen2(false)} center classNames={{
                             overlayAnimationIn: 'customEnterOverlayAnimation',
@@ -113,7 +117,7 @@ export default function Bottom() {
                     </li>
                     <li>
                         <span className="icon-modal" onClick={() => setOpen3(true)}>
-                            <img src="https://cinestar.com.vn/pictures/moi/8DinhDang/2d.jpg" align="Công nghệ chiếu phim 2D Digital" alt="" />
+                            <img src={lgo3} align="Công nghệ chiếu phim 2D Digital" alt="" />
                         </span>
                         <Modal open={openMd3} onClose={() => setOpen3(false)} center classNames={{
                             overlayAnimationIn: 'customEnterOverlayAnimation',
@@ -135,7 +139,7 @@ export default function Bottom() {
                     </li>
                     <li>
                         <span className="icon-modal" onClick={() => setOpen4(true)}>
-                            <img src="https://cinestar.com.vn/pictures/moi/8DinhDang/3d.png" align="Công nghệ chiếu phim 3D Digital" alt="" />
+                            <img src={lgo4} align="Công nghệ chiếu phim 3D Digital" alt="" />
                         </span>
                         <Modal open={openMd4} onClose={() => setOpen4(false)} center classNames={{
                             overlayAnimationIn: 'customEnterOverlayAnimation',

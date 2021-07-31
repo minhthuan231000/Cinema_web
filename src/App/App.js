@@ -26,7 +26,6 @@ import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
 import BookingForm from '../components/BooingForm/BookingForm';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
-console.log("🚀 ~ file: App.js ~ line 29 ~ cookies", cookies.get('user').id)
 
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;

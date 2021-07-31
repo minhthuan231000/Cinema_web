@@ -1,160 +1,124 @@
-import React, { Component } from "react";
-import UploadService from "../services/upload-files";
+// imports the React Javascript Library
+import React from "react";
+//Card
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
 
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { Box, Typography, Button, ListItem, withStyles } from '@material-ui/core';
-const BorderLinearProgress = withStyles((theme) => ({
-    root: {
-        height: 15,
-        borderRadius: 5,
-    },
-    colorPrimary: {
-        backgroundColor: "#EEEEEE",
-    },
-    bar: {
-        borderRadius: 5,
-        backgroundColor: '#1a90ff',
-    },
-}))(LinearProgress);
-export default class UploadFiles extends Component {
-    constructor(props) {
-        super(props);
+import Fab from "@material-ui/core/Fab";
+import Grid from "@material-ui/core/Grid";
+import blue from "@material-ui/core/colors/blue";
 
-        this.state = {
-            currentFile: undefined,
-            previewImage: undefined,
-            progress: 0,
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
-            message: "",
-            isError: false,
-            imageInfos: [],
-        };
+import { withStyles } from "@material-ui/core/styles";
 
-    }
-    componentDidMount() {
-        UploadService.getFiles().then((response) => {
-            this.setState({
-                imageInfos: response.data,
-            });
-        });
-    }
-    selectFile(e) {
-        this.setState({
-            currentFile: e.target.files[0],
-            previewImage: URL.createObjectURL(e.target.files[0]),
-            progress: 0,
-            message: ""
-        });
-    }
-    upload() {
-        this.setState({
-            progress: 0
-        });
+const styles = theme => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+    width: 500,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-end"
+  },
+  input: {
+    display: "none"
+  },
+  button: {
+    color: blue[900],
+    margin: 10
+  }
+});
 
-        UploadService.upload(this.state.currentFile, (event) => {
-            this.setState({
-                progress: Math.round((100 * event.loaded) / event.total),
-            });
-        })
-            .then((response) => {
-                this.setState({
-                    message: response.data.message,
-                    isError: false
-                });
-                return UploadService.getFiles();
-            })
-            .then((files) => {
-                this.setState({
-                    imageInfos: files.data,
-                });
-            })
-            .catch((err) => {
-                this.setState({
-                    progress: 0,
-                    message: "Could not upload the image!",
-                    currentFile: undefined,
-                    isError: true
-                });
-            });
-    }
-    render() {
-        const {
-            currentFile,
-            previewImage,
-            progress,
-            message,
-            imageInfos,
-            isError
-        } = this.state;
+class ImageUploadCard extends React.Component {
+  state = {
+    mainState: "initial", // initial, uploaded
+    imageUploaded: 0,
+    selectedFile: null
+  };
+  handleUploadClick = event => {
+    var file = event.target.files[0];
 
-        return (
-            <div className="mg20">
-                <label htmlFor="btn-upload">
-                    <input
-                        id="btn-upload"
-                        name="btn-upload"
-                        style={{ display: 'none' }}
-                        type="file"
-                        accept="image/*"
-                        onChange={this.selectFile} />
-                    <Button
-                        className="btn-choose"
-                        variant="outlined"
-                        component="span" >
-                        Choose Image
-                    </Button>
-                </label>
-                <div className="file-name">
-                    {currentFile ? currentFile.name : null}
-                </div>
-                <Button
-                    className="btn-upload"
-                    color="primary"
-                    variant="contained"
-                    component="span"
-                    disabled={!currentFile}
-                    onClick={this.upload}>
-                    Upload
-                </Button>
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = function (e) {
+      this.setState({
+        selectedFile: [reader.result]
+      });
+    }.bind(this);// Would see a path?
+    this.setState({
+      mainState: "uploaded",
+      selectedFile: event.target.files[0],
+      imageUploaded: 1
+    });
+  };
 
-                {currentFile && (
-                    <Box className="my20" display="flex" alignItems="center">
-                        <Box width="100%" mr={1}>
-                            <BorderLinearProgress variant="determinate" value={progress} />
-                        </Box>
-                        <Box minWidth={35}>
-                            <Typography variant="body2" color="textSecondary">{`${progress}%`}</Typography>
-                        </Box>
-                    </Box>)
-                }
+  renderInitialState() {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <CardContent>
+          <Grid container justifyContent="center" alignItems="center">
+            <input
+              accept="image/*"
+              className={classes.input}
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={this.handleUploadClick}
+            />
+            <label htmlFor="contained-button-file">
+              <Fab component="span" className={classes.button}>
+                <AddPhotoAlternateIcon />
+              </Fab>
+            </label>
+          </Grid>
+        </CardContent>
+      </React.Fragment>
+    );
+  }
 
-                {previewImage && (
-                    <div>
-                        <img className="preview my20" src={previewImage} alt="" />
-                    </div>
-                )}
+  renderUploadedState() {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <CardActionArea onClick={this.imageResetHandler}>
+          <img alt=""
+            width="100%"
+            className={classes.media}
+            src={this.state.selectedFile} // obj img đã lấy được
+          />
+          {/* truyền props ra bên ngoài */}
+          {this.props.children(this.state.selectedFile)} 
+        </CardActionArea>
+      </React.Fragment>
+    );
+  }
 
-                {message && (
-                    <Typography variant="subtitle2" className={`upload-message ${isError ? "error" : ""}`}>
-                        {message}
-                    </Typography>
-                )}
+  imageResetHandler = event => {
+    console.log("Reset Click!");
+    this.setState({
+      mainState: "initial",
+      selectedFile: null,
+      imageUploaded: 0
+    });
+  };
 
-                <Typography variant="h6" className="list-header">
-                    List of Images
-                </Typography>
-                <ul className="list-group">
-                    {imageInfos &&
-                        imageInfos.map((image, index) => (
-                            <ListItem
-                                divider
-                                key={index}>
-                                <img src={image.url} alt={image.name} height="80px" className="mr20" />
-                                <a href={image.url}>{image.name}</a>
-                            </ListItem>
-                        ))}
-                </ul>
-            </div>
-        );
-    }
+  render() {
+    const { classes} = this.props;
+    return (
+      <React.Fragment>
+        <div className={classes.root}>
+          <Card>
+            {/* chuyển đổi trạng thái khởi tạo icon upload và sau khi upload */}
+            {(this.state.mainState ==="initial" && this.renderInitialState()) ||
+              (this.state.mainState === "uploaded" &&
+                this.renderUploadedState())}
+          </Card>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
+
+export default withStyles(styles, { withTheme: true })(ImageUploadCard);

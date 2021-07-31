@@ -17,7 +17,6 @@ import './admin.css'
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function FeatureAdd() {
 
-
   //Add cinema
   let formCinemas = {};
   const handleChangeThemCumRap = (event) => {
@@ -159,7 +158,7 @@ export default function FeatureAdd() {
       view: 0
     };
     console.log("🚀 ~ file: AddItem.js ~ line 161 ~ handleSubmit4 ~ data", data)
-    
+
     // let request = new Request(`${DOMAIN}/api/movie`, {
     //   method: 'POST',
     //   headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -222,8 +221,15 @@ export default function FeatureAdd() {
   const handleClick = event => {
     //const { myValue } = event.target.value;
   }
+
+  const objImg = data => {
+    console.log('object image: ')
+    console.log(data)
+    console.log('url image: ')
+    console.log(data[0])
+  }
   return (
-    <div className="addFeature-root">
+    <div className="addFeature-root" >
       <div className="col-5" >
         <form autoComplete="auto" > {/*them cum rap */}
           <Paper style={{ boxShadow: '1px 4px 3px 0px rgb(0,0,0,0.7)' }}>
@@ -357,7 +363,7 @@ export default function FeatureAdd() {
               <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" name="name" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" name="minute_time" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="address" label="Mô tả" onChange={(e) => handleChangeMovie(e)} />
-              <UploadImages />
+              <UploadImages children={objImg}/>
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
               <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={e => handleSubmit4(e)} >
