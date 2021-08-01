@@ -26,20 +26,15 @@ import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
 import BookingForm from '../components/BooingForm/BookingForm';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
-console.log("🚀 ~ file: App.js ~ line 29 ~ cookies", cookies.get('user').id)
 
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            isAdmin: false, /* true là đi đến Admin, false là đi đến home */
-        };
+    constructor(props) {
+        super(props);
+        this.state = {isAdmin: true}/* true là đi đến Admin, false là đi đến home */
+        
     }
-    
-     
-
     AdminPage = () => {
         return <AdminPage loggedInAdmin={false} />
     }
@@ -117,6 +112,17 @@ export default class App extends Component {
             </div>
         )
     }
+    fetchUser = async() => {
+        const loggedInUser = cookies.get('user');
+        const request = new Request(`${DOMAIN}/api/user/`+loggedInUser.id, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+        
+        await fetch(request)
+        .then(response => response.json())
+       .then(json => this.setState({ isAdmin: json.data.isAdmin }));
+    }
     showButton = () => {
         const loggedInUser = cookies.get('user');
         this.load_data();
@@ -124,7 +130,7 @@ export default class App extends Component {
             localStorage.removeItem('history_booking');
             return this.UserPage();
         }
-        if (loggedInUser) {
+        if (loggedInUser) {            
             let role = loggedInUser.role;
             if (role === 'user') {
                 return this.UserPage();
@@ -162,8 +168,8 @@ export default class App extends Component {
             )
         return;
     }
-
     render() {
+    //this.fetchUser()
         return (
             <div className="App">
                 {this.showButton()}

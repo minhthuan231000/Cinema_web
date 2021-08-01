@@ -17,7 +17,7 @@ const cookies = new Cookies();
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 const TAX_RATE = 0.1;
-const loggedInUser = cookies.get('user');
+const loggedInUser = cookies.get('user'); //Ko can doi
 
 const useStyles = makeStyles((theme) => ({
     container: {
