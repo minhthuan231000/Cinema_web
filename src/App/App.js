@@ -32,15 +32,13 @@ const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 const loggedInUser = cookies.get('user');
 
-let isAdmin = false;
-
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {x: false}/* true là đi đến Admin, false là đi đến home */
+        this.state = {isAdmin: false}/* true là đi đến Admin, false là đi đến home */
         
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
@@ -49,7 +47,7 @@ export default class App extends Component {
         .then(res => res.json())
         .then((result) => {
                 if (result) {
-                    this.setState({ x: result.data.isAdmin });
+                    this.setState({ isAdmin: result.data.isAdmin });
                 }
             }
         )
@@ -172,7 +170,7 @@ export default class App extends Component {
     render() {
         return (
             <div className="App">
-                {this.showButton(isAdmin)}
+                {this.showButton(this.state.isAdmin)}
             </div>
         );
     }
