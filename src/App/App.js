@@ -29,11 +29,30 @@ const cookies = new Cookies();
 
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
+
+const loggedInUser = cookies.get('user');
+
+let isAdmin = false;
+
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {isAdmin: true}/* true là đi đến Admin, false là đi đến home */
+        this.state = {x: false}/* true là đi đến Admin, false là đi đến home */
         
+    }
+    componentWillMount() {
+        const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+        fetch(request)
+        .then(res => res.json())
+        .then((result) => {
+                if (result) {
+                    this.setState({ x: result.data.isAdmin });
+                }
+            }
+        )
     }
     AdminPage = () => {
         return <AdminPage loggedInAdmin={false} />
@@ -112,38 +131,20 @@ export default class App extends Component {
             </div>
         )
     }
-    fetchUser = async() => {
-        const loggedInUser = cookies.get('user');
-        const request = new Request(`${DOMAIN}/api/user/`+loggedInUser.id, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
-        });
-        
-        await fetch(request)
-        .then(response => response.json())
-       .then(json => this.setState({ isAdmin: json.data.isAdmin }));
-    }
-    showButton = () => {
-        const loggedInUser = cookies.get('user');
+    showButton = (isAdmin) => {
         this.load_data();
+        
         if (!loggedInUser) {
-            localStorage.removeItem('history_booking');
             return this.UserPage();
         }
-        if (loggedInUser) {            
-            let role = loggedInUser.role;
-            if (role === 'user') {
+        if (loggedInUser) {    
+            if (isAdmin === false) {
                 return this.UserPage();
-            } else if (role === 'staff') {
+            } else if (isAdmin === true) {
                 return this.AdminPage();
-            } else if (role === 'lock') {
-                localStorage.removeItem('user');
-                alert("Your acc")
-                return this.UserPage();
-            }
+            } 
         }
     }
-
 
     load_data = async () => {
         let request = new Request(`${DOMAIN}/load/data`, {
@@ -169,10 +170,9 @@ export default class App extends Component {
         return;
     }
     render() {
-    //this.fetchUser()
         return (
             <div className="App">
-                {this.showButton()}
+                {this.showButton(isAdmin)}
             </div>
         );
     }

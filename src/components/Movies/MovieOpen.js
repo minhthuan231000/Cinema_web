@@ -5,7 +5,7 @@ import './Movies.css'
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-const DOMAIN = process.env.REACT_APP_DOMAIN;
+//const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default class MoviesOpen extends Component {
     /* Xử lý nodejs tại component này */
     constructor(props) {
@@ -18,15 +18,6 @@ export default class MoviesOpen extends Component {
         const loggedInUser = cookies.get('user');
         if (loggedInUser) {
             const target = e.target;
-
-            const request = new Request(`${DOMAIN}/api/movie/`+target.id, {
-                method: 'GET',
-                headers: new Headers({ 'Content-Type': 'application/json' })
-            });
-            async function fetchBooks() {
-                await fetch(request);
-            }
-            await fetchBooks();
 
             return window.location.href=("/BookingForm?id="+target.id);
         }else if (!loggedInUser) {

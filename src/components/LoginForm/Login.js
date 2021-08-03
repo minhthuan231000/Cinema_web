@@ -95,7 +95,6 @@ class Login extends Component { // class parent login
                                             email: result.user.email,
                                             fullname: result.user.fullname,
                                             numphone: result.user.numphone,
-                                            role: result.user.role,
                                         }
                                         cookies.set('user', data, { path: '/' });
                                        

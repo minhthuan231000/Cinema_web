@@ -142,8 +142,7 @@ class Register extends Component {
           };
         } else {
           let data = {
-            ...formData,
-            role: "user"
+            ...formData
           };
           //Login code
 

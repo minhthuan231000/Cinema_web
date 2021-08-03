@@ -55,12 +55,12 @@ export default function BookingForm() {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
         });
-        async function fetchBooks() {
+        async function fetchListTheater() {
             const response = await fetch(request);
             const json = await response.json();
             await setListTheater(json.data);
         }
-        fetchBooks();
+        fetchListTheater();
     }, []);
 
     if (!loggedInUser) {

@@ -88,12 +88,12 @@ export default function Revenue() {
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(dataSetup)
         });
-        async function fetchBooks() {
+        async function fetchRevenue() {
             const response = await fetch(request);
             const json = await response.json();
             await setRevenue(json.data);
         }
-        fetchBooks();
+        fetchRevenue();
     }, []);
     useEffect(function effectFunction() {
         const dataSetup = {
@@ -105,12 +105,12 @@ export default function Revenue() {
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(dataSetup)
         });
-        async function fetchBooks() {
+        async function fetchRevenueMovie() {
             const response = await fetch(request);
             const json = await response.json();
             await setRevenueMovie(json.data);
         }
-        fetchBooks();
+        fetchRevenueMovie();
     }, []);
     rows =createListRow(revenue);
     rowsMovie = createListRowMovie(revenueMovie);

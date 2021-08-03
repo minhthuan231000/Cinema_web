@@ -16,10 +16,10 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import UpdateIcon from '@material-ui/icons/Update';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import BlockIcon from '@material-ui/icons/Block';
-
+import BlockIcon from '@material-ui/icons/Lock';
+import UpdateIcon from '@material-ui/icons/Update';
 
 const DOMAIN =process.env.REACT_APP_DOMAIN;
 
@@ -136,6 +136,34 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected, selected, setRows, setSelected } = props;
+
+    const click_update= async() => {
+        let data = { listId: selected };
+        let request = new Request(`${DOMAIN}/api/user/update`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(data)
+        });
+
+        await fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    if (result.Status === 'Complete') {
+                        setRows(result.data);
+                        setSelected([]);
+                    } else if (result.Status === 'Error') {
+                        alert('Del showtime error');
+                    }
+                }
+            },
+                (error) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
+    }
     const click_delete = async() => {
         let data = { listId: selected };
         let request = new Request(`${DOMAIN}/api/user/lock`, {
@@ -208,14 +236,19 @@ const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 ? (
                 <div style={{display: 'inline-flex'}}>
+                     <Tooltip title="Active staff">
+                        <IconButton aria-label="update" onClick={() => click_update()}>
+                            <UpdateIcon />
+                        </IconButton>
+                    </Tooltip>
                     <Tooltip title="Lock account">
                         <IconButton aria-label="delete" onClick={() => click_delete()}>
                             <BlockIcon />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="active account">
+                    <Tooltip title="Active user">
                         <IconButton aria-label="active" onClick={() => click_active()}>
-                            <UpdateIcon />
+                            <LockOpenIcon />
                         </IconButton>
                     </Tooltip>
                 </div>
@@ -277,12 +310,12 @@ export default function EnhancedTable() {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
         });
-        async function fetchBooks() {
+        async function fetchRows() {
             const response = await fetch(request);
             const json = await response.json();
             await setRows(json.data);
         }
-        fetchBooks();
+        fetchRows();
     }, []);
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
