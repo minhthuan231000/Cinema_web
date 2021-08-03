@@ -35,7 +35,7 @@ export default class App extends Component {
         this.state = {isAdmin: false}/* true là đi đến Admin, false là đi đến home */
     }
     // check admin
-    UNSAFE_componentWillMount() {
+    UNSAFE_componentDidMount() {
         const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
