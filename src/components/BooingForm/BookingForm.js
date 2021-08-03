@@ -37,6 +37,7 @@ export default function BookingForm() {
     const [listSeats, setListSeats] = React.useState([]);
     const [listTime, setListTime] = React.useState([]);
     const [listTheater, setListTheater] = React.useState([]);
+    const [listTicket, setListTicket] = React.useState([]);
     const [price, setPrice] = React.useState(0);
     const [showtime_id, setShowtimeId] = React.useState();
     const DOMAIN = process.env.REACT_APP_DOMAIN;
@@ -114,12 +115,31 @@ export default function BookingForm() {
         }
     }
     const handleChangeTime = async (event) => {
-        await setTime('');
-        
         let temp = event.target.value;
-        setTime(temp);
-        setShowtimeId(event.target.value);
-        setPrice(searchPrice(temp));
+        let listTickets = {};
+        await setTime('');
+        await setTime(temp);
+        await setShowtimeId(event.target.value);
+        await setPrice(searchPrice(temp));
+        const request = new Request(`${DOMAIN}/api/showtime/showtime/`+ event.target.value, {
+            method: 'GET',
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        });
+
+        await fetch(request)
+            .then(res => res.json())
+            .then((result) => {
+                if (result) {
+                    listTickets = result.data[0].bookings[0].tickets;
+                }
+            },
+                (error) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            )
+            setListTicket(listTickets);
     };
 
     const createRow = (sizeRow) => {

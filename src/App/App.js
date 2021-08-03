@@ -34,7 +34,6 @@ export default class App extends Component {
         super(props);
         this.state = {isAdmin: false}/* true là đi đến Admin, false là đi đến home */
     }
-
     // check admin
     UNSAFE_componentWillMount() {
         const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
