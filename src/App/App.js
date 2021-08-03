@@ -35,20 +35,23 @@ export default class App extends Component {
         this.state = {isAdmin: false}/* true là đi đến Admin, false là đi đến home */
     }
     // check admin
-    UNSAFE_componentDidMount() {
-        const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
-        });
-        fetch(request)
-        .then(res => res.json())
-        .then((result) => {
-                if (result) {
-                    this.setState({ isAdmin: result.data.isAdmin });
-                }
+        componentDidMount() {
+            if(loggedInUser){
+                const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
+                    method: 'GET',
+                    headers: new Headers({ 'Content-Type': 'application/json' })
+                });
+                fetch(request)
+                .then(res => res.json())
+                .then((result) => {
+                        if (result) {
+                            this.setState({ isAdmin: result.data.isAdmin });
+                        }
+                    }
+                )
             }
-        )
-    }
+        }
+
     AdminPage = () => {
         return <AdminPage loggedInAdmin={false} />
     }
@@ -128,7 +131,6 @@ export default class App extends Component {
     }
     showButton = (isAdmin) => {
         this.load_data();
-        
         if (!loggedInUser) {
             return this.UserPage();
         }
