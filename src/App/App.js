@@ -26,18 +26,16 @@ import MovieSchedule from './../components/MovieSchedule/MovieSchedule';
 import BookingForm from '../components/BooingForm/BookingForm';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
-
-
 const DOMAIN = process.env.REACT_APP_DOMAIN;
-
 const loggedInUser = cookies.get('user');
 
 export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {isAdmin: false}/* true là đi đến Admin, false là đi đến home */
-        
     }
+
+    // check admin
     UNSAFE_componentWillMount() {
         const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
             method: 'GET',
@@ -143,8 +141,7 @@ export default class App extends Component {
             } 
         }
     }
-
-    load_data = async () => {
+    load_data = async() => {
         let request = new Request(`${DOMAIN}/load/data`, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
