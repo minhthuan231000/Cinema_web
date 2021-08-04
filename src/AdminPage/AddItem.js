@@ -13,6 +13,8 @@ import QueueIcon from '@material-ui/icons/Queue';
 import Paper from '@material-ui/core/Paper';
 import UploadImages from './Upload-image';
 import './admin.css'
+import moment from 'moment-timezone';
+//import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function FeatureAdd() {
@@ -218,7 +220,7 @@ export default function FeatureAdd() {
     })
     return showlist;
   }
-  const [date] = React.useState(Date.now()); 
+  const [date] = React.useState( moment(new Date()).format('YYYY-MM-DDTHH:mm')); 
   const handleClick = event => {
     //const { myValue } = event.target.value;
   }
@@ -252,7 +254,8 @@ export default function FeatureAdd() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     name="loairap"
-                    onChange={(e) => handleChangeTheater(e)}
+                    value={''}
+                    onChange={(e) => {handleChangeTheater(e)}}
                   >
                     {showLoaiRap()}
                   </Select>
@@ -263,6 +266,7 @@ export default function FeatureAdd() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     name="cumrap"
+                    value={''}
                     onChange={(e) => handleChangeTheater(e)}
                   >
                     {showCumRap()}
@@ -322,6 +326,7 @@ export default function FeatureAdd() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   name="cbPhim"
+                  value={''}
                   onChange={(e) => handleChangeShowtimes(e)}
                 >
                   {showListItemMovie()}
@@ -333,6 +338,7 @@ export default function FeatureAdd() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   name="cbRap"
+                  value={''}
                   onChange={(e) => handleChangeShowtimes(e)}
                 >
                   {showListItemRap()}

@@ -109,6 +109,7 @@ export default function Payment() {
             let listId = getCountBooking(booking);
             let data = {
                 listId: listId,
+                user_id: loggedInUser.id
             }
 
             const request = new Request(`${DOMAIN}/api/booking/buy`, {
