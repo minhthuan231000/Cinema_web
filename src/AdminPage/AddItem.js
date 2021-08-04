@@ -13,6 +13,8 @@ import QueueIcon from '@material-ui/icons/Queue';
 import Paper from '@material-ui/core/Paper';
 import UploadImages from './Upload-image';
 import './admin.css'
+import moment from 'moment-timezone';
+//import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function FeatureAdd() {
@@ -147,40 +149,45 @@ export default function FeatureAdd() {
     const name = target.name;
     formMovie[name] = value;
   }
+  let imageBase = '';
+  const objImg = data => {
+    imageBase = data[0];
+  }
   const handleSubmit4 = () => {
+
+    const open = document.getElementById('open').value;
     let data = {
       name: formMovie.name,
-      image: 'test1',
-      trailer: 'test1',
-      introduce: 'introduce',
+      image: imageBase,
+      trailer: 'test',
+      introduce: formMovie.introduce,
       minute_time: formMovie.minute_time,
-      opening_day: formMovie.opening_day,
+      opening_day: open,
       view: 0
     };
-    console.log("🚀 ~ file: AddItem.js ~ line 161 ~ handleSubmit4 ~ data", data)
 
-    // let request = new Request(`${DOMAIN}/api/movie`, {
-    //   method: 'POST',
-    //   headers: new Headers({ 'Content-Type': 'application/json' }),
-    //   body: JSON.stringify(data)
-    // });
-    // fetch(request)
-    //   .then(res => res.json())
-    //   .then((result) => {
-    //     if (result) {
-    //       if (result.status === '200') {
-    //         alert('Success');
-    //       } else if (result.status === '400') {
-    //         console.log('Del showtime error');
-    //       }
-    //     }
-    //   },
-    //     (error) => {
-    //       if (error) {
-    //         console.log(error);
-    //       }
-    //     }
-    //   )
+    let request = new Request(`${DOMAIN}/api/movie`, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(data)
+    });
+    fetch(request)
+      .then(res => res.json())
+      .then((result) => {
+        if (result) {
+          if (result.status === '200') {
+            alert(result.message);
+          } else if (result.status === '400') {
+            alert(result.message)
+          }
+        }
+      },
+        (error) => {
+          if (error) {
+            console.log(error);
+          }
+        }
+      )
   }
 
   const showLoaiRap = () => {
@@ -213,21 +220,11 @@ export default function FeatureAdd() {
     })
     return showlist;
   }
-  const [date] = React.useState("2021-07-12T10:30"); // value date fomat with 2021-07-12T10:30
-  // handles when user changes input in date inputfield
-  // const handleChangeDate = e => {
-  //   setDate(e.target.value);
-  // };
+  const [date] = React.useState( moment(new Date()).format('YYYY-MM-DDTHH:mm')); 
   const handleClick = event => {
     //const { myValue } = event.target.value;
   }
 
-  const objImg = data => {
-    console.log('object image: ')
-    console.log(data)
-    console.log('url image: ')
-    console.log(data[0])
-  }
   return (
     <div className="addFeature-root" >
       <div className="col-5" >
@@ -257,7 +254,8 @@ export default function FeatureAdd() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     name="loairap"
-                    onChange={(e) => handleChangeTheater(e)}
+                    value={''}
+                    onChange={(e) => {handleChangeTheater(e)}}
                   >
                     {showLoaiRap()}
                   </Select>
@@ -268,6 +266,7 @@ export default function FeatureAdd() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     name="cumrap"
+                    value={''}
                     onChange={(e) => handleChangeTheater(e)}
                   >
                     {showCumRap()}
@@ -327,6 +326,7 @@ export default function FeatureAdd() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   name="cbPhim"
+                  value={''}
                   onChange={(e) => handleChangeShowtimes(e)}
                 >
                   {showListItemMovie()}
@@ -338,6 +338,7 @@ export default function FeatureAdd() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   name="cbRap"
+                  value={''}
                   onChange={(e) => handleChangeShowtimes(e)}
                 >
                   {showListItemRap()}
@@ -360,9 +361,21 @@ export default function FeatureAdd() {
               <div>
                 <label><h4>Thêm Phim</h4></label>
               </div>
+              
               <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" name="name" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" name="minute_time" onChange={(e) => handleChangeMovie(e)} />
-              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="address" label="Mô tả" onChange={(e) => handleChangeMovie(e)} />
+              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="introduce" label="Mô tả" onChange={(e) => handleChangeMovie(e)} />
+              <TextField
+                id="open"
+                label="Opening day"
+                type="datetime-local"
+                name="opening_day"
+                defaultValue={date}
+                style={{ marginTop: 3 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
               <UploadImages children={objImg}/>
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>

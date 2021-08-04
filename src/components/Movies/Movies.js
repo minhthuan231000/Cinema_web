@@ -31,11 +31,18 @@ export default class MoviesOpen extends Component {
             return;
         }
     }
+    getFormattedDate(date) {
+        let year = date.getFullYear();
+        let month = (1 + date.getMonth()).toString().padStart(2, '0');
+        let day = date.getDate().toString().padStart(2, '0');
+        return month + '/' + day + '/' + year;
+    }
     
     showMovie = () => {
         let list_movie= [];
         list_movie = JSON.parse(localStorage.getItem('movie')||0);
         const movies = list_movie.map((item, key) => {
+            let open = this.getFormattedDate(new Date(item.opening_day));
             if (item.id < 7) {
                 let img = new Buffer.from(item.image.data).toString("ascii")
                 return (
@@ -50,6 +57,8 @@ export default class MoviesOpen extends Component {
                             <Button style={{ marginLeft: '5px' }} id={item.id} variant="text" onClick={this.check_login}>Mua Vé</Button>
                             <Card.Footer>
                                 <small className="text-muted">View: {item.view} </small>
+                                <p></p>
+                                <small className="text-muted">Open: {open}</small>
                             </Card.Footer>
                         </Card.Body>
                     </Card>);
@@ -70,6 +79,8 @@ export default class MoviesOpen extends Component {
                         <Button style={{ marginLeft: '5px' }} variant="text" id={item.id} onClick={this.check_login}>Mua Vé</Button>
                         <Card.Footer>
                             <small className="text-muted">View: {item.view} </small>
+                                <p></p>
+                            <small className="text-muted">Open: {open}</small>
                         </Card.Footer>
                     </Card.Body>
                 </Card>)

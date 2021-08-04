@@ -96,7 +96,7 @@ class ImageUploadCard extends React.Component {
         var image = document.getElementById('contained-button-file');
 	    image.src = URL.createObjectURL(event.target.files[0]);
         this.toDataURL(image.src, function(dataUrl) {
-            console.log('RESULT:', dataUrl)
+            //console.log('RESULT:', dataUrl)
         })
         const reader = new FileReader();
 

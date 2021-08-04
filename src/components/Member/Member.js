@@ -27,28 +27,31 @@ export default function Member(props) {
     const onOpenModalInfo = () => setOpen3(true);
     const onCloseModalInfo = () => setOpen3(false);
 
-    const [booking,setBooking] = React.useState([]);
+    const [booking, setBooking] = React.useState([]);
     const loggedInUser = cookies.get('user');
 
     React.useEffect(function effectFunction() {
         const loggedInUser = cookies.get('user');
-        if(loggedInUser){
-        const request = new Request(`${DOMAIN}/api/booking/`+loggedInUser.id, {
-            method: 'GET',
-            headers: new Headers({ 'Content-Type': 'application/json' })
-        });
-        async function fetchBooks() {
-            const response = await fetch(request);
-            const json = await response.json();
-            await setBooking(json.data);
+        if (loggedInUser) {
+            const request = new Request(`${DOMAIN}/api/booking/` + loggedInUser.id, {
+                method: 'GET',
+                headers: new Headers({ 'Content-Type': 'application/json' })
+            });
+            async function fetchBooks() {
+                const response = await fetch(request);
+                const json = await response.json();
+                await setBooking(json.data);
+            }
+            fetchBooks();
         }
-        fetchBooks();}
+
+        setBooking({});
     }, []);
     const refreshPage = () => {
         window.location.reload();
     }
     let logout = () => {
-        
+
         const cookies = new Cookies();
         cookies.remove('user');
         refreshPage();
