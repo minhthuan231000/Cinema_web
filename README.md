@@ -52,4 +52,5 @@ ngày	01/03/2019 đến	30/04/2019
 - Thông	kê	doanh	thu	theo	phim trong	khoảng	thời	gian	do	người	dùng	nhập
 > Phim	Avenger:	Endgame	bán	được	50000	vé	với	doanh	thu	20.000.000.000	VND	
 từ ngày	25/04/2019 đến	10/05/2019.
+-
 > Điểm	cộng:	Hiển	thị dạng	biểu	đồ (chart)
