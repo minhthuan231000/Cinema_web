@@ -37,3 +37,27 @@
     background: #00000093;
 }
 
+
+.Register .social-login{
+    text-align: center;
+}
+.Register .social-login img{
+    height: 18px;
+    width: 18px;
+}
+.Register .social-login span a{
+    color: bisque;
+    text-decoration: none;
+    margin: 10px;
+    padding-bottom: 30px;
+}
+.Register .social-login span a.fb:hover{
+    color: #2e88f0;
+}
+.Register .social-login span a.gg:hover{
+    color: #f03b2e;
+}
+.Register .forget-password > span:hover{
+    color: #ff0000;
+    cursor: pointer;
+}

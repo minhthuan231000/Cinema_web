@@ -6,7 +6,7 @@ import icon_fb from '../../images/icons/icon-facebook.jpg'
 import icon_gg from '../../images/icons/icon-google.jpg'
 import Cookies from 'universal-cookie';
 import Alert from '@material-ui/lab/Alert';
-const cookies = new Cookies();
+const cookies = new Cookies(); 
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 
