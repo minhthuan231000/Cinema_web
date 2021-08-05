@@ -32,25 +32,25 @@ o Điểm	cộng:	đăng	nhập	bằng	Google,	Facebook
 - Trang	chủ hiển	thị các	phim	mới	được	công	chiếu và	phim	được	xem	nhiều	nhất
 - Tìm	các suất	chiếu	của	một	phim	theo	cụm	rạp	hoặc	tìm	các	suất	chiếu	của	tất	cả các	
 phim	tại	một	rạp	nào	đó
--- Điểm	cộng:	Hiển	thị thông	tin	chi	tiết	phim	(giới	thiệu,	trailer)
--- Điểm	cộng:	Hiển	thị thông	tin	chi	tiết	cụm	rạp chiếu	phim	(hình	ảnh	giới	thiệu,	
+> Điểm	cộng:	Hiển	thị thông	tin	chi	tiết	phim	(giới	thiệu,	trailer)
+> Điểm	cộng:	Hiển	thị thông	tin	chi	tiết	cụm	rạp chiếu	phim	(hình	ảnh	giới	thiệu,	
 các	rạp	có	trong	cụm,	bản	đồ Google	Maps dựa	vào	địa	chỉ)
 - Đặt	vé	xem	phim (chọn	suất	chiếu,	chọn	ghế,	xác	nhận)
 - Điểm	cộng:	Gửi	thông	tin	vé	qua	SMSo Điểm	cộng:	Tích	hợp	cổng	thanh	toán (Paypal,	Momo,	ZaloPay,	Grab…)
 - Điểm	cộng:	Barcode/QRCode cho	đặt	chỗ
-• Xem	lại	các	danh	sách	các	đặt	vé	trong	lịch	sử (ngày/giờ,	phim,	rạp/cụm	rạp,	ghế)
+- Xem	lại	các	danh	sách	các	đặt	vé	trong	lịch	sử (ngày/giờ,	phim,	rạp/cụm	rạp,	ghế)
 ### Quản	lý
-• Có	phần	đăng	nhập	riêng,	có	thể sử dụng	chung	hoặc	riêng	hệ thống	người	dùng
-• Quản	lý	(thêm/xóa)	rạp (tên,	cấu	hình	ghế),	cụm	rạp (tên,	địa	chỉ),	phim (tên,	thời	lượng,	
+- Có	phần	đăng	nhập	riêng,	có	thể sử dụng	chung	hoặc	riêng	hệ thống	người	dùng
+- Quản	lý	(thêm/xóa)	rạp (tên,	cấu	hình	ghế),	cụm	rạp (tên,	địa	chỉ),	phim (tên,	thời	lượng,	
 hình	ảnh	poster,	ngày	công	chiếu),	suất	chiếu (rạp,	thời	điểm	bắt	đầu,	thời	điểm	kết	
 thúc)
-o Điểm	cộng:	Nhiều	hình	ảnh	cho	một	phim, giới	thiệu, trailer
-• Thống	kê	doanh	thu	theo	cụm	rạp trong	khoảng	thời	gian	do	người	dùng	nhập
-o Cụm	rạp	CGV	Hùng	Vương	bán	được	2400	vé	với	doanh	thu	500.000.000	VND	từ
+> Điểm	cộng:	Nhiều	hình	ảnh	cho	một	phim, giới	thiệu, trailer
+- Thống	kê	doanh	thu	theo	cụm	rạp trong	khoảng	thời	gian	do	người	dùng	nhập
+> Cụm	rạp	CGV	Hùng	Vương	bán	được	2400	vé	với	doanh	thu	500.000.000	VND	từ
 ngày	01/03/2019 đến	30/04/2019
-o Cụm	rạp	CGV	Parkson…
-o Điểm	cộng:	Hiển	thị dạng	biểu	đồ (chart)
-• Thông	kê	doanh	thu	theo	phim trong	khoảng	thời	gian	do	người	dùng	nhập
-o Phim	Avenger:	Endgame	bán	được	50000	vé	với	doanh	thu	20.000.000.000	VND	
+> Cụm	rạp	CGV	Parkson…
+> Điểm	cộng:	Hiển	thị dạng	biểu	đồ (chart)
+- Thông	kê	doanh	thu	theo	phim trong	khoảng	thời	gian	do	người	dùng	nhập
+- Phim	Avenger:	Endgame	bán	được	50000	vé	với	doanh	thu	20.000.000.000	VND	
 từ ngày	25/04/2019 đến	10/05/2019
-o Điểm	cộng:	Hiển	thị dạng	biểu	đồ (chart)
+- Điểm	cộng:	Hiển	thị dạng	biểu	đồ (chart)
