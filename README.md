@@ -1,13 +1,13 @@
 LTWeb	2	- Đồ án	cuối	kỳ
 CD2018/1
 ### Chú	ý
-• Đồ án	làm	theo	nhóm	4	thành	viên	theo	link	đăng	ký	nhóm
-• Mã	nguồn	phải	được	cập	nhật	trên	Github	được	GVLT	cung	cấp	(-4	điểm)
-• Nộp	đồ án	trên	moodle,	hạn	chót	trước	thi	lý	thuyết	(vấn	đáp)
-• Đặt	tên	file:	xx_MSSV1_MSSV2_MSSV3_MSSV4.zip/rar trong	đó	xx là	mã	nhóm	trong	
+- Đồ án	làm	theo	nhóm	4	thành	viên	theo	link	đăng	ký	nhóm
+- Mã	nguồn	phải	được	cập	nhật	trên	Github	được	GVLT	cung	cấp	(-4	điểm)
+- Nộp	đồ án	trên	moodle,	hạn	chót	trước	thi	lý	thuyết	(vấn	đáp)
+- Đặt	tên	file:	xx_MSSV1_MSSV2_MSSV3_MSSV4.zip/rar trong	đó	xx là	mã	nhóm	trong	
 danh	sách	nhóm	được	công	bố
-• Triển	khai	trên	Heroku	hoặc	VPS
-• Sử dụng	Node.js	và	các	module	cần	thiết,	CSDL	Postgres/MySQL,	Bootstrap hoặc	
+- Triển	khai	trên	Heroku	hoặc	VPS
+- Sử dụng	Node.js	và	các	module	cần	thiết,	CSDL	Postgres/MySQL,	Bootstrap hoặc	
 React/Vue
 
 ### Yêu	cầu
