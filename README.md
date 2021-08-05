@@ -1,4 +1,4 @@
-#Lập Trình Web	2	- Đồ án	cuối	kỳ CD2018/1
+# Lập Trình Web	2	- Đồ án	cuối	kỳ CD2018/1
 ### Chú	ý
 - Đồ án	làm	theo	nhóm	4	thành	viên	theo	link	đăng	ký	nhóm
 - Mã	nguồn	phải	được	cập	nhật	trên	Github	được	GVLT	cung	cấp	(-4	điểm)
