@@ -1,6 +1,6 @@
 LTWeb	2	- Đồ án	cuối	kỳ
 CD2018/1
-Chú	ý
+### Chú	ý
 • Đồ án	làm	theo	nhóm	4	thành	viên	theo	link	đăng	ký	nhóm
 • Mã	nguồn	phải	được	cập	nhật	trên	Github	được	GVLT	cung	cấp	(-4	điểm)
 • Nộp	đồ án	trên	moodle,	hạn	chót	trước	thi	lý	thuyết	(vấn	đáp)
@@ -9,7 +9,8 @@ danh	sách	nhóm	được	công	bố
 • Triển	khai	trên	Heroku	hoặc	VPS
 • Sử dụng	Node.js	và	các	module	cần	thiết,	CSDL	Postgres/MySQL,	Bootstrap hoặc	
 React/Vue
-Yêu	cầu
+
+###Yêu	cầu
 • Xây	dựng	website	đặt	vé	xem	phim
 • Hệ thống	rạp	phim	bao	gồm	nhiều	cụm	rạp,	mỗi	cụm	rạp	bao	gồm	nhiều	rạp	chiếu	khác	
 nhau
@@ -22,8 +23,8 @@ rạp	khác	nhau
 thành	công	hoặc	thất	bại (gợi	ý:	sử dụng	SQL	transaction)
 • Quản	lý	cụm	rạp,	rạp,	phim,	suất	chiếu	và	thống	kê	doanh	thu	(cụm	rạp,	phim)
 • Gửi	email	thông	báo	(mã	vé,	thông	tin	suất	chiếu)	sau	khi	đặt	vé	thành	công
-Chức	năng
-Người	dùng
+#### Chức	năng
+### Người	dùng
 • Đăng	ký (xác	nhận	email),	đăng	nhập,	đăng	xuất	(email,	mật	khẩu),	quên	mật	khẩu	bằng	
 email
 o Điểm	cộng:	đăng	nhập	bằng	Google,	Facebook
@@ -38,7 +39,7 @@ các	rạp	có	trong	cụm,	bản	đồ Google	Maps dựa	vào	địa	chỉ)
 o Điểm	cộng:	Gửi	thông	tin	vé	qua	SMSo Điểm	cộng:	Tích	hợp	cổng	thanh	toán (Paypal,	Momo,	ZaloPay,	Grab…)
 o Điểm	cộng:	Barcode/QRCode cho	đặt	chỗ
 • Xem	lại	các	danh	sách	các	đặt	vé	trong	lịch	sử (ngày/giờ,	phim,	rạp/cụm	rạp,	ghế)
-Quản	lý
+### Quản	lý
 • Có	phần	đăng	nhập	riêng,	có	thể sử dụng	chung	hoặc	riêng	hệ thống	người	dùng
 • Quản	lý	(thêm/xóa)	rạp (tên,	cấu	hình	ghế),	cụm	rạp (tên,	địa	chỉ),	phim (tên,	thời	lượng,	
 hình	ảnh	poster,	ngày	công	chiếu),	suất	chiếu (rạp,	thời	điểm	bắt	đầu,	thời	điểm	kết	
