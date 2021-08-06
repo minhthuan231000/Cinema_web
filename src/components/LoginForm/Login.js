@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css';
 import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../models/validator';
-
+import LoginHooks from './Login-google'
 import icon_fb from '../../images/icons/icon-facebook.jpg'
-import icon_gg from '../../images/icons/icon-google.jpg'
 import Cookies from 'universal-cookie';
 import Alert from '@material-ui/lab/Alert';
 const cookies = new Cookies(); 
@@ -165,12 +164,10 @@ class Login extends Component { // class parent login
                     <button onClick={(e) => { submitForm(e) }} type="submit" className="btn btn-dark btn-lg btn-block col-5 btnLog">Đăng nhập</button>
                     <span>&nbsp;</span>
                     <div className="social-login">
-                        <span>
+                        <button className="btnAuth" >
                             <img alt="" src={icon_fb}></img>
-                            <a className="fb" href="/login-facebook">Login with Facebook</a></span>
-                        <span>
-                            <img alt="" src={icon_gg}></img>
-                            <a className="gg" href="/login-google">Login with Google</a></span>
+                            <span className="fb" >Login with Facebook</span></button>
+                        <LoginHooks/>
                     </div>
                     <span>&nbsp;</span>
                 </div>

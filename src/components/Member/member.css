@@ -64,3 +64,10 @@
     width: 100%;
     border-radius: 20px;
 }
+.btnAuth-gg{
+    background-color: transparent;
+    border: 0;
+}
+.btnAuth-gg .icon {
+    width: 60px;
+}
