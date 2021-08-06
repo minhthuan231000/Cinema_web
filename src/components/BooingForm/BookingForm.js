@@ -47,6 +47,8 @@ export default function BookingForm() {
     const foo = params.get('id'); // movie_id
     const [movie_id] = React.useState(foo); // set dữ liệu cho movie_id thành công
 
+    const [seatsRows, setRow] = React.useState([]);
+    const [seatsColumns, setCol] = React.useState([]);
     React.useEffect(function effectFunction() {
         const DOMAIN = process.env.REACT_APP_DOMAIN;
         const search = window.location.search;
@@ -90,7 +92,8 @@ export default function BookingForm() {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
         });
-
+        // fetch data from ../../randomuser/api
+        // show avatar and name of user
         await fetch(request)
             .then(res => res.json())
             .then((result) => {
@@ -117,7 +120,7 @@ export default function BookingForm() {
     }
     const handleChangeTime = async (event) => {
         let temp = event.target.value;
-        var listTickets = {};
+        var listTickets = [];
         await setTime('');
         await setTime(temp);
         await setShowtimeId(event.target.value);
@@ -135,20 +138,32 @@ export default function BookingForm() {
                         return
                     }
                     else {
-                        listTickets = result.data[0].bookings[0].tickets;
+                        const Tickets_Booked = result.data[0].bookings;
+                        for (let index = 0; index < Tickets_Booked.length; index++) {
+                            const element = result.data[0].bookings[index].tickets.map(item => ({ 'X': item.address_x, 'Y': item.address_y }))
+                            listTickets.push(element);
+                        }
                     }
-                }
-                else {
+                } else {
                     return
                 }
             })
-        return setListTicket(listTickets);
+        setListTicket(listTickets);
+        let row = 0;
+        let column = 0;
+        if (listTime.length !== 0) {
+            row = listTime[0][4];
+            column = listTime[0][3];
+        }
+        setRow(createRow(row));
+        setCol(createCol(column));
     };
-
     const createRow = (sizeRow) => {
-
         const Row = [];
         for (let index = 0; index < sizeRow; index++) {
+            if(sizeRow % 2 !== 0){
+                Row[index] = '';
+            }
             Row[index] = index + 1;
             Row[index].toString()
         }
@@ -185,12 +200,12 @@ export default function BookingForm() {
     }
 
     const ShowSelectCinema = () => {
-
         const show_list = listTheater.map((item, index) => {
             return <MenuItem key={index} value={item.theater.id} >{item.theater.name}</MenuItem>
         })
         return show_list;
     }
+
     const ShowImage = () => {
         let list_movie = JSON.parse(localStorage.getItem('movie') || 0);
         const movies = list_movie.map((item, index) => {
@@ -282,15 +297,9 @@ export default function BookingForm() {
                 }
             )
     }
-    let row = 0;
-    let column = 0
-    if (listTime.length !== 0) {
-        row = listTime[0][4];
-        column = listTime[0][3];
-    }
-    const seatsColumns = createCol(row);
-    const seatsRows = createRow(column);
+
     const totalPrice = listSeats.length * price;
+
     const seatsGenerator = () => {
         return (
             <div className="container">
@@ -309,6 +318,19 @@ export default function BookingForm() {
                                             {row}
                                         </td>
                                         {seatsColumns.map((column, index) => {
+                                            if (listTicket[0] !== undefined) {
+                                                for (let inx = 0; inx < listTicket.length; inx++) {
+                                                    for (let inx2 = 0; inx2 < listTicket[inx].length; inx2++) {
+                                                        if ((listTicket[inx][inx2]['X']) === row.toString() && listTicket[inx][inx2]['Y'] === ArrConvert[column].toString()) {
+                                                            return (
+                                                                <td key={index}>
+                                                                    <input checked={true} type="checkbox" onChange={(e) => changeSeats(e)} className="seat" id={`${row}${column}`} value={`${row}${column}`} />
+                                                                </td>
+                                                            )
+                                                        }
+                                                    }
+                                                }
+                                            }
                                             return (
                                                 column === '' ? <td key={index}>&emsp;&emsp;</td> :
                                                     <td key={index}>
