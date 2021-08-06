@@ -38,6 +38,7 @@ export default function BookingForm() {
     const [listTime, setListTime] = React.useState([]);
     const [listTheater, setListTheater] = React.useState([]);
     const [listTicket, setListTicket] = React.useState([]);
+    const [checkSeat, setCheckSeat] = React.useState(false);
     const [price, setPrice] = React.useState(0);
     const [showtime_id, setShowtimeId] = React.useState();
     const DOMAIN = process.env.REACT_APP_DOMAIN;
@@ -51,8 +52,8 @@ export default function BookingForm() {
         const search = window.location.search;
         const params = new URLSearchParams(search);
         const foo = params.get('id'); // movie_id
-        
-        const request = new Request(`${DOMAIN}/api/movie/foundTheater/`+foo, {
+
+        const request = new Request(`${DOMAIN}/api/movie/foundTheater/` + foo, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
         });
@@ -66,7 +67,7 @@ export default function BookingForm() {
 
     if (!loggedInUser) {
         window.location.href = "/Home";
-    } 
+    }
     // Handle Open - Close
     const handleClose = () => {
         setOpen(false);
@@ -82,10 +83,10 @@ export default function BookingForm() {
         setOpen3(true);
     };
 
-    const handleChangeCinema = async(event) => {
+    const handleChangeCinema = async (event) => {
         setCine(event.target.value);
-        let listShowtimes = {} ;
-        const request = new Request(`${DOMAIN}/api/showtime/movie?movie=`+movie_id+'&theater='+event.target.value, {
+        let listShowtimes = {};
+        const request = new Request(`${DOMAIN}/api/showtime/movie?movie=` + movie_id + '&theater=' + event.target.value, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
         });
@@ -103,12 +104,12 @@ export default function BookingForm() {
                     }
                 }
             )
-        let list = listShowtimes.map((time) => ([time.id,time.start_time,time.price,time.theater.number_row,time.theater.number_column]) );
+        let list = listShowtimes.map((time) => ([time.id, time.start_time, time.price, time.theater.number_row, time.theater.number_column]));
         setListTime(list);
     };
 
-    const searchPrice = (nameKey)=>{
-        for (var i=0; i < listTime.length; i++) {
+    const searchPrice = (nameKey) => {
+        for (var i = 0; i < listTime.length; i++) {
             if (listTime[i][0] === nameKey) {
                 return listTime[i][2];
             }
@@ -116,12 +117,12 @@ export default function BookingForm() {
     }
     const handleChangeTime = async (event) => {
         let temp = event.target.value;
-        let listTickets = {};
+        var listTickets = {};
         await setTime('');
         await setTime(temp);
         await setShowtimeId(event.target.value);
         await setPrice(searchPrice(temp));
-        const request = new Request(`${DOMAIN}/api/showtime/showtime/`+ event.target.value, {
+        const request = new Request(`${DOMAIN}/api/showtime/showtime/` + event.target.value, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
         });
@@ -130,16 +131,18 @@ export default function BookingForm() {
             .then(res => res.json())
             .then((result) => {
                 if (result) {
-                    listTickets = result.data[0].bookings[0].tickets;
-                }
-            },
-                (error) => {
-                    if (error) {
-                        console.log(error);
+                    if (result.data[0].bookings[0] == null) {
+                        return
+                    }
+                    else {
+                        listTickets = result.data[0].bookings[0].tickets;
                     }
                 }
-            )
-            setListTicket(listTickets);
+                else {
+                    return
+                }
+            })
+        return setListTicket(listTickets);
     };
 
     const createRow = (sizeRow) => {
@@ -164,14 +167,14 @@ export default function BookingForm() {
         }
         return Col;
     }
+
     const changeSeats = (event) => {
+        if (time === '') {
+            alert("Please select showtime !!!")
+        }
         const target = event.target;
         const value = target.value;
         const check = target.checked;
-        if(price === 0){
-            alert("Please select showtime !!!") 
-            return;
-        }
         if (check) {
             const newList = listSeats.concat({ value });
             setListSeats(newList);
@@ -180,29 +183,30 @@ export default function BookingForm() {
             setListSeats(newList);
         }
     }
-    
+
     const ShowSelectCinema = () => {
-        
+
         const show_list = listTheater.map((item, index) => {
             return <MenuItem key={index} value={item.theater.id} >{item.theater.name}</MenuItem>
         })
         return show_list;
     }
     const ShowImage = () => {
-        let list_movie = JSON.parse(localStorage.getItem('movie')||0);
-            const movies = list_movie.map((item, index) => {
-                let img = new Buffer.from(item.image.data).toString("ascii")
-                if (item.id.toString() === movie_id) {
-                    return <img key={index} src={`data:image/png;base64,${img}`} alt="" />
-                } 
-                return ' ' ;
+        let list_movie = JSON.parse(localStorage.getItem('movie') || 0);
+        const movies = list_movie.map((item, index) => {
+            let img = new Buffer.from(item.image.data).toString("ascii")
+            if (item.id.toString() === movie_id) {
+                return <img key={index} src={`data:image/png;base64,${img}`} alt="" />
+            }
+            return ' ';
         })
         return movies;
     }
     const ShowContentImage = () => {
-        let list_movie = JSON.parse(localStorage.getItem('movie'||0));
+        let list_movie = JSON.parse(localStorage.getItem('movie' || 0));
         const movies = list_movie.map((item, index) => {
             if (item.id.toString() === movie_id) {
+                item.opening_day = item.opening_day.substr(0, item.opening_day.indexOf('T'))
                 return (
                     <div key={index} className="img_booking_content">
                         <h6>Tên Phim</h6>
@@ -219,8 +223,8 @@ export default function BookingForm() {
         return movies
     }
     const ShowSelectStartTime = () => {
-        const show_list = listTime.map((item,index) => {
-            return <MenuItem key={index}value={item[0]}>{item[1]}</MenuItem>
+        const show_list = listTime.map((item, index) => {
+            return <MenuItem key={index} value={item[0]}>{item[1]}</MenuItem>
         })
         return show_list;
     }
@@ -228,7 +232,7 @@ export default function BookingForm() {
         'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12, 'm': 13,
         'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26
     }
-    const AddToCartClick = async() => {
+    const AddToCartClick = async () => {
         var dic = {}
         let listSeatConvert = listSeats.map(o => { return o.value })
         for (let index = 0; index < listSeats.length; index++) {
@@ -237,9 +241,9 @@ export default function BookingForm() {
             let address_y;
             if (seat.length === 3) {
                 let temp = listSeats[index].value.charAt(2);
-                address_x = listSeats[index].value.charAt(0)+listSeats[index].value.charAt(1);
+                address_x = listSeats[index].value.charAt(0) + listSeats[index].value.charAt(1);
                 address_y = ArrConvert[temp];
-            } else if (seat.length === 2)  {
+            } else if (seat.length === 2) {
                 let temp = listSeats[index].value.charAt(1);
                 address_x = listSeats[index].value.charAt(0);
                 address_y = ArrConvert[temp];
@@ -263,11 +267,11 @@ export default function BookingForm() {
             .then(res => res.json())
             .then((result) => {
                 if (result) {
-                    if(result.status==="200"){
+                    if (result.status === "200") {
                         alert("Thêm vào giỏ hàng thành công!")
                         window.location.href = "/Payment"
-                    }else{
-                        alert("Thêm vào giỏi hàng thất bại !!!");
+                    } else {
+                        alert("Thêm vào giỏ hàng thất bại !!!");
                     }
                 }
             },
@@ -280,7 +284,7 @@ export default function BookingForm() {
     }
     let row = 0;
     let column = 0
-    if(listTime.length !== 0){
+    if (listTime.length !== 0) {
         row = listTime[0][4];
         column = listTime[0][3];
     }
@@ -308,7 +312,7 @@ export default function BookingForm() {
                                             return (
                                                 column === '' ? <td key={index}>&emsp;&emsp;</td> :
                                                     <td key={index}>
-                                                        <input type="checkbox" onChange={(e) => changeSeats(e)} className="seat" id={`${row}${column}`} value={`${row}${column}`}  />
+                                                        <input type="checkbox" onChange={(e) => changeSeats(e)} className="seat" id={`${row}${column}`} value={`${row}${column}`} />
                                                     </td>
                                             )
                                         })}
@@ -362,7 +366,7 @@ export default function BookingForm() {
                             onClose={handleClose}
                             onOpen={handleOpen}
                             value={cine}
-                            onChange={(e)=>handleChangeCinema(e)}
+                            onChange={(e) => handleChangeCinema(e)}
                         >
                             {ShowSelectCinema()}
                         </Select>
@@ -374,8 +378,8 @@ export default function BookingForm() {
                             open={open3}
                             onClose={handleClose3}
                             onOpen={handleOpen3}
-                            value={time||''}
-                            onChange={(e) =>handleChangeTime(e)}
+                            value={time || ''}
+                            onChange={(e) => handleChangeTime(e)}
                         >
                             {ShowSelectStartTime()}
                         </Select>
