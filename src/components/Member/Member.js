@@ -44,7 +44,6 @@ export default function Member(props) {
             }
             fetchBooks();
         }
-
         setBooking({});
     }, []);
     const refreshPage = () => {
@@ -82,7 +81,7 @@ export default function Member(props) {
                             </li>
                             <li className="btn-cart">
                                 <IconButton aria-label="show 4 new item" color="inherit" href="/Payment"> {/* xem thanh toán vé */}
-                                    <Badge badgeContent={booking.length} color="secondary" showZero>
+                                    <Badge badgeContent={booking.length===0? null :booking.length} color="secondary" showZero>
                                         <ShoppingCartIcon style={{ color: '#e00d7a', fontSize: '35px' }} />
                                     </Badge>
                                 </IconButton>
