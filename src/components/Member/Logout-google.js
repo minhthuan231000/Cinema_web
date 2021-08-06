@@ -3,7 +3,7 @@ import { useGoogleLogout } from 'react-google-login';
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies();
-const clientId = '935932900837-8ndtoqgpbgrm829n73d0vkidfkvcsd2f.apps.googleusercontent.com';
+const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vkidfkvcsd2f.apps.googleusercontent.com';
 
 function LogoutHooks() {
   const onLogoutSuccess = (res) => {

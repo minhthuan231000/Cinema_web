@@ -2,14 +2,14 @@ import React from 'react';
 import { useGoogleLogin } from 'react-google-login';
 import icon_gg from '../../images/icons/icon-google.jpg'
 import Cookies from 'universal-cookie';
-
 // refresh token
 import { refreshTokenSetup } from '../utils/refreshToken';
 
 
+
 const cookies = new Cookies(); 
-const clientId ='935932900837-8ndtoqgpbgrm829n73d0vkidfkvcsd2f.apps.googleusercontent.com';
 const DOMAIN = process.env.REACT_APP_DOMAIN;
+const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vkidfkvcsd2f.apps.googleusercontent.com';
 
  function LoginHooks() {
   const onSuccess = async(res) => {
