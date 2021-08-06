@@ -17,6 +17,11 @@
     position: absolute;
     right: 40px;
 }
+.btnAuth{
+    background-color: transparent;
+    border: 0;
+    color: white;
+}
 .Login button.btnLog:hover {
     box-shadow: 2px 2px #1467e46e, 2px 2px #1467e46e, 3px 3px #1467e46e;
     border: 1px solid #1467e46e;

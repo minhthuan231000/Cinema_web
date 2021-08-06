@@ -10,6 +10,7 @@ import Cookies from 'universal-cookie';
 import { Badge } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import LogoutHooks from './Logout-google';
 const cookies = new Cookies();
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
@@ -46,16 +47,6 @@ export default function Member(props) {
         }
         setBooking({});
     }, []);
-    const refreshPage = () => {
-        window.location.reload();
-    }
-    let logout = () => {
-
-        const cookies = new Cookies();
-        cookies.remove('user');
-        refreshPage();
-    };
-
     if (loggedInUser) { // neu da login thi Redirect
         let username = loggedInUser.fullname;
 
@@ -65,7 +56,7 @@ export default function Member(props) {
                     <div className="register-wrap">
                         <ul>
                             <li className="btn-logout">
-                                <button onClick={logout}><a href="/">Log Out</a></button>
+                                <LogoutHooks/>
                             </li>
                             <li className="btn-login">
                                 <button onClick={onOpenModalInfo}>{username}</button>
@@ -97,7 +88,7 @@ export default function Member(props) {
             <div className="register-content">
                 <div className="container">
                     <div className="register-wrap">
-                        <ul>
+                            <ul>
                             <li className="btn-register">
                                 <button onClick={onOpenModalReg}>Đăng ký thành viên</button>
                                 <Modal open={openReg} onClose={onCloseModalReg} center classNames={{

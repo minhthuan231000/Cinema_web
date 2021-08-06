@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import './Register.css';
 import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '.../../../models/validator';
-
-import icon_fb from '../../images/icons/icon-facebook.jpg'
-import icon_gg from '../../images/icons/icon-google.jpg'
-
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 class Register extends Component {
@@ -211,16 +207,6 @@ class Register extends Component {
             <input type="password" name="confirm_password" className="form-control" onChange={handleInputChange} placeholder="NHẬP LẠI MẬT KHẨU (*)" />
           </div>
           <button onClick={e => submitForm(e)} id="btnSubmitForm" type="submit" className="btn btn-dark btn-lg btn-block col-5 btnReg">Đăng ký</button>
-            <span>&nbsp;</span>
-            <div className="social-login">
-                <span>
-                    <img alt="" src={icon_fb}></img>
-                    <a className="fb" href="/login-facebook">Login with Facebook</a></span>
-                <span>
-                    <img alt="" src={icon_gg}></img>
-                    <a className="gg" href="/login-google">Login with Google</a></span>
-            </div>
-            <span>&nbsp;</span>
         </form>
       </div>
     }
