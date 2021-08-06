@@ -24,7 +24,13 @@ const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vki
         .then(res => res.json())
         .then((result) => {
             if (result) {
-              let data = result.data;
+              let data = {
+                id: result.data.id,
+                email: result.data.email,
+                fullname: result.data.fullname,
+                numphone: result.data.numphone
+              }
+              
               cookies.set('user', data, { path: '/' });
               window.location.reload();
             }
