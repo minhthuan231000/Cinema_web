@@ -59,7 +59,7 @@ const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vki
   });
 
   return (
-    <button className="btnAuth-gg" onClick={signIn} >
+    <button className="btnAuth" onClick={signIn} >
       <img src={icon_gg} alt="google login" className="icon"></img>
       <span className="buttonText">Sign in with Google</span>
     </button>
