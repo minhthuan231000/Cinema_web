@@ -29,8 +29,9 @@ import {
 } from "react-router-dom";
 import Profile from './Profile';
 import Cookies from 'universal-cookie'
-const cookies = new Cookies();
+import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 
+const cookies = new Cookies();
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -221,7 +222,6 @@ export default function AdminPage(props) {
                 </div>
             </div>
             <footer>
-
             </footer>
         </div>
     );

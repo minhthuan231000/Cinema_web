@@ -52,7 +52,7 @@ header.admin_header .navbar-brand {
 
 .admin_content .admin_sliderbar {
     display: inline-flex;
-    height: 999;
+    height: 2900px;
 }
 
 .admin_sliderbar .divider {
@@ -63,7 +63,7 @@ header.admin_header .navbar-brand {
     background-image: url('../images/18250.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 1200px;
+    height: 100%;
 }
 
 .MuiTab-wrapper {

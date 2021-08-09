@@ -5,7 +5,7 @@ import LoginHooks from './Login-google'
 import icon_fb from '../../images/icons/icon-facebook.jpg'
 import Cookies from 'universal-cookie';
 import Alert from '@material-ui/lab/Alert';
-const cookies = new Cookies(); 
+const cookies = new Cookies();
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 
@@ -96,7 +96,7 @@ class Login extends Component { // class parent login
                                             numphone: result.user.numphone,
                                         }
                                         cookies.set('user', data, { path: '/' });
-                                       
+
                                         this.setState({
                                             alert: 2
                                         })
