@@ -38,7 +38,7 @@ export default function BookingForm() {
     const [listTime, setListTime] = React.useState([]);
     const [listTheater, setListTheater] = React.useState([]);
     const [listTicket, setListTicket] = React.useState([]);
-    const [checkSeat, setCheckSeat] = React.useState(false);
+    //const [checkSeat, setCheckSeat] = React.useState(false);
     const [price, setPrice] = React.useState(0);
     const [showtime_id, setShowtimeId] = React.useState();
     const DOMAIN = process.env.REACT_APP_DOMAIN;
