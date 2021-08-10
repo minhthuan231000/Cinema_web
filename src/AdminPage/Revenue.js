@@ -36,11 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
 //Convert array cinema
 function createRow(cinemas) {
-    let name = cinemas.showtime.theater.cinema.name;
+    let name = cinemas.name;
     let total = cinemas.total;
     let count = cinemas.count;
-    let address = cinemas.showtime.theater.cinema.address;
-    let id = cinemas.showtime.theater.cinema.id;
+    let address = cinemas.address;
+    let id = cinemas.id
     return [name,count,address,total,id] ;
 }
 function createListRow(cinema_obj) {
