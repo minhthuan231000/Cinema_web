@@ -29,7 +29,7 @@ import {
 } from "react-router-dom";
 import Profile from './Profile';
 import Cookies from 'universal-cookie'
-import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
+//import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 
 const cookies = new Cookies();
 function TabPanel(props) {

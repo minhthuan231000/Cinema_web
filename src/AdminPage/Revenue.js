@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 //Convert array cinema
 function createRow(cinemas) {
     let name = cinemas.name;
-    let total = cinemas.total;
+    let total = Number(cinemas.total);
     let count = cinemas.count;
     let address = cinemas.address;
     let id = cinemas.id
@@ -55,11 +55,11 @@ function createListRow(cinema_obj) {
 
 //Convert array movie
 function createRowMovie(movies) {
-    let name = movies.showtime.movie.name;
-    let total = movies.total;
+    let name = movies.name;
+    let total = Number(movies.total)+0;
     let count = movies.count;
-    let view = movies.showtime.movie.view;
-    let id = movies.showtime.movie.id;
+    let view = movies.view;
+    let id = movies.id;
     return [name, count, view, total, id];
 }
 function createListRowMovie(movie_obj) {
@@ -78,10 +78,12 @@ export default function Revenue() {
     const [revenueMovie, setRevenueMovie] = React.useState([]); //Thong ke theo phim
     let rows = [];
     let rowsMovie = [];
+    
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [page2, setPage2] = React.useState(0);
     const [rowsPerPage2, setRowsPerPage2] = React.useState(5);
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -132,8 +134,17 @@ export default function Revenue() {
         fetchRevenueMovie();
     }, []);
 
-    rows = createListRow(revenue);
-    rowsMovie = createListRowMovie(revenueMovie);
+    //create List Row Revenue Cinema
+    rows = createListRow(revenue).sort(function (a, b) {
+        return b[3] - a[3];
+    });
+
+    //create List Row Revenue Movie 
+    rowsMovie = createListRowMovie(revenueMovie).sort(function (a, b) {
+        return b[3] - a[3];
+    });;
+
+
     let Subtotal = rows.map((item) => item[3]).reduce((a, b) => Number.parseInt(a) + Number.parseInt(b), 0);
     let Tax = Subtotal * TAX_RATE;
     let Total = Subtotal - Tax;

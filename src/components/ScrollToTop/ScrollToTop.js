@@ -2,19 +2,18 @@ import React, { Component } from "react";
 import './Scroll.css'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 export default class ScrollToTop extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             is_visible: false
         };
     }
-
     componentDidMount() {
         var scrollComponent = this;
         document.addEventListener("scroll", function (e) {
             scrollComponent.toggleVisibility();
         });
-    }
+    };
 
     toggleVisibility() {
         if (window.pageYOffset > 300) {
@@ -37,6 +36,7 @@ export default class ScrollToTop extends Component {
 
     render() {
         const { is_visible } = this.state;
+        
         return (
             <div className="scroll-to-top">
                 {is_visible && (

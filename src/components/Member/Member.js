@@ -14,7 +14,7 @@ import LogoutHooks from './Logout-google';
 const cookies = new Cookies();
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
-export default function Member(props) {
+export default function Member() {
 
     const [openReg, setOpen] = useState(false);
     const onOpenModalReg = () => setOpen(true);
@@ -27,12 +27,14 @@ export default function Member(props) {
     const [openInfo, setOpen3] = useState(false);
     const onOpenModalInfo = () => setOpen3(true);
     const onCloseModalInfo = () => setOpen3(false);
+    const [didMount, setDidMount] = useState(false); 
 
     const [booking, setBooking] = React.useState([]);
     const loggedInUser = cookies.get('user');
 
     React.useEffect(function effectFunction() {
         const loggedInUser = cookies.get('user');
+        setDidMount(true);
         if (loggedInUser) {
             const request = new Request(`${DOMAIN}/api/booking/` + loggedInUser.id, {
                 method: 'GET',
@@ -46,10 +48,13 @@ export default function Member(props) {
             fetchBooks();
         }
         setBooking({});
+        return () => setDidMount(false);
     }, []);
+    if(!didMount) {
+        return null;
+      }
     if (loggedInUser) { // neu da login thi Redirect
         let username = loggedInUser.fullname;
-
         return (
             <div className="register-content">
                 <div className="container">
