@@ -9,6 +9,7 @@
         Title,
         Tooltip,
         Legend,
+        
     } from '@devexpress/dx-react-chart-material-ui';
     import { ValueScale, Animation } from '@devexpress/dx-react-chart';
     import { EventTracker } from '@devexpress/dx-react-chart';
@@ -112,21 +113,20 @@ export default class Demo extends React.PureComponent {
     }
 
     // Muốn tự động thay đổi data từ uncomment
-    componentDidMount() {
-       // const selectElement = document.getElementById('select');
-            const request = new Request(`${DOMAIN}/api/booking/` , {
-                method: 'GET',
-                headers: new Headers({ 'Content-Type': 'application/json' })
-            });
-            fetch(request)
-            .then(res => res.json())
-            .then((result) => {
-                    if (result) {
-                    console.log("🚀 ~ file: ChartData.js ~ line 129 ~ Demo ~ .then ~ result", result)
+    // componentDidMount() {
+    //    // const selectElement = document.getElementById('select');
+    //         const request = new Request(`${DOMAIN}/api/booking/` , {
+    //             method: 'GET',
+    //             headers: new Headers({ 'Content-Type': 'application/json' })
+    //         });
+    //         fetch(request)
+    //         .then(res => res.json())
+    //         .then((result) => {
+    //                 if (result) {
                         
-                    }
-                }
-            )
+    //                 }
+    //             }
+    //         )
 
         // this.id = setInterval(() => {
         //     selectElement.selectedIndex = this.index;
@@ -137,11 +137,11 @@ export default class Demo extends React.PureComponent {
         //         this.index += 1;
         //     }
         // }, 4000);
-    }
+    //}
 
-    componentWillUnmount() {
-        clearTimeout(this.id);
-    }
+    // componentWillUnmount() {
+    //     clearTimeout(this.id);
+    // }
 
     changeData(e) {
         this.setState({ data: theaters[e.target.value] });

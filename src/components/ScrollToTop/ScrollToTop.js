@@ -20,7 +20,7 @@ export default class ScrollToTop extends Component {
             this.setState({
                 is_visible: true
             });
-        } else {
+        } else { 
             this.setState({
                 is_visible: false
             });
@@ -36,7 +36,6 @@ export default class ScrollToTop extends Component {
 
     render() {
         const { is_visible } = this.state;
-        
         return (
             <div className="scroll-to-top">
                 {is_visible && (

@@ -50,6 +50,7 @@ export default function Member() {
         setBooking({});
         return () => setDidMount(false);
     }, []);
+    
     if(!didMount) {
         return null;
       }
