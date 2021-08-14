@@ -93,7 +93,6 @@ import moment from 'moment-timezone';
 let date = moment(new Date()).format("YYYY");
 const option = [Number(date)-1, Number(date), Number(date) +1];
 const option2 = [Number(date)-1, Number(date), Number(date) +1];
-const DOMAIN = process.env.REACT_APP_DOMAIN;
 
 export default class Demo extends React.PureComponent {
     constructor(props) {
