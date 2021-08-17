@@ -109,6 +109,9 @@ export default function BookingForm() {
             )
         let list = listShowtimes.map((time) => ([time.id, time.start_time, time.price, time.theater.number_row, time.theater.number_column]));
         setListTime(list);
+        setListTicket([]);
+        setRow([]);
+        setCol([]);
     };
 
     const searchPrice = (nameKey) => {

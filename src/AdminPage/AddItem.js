@@ -159,7 +159,7 @@ export default function FeatureAdd() {
     let data = {
       name: formMovie.name,
       image: imageBase,
-      trailer: 'test',
+      trailer: '#',
       introduce: formMovie.introduce,
       minute_time: formMovie.minute_time,
       opening_day: open,
