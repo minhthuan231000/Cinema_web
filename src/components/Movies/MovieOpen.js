@@ -44,7 +44,7 @@ export default class MoviesOpen extends Component {
                 let img = new Buffer.from(item.image.data).toString("ascii")
                 return (
                     <Card key={key}>
-                        <Card.Img variant="top" src={`data:image/png;base64,${img}`} />
+                        <Card.Img variant="top" src={`${img}`} />
                         <Card.Body>
                             <Card.Title>{item.name}</Card.Title>
                             <Card.Text className="Card_Text">
@@ -62,7 +62,7 @@ export default class MoviesOpen extends Component {
             const img = new Buffer.from(item.image.data).toString("ascii")
             return (
                 <Card key={key}>
-                    <Card.Img variant="top" src={`data:image/jpeg;base64,${img}`} />
+                    <Card.Img variant="top" src={`${img}`} />
                     <Card.Body>
                         <Card.Title>{item.name}</Card.Title>
                         <div className="Card_Text">
