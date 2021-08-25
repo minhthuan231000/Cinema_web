@@ -63,7 +63,7 @@ export default function BookingForm() {
         async function fetchListTheater() {
             const response = await fetch(request);
             const json = await response.json();
-            await setListTheater(json.data);
+            setListTheater(json.data);
         }
         fetchListTheater();
     }, []);
@@ -125,10 +125,10 @@ export default function BookingForm() {
     const handleChangeTime = async (event) => {
         let temp = event.target.value;
         var listTickets = [];
-        await setTime('');
-        await setTime(temp);
-        await setShowtimeId(event.target.value);
-        await setPrice(searchPrice(temp));
+        setTime('');
+        setTime(temp);
+        setShowtimeId(event.target.value);
+        setPrice(searchPrice(temp));
         const request = new Request(`${DOMAIN}/api/showtime/showtime/` + event.target.value, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })

@@ -7,18 +7,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
 // import AddIcon from '@material-ui/icons/Add';
-// import RemoveIcon from '@material-ui/icons/Remove';
 import Fab from '@material-ui/core/Fab';
 import QueueIcon from '@material-ui/icons/Queue';
 import Paper from '@material-ui/core/Paper';
 import UploadImages from './Upload-image';
 import './admin.css'
 import moment from 'moment-timezone';
-//import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 export default function FeatureAdd() {
-
   //Add cinema
   let formCinemas = {};
   const handleChangeThemCumRap = (event) => {
@@ -221,8 +218,8 @@ export default function FeatureAdd() {
     return showlist;
   }
   const [date] = React.useState( moment(new Date()).format('YYYY-MM-DDTHH:mm')); 
-  const handleClick = event => {
-    //const { myValue } = event.target.value;
+  const handleClick = () => {
+    return ;
   }
 
   return (
@@ -374,7 +371,7 @@ export default function FeatureAdd() {
                 style={{ marginTop: 3 }}
                 InputLabelProps={{
                   shrink: true,
-                }}
+                }} 
               />
               <UploadImages children={objImg}/>
               <p></p>
