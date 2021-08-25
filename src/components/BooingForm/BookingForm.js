@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Cookies from 'universal-cookie'
+
 const cookies = new Cookies();
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -164,7 +165,7 @@ export default function BookingForm() {
     const createRow = (sizeRow) => {
         const Row = [];
         for (let index = 0; index < sizeRow; index++) {
-            if(sizeRow % 2 !== 0){
+            if (sizeRow % 2 !== 0) {
                 Row[index] = '';
             }
             Row[index] = index + 1;
@@ -221,8 +222,10 @@ export default function BookingForm() {
         return movies;
     }
     const ShowContentImage = () => {
+
         let list_movie = JSON.parse(localStorage.getItem('movie' || 0));
         const movies = list_movie.map((item, index) => {
+            item.trailer = item.trailer.replace('view?usp=sharing', 'preview')
             if (item.id.toString() === movie_id) {
                 item.opening_day = item.opening_day.substr(0, item.opening_day.indexOf('T'))
                 return (

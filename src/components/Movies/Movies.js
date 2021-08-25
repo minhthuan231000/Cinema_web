@@ -1,23 +1,52 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap'
-//import { Link } from 'react-router-dom';
 import './Movies.css'
 import Cookies from 'universal-cookie';
+
 const cookies = new Cookies();
 
+/* End Trailer Form */
 const DOMAIN = process.env.REACT_APP_DOMAIN;
-export default class MoviesOpen extends Component {
-    /* Xử lý nodejs tại component này */
-    constructor(props) {
-        super(props);
-        this.state = {};
-    };
-    
-    check_login = async(e)=>{
+export default function MoviesOpen() {
+    var [idMovie, setIDMovie] = useState(0);
+    const [open, setOpen] = useState(false);
+    const handleTrailer = () => {
+        if (open === true) {
+            return Trailer();
+        }
+        else {
+            return ' ';
+        }
+    }
+    const Trailer = () => {
+        let list_movie = JSON.parse(localStorage.getItem('movie' || 0));
+        const movies = list_movie.map((item, index) => {
+            if (idMovie.toString() === item.id.toString()) {
+                item.trailer = item.trailer.replace('view?usp=sharing', 'preview')
+                return <div key={index} className="trailer">
+                    <div className="trailer__wrap">
+                        <div className="trailer__btnClose">
+                            <button className="btn btn-info" onClick={() => setOpen(false)}>X</button>
+                        </div>
+                        <div className="trailer__clip">
+                            <iframe src={item.trailer} width="100%" height="100%" title={'trailer' + index}></iframe>
+                        </div>
+                    </div>
+                </div>
+            }
+            return ' '
+        })
+        return movies;
+    }
+    const getLink = (e) => {
+        setOpen(true);
+        setIDMovie(idMovie = e.target.id);
+    }
+    const check_login = async (e) => {
         const loggedInUser = cookies.get('user');
         if (loggedInUser) {
             const target = e.target;
-            const request = new Request(`${DOMAIN}/api/movie/`+target.id, {
+            const request = new Request(`${DOMAIN}/api/movie/` + target.id, {
                 method: 'GET',
                 headers: new Headers({ 'Content-Type': 'application/json' })
             });
@@ -25,23 +54,23 @@ export default class MoviesOpen extends Component {
                 await fetch(request);
             }
             await fetchBooks();
-            return window.location.href=("/BookingForm?id="+target.id);
-        }else if (!loggedInUser) {
+            return window.location.href = ("/BookingForm?id=" + target.id);
+        } else if (!loggedInUser) {
             alert("Please login !!!");
             return;
         }
-    }
-    getFormattedDate(date) {
+    };
+    const getFormattedDate = (date) => {
         let year = date.getFullYear();
         let month = (1 + date.getMonth()).toString().padStart(2, '0');
         let day = date.getDate().toString().padStart(2, '0');
         return month + '/' + day + '/' + year;
-    }
-    
-    showMovie = () => {
-        let list_movie= [];
-        list_movie = JSON.parse(localStorage.getItem('movie')||0);
+    };
+    const showMovie = () => {
+        let list_movie = [];
+        list_movie = JSON.parse(localStorage.getItem('movie') || 0);
         const movies = list_movie.map((item, key) => {
+<<<<<<< HEAD
             let open = this.getFormattedDate(new Date(item.opening_day));
             if (item.id < 7) {
                 let img = new Buffer.from(item.image.data).toString("ascii")
@@ -64,6 +93,9 @@ export default class MoviesOpen extends Component {
                     </Card>);
             }
 
+=======
+            let open = getFormattedDate(new Date(item.opening_day));
+>>>>>>> main
             const img = new Buffer.from(item.image.data).toString("ascii")
             return (
                 <Card key={key}>
@@ -75,11 +107,11 @@ export default class MoviesOpen extends Component {
                                 {item.introduce}
                             </Card.Text>
                         </div>
-                        <Button variant="primary">Trailer</Button>
-                        <Button style={{ marginLeft: '5px' }} variant="text" id={item.id} onClick={this.check_login}>Mua Vé</Button>
+                        <Button variant="primary" id={item.id} onClick={getLink} >Trailer</Button>
+                        <Button style={{ marginLeft: '5px' }} variant="text" id={item.id} onClick={check_login}>Mua Vé</Button>
                         <Card.Footer>
                             <small className="text-muted">View: {item.view} </small>
-                                <p></p>
+                            <p></p>
                             <small className="text-muted">Open: {open}</small>
                         </Card.Footer>
                     </Card.Body>
@@ -87,11 +119,12 @@ export default class MoviesOpen extends Component {
         })
         return movies;
     }
-    render() {
-        return (
+    return (
+        <div>
+            {handleTrailer()}
             <div className="List_movies">
-                {this.showMovie()}
+                {showMovie()}
             </div>
-        );
-    }
+        </div>
+    );
 }
