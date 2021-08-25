@@ -70,32 +70,7 @@ export default function MoviesOpen() {
         let list_movie = [];
         list_movie = JSON.parse(localStorage.getItem('movie') || 0);
         const movies = list_movie.map((item, key) => {
-<<<<<<< HEAD
-            let open = this.getFormattedDate(new Date(item.opening_day));
-            if (item.id < 7) {
-                let img = new Buffer.from(item.image.data).toString("ascii")
-                return (
-                    <Card key={key}>
-                        <Card.Img variant="top" src={`${img}`} />
-                        <Card.Body>
-                            <Card.Title>{item.name}</Card.Title>
-                            <Card.Text className="Card_Text">
-                                {item.introduce}
-                            </Card.Text>
-                            <Button variant="primary">Trailer</Button>
-                            <Button style={{ marginLeft: '5px' }} id={item.id} variant="text" onClick={this.check_login}>Mua Vé</Button>
-                            <Card.Footer>
-                                <small className="text-muted">View: {item.view} </small>
-                                <p></p>
-                                <small className="text-muted">Open: {open}</small>
-                            </Card.Footer>
-                        </Card.Body>
-                    </Card>);
-            }
-
-=======
             let open = getFormattedDate(new Date(item.opening_day));
->>>>>>> main
             const img = new Buffer.from(item.image.data).toString("ascii")
             return (
                 <Card key={key}>
