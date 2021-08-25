@@ -49,7 +49,6 @@ export default function Member(props) {
     }, []);
     if (loggedInUser) { // neu da login thi Redirect
         let username = loggedInUser.fullname;
-
         return (
             <div className="register-content">
                 <div className="container">

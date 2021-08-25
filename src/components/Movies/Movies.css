@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
 .List_movies .card {
     width: 21rem;
     height: 40rem;
@@ -10,23 +11,25 @@
     box-shadow: 5px 10px 10px 5px rgb(0, 0, 0, 0.7);
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 .card-title {
     white-space: normal;
 }
+
 .card-img, .card-img-top {
     height: 25em;
 }
 
 .Card_Text {
-    overflow: hidden ;
-    text-align:left;
+    overflow: hidden;
+    text-align: left;
     height: 25%;
     width: fit-content;
     white-space: normal;
     margin-block-end: 20px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
-   -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical;
 }
 
 .btn-primary {
@@ -40,10 +43,58 @@
     background-color: #0dc0e0;
     border-color: #0dc0e0;
 }
-#btn-muave{
+
+#btn-muave {
     color: white;
     text-decoration: none;
 }
-#btn-muave:hover{
+
+#btn-muave:hover {
     color: #212529;
+}
+
+/* Trailer */
+
+@keyframes OverlayAnimation {
+    0% {
+        top: -100px;
+        background: rgba(0, 0, 0, 1);
+        opacity: 0;
+    }
+    50% {
+        top: -50px;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0.5;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+.trailer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.7);
+    animation: OverlayAnimation 0.5s ease;
+}
+
+.trailer .trailer__wrap {
+    display: flex;
+    padding: 5% 10%;
+    height: 100%;
+}
+
+.trailer__btnClose button {
+    padding: 4px 20px;
+    font-size: 3rem;
+    border-radius: 20px 20px 0 20px;
+}
+
+.trailer__clip {
+    flex: 1;
 }
