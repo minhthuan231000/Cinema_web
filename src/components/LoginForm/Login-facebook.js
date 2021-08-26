@@ -1,18 +1,16 @@
 import React from 'react';
-import { useGoogleLogin } from 'react-google-login';
-import icon_gg from '../../images/icons/icon-google.jpg'
+import FacebookLogin from 'react-facebook-login';
 import Cookies from 'universal-cookie';
-// refresh token
 import { refreshTokenSetup } from '../utils/refreshToken';
 
 
 
 const cookies = new Cookies(); 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
-const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vkidfkvcsd2f.apps.googleusercontent.com';
 
- function LoginHooks() {
-  const onSuccess = async(res) => {
+ function LoginHooksFb() {
+
+  const responseFacebook = async(res) => {
     let data = res.profileObj;
     const request = new Request(`${DOMAIN}/api/auth/google`, {
       method: 'POST',
@@ -45,29 +43,19 @@ const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vki
             }
         )
     refreshTokenSetup(res);
-  };
-
-  const onFailure = (res) => {
-    console.log('Login failed: res:', res);
-  };
-
-  const { signIn } = useGoogleLogin({
-    onSuccess,
-    onFailure,
-    clientId,
-    isSignedIn: false,
-    accessType: 'offline',
-    cookiePolicy: 'single_host_origin',
-    // responseType: 'code',
-    // prompt: 'consent',
-  });
+  }
 
   return (
-    <button className="btnAuth" onClick={signIn}>
-      <img src={icon_gg} alt="google login" className="icon"></img>
-      <span className="buttonText">Sign in with Google</span>
-    </button>
+    
+    <FacebookLogin
+    appId="3722823571162688"
+    autoLoad={false}
+    fields="id,name,email,picture"
+    callback={responseFacebook}
+    cssClass="my-facebook-button-class"
+    icon="fa-facebook"
+  />
   );
 }
 
-export default LoginHooks;
+export default LoginHooksFb;
