@@ -222,7 +222,6 @@ export default function BookingForm() {
         return movies;
     }
     const ShowContentImage = () => {
-
         let list_movie = JSON.parse(localStorage.getItem('movie' || 0));
         const movies = list_movie.map((item, index) => {
             item.trailer = item.trailer.replace('view?usp=sharing', 'preview')

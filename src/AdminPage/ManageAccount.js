@@ -153,7 +153,7 @@ const EnhancedTableToolbar = (props) => {
                         setRows(result.data);
                         setSelected([]);
                     } else if (result.Status === 'Error') {
-                        alert('Del showtime error');
+                        alert('Update showtime error');
                     }
                 }
             },
