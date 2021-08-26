@@ -508,7 +508,7 @@ class Login extends Component { // class parent login
             )
         }
         const HandleAlert = () => {
-            if (this.state.alert === 1) return <Alert severity="warning">Please active account !</Alert>
+            if (this.state.alert === 1) return <Alert severity="warning">Your account was ban!</Alert>
             if (this.state.alert === 2) return <Alert severity="success">Login Success !</Alert>
             if (this.state.alert === 3) return <Alert severity="warning">Email is not exist. Please sign up !</Alert>
             if (this.state.alert === 4) return <Alert severity="error">Password was wrong. Please check again !</Alert>
