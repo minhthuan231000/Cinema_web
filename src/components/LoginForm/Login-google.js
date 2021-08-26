@@ -23,8 +23,8 @@ const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vki
     await fetch(request)
         .then(res => res.json())
         .then((result) => {
-            if (result) {
-              if(result.data.role !== 'lock'){
+            if (result.data.role) {
+                console.log(result)
                 let data = {
                   id: result.data.id,
                   email: result.data.email,
@@ -33,10 +33,9 @@ const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vki
                 } 
                 cookies.set('user', data, { path: '/' });
                 window.location.reload();
-              }else if(result.data.role === 'lock'){
-                alert("Your account was lock!")
-              }
-              }
+            }else {
+              alert('Your account was ban')
+            }
         },
             (error) => {
                 if (error) {
