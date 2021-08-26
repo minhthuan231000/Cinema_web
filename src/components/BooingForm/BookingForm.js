@@ -63,7 +63,7 @@ export default function BookingForm() {
         async function fetchListTheater() {
             const response = await fetch(request);
             const json = await response.json();
-            await setListTheater(json.data);
+            setListTheater(json.data);
         }
         fetchListTheater();
     }, []);
@@ -110,6 +110,9 @@ export default function BookingForm() {
             )
         let list = listShowtimes.map((time) => ([time.id, time.start_time, time.price, time.theater.number_row, time.theater.number_column]));
         setListTime(list);
+        setListTicket([]);
+        setRow([]);
+        setCol([]);
     };
 
     const searchPrice = (nameKey) => {
@@ -122,10 +125,10 @@ export default function BookingForm() {
     const handleChangeTime = async (event) => {
         let temp = event.target.value;
         var listTickets = [];
-        await setTime('');
-        await setTime(temp);
-        await setShowtimeId(event.target.value);
-        await setPrice(searchPrice(temp));
+        setTime('');
+        setTime(temp);
+        setShowtimeId(event.target.value);
+        setPrice(searchPrice(temp));
         const request = new Request(`${DOMAIN}/api/showtime/showtime/` + event.target.value, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
@@ -212,7 +215,7 @@ export default function BookingForm() {
         const movies = list_movie.map((item, index) => {
             let img = new Buffer.from(item.image.data).toString("ascii")
             if (item.id.toString() === movie_id) {
-                return <img key={index} src={`data:image/png;base64,${img}`} alt="" />
+                return <img key={index} src={`${img}`} alt="" />
             }
             return ' ';
         })

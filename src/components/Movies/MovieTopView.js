@@ -72,7 +72,7 @@ export default function MoviesTopView() {
             const img = new Buffer.from(item.image.data).toString("ascii")
             return (
                 <Card key={key}>
-                    <Card.Img variant="top" src={`data:image/jpeg;base64,${img}`} />
+                    <Card.Img variant="top" src={`${img}`} />
                     <Card.Body>
                         <Card.Title>{item.name}</Card.Title>
                         <div className="Card_Text">

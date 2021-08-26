@@ -1,96 +1,98 @@
-import * as React from 'react';
-import Paper from '@material-ui/core/Paper';
-import {
-    Chart,
-    ArgumentAxis,
-    ValueAxis,
-    BarSeries,
-    SplineSeries,
-    Title,
-    Tooltip,
-    Legend,
-} from '@devexpress/dx-react-chart-material-ui';
-import { ValueScale, Animation } from '@devexpress/dx-react-chart';
-import { EventTracker } from '@devexpress/dx-react-chart';
-
-export const theaters = {
-    2020: [
-        { theater: 'BHD Star 3/2', quality: 50, total: 987000 },
-        { theater: 'BHD Star Bitexco', quality: 100, total: 3000000 },
-        { theater: 'BHD Star Phạm Hùng', quality: 30, total: 1100000 },
-        { theater: 'CGV Pandora City', quality: 107, total: 7100000 },
-        { theater: 'CGV Vivo City', quality: 95, total: 4300000 },
-        { theater: 'Lotte Cộng Hoà', quality: 150, total: 7500000 },
-        { theater: 'Lotte Phú Thọ', quality: 120, total: 5300000 },
-        { theater: 'CGV Vincom Đồng Khởi', quality: 110, total: 2500000 },
-        { theater: 'CGV Vincom Thủ Đức', quality: 54, total: 2300000 }
-    ],
-    2021: [
-        { theater: 'BHD Star 3/2', quality: 100, total: 1000000 },
-        { theater: 'BHD Star Bitexco', quality: 200, total: 4300000 },
-        { theater: 'BHD Star Phạm Hùng', quality: 30, total: 1100000 },
-        { theater: 'CGV Pandora City', quality: 50, total: 1200000 },
-        { theater: 'CGV Vivo City', quality: 127, total: 7150000 },
-        { theater: 'Lotte Cộng Hoà', quality: 105, total: 4340000 },
-        { theater: 'Lotte Phú Thọ', quality: 180, total: 7520000 },
-        { theater: 'CGV Vincom Đồng Khởi', quality: 150, total: 5380000 },
-        { theater: 'CGV Vincom Thủ Đức', quality: 120, total: 2590000 }
-    ],
-    2022: [
-        { theater: 'BHD Star 3/2', quality: 170, total: 856000 },
-        { theater: 'BHD Star Bitexco', quality: 150, total: 3574000 },
-        { theater: 'BHD Star Phạm Hùng', quality: 30, total: 1100000 },
-        { theater: 'CGV Pandora City', quality: 10, total: 1198000 },
-        { theater: 'CGV Vivo City', quality: 33, total: 6150000 },
-        { theater: 'Lotte Cộng Hoà', quality: 84, total: 3340000 },
-        { theater: 'Lotte Phú Thọ', quality: 120, total: 5520000 },
-        { theater: 'CGV Vincom Đồng Khởi', quality: 110, total: 3380000 },
-        { theater: 'CGV Vincom Thủ Đức', quality: 90, total: 1890000 }
-    ],
-};
-export const movies = {
-    2020: [
-        { movie: 'Zack Snyder is Justice', quality: 100, total: 1987000 },
-        { movie: 'Captain Marvel', quality: 140, total: 3000000 },
-        { movie: 'Godzilla vs. Kong', quality: 80, total: 1100000 },
-        { movie: 'The Turning', quality: 102, total: 2000000 },
-        { movie: 'Catch Me If You Can', quality: 95, total: 4300000 },
-        { movie: 'The Empty Man', quality: 150, total: 7500000 },
-        { movie: 'Collectors', quality: 70, total: 3000000 },
-        { movie: 'Darkest Hour', quality: 110, total: 2500000 },
-        { movie: 'Prince of Persia: The Sands of Time', quality: 54, total: 2300000 },
-        { movie: 'Chef', quality: 74, total: 2600000 },
-        { movie: 'Freaky', quality: 104, total: 5200000 },
-    ],
-    2021: [
-        { movie: 'Zack Snyder is Justice', quality: 100, total: 1000000 },
-        { movie: 'Captain Marvel', quality: 200, total: 4300000 },
-        { movie: 'Godzilla vs. Kong', quality: 30, total: 1100000 },
-        { movie: 'The Turning', quality: 50, total: 1200000 },
-        { movie: 'Catch Me If You Can', quality: 127, total: 7150000 },
-        { movie: 'The Empty Man', quality: 105, total: 4340000 },
-        { movie: 'Collectors', quality: 180, total: 7520000 },
-        { movie: 'Darkest Hour', quality: 150, total: 5380000 },
-        { movie: 'Prince of Persia: The Sands of Time', quality: 120, total: 2590000 },
-        { movie: 'Chef', quality: 64, total: 2400000 },
-        { movie: 'Freaky', quality: 105, total: 5330000 },
-    ],
-    2022: [
-        { movie: 'Zack Snyder is Justice', quality: 170, total: 856000 },
-        { movie: 'Captain Marvel', quality: 150, total: 3574000 },
-        { movie: 'Godzilla vs. Kong', quality: 30, total: 1100000 },
-        { movie: 'The Turning', quality: 10, total: 1198000 },
-        { movie: 'Catch Me If You Can', quality: 33, total: 6150000 },
-        { movie: 'The Empty Man', quality: 84, total: 3340000 },
-        { movie: 'Collectors', quality: 120, total: 5520000 },
-        { movie: 'Darkest Hour', quality: 110, total: 3380000 },
-        { movie: 'Prince of Persia: The Sands of Time', quality: 90, total: 1890000 },
-        { movie: 'Chef', quality: 34, total: 1400000 },
-        { movie: 'Freaky', quality: 110, total: 5450000 },
-    ],
-};
-const option = [2020, 2021, 2022];
-const option2 = [2020, 2021, 2022];
+    import * as React from 'react';
+    import Paper from '@material-ui/core/Paper';
+    import {
+        Chart,
+        ArgumentAxis,
+        ValueAxis,
+        BarSeries,
+        SplineSeries,
+        Title,
+        Tooltip,
+        Legend,
+        
+    } from '@devexpress/dx-react-chart-material-ui';
+    import { ValueScale, Animation } from '@devexpress/dx-react-chart';
+    import { EventTracker } from '@devexpress/dx-react-chart';
+import moment from 'moment-timezone';
+    export const theaters = {
+        2020: [
+            { theater: 'BHD Star 3/2', quality: 50, total: 987000 },
+            { theater: 'BHD Star Bitexco', quality: 100, total: 3000000 },
+            { theater: 'BHD Star Phạm Hùng', quality: 30, total: 1100000 },
+            { theater: 'CGV Pandora City', quality: 107, total: 7100000 },
+            { theater: 'CGV Vivo City', quality: 95, total: 4300000 },
+            { theater: 'Lotte Cộng Hoà', quality: 150, total: 7500000 },
+            { theater: 'Lotte Phú Thọ', quality: 120, total: 5300000 },
+            { theater: 'CGV Vincom Đồng Khởi', quality: 110, total: 2500000 },
+            { theater: 'CGV Vincom Thủ Đức', quality: 54, total: 2300000 }
+        ],
+        2021: [
+            { theater: 'BHD Star 3/2', quality: 100, total: 1000000 },
+            { theater: 'BHD Star Bitexco', quality: 200, total: 4300000 },
+            { theater: 'BHD Star Phạm Hùng', quality: 30, total: 1100000 },
+            { theater: 'CGV Pandora City', quality: 50, total: 1200000 },
+            { theater: 'CGV Vivo City', quality: 127, total: 7150000 },
+            { theater: 'Lotte Cộng Hoà', quality: 105, total: 4340000 },
+            { theater: 'Lotte Phú Thọ', quality: 180, total: 7520000 },
+            { theater: 'CGV Vincom Đồng Khởi', quality: 150, total: 5380000 },
+            { theater: 'CGV Vincom Thủ Đức', quality: 120, total: 2590000 }
+        ],
+        2022: [
+            { theater: 'BHD Star 3/2', quality: 170, total: 856000 },
+            { theater: 'BHD Star Bitexco', quality: 150, total: 3574000 },
+            { theater: 'BHD Star Phạm Hùng', quality: 30, total: 1100000 },
+            { theater: 'CGV Pandora City', quality: 10, total: 1198000 },
+            { theater: 'CGV Vivo City', quality: 33, total: 6150000 },
+            { theater: 'Lotte Cộng Hoà', quality: 84, total: 3340000 },
+            { theater: 'Lotte Phú Thọ', quality: 120, total: 5520000 },
+            { theater: 'CGV Vincom Đồng Khởi', quality: 110, total: 3380000 },
+            { theater: 'CGV Vincom Thủ Đức', quality: 90, total: 1890000 }
+        ],
+    };
+    export const movies = {
+        2020: [
+            { movie: 'Zack Snyder is Justice', quality: 100, total: 1987000 },
+            { movie: 'Captain Marvel', quality: 140, total: 3000000 },
+            { movie: 'Godzilla vs. Kong', quality: 80, total: 1100000 },
+            { movie: 'The Turning', quality: 102, total: 2000000 },
+            { movie: 'Catch Me If You Can', quality: 95, total: 4300000 },
+            { movie: 'The Empty Man', quality: 150, total: 7500000 },
+            { movie: 'Collectors', quality: 70, total: 3000000 },
+            { movie: 'Darkest Hour', quality: 110, total: 2500000 },
+            { movie: 'Prince of Persia: The Sands of Time', quality: 54, total: 2300000 },
+            { movie: 'Chef', quality: 74, total: 2600000 },
+            { movie: 'Freaky', quality: 104, total: 5200000 },
+        ],
+        2021: [
+            { movie: 'Zack Snyder is Justice', quality: 100, total: 1000000 },
+            { movie: 'Captain Marvel', quality: 200, total: 4300000 },
+            { movie: 'Godzilla vs. Kong', quality: 30, total: 1100000 },
+            { movie: 'The Turning', quality: 50, total: 1200000 },
+            { movie: 'Catch Me If You Can', quality: 127, total: 7150000 },
+            { movie: 'The Empty Man', quality: 105, total: 4340000 },
+            { movie: 'Collectors', quality: 180, total: 7520000 },
+            { movie: 'Darkest Hour', quality: 150, total: 5380000 },
+            { movie: 'Prince of Persia: The Sands of Time', quality: 120, total: 2590000 },
+            { movie: 'Chef', quality: 64, total: 2400000 },
+            { movie: 'Freaky', quality: 105, total: 5330000 },
+        ],
+        2022: [
+            { movie: 'Zack Snyder is Justice', quality: 170, total: 856000 },
+            { movie: 'Captain Marvel', quality: 150, total: 3574000 },
+            { movie: 'Godzilla vs. Kong', quality: 30, total: 1100000 },
+            { movie: 'The Turning', quality: 10, total: 1198000 },
+            { movie: 'Catch Me If You Can', quality: 33, total: 6150000 },
+            { movie: 'The Empty Man', quality: 84, total: 3340000 },
+            { movie: 'Collectors', quality: 120, total: 5520000 },
+            { movie: 'Darkest Hour', quality: 110, total: 3380000 },
+            { movie: 'Prince of Persia: The Sands of Time', quality: 90, total: 1890000 },
+            { movie: 'Chef', quality: 34, total: 1400000 },
+            { movie: 'Freaky', quality: 110, total: 5450000 },
+        ],
+    };
+let date = moment(new Date()).format("YYYY");
+const option = [Number(date)-1, Number(date), Number(date) +1];
+const option2 = [Number(date)-1, Number(date), Number(date) +1];
 
 export default class Demo extends React.PureComponent {
     constructor(props) {
@@ -108,23 +110,37 @@ export default class Demo extends React.PureComponent {
         this.id2 = undefined;
         this.index2 = 1;
     }
-    // Muốn tự động thay đổi data từ uncomment
-    /* componentDidMount() {
-        const selectElement = document.getElementById('select');
-        this.id = setInterval(() => {
-            selectElement.selectedIndex = this.index;
-            this.setState({ data: data[option[this.index]] });
-            if (this.index === 2) {
-                this.index = 0;
-            } else {
-                this.index += 1;
-            }
-        }, 4000);
-    }
 
-    componentWillUnmount() {
-        clearTimeout(this.id);
-    } */
+    // Muốn tự động thay đổi data từ uncomment
+    // componentDidMount() {
+    //    // const selectElement = document.getElementById('select');
+    //         const request = new Request(`${DOMAIN}/api/booking/` , {
+    //             method: 'GET',
+    //             headers: new Headers({ 'Content-Type': 'application/json' })
+    //         });
+    //         fetch(request)
+    //         .then(res => res.json())
+    //         .then((result) => {
+    //                 if (result) {
+                        
+    //                 }
+    //             }
+    //         )
+
+        // this.id = setInterval(() => {
+        //     selectElement.selectedIndex = this.index;
+        //    // this.setState({ data: data[option[this.index]] });
+        //     if (this.index === 2) {
+        //         this.index = 0;
+        //     } else {
+        //         this.index += 1;
+        //     }
+        // }, 4000);
+    //}
+
+    // componentWillUnmount() {
+    //     clearTimeout(this.id);
+    // }
 
     changeData(e) {
         this.setState({ data: theaters[e.target.value] });

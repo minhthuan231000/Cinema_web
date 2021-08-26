@@ -236,7 +236,7 @@ class ImageUploadCard extends React.Component {
                         className={classes.secondaryButton}
                         aria-label="Close"
                         onClick={this.handleSeachClose}
-                    >
+                    > 
                         <ReplayIcon />
                     </IconButton>
                 </Grid>
@@ -246,7 +246,6 @@ class ImageUploadCard extends React.Component {
 
     renderUploadedState() {
         const { classes } = this.props;
-
         return (
             <React.Fragment>
                 <CardActionArea onClick={this.imageResetHandler}>

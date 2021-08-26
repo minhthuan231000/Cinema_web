@@ -36,9 +36,26 @@ class ImageUploadCard extends React.Component {
     imageUploaded: 0,
     selectedFile: null
   };
+   toDataURL(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+            callback(reader.result);
+          }
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+    }
+    
   handleUploadClick = event => {
     var file = event.target.files[0];
-
+    
+    this.toDataURL(file, function(dataUrl) {
+      console.log('RESULT:', dataUrl)
+  })
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = function (e) {

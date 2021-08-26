@@ -23,16 +23,18 @@ const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vki
     await fetch(request)
         .then(res => res.json())
         .then((result) => {
-            if (result) {
-              let data = {
-                id: result.data.id,
-                email: result.data.email,
-                fullname: result.data.fullname,
-                numphone: result.data.numphone
-              }
-              
-              cookies.set('user', data, { path: '/' });
-              window.location.reload();
+            if (result.data.role) {
+                console.log(result)
+                let data = {
+                  id: result.data.id,
+                  email: result.data.email,
+                  fullname: result.data.fullname,
+                  numphone: result.data.numphone
+                } 
+                cookies.set('user', data, { path: '/' });
+                window.location.reload();
+            }else {
+              alert('Your account was ban')
             }
         },
             (error) => {
@@ -52,14 +54,15 @@ const clientId = process.env.REACT_APP_ID||'935932900837-8ndtoqgpbgrm829n73d0vki
     onSuccess,
     onFailure,
     clientId,
-    isSignedIn: true,
+    isSignedIn: false,
     accessType: 'offline',
+    cookiePolicy: 'single_host_origin',
     // responseType: 'code',
     // prompt: 'consent',
   });
 
   return (
-    <button className="btnAuth" onClick={signIn} >
+    <button className="btnAuth" onClick={signIn}>
       <img src={icon_gg} alt="google login" className="icon"></img>
       <span className="buttonText">Sign in with Google</span>
     </button>
