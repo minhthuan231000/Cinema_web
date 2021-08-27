@@ -29,6 +29,7 @@ export default function FeatureAdd() {
       name: formCinemas.name,
       address: formCinemas.address
     };
+    console.log("🚀 ~ file: AddItem.js ~ line 32 ~ handleSubmit1 ~ data", data)
     let request = new Request(`${DOMAIN}/api/cinema`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -230,7 +231,7 @@ export default function FeatureAdd() {
             <div className="groupCumRap">
               <div><label><h4>Thêm cụm rạp</h4></label></div>
               <TextField style={{ marginLeft: 10 }} id="standard-basic" name="name" label="Tên Cụm Rạp" onChange={(e) => handleChangeThemCumRap(e)} />
-              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="introduce" label="Địa Chỉ" onChange={(e) => handleChangeThemCumRap(e)} />
+              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="address" label="Địa Chỉ" onChange={(e) => handleChangeThemCumRap(e)} />
             </div>
             <p></p>
             <InputLabel id="demo-simple-select-label" >&ensp;Submit</InputLabel>
