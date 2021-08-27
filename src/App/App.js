@@ -146,6 +146,7 @@ export default class App extends Component {
     }
 
     load_data = async () => {
+        console.log(DOMAIN);
         let request = new Request(`${DOMAIN}/load/data`, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
