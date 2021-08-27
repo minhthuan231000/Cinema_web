@@ -32,25 +32,25 @@ const loggedInUser = cookies.get('user');
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {isAdmin: false}/* true là đi đến Admin, false là đi đến home */
+        this.state = { isAdmin: false }/* true là đi đến Admin, false là đi đến home */
     }
     // check admin
-        componentDidMount() {
-            if(loggedInUser){
-                const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
-                    method: 'GET',
-                    headers: new Headers({ 'Content-Type': 'application/json' })
-                });
-                fetch(request)
+    componentDidMount() {
+        if (loggedInUser) {
+            const request = new Request(`${DOMAIN}/api/user/` + loggedInUser.id, {
+                method: 'GET',
+                headers: new Headers({ 'Content-Type': 'application/json' })
+            });
+            fetch(request)
                 .then(res => res.json())
                 .then((result) => {
-                        if (result) {
-                            this.setState({ isAdmin: result.data.isAdmin });
-                        }
+                    if (result) {
+                        this.setState({ isAdmin: result.data.isAdmin });
                     }
+                }
                 )
-            }
         }
+    }
 
     AdminPage = () => {
         return <AdminPage loggedInAdmin={false} />
@@ -129,20 +129,23 @@ export default class App extends Component {
             </div>
         )
     }
+
     showButton = (isAdmin) => {
         this.load_data();
         if (!loggedInUser) {
             return this.UserPage();
         }
-        if (loggedInUser) {    
+        if (loggedInUser) {
             if (isAdmin === false) {
                 return this.UserPage();
             } else if (isAdmin === true) {
                 return this.AdminPage();
-            } 
+            }
         }
+
     }
-    load_data = async() => {
+
+    load_data = async () => {
         let request = new Request(`${DOMAIN}/load/data`, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
