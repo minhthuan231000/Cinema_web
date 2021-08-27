@@ -24,12 +24,12 @@ export default function FeatureAdd() {
     const name = target.name;
     formCinemas[name] = value;
   }
-  const handleSubmit1 = () => {
+  const SubmitThemCumRap = () => {
     let data = {
       name: formCinemas.name,
       address: formCinemas.address
     };
-    console.log("🚀 ~ file: AddItem.js ~ line 32 ~ handleSubmit1 ~ data", data)
+    console.log("🚀 ~ file: AddItem.js ~ line 32 ~ SubmitThemCumRap ~ data", data)
     let request = new Request(`${DOMAIN}/api/cinema`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -41,6 +41,7 @@ export default function FeatureAdd() {
         if (result) {
           if (result.status === '200') {
             alert('Success');
+            window.location.reload();
           } else if (result.status === '400') {
             alert(result.message)
           }
@@ -105,7 +106,7 @@ export default function FeatureAdd() {
     const name = target.name;
     formTheater[name] = value;
   }
-  const handleSubmit2 = () => {
+  const SubmitThemRap = () => {
     let data = {
       name: formTheater.name_theater,
       cinema_id: formTheater.cumrap,
@@ -151,7 +152,7 @@ export default function FeatureAdd() {
   const objImg = data => {
     imageBase = data[0];
   }
-  const handleSubmit4 = () => {
+  const SubmitMovie = () => {
 
     const open = document.getElementById('open').value;
     let data = {
@@ -187,11 +188,10 @@ export default function FeatureAdd() {
         }
       )
   }
-
   const showLoaiRap = () => {
     let list_loairap = [{ "name": '2d' }, { "name": '3d' }, { "name": '4dx' }];
     const showlist = list_loairap.map((item, index) => {
-      return <MenuItem key={index} value={item.name} onClick={handleClick}>{item.name}</MenuItem>
+      return <MenuItem key={index} value={item.name}>{item.name}</MenuItem>
     })
     return showlist;
   }
@@ -199,7 +199,7 @@ export default function FeatureAdd() {
   const showCumRap = () => {
     let list_cinema = JSON.parse(localStorage.getItem('cinema') || 0);
     const show_list = list_cinema.map((item, index) => {
-      return <MenuItem key={index} value={item.id} >{item.name}</MenuItem>
+      return <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
     })
     return show_list;
   }
@@ -207,22 +207,18 @@ export default function FeatureAdd() {
   const showListItemMovie = () => {
     let list_movie = JSON.parse(localStorage.getItem('movie') || 0);
     const show_list = list_movie.map((item, index) => {
-      return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
+      return <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
     })
     return show_list;
   }
   const showListItemRap = () => {
     let list_rap = JSON.parse(localStorage.getItem('theater') || 0);
     const showlist = list_rap.map((item, index) => {
-      return <MenuItem key={index} value={item.id} onClick={handleClick}>{item.name}</MenuItem>
+      return <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
     })
     return showlist;
   }
-  const [date] = React.useState( moment(new Date()).format('YYYY-MM-DDTHH:mm')); 
-  const handleClick = () => {
-    return ;
-  }
-
+  const [date] = React.useState(moment(new Date()).format('YYYY-MM-DDTHH:mm'));
   return (
     <div className="addFeature-root" >
       <div className="col-5" >
@@ -235,7 +231,7 @@ export default function FeatureAdd() {
             </div>
             <p></p>
             <InputLabel id="demo-simple-select-label" >&ensp;Submit</InputLabel>
-            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" onClick={() => handleSubmit1()} aria-label="submit">
+            <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" onClick={() => SubmitThemCumRap()} aria-label="submit">
               <QueueIcon />
             </Fab>
           </Paper>
@@ -252,19 +248,17 @@ export default function FeatureAdd() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     name="loairap"
-                    value={''}
-                    onChange={(e) => {handleChangeTheater(e)}}
+                    onChange={(e) => handleChangeTheater(e)}
                   >
                     {showLoaiRap()}
                   </Select>
                 </FormControl>
-                <FormControl className="input-TypeRap">
+                <FormControl className="input-CumRap">
                   <InputLabel id="demo-simple-select-label">Cụm Rạp</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     name="cumrap"
-                    value={''}
                     onChange={(e) => handleChangeTheater(e)}
                   >
                     {showCumRap()}
@@ -284,7 +278,7 @@ export default function FeatureAdd() {
               </div>
               <p></p>
               <InputLabel id="demo-simple-select-label" >&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={handleSubmit2} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" onClick={() => SubmitThemRap()} >
                 <QueueIcon />
               </Fab>
             </Paper>
@@ -324,7 +318,6 @@ export default function FeatureAdd() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   name="cbPhim"
-                  value={''}
                   onChange={(e) => handleChangeShowtimes(e)}
                 >
                   {showListItemMovie()}
@@ -336,7 +329,6 @@ export default function FeatureAdd() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   name="cbRap"
-                  value={''}
                   onChange={(e) => handleChangeShowtimes(e)}
                 >
                   {showListItemRap()}
@@ -359,7 +351,7 @@ export default function FeatureAdd() {
               <div>
                 <label><h4>Thêm Phim</h4></label>
               </div>
-              
+
               <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" name="name" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" name="minute_time" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="introduce" label="Mô tả" onChange={(e) => handleChangeMovie(e)} />
@@ -372,12 +364,12 @@ export default function FeatureAdd() {
                 style={{ marginTop: 3 }}
                 InputLabelProps={{
                   shrink: true,
-                }} 
+                }}
               />
-              <UploadImages children={objImg}/>
+              <UploadImages children={objImg} />
               <p></p>
               <InputLabel id="demo-simple-select-label">&ensp;Submit</InputLabel>
-              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={e => handleSubmit4(e)} >
+              <Fab style={{ margin: '0 0 5px 5px' }} size="small" color="secondary" aria-label="submit" className="" onClick={e => SubmitMovie(e)} >
                 <QueueIcon />
               </Fab>
             </div>
