@@ -2,17 +2,6 @@ Cài đặt các module cần thiết :
 npm i --save
 if can't: npm install --force || npm install --legacy-peer-deps --save radium
 
-Add database từ file data_database
-
-Chỉnh sửa file: Folder: server/config/config.json 
-
-"development": {
-    "username": "postgres",
-    "password": "<pass của bạn>",
-    "database": "<database bạn tạo>",
-    "dialect": "postgres"
-  },
-
 Tạo file .env ngoài thư mục lớn: =>
 
 REACT_APP_DOMAIN=http://localhost:9080

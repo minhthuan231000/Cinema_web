@@ -159,8 +159,8 @@ export default function BookingForm() {
             row = listTime[0][4];
             column = listTime[0][3];
         }
-        setRow(createRow(row));
-        setCol(createCol(column));
+        setRow(createRow(column));
+        setCol(createCol(row));
     };
     const createRow = (sizeRow) => {
         const Row = [];
@@ -169,7 +169,7 @@ export default function BookingForm() {
                 Row[index] = '';
             }
             Row[index] = index + 1;
-            Row[index].toString()
+            Row[index].toString();
         }
         return Row;
     }
@@ -250,7 +250,7 @@ export default function BookingForm() {
     }
     const ArrConvert = {
         'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12, 'm': 13,
-        'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26
+        'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26, '': 27
     }
     const AddToCartClick = async () => {
         var dic = {}
@@ -304,7 +304,7 @@ export default function BookingForm() {
     }
 
     const totalPrice = listSeats.length * price;
-
+    console.log(seatsRows)
     const seatsGenerator = () => {
         return (
             <div className="container">
