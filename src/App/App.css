@@ -2,6 +2,19 @@ body {
   width: 100%;
   line-height: 1;
 }
+body::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0;
+}
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgb(0, 0, 0);
+  background-color: #333;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(99, 17, 167);
+  outline: 1px solid rgba(82, 20, 182, 0.5);
+}
 
 .App {
   display: block;

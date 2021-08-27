@@ -3,8 +3,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 .form-control {
+    font-weight: 800;
     border-radius: 30px;
-}
-.form-control:hover {
-    background-color: rgba(107, 206, 252, 0.705);
 }

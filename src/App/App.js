@@ -171,7 +171,7 @@ export default class App extends Component {
     }
     render() {
         return (
-            <div className="App">
+            <div>
                 {this.showButton(this.state.isAdmin)}
             </div>
         );
