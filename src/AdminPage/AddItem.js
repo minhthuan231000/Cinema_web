@@ -158,7 +158,7 @@ export default function FeatureAdd() {
     let data = {
       name: formMovie.name,
       image: imageBase,
-      trailer: '#',
+      trailer: formMovie.trailer,
       introduce: formMovie.introduce,
       minute_time: formMovie.minute_time,
       opening_day: open,
@@ -355,6 +355,7 @@ export default function FeatureAdd() {
               <TextField style={{ margin: 8 }} id="standard-basic" label="Tên Phim" name="name" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: 8 }} id="standard-basic" label="Thời lượng (phút)" name="minute_time" onChange={(e) => handleChangeMovie(e)} />
               <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="introduce" label="Mô tả" onChange={(e) => handleChangeMovie(e)} />
+              <TextField style={{ margin: '8px 5px 5px 10px', width: '20em' }} id="standard-basic" name="trailer" label="Trailer" onChange={(e) => handleChangeMovie(e)} />
               <TextField
                 id="open"
                 label="Opening day"
