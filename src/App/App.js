@@ -146,6 +146,7 @@ export default class App extends Component {
     }
 
     load_data = async () => {
+        console.log(DOMAIN);
         let request = new Request(`${DOMAIN}/load/data`, {
             method: 'GET',
             headers: new Headers({ 'Content-Type': 'application/json' })
@@ -170,7 +171,7 @@ export default class App extends Component {
     }
     render() {
         return (
-            <div className="App">
+            <div>
                 {this.showButton(this.state.isAdmin)}
             </div>
         );

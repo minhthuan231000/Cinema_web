@@ -103,16 +103,19 @@ header.admin_header .navbar-brand {
     display: inline-flex;
 }
 
-.groupAdd-rap {}
-
 .groupAdd-rap .groupControl-rap {
     display: flex;
-    width: 480px;
+    width: 600px;
     padding-left: 10px;
+    justify-content: space-between;
 }
 
 .input-TypeRap {
-    width: 5em;
+    width: 6em;
+}
+
+.input-CumRap {
+    width: 15em;
 }
 
 #datetime {

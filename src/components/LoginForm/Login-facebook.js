@@ -1,8 +1,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import Cookies from 'universal-cookie';
-
-
+import './Login.css'
 
 const cookies = new Cookies(); 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
@@ -49,7 +48,7 @@ const DOMAIN = process.env.REACT_APP_DOMAIN;
     autoLoad={false}
     fields="id,name,email,picture"
     callback={responseFacebook}
-    cssClass="my-facebook-button-class"
+    cssClass="button-facebook"
     icon="fa-facebook"
   />
   );
