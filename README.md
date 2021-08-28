@@ -1,4 +1,9 @@
 # Lập Trình Web	2	- Đồ án	cuối	kỳ CD2018/1
+### Sinh viên:
+- 18600327 Bùi Ngọc Yên
+- 18600269 Nguyễn Minh Thuận
+- 18600318 Nguyễn Nguyên Văn
+- 18600010 Nguyễn Thành Nam 
 ### Chú	ý
 - Đồ án	làm	theo	nhóm	4	thành	viên	theo	link	đăng	ký	nhóm
 - Mã	nguồn	phải	được	cập	nhật	trên	Github	được	GVLT	cung	cấp	(-4	điểm)
